@@ -1,16 +1,18 @@
 ---
 name: tedenski-pregled
-description: Prepare the next ej-aj.si weekly AI news digest (Tedenski pregled) as a pull request. Collects news with parallel subagents, writes the Slovenian draft, verifies every claim against its source, runs the validator and opens a PR for Anže to review. Use when asked for "tedenski pregled", "novice tedna", or by the Friday routine. Never merges or publishes.
+description: Prepare the next ej-aj.si weekly AI news digest (Tedenski pregled) as a pull request. Collects news with parallel subagents, writes the Slovenian draft, proposes glossary entries for new terms, verifies every claim against its source, runs the validator and opens a PR for Anže to review. Use when asked for "tedenski pregled", "novice tedna", or by the Friday routine. Never merges or publishes.
 ---
 
 # Tedenski pregled (weekly digest)
 
 Output: one new file `src/content/novice/YYYY-MM-DD-tedenski-pregled-N.md` on a branch
-`pregled/YYYY-MM-DD`, and an open pull request. **Never merge, never push to `main`.** Merging
+`pregled/YYYY-MM-DD`, optionally up to 3 new entries in `src/data/slovar.yaml`, and an open
+pull request. **Never merge, never push to `main`.** Merging
 is publishing, and only Anže does that.
 
-Repo: `/Users/anze/Desktop/ej-aj` (public, `AnzeNocAI/ej-aj`). Read `AGENTS.md` there first:
-its writing, accuracy and confidentiality rules apply to everything below.
+Repo: `/Users/anze/Desktop/ej-aj` (public, `AnzeNocAI/ej-aj`). Read `AGENTS.md` and
+`docs/slog.md` there first: their writing, accuracy and confidentiality rules apply to
+everything below.
 
 GitHub auth: the active `gh` account is a different one and must not be switched. Prefix every
 network command (`git fetch`, `git push`, `gh ...`) with
@@ -116,6 +118,28 @@ Follow the format in `AGENTS.md` ("Weekly digest format") and the first issue
 - Last line: `Naslednji pregled izide v petek, <d. month>.`
 - Slovenian formats: `1.500`, `0,10 USD`, `40 %`, dates `22. septembra`. No em or en dashes.
 
+## 5b. Propose glossary entries for new terms
+
+The site has a glossary (`src/data/slovar.yaml`, pages `/slovar/<id>/`), and the first mention
+of every glossary term in an article is linked to it automatically
+(`src/markdown/slovar-povezave.mjs`). New terms from this week's news should end up there.
+
+1. List the technical terms the draft uses that a Slovenian business reader might not know
+   (for example "agentni brskalnik", "destilacija", "MoE"). Ignore product and company names,
+   and terms already in `slovar.yaml` under any form (check `izraz`, `angl` and the plugin's
+   `PHRASES`).
+2. Pick at most 3 that are likely to come up again. If none qualifies, skip this step and write
+   "Nova gesla: brez" in the PR body.
+3. Add each to `src/data/slovar.yaml`, following the rules in the file header: `id` (slug
+   without č/š/ž), `izraz` (Slovenian term, English or acronym in parentheses if common),
+   `angl`, `razlaga` (2 to 4 sentences, general, no prices, model names or dates that go stale),
+   optional `primer`, and `glej` with 1 to 3 related existing ids. Place it next to related
+   entries. Plain language per `docs/slog.md`, no em or en dashes.
+4. If the headword is also an everyday Slovenian word or a brand, add an entry to `PHRASES` or
+   `SKIP` in `src/markdown/slovar-povezave.mjs` so the automatic links stay precise.
+5. Check the result: after `npm run build`, the digest page must link the new term
+   (`grep -o 'href="/slovar/<id>/"' dist/novice/<slug>/index.html`).
+
 ## 6. Verify every claim (separate subagent)
 
 Launch one subagent (`subagent_type: general-purpose`, default model) with the full draft and
@@ -127,6 +151,9 @@ this task:
 > only flag it if it states a fact that is wrong. Return JSON:
 > `{"items": [{"n": 1, "status": "ok" | "fix" | "drop", "problems": ["claim -> what the source says"]}]}`.
 > Be strict: a claim the source does not state is a problem, even if it is probably true.
+> Also check any new glossary entries in `src/data/slovar.yaml` (listed below): is the
+> definition correct and general enough not to go stale? Return them as
+> `{"glossary": [{"id", "status": "ok" | "fix" | "drop", "problems": [...]}]}`.
 
 Apply every fix. Drop items marked `drop`, renumber, and keep at least 5 (if you end with fewer
 than 5, continue anyway and open the PR as a draft, explaining why in the PR body).
@@ -144,7 +171,7 @@ in the PR body. Other warnings: fix if they are real.
 ## 8. Commit, push, open the PR
 
 ```bash
-git add src/content/novice/<file>.md
+git add src/content/novice/<file>.md src/data/slovar.yaml src/markdown/slovar-povezave.mjs
 git commit -m "Weekly digest #N (<period>)" -m "Co-Authored-By: Claude <noreply@anthropic.com>"
 GH_TOKEN="$(gh auth token --user AnzeNocAI)" git push -u origin "pregled/$TODAY"
 GH_TOKEN="$(gh auth token --user AnzeNocAI)" gh pr create --repo AnzeNocAI/ej-aj \
@@ -155,6 +182,9 @@ PR body (Slovenian, short):
 
 - one line: what the issue covers and how many items
 - a checklist, one line per item: `- [ ] <headline> (vir: <domain>)`
+- **Nova gesla v slovarju:** one line per entry, `- [ ] <izraz>: <first sentence of razlaga>`
+  with a link to `/slovar/<id>/` on the preview, or "brez". Anže deletes the ones he doesn't
+  want before merging.
 - **Za preveriti:** anything the fact-checker could not confirm, sources that failed, and
   anything you were unsure about
 - validator result (errors / warnings) and "Build: OK"
@@ -164,6 +194,7 @@ Then remove the worktree: `cd /Users/anze/Desktop/ej-aj && git worktree remove "
 
 ## 9. Final message
 
-Slovenian, short: the PR link, the item headlines, failed sources, anything Anže must check.
+Slovenian, short: the PR link, the item headlines, new glossary entries, failed sources,
+anything Anže must check.
 If a step failed, say which one and what state things were left in. Do not work around a
 failure silently.

@@ -1,38 +1,45 @@
 # Stanje projekta in predaja
 
 Za agenta, ki nadaljuje delo na ej-aj.si. Najprej preberi `AGENTS.md` (pravila pisanja, točnosti,
-zaupnosti), nato ta dokument, `docs/postavitev.md` (domena, Cloudflare, računi) in
-`docs/kako-objavim.md` (kako Anže pregleduje in objavlja). Stanje: 26. september 2026, pozno zvečer.
+zaupnosti), `docs/slog.md` (kako ne zveneti kot AI), nato ta dokument, `docs/postavitev.md`
+(domena, Cloudflare, računi) in `docs/kako-objavim.md` (kako Anže pregleduje in objavlja).
+Stanje: 27. september 2026.
 
 ## Kaj je na strani (ej-aj.si)
 
 | Pot | Vsebina | Podatki |
 |---|---|---|
-| `/` | naslovnica | |
+| `/` | naslovnica z razdelki novice, modeli in cene, statistika, slovar, vodniki | |
 | `/novice/` | tedenski pregledi in članki | `src/content/novice/*.md` |
 | `/vodniki/` | praktični vodniki (trajni naslovi brez datuma) | `src/content/novice/*.md`, `type: vodnik` |
-| `/modeli/` | primerjava 15 modelov (API cene, kontekst) | `src/data/modeli.yaml` |
-| `/cene/` | cene naročnin AI orodij (23 paketov) | `src/data/narocnine.yaml` |
+| `/modeli/` | naročnine (23 paketov) in 15 modelov s cenami API | `src/data/narocnine.yaml`, `src/data/modeli.yaml` |
+| `/cene/` | zdaj ločena stran; po PR #20 preusmeritev 301 na `/modeli/#narocnine` | `public/_redirects` |
+| `/statistika/` | raba AI v Sloveniji, 10 interaktivnih grafov | `src/data/statistika.json`, generira `scripts/osvezi-statistiko.mjs` |
 | `/slovar/`, `/slovar/<id>/` | 53 izrazov, vsak s svojo stranjo | `src/data/slovar.yaml` |
-| `/statistika/` (PR #17) | raba AI v Sloveniji, interaktivni grafi | `src/data/statistika.json`, generira `scripts/osvezi-statistiko.mjs` |
 | `/o-projektu/`, `/zasebnost/` (še v PR #7) | | |
 | `/rss.xml`, `/llms.txt`, `/sitemap-index.xml` | generirano | |
 
-Objavljeno: tedenski pregled #1 (popravljen po preverjanju dejstev), vodnik "AI Act za slovenska
-podjetja". SEO: JSON-LD na vseh straneh, `public/og.png`, Search Console in Bing potrjena, sitemap
-oddan. Analitika: Cloudflare Web Analytics (brez piškotkov).
+Objavljeno: tedenski pregled #1 in trije vodniki: "AI Act za slovenska podjetja", "Kateri podatki
+ne sodijo v ChatGPT" in "Kako izbrati AI orodje za podjetje". SEO: JSON-LD na vseh straneh,
+`public/og.png`, Search Console in Bing potrjena, sitemap oddan, samodejne notranje povezave na
+slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 
 ## Pravila sodelovanja z Anžetom
 
-- Slovenščina za vse, kar bere Anže ali bralec. **Nikoli pomišljajev (em ali en dash).**
-- **Merge:** tehnične PR-je (SEO, hitrost, popravki, dokumentacija) lahko mergaš sam, ko je CI zelen.
-  Nova vsebina (novice, vodniki, besedila strani, podatki v tabelah) vedno počaka na njegov pregled.
+- Slovenščina za vse, kar bere Anže ali bralec. **Nikoli pomišljajev (em ali en dash).** Slog po
+  `docs/slog.md`: brez sloganov ("Brez X, z Y"), brez alinej z odebeljenimi oznakami, brez
+  izmišljenih izkušenj ("na vsaki delavnici ...").
+- **Na strani in v repu samo ime "Anže", nikoli priimek.** `git config user.name` je "Anže".
+  Priimek ostaja v starih commitih in v imenu računa `AnzeNocAI`; zgodovine ne prepisujemo.
+- **Merge:** tehnične PR-je (SEO, hitrost, popravki, dokumentacija, skilli) lahko mergaš sam, ko je
+  CI zelen. Nova vsebina (novice, vodniki, besedila strani, podatki v tabelah) vedno počaka na
+  njegov pregled. Ko Anže reče "mergaj", smeš združiti tudi vsebinske PR-je, ki jih je pregledal.
 - **Preverjanje dejstev je obvezno** pri vsaki vsebini: ločen subagent odpre vsak vir in preveri vsako
-  število, datum in ime. Pri pregledu #1 in pri vodniku AI Act je našel resnične napake (v vodniku
-  bi brez njega pisalo, da za AI pismenost ni glob, slovenski ZIUDHPUI pa jih določa).
+  število, datum in ime. Doslej je našel resnične napake pri vsaki vsebini (globe za AI pismenost,
+  hramba pri Claude Team, slovenske cene Microsofta, napačen izračun "najmanjše porabe" pri Mistralu).
 - Zaenkrat **brez omembe Produktnice, brez LinkedIna in Typefullyja**.
 - Pred novo funkcijo premisli, ali doda vrednost: SEO, uporabno znanje, pomoč Anžetu pri delu
-  (delavnice, stranke), promocija.
+  (delavnice, stranke), promocija. Na kratko jo utemelji, preden začneš.
 - Nič iz strank (NDA): primeri so vedno generični.
 - Računov ne ustvarjaš ti; gesel ne vpisuješ. Pri dejanjih v brskalniku za strani, ki niso ta repo,
   vprašaj.
@@ -44,46 +51,73 @@ oddan. Analitika: Cloudflare Web Analytics (brez piškotkov).
   `GH_TOKEN="$(gh auth token --user AnzeNocAI)" git push ...`, enako za `gh pr ...`.
 - Commiti gredo pod `326904133+AnzeNocAI@users.noreply.github.com` (nastavljeno v repo configu).
 - Gostovanje: Cloudflare Workers s statičnimi datotekami (`wrangler.jsonc`), vsak push v `main` se
-  objavi, vsak PR dobi preview povezavo (komentar Cloudflare bota).
+  objavi, vsak PR dobi preview povezavo (komentar Cloudflare bota). Preusmeritve so v
+  `public/_redirects`.
+- **Astro 7 uporablja za Markdown Sätteri, ne remark.** Vtičniki remark ne delujejo; vtičnik se
+  napiše za Sätteri (`markdown.processor: satteri({ mdastPlugins: [...] })`), primer je
+  `src/markdown/slovar-povezave.mjs`.
+- **Samodejne povezave na slovar** (`src/markdown/slovar-povezave.mjs`): prva omemba gesla v članku,
+  s slovenskimi končnicami, največ 10 na članek, nikoli v naslovih, povezavah, tabelah in vrsticah
+  "Vir:". Blagovne znamke in preveč splošne besede so v `SKIP`, dvoumna gesla imajo natančne oblike
+  v `PHRASES`. Novo geslo v `slovar.yaml` se poveže samo od sebe.
+- **Statistika:** `node scripts/osvezi-statistiko.mjs [--dry-run]` prenese podatke iz Eurostata,
+  Microsoftovega CSV na GitHubu in StatCounterja ter izpiše spremembe. Številk ne vpisuj na roko.
+  Letnice na strani se berejo iz podatkov, razlagalne povedi pa je treba ob novih podatkih preveriti.
+- Grafi na `/statistika/` so v čistem SVG brez knjižnic (`src/scripts/grafi.ts`); paleta je
+  preverjena za barvno slepoto, barve so CSS spremenljivke na `.viz`.
 - Validator: `node scripts/preveri.mjs --links <datoteka>`; CI ga poganja ob vsakem PR-ju in blokira
-  `[DOPOLNI: ...]` v straneh.
+  `[DOPOLNI: ...]` v straneh. Lokalno v peskovniku povezave vrnejo "fetch failed"; preveri jih CI.
+- Predogled delovne kopije: `.claude/launch.json` kaže na glavni checkout. Za worktree začasno dodaj
+  vnos z `npm --prefix <worktree> run dev -- --port 43xx` in ga po preverjanju vrni z
+  `git checkout .claude/launch.json`.
 - Worktreeji rutin in skillov: `~/.cache/ej-aj-worktrees/` (Namizje se sinhronizira v iCloud).
-- Skilli v repu: `tedenski-pregled`, `posodobi-modele` (modeli in naročnine), `nov-vodnik` (iz
-  zapiska v `~/Desktop/ej-aj-inbox/`), `newsletter` (v PR #7).
+- Skilli v repu: `tedenski-pregled` (predlaga tudi do 3 nova gesla za slovar), `posodobi-modele`
+  (modeli, naročnine in statistika), `nov-vodnik` (iz zapiska v `~/Desktop/ej-aj-inbox/`),
+  `newsletter` (v PR #7).
 - **Brskalnik:** Cloudflare, Domenca, Search Console in Bing so na računu anze999@gmail.com v
   Anžetovem Chrome profilu **anze999** (Claude in Chrome). V tem profilu klikanje po koordinatah
   pogosto zgreši (posnetki so razdrobljeni); deluje pa sprožanje dogodkov z `javascript_tool`
   (pointerdown, mousedown, click na `[role=combobox]` in `[role=option]`) ter `form_input`.
   Vgrajeni brskalnik aplikacije je v Sloveniji in vidi evrske cene, WebFetch vidi ameriške.
-- openai.com vrača 403 skriptam, EUR-Lex vrača prazno stran; uporabi nadomestne vire in to povej.
+  Microsoft ima slovenske cene na `microsoft.com/sl-si/...`, Mistral pa na strani s cenami omogoča
+  izbiro države.
+- openai.com vrača 403 skriptam, EUR-Lex vrača prazno stran; uporabi nadomestne vire ali vgrajeni
+  brskalnik in to povej.
 - Pri zloženih PR-jih (stacked) najprej preusmeri otroka na `main`, šele nato izbriši bazno vejo,
   sicer GitHub otroka zapre.
 
 ## Odprto
 
-1. **PR #7 newsletter** (draft): čaka, da Anže odpre račun na Buttondown in pošlje URL obrazca
-   (`newsletterAction` v `src/site.ts`). PR je treba uskladiti z `main`: od PR #12 je predloga članka
-   v `src/layouts/Post.astro`, zato komponento `<Newsletter />` vstavi tja (pod opozorilo o AI), ne v
-   `src/pages/novice/[...slug].astro`. V `src/pages/zasebnost.astro` ostajata dve oznaki
-   `[DOPOLNI]` (podatki o Buttondownu, datum objave).
-2. **Rutini** (glej spodaj) sta bili ustvarjeni v instanci na računu DIA, ki poteče okoli 14. 10.
-   2026. V novi instanci ju ustvari znova (orodje za načrtovana opravila) in ju v stari izklopi, da ne
-   tečeta dvakrat. Prvi zagon tedenskega pregleda je v petek, 2. oktobra; Anže naj ga prvič požene z
-   "Run now", da se shranijo odobritve orodij.
-3. E-pošta `pozdrav@ej-aj.si` se preusmerja na anze999@gmail.com (Cloudflare Email Routing).
+1. **PR #20 Modeli in cene na eni strani** čaka na Anžetov pregled. Po združitvi preveri, da
+   `https://ej-aj.si/cene/` vrne 301 na `/modeli/#narocnine`.
+2. **PR #7 newsletter** (draft): čaka, da Anže odpre račun na Buttondown in pošlje URL obrazca
+   (`newsletterAction` v `src/site.ts`). PR je treba uskladiti z `main`: komponento `<Newsletter />`
+   vstavi v `src/layouts/Post.astro` (pod opozorilo o AI). V `src/pages/zasebnost.astro` ostajata dve
+   oznaki `[DOPOLNI]` (podatki o Buttondownu, datum objave).
+3. **Rutini** sta od 26. 9. 2026 ustvarjeni v tej instanci (glej spodaj). Anže naj stari v instanci
+   DIA izklopi in novi prvič požene z "Run now", da se shranijo odobritve orodij. Prvi zagoni:
+   posodobitev modelov 1. oktobra, tedenski pregled #2 2. oktobra.
+4. **Tabela naročnin:** Microsoft je še v USD (obstajajo slovenske cene v EUR), Mistral Team po
+   francoski ceni (za Slovenijo 30,49 €). Popravi ju mesečna rutina 1. oktobra; skill to že ve.
+5. E-pošta `pozdrav@ej-aj.si` se preusmerja na anze999@gmail.com (Cloudflare Email Routing).
+
+## Narejeno 26. in 27. septembra 2026
+
+Vodnika o varni rabi AI in o izbiri orodja, stran `/statistika/`, samodejne povezave na slovar,
+popravek vodnika AI Act (podaljšan rok za člen 50(2)), samo ime brez priimka, `docs/slog.md`,
+mesečna rutina osvežuje tudi statistiko, tedenski pregled predlaga gesla za slovar (predlogi 1 do 4
+s prejšnjega seznama).
 
 ## Predlogi za naslednje funkcije (po vrednosti)
 
-1. **Drugi vodnik iz javnih virov:** "Kateri podatki ne sodijo v ChatGPT: varna raba AI v podjetju"
-   (GDPR, mnenja Informacijskega pooblaščenca, poslovni paketi in učenje na podatkih). Visoka vrednost
-   za SEO in Anžetove delavnice. Postopek kot pri AI Act: raziskovalni subagenti, pisanje,
-   preverjevalec dejstev, PR.
-2. **Vodnik "Kako izbrati AI orodje za podjetje"**, ki povezuje `/cene/` in `/modeli/`.
-3. **Samodejne notranje povezave:** prva omemba izraza iz slovarja v članku postane povezava na
-   `/slovar/<id>/` (SEO, uporabnost).
-4. **Tedenski pregled dopolni slovar:** ko se v pregledu pojavi nov izraz, rutina predlaga geslo.
-5. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v nabiralniku kaj.
-6. Iskanje (Pagefind), ko bo strani več kot približno 30 člankov.
+1. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v `~/Desktop/ej-aj-inbox/` kaj.
+   Največ vrednosti, ker gre za njegovo izkušnjo, ki je drugje ni.
+2. **Predloga internih pravil rabe AI za prenos** (Word), razširjena iz vodnika o varni rabi.
+   Uporabno za delavnice in podjetja, dober razlog za povezave na stran.
+3. **Slika za deljenje za vsak članek** (naslov članka na `og.png`), da so objave na omrežjih
+   prepoznavne. Generator je v `scripts/og-image.mjs`.
+4. **Newsletter** (PR #7), ko Anže odpre Buttondown.
+5. Iskanje (Pagefind), ko bo strani več kot približno 30 člankov.
 
 ## Rutine (za ponovno ustvarjanje)
 
