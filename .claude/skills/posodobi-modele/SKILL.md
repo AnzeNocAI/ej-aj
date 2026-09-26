@@ -1,6 +1,6 @@
 ---
 name: posodobi-modele
-description: Monthly refresh of the ej-aj.si model comparison (src/data/modeli.yaml). Re-checks every price, context window and availability against the providers' official pages, adds notable new models, and opens a PR with a clear diff summary. Use when asked to "posodobi modele", "preveri cene modelov", or by the monthly routine. Never merges.
+description: Monthly refresh of the ej-aj.si model comparison (src/data/modeli.yaml) and subscription prices (src/data/narocnine.yaml). Re-checks every price, context window and availability against the providers' official pages, adds notable new models, and opens a PR with a clear diff summary. Use when asked to "posodobi modele", "preveri cene modelov", or by the monthly routine. Never merges.
 ---
 
 # Posodobi primerjavo modelov
@@ -43,8 +43,23 @@ Split `src/data/modeli.yaml` by provider. Launch one subagent per provider in a 
 openai.com often returns 403 to scripts. Then use the OpenAI developer community
 announcements, platform docs, or reputable coverage (TechCrunch, The Verge), and name the source.
 
+## 2b. Re-check subscription prices (one more subagent, same message)
+
+Launch one more subagent for `src/data/narocnine.yaml` with this task:
+
+> For each plan below, open the URL in `vir` and report the current price per user per month
+> (monthly billing and annual billing), currency, whether VAT is included, and minimum seats.
+> Prefer pages localised for Slovenia (EUR). WebFetch sees US prices; if a page only shows USD
+> there, use the built-in browser (it runs in Slovenia) and say so. Only report values you saw
+> on an opened page. Return JSON: `{"plans": [{"id", "cena_mesec", "cena_letno", "valuta",
+> "ddv", "min_uporabnikov", "source_url", "notes"}], "new_plans": [...], "failed_sources": [...]}`
+
+Microsoft pages only showed US prices in USD in September 2026; keep them marked as such.
+
 ## 3. Update the YAML
 
+- Same rules for `src/data/narocnine.yaml`; `kaj_dobite` stays a short Slovenian summary of
+  what the page lists.
 - Change only values a subagent confirmed on an opened page. Set `preverjeno` to today for
   every entry you re-checked, and update `viri` if the source moved.
 - A model that is no longer offered: remove it and say so in the PR.
@@ -57,11 +72,11 @@ announcements, platform docs, or reputable coverage (TechCrunch, The Verge), and
 
 ```bash
 npm run build
-git add src/data/modeli.yaml
+git add src/data/modeli.yaml src/data/narocnine.yaml
 git commit -m "Refresh model comparison ($MONTH)"
 GH_TOKEN="$(gh auth token --user AnzeNocAI)" git push -u origin "modeli/$MONTH"
 GH_TOKEN="$(gh auth token --user AnzeNocAI)" gh pr create --repo AnzeNocAI/ej-aj --base main \
-  --head "modeli/$MONTH" --title "Primerjava modelov: osvežitev $MONTH" --body-file <body.md>
+  --head "modeli/$MONTH" --title "Modeli in cene: osvežitev $MONTH" --body-file <body.md>
 ```
 
 PR body (Slovenian): a table of changes (model, field, old, new, source), added and removed
