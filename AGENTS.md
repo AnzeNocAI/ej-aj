@@ -11,7 +11,20 @@ Workers (static assets, `wrangler.jsonc`) on every push to `main`.
   `clanek/<slug>`), open a PR, and let Anže review it on the Cloudflare preview URL. Merging is
   publishing.
 - File names: `YYYY-MM-DD-<slug>.md`. Weekly digests: `YYYY-MM-DD-tedenski-pregled-<n>.md`.
-- Run `npm run build` before opening a PR; it must pass.
+- Before opening a PR run `node scripts/preveri.mjs --links <file>` (content validator: front
+  matter, dashes, digest structure, sources, links) and `npm run build`. Both must pass; CI runs
+  the validator again on every PR.
+
+## Skills and routines
+
+- `.claude/skills/tedenski-pregled/`: prepares the weekly digest as a PR (parallel collector
+  subagents, fact-checker subagent, validator). Run by a local Friday routine
+  (`ej-aj-tedenski-pregled`), or on request.
+- `.claude/skills/nov-vodnik/`: turns a note from `~/Desktop/ej-aj-inbox/` (outside the repo,
+  synced via iCloud) into a draft guide PR, with a confidentiality pass and `[DOPOLNI: ...]`
+  placeholders that the validator blocks. Manual for now.
+- Routines and skills do their work in git worktrees under `~/.cache/ej-aj-worktrees/`, never
+  in the main checkout and never inside iCloud-synced folders.
 
 ## Writing rules (Slovenian copy)
 
