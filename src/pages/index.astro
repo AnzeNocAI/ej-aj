@@ -14,10 +14,6 @@ const soon = [
     title: 'Praktični vodniki',
     text: 'Kako AI uporabiti pri računih, ponudbah, zapisnikih in drugih vsakdanjih opravilih v podjetju.',
   },
-  {
-    title: 'AI slovar',
-    text: 'Token, agent, MCP, halucinacija: izrazi, razloženi po domače.',
-  },
 ];
 ---
 
@@ -39,6 +35,17 @@ const soon = [
     <div class="grid">
       {posts.map((post) => <PostCard post={post} />)}
     </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>AI slovar</h2>
+      <a href="/slovar/">Vsi izrazi</a>
+    </div>
+    <p class="section-lede">
+      Token, agent, MCP, halucinacija: izrazi, ki jih srečate ob uporabi AI, razloženi po domače.
+      <a href="/slovar/">Odpri slovar</a>
+    </p>
   </section>
 
   <section class="wrap section">

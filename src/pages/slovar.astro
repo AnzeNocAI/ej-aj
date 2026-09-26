@@ -1,0 +1,150 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const entries = (await getCollection('slovar')).sort((a, b) =>
+  a.data.izraz.localeCompare(b.data.izraz, 'sl'),
+);
+const byId = new Map(entries.map((e) => [e.id, e]));
+
+// Group by first letter (Slovenian alphabet order via localeCompare above).
+const groups = new Map<string, typeof entries>();
+for (const entry of entries) {
+  const letter = entry.data.izraz[0].toLocaleUpperCase('sl');
+  if (!groups.has(letter)) groups.set(letter, []);
+  groups.get(letter)!.push(entry);
+}
+---
+
+<Base
+  title="AI slovar"
+  description="Izrazi umetne inteligence, razloženi po domače: token, agent, MCP, halucinacija, RAG in drugi."
+>
+  <div class="wrap narrow">
+    <header class="article-head">
+      <span class="eyebrow">Slovar</span>
+      <h1>AI slovar</h1>
+      <p class="lede">
+        {entries.length} izrazov, ki jih srečate ob uporabi AI, razloženih brez tehničnega žargona.
+      </p>
+    </header>
+
+    <nav class="letters" aria-label="Črke">
+      {[...groups.keys()].map((letter) => <a href={`#crka-${letter}`}>{letter}</a>)}
+    </nav>
+
+    {
+      [...groups.entries()].map(([letter, list]) => (
+        <section class="letter-group" id={`crka-${letter}`}>
+          <h2 class="letter">{letter}</h2>
+          <dl class="terms">
+            {list.map((e) => (
+              <div class="term" id={e.id}>
+                <dt>
+                  <a href={`#${e.id}`}>{e.data.izraz}</a>
+                  {e.data.angl && e.data.angl !== e.data.izraz && <span class="angl">{e.data.angl}</span>}
+                </dt>
+                <dd>
+                  <p>{e.data.razlaga}</p>
+                  {e.data.primer && (
+                    <p class="primer">
+                      <strong>Primer:</strong> {e.data.primer}
+                    </p>
+                  )}
+                  {e.data.glej.length > 0 && (
+                    <p class="glej">
+                      Glej tudi:{' '}
+                      {e.data.glej
+                        .filter((id) => byId.has(id))
+                        .map((id, i) => (
+                          <>
+                            {i > 0 && ', '}
+                            <a href={`#${id}`}>{byId.get(id)!.data.izraz}</a>
+                          </>
+                        ))}
+                    </p>
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))
+    }
+  </div>
+</Base>
+
+<style>
+  .letters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+  .letters a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .letters a:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .letter {
+    font-size: 1.6rem;
+    color: var(--accent);
+    margin: 36px 0 8px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 6px;
+  }
+  .terms {
+    margin: 0;
+  }
+  .term {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 80px;
+  }
+  .term:target {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  dt {
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    align-items: baseline;
+  }
+  dt a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .angl {
+    font-weight: 400;
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  dd {
+    margin: 6px 0 0;
+  }
+  dd p {
+    margin: 0 0 6px;
+  }
+  .primer,
+  .glej {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+</style>
