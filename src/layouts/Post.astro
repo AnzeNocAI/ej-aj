@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import Base from './Base.astro';
 import { postPath } from '../lib';
-import { TYPE_LABEL, formatDate } from '../site';
+import { SITE, TYPE_LABEL, formatDate } from '../site';
 
 interface Props {
   post: CollectionEntry<'novice'>;
@@ -65,7 +65,7 @@ const toc = post.data.type === 'vodnik' ? headings.filter((h) => h.depth === 2) 
     </div>
     <p class="disclosure">
       Pri pripravi je pomagal AI (Claude). Vsako trditev smo preverili pri navedenem viru, besedilo
-      je pred objavo pregledal in uredil Anže Noč. Ste opazili napako?
+      je pred objavo pregledal in uredil {SITE.author}. Ste opazili napako?
       <a href="https://github.com/AnzeNocAI/ej-aj/issues">Sporočite jo na GitHubu</a>.
     </p>
   </article>
