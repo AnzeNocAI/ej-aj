@@ -86,6 +86,11 @@ for (const file of files) {
     error(file, `vrstica ${lineOf(text, m.index)}: pomišljaj "${m[0]}" (uporabi vejico, dvopičje, oklepaj ali "do")`);
   }
 
+  // Placeholders the author still has to fill in must never reach the site.
+  for (const m of text.matchAll(/\[DOPOLNI[^\]]*\]/g)) {
+    error(file, `vrstica ${lineOf(text, m.index)}: odprto mesto ${m[0]} (dopolni ali odstrani)`);
+  }
+
   const fm = parseFrontMatter(text);
   if (!fm) {
     error(file, 'manjka front matter');

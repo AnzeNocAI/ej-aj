@@ -24,7 +24,8 @@ Do not touch the main checkout (Anže may have uncommitted work there).
 cd /Users/anze/Desktop/ej-aj
 GH_TOKEN="$(gh auth token --user AnzeNocAI)" git fetch origin
 TODAY=$(date +%F)
-WT=/Users/anze/Desktop/ej-aj-worktrees/pregled-$TODAY
+WT=/Users/anze/.cache/ej-aj-worktrees/pregled-$TODAY
+mkdir -p /Users/anze/.cache/ej-aj-worktrees
 git worktree add "$WT" -b "pregled/$TODAY" origin/main
 cd "$WT" && npm ci --silent
 ```
