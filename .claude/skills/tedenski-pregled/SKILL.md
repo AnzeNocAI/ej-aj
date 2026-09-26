@@ -59,6 +59,18 @@ Shared prompt text for every collector:
 > chip news. Never invent a URL or a number: if a page did not load, leave the item out and add
 > it to `failed_sources`. Return JSON only: `{"items": [...], "failed_sources": [...]}`.
 
+Source-specific tips (learned from test runs; pass the relevant ones to each collector):
+
+- anthropic.com/news: WebFetch's summary gets dates wrong. Fetch the raw HTML with `curl` and
+  read the `<time>` tags.
+- claude.com/blog: paginated; older posts are at `?b7eea976_page=2`. Skip guides and
+  thought-leadership posts, keep dated product and customer announcements.
+- Claude Code: the changelog has no dates. Map versions to dates with the GitHub Releases API
+  (`gh api repos/anthropics/claude-code/releases --paginate --jq '.[] | [.tag_name, .published_at] | @tsv'`)
+  and link the release page. Keep only notable user-facing features.
+- openai.com returns 403 to scripts. Use help.openai.com release notes, the OpenAI developer
+  community, developers.openai.com, or reputable coverage, and say which one you used.
+
 Source lists:
 
 - **A (Anthropic and Claude):** https://www.anthropic.com/news, the Claude Code changelog
