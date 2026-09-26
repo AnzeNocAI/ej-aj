@@ -32,8 +32,8 @@ Obveznosti za modele za splošne namene, ki veljajo od avgusta 2025 (tehnična d
 | 2. avgust 2025 | Obveznosti ponudnikov modelov za splošne namene, nadzorna pravila. |
 | 21. november 2025 | V Sloveniji začne veljati zakon o izvajanju (ZIUDHPUI). |
 | 27. julij 2026 | Začne veljati Digital Omnibus, ki premakne roke za visoko tvegane sisteme. |
-| 2. avgust 2026 | Pravila o preglednosti (člen 50). Od 3. avgusta nadzorni organi začnejo nadzirati tudi AI pismenost. |
-| 2. december 2026 | Nove prepovedi (spolno eksplicitni deepfake posnetki brez privolitve in gradivo spolne zlorabe otrok). |
+| 2. avgust 2026 | Pravila o preglednosti (člen 50): klepetalniki, označevanje deepfake vsebin in besedil o zadevah javnega interesa. Nadzorni organi začnejo nadzirati tudi AI pismenost. |
+| 2. december 2026 | Nove prepovedi (sistemi, ki ustvarjajo intimne podobe ljudi brez njihove izrecne privolitve, in gradivo spolne zlorabe otrok). Do tega dne morajo ponudniki generativnih sistemov AI, danih na trg pred 2. avgustom 2026, uvesti strojno berljivo označevanje vsebin (člen 50(2)). |
 | 2. december 2027 | Pravila za visoko tvegane rabe iz Priloge III (zaposlovanje, krediti ...). |
 | 2. avgust 2028 | Pravila za AI, vgrajen v izdelke (medicinski pripomočki, dvigala, igrače). |
 
@@ -72,9 +72,11 @@ Vir: [besedilo člena 5](https://artificialintelligenceact.eu/article/5/)
 - **Deepfake vsebine:** če z AI ustvarite ali predelate sliko, zvok ali video, ki spominja na resnične ljudi, predmete, kraje ali dogodke in bi lahko delovala verodostojno, morate razkriti, da je vsebina umetna. Pri očitno umetniških, satiričnih ali izmišljenih delih zadošča primerna, nevsiljiva oznaka.
 - **Besedila o zadevah javnega interesa:** če z AI ustvarjeno besedilo objavite za obveščanje javnosti, morate to razkriti. Izjema velja, kadar je besedilo šlo skozi človeški pregled in zanj nosi uredniško odgovornost konkretna oseba.
 
+Ponudniki orodij, ki ustvarjajo slike, zvok, video ali besedilo, morajo take vsebine označiti tudi strojno berljivo, na primer z vodnim žigom ali metapodatki. Za orodja, ki so bila na trgu že pred 2. avgustom 2026, velja podaljšan rok do 2. decembra 2026. Za podjetja, ki ta orodja le uporabljajo, se roki ne spremenijo.
+
 AKOS je avgusta 2026 objavil nabor ikon v slovenskem jeziku za označevanje vsebin, ustvarjenih z AI, ki jih lahko uporabite.
 
-Viri: [besedilo člena 50](https://artificialintelligenceact.eu/article/50/), [AKOS, umetna inteligenca](https://www.akos-rs.si/umetna-inteligenca)
+Viri: [besedilo člena 50](https://artificialintelligenceact.eu/article/50/), [AKOS, umetna inteligenca](https://www.akos-rs.si/umetna-inteligenca), [AKOS, obveznosti ponudnikov po členu 50(2)](https://www.akos-rs.si/umetna-inteligenca/raziscite/novice/novica/obveznosti-ponudnikov-sistemov-ui-ki-ustvarjajo-sinteticno-zvocno-slikovno-video-ali-besedilno-vsebino), [Uredba (EU) 2026/1744](https://eur-lex.europa.eu/legal-content/SL/TXT/?uri=OJ:L_202601744)
 
 ## Visoko tvegana raba: HR in krediti
 
