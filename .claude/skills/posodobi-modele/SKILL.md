@@ -18,7 +18,8 @@ must not be switched).
 cd /Users/anze/Desktop/ej-aj
 GH_TOKEN="$(gh auth token --user AnzeNocAI)" git fetch origin
 MONTH=$(date +%Y-%m)
-WT=/Users/anze/Desktop/ej-aj-worktrees/modeli-$MONTH
+WT=/Users/anze/.cache/ej-aj-worktrees/modeli-$MONTH
+mkdir -p /Users/anze/.cache/ej-aj-worktrees
 git worktree add "$WT" -b "modeli/$MONTH" origin/main
 cd "$WT" && npm ci --silent
 ```
