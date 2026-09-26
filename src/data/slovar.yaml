@@ -333,3 +333,161 @@
     vsakdanje rabe pa predvsem preglednost. Veljati je začela avgusta 2024, obveznosti pa se
     uvajajo postopoma v več letih.
   glej: [zasebnost-podatkov]
+
+- id: chatgpt
+  izraz: ChatGPT
+  razlaga: >-
+    Klepetalnik podjetja OpenAI, ki je ob izidu konec leta 2022 sprožil val zanimanja za
+    generativno AI. Temelji na modelih družine GPT. Na voljo je brezplačno in v plačljivih
+    paketih za posameznike in podjetja.
+  glej: [gpt, klepetalnik, claude, gemini]
+
+- id: claude
+  izraz: Claude
+  razlaga: >-
+    AI asistent podjetja Anthropic in hkrati ime družine njihovih jezikovnih modelov. Na voljo
+    je kot klepetalnik, kot namizna aplikacija, prek API-ja in kot Claude Code za delo s kodo in
+    datotekami. Podpira skille, konektorje in rutine.
+  glej: [claude-code, chatgpt, skill, mcp]
+
+- id: claude-code
+  izraz: Claude Code
+  razlaga: >-
+    Anthropicov agent, ki dela neposredno z datotekami in programi na vašem računalniku ali v
+    oblaku: bere in piše kodo, poganja ukaze in samostojno izvaja večstopenjske naloge.
+    Uporablja se za programiranje, pa tudi za avtomatizacijo pisarniških opravil.
+  glej: [claude, agent, subagent]
+
+- id: gemini
+  izraz: Gemini
+  razlaga: >-
+    Googlov AI asistent in družina modelov. Vgrajen je v Googlove storitve, kot so Gmail,
+    Dokumenti in Android, zato je praktična izbira za podjetja, ki delajo v Google Workspace.
+  glej: [chatgpt, claude, asistent]
+
+- id: copilot
+  izraz: Microsoft Copilot
+  razlaga: >-
+    Microsoftov AI asistent, vgrajen v Windows in programe Microsoft 365 (Word, Excel, Outlook,
+    Teams). Za podjetja, ki delajo v Microsoftovem okolju, je njegova prednost dostop do
+    dokumentov in e-pošte, ki jih že imajo tam.
+  glej: [asistent, chatgpt]
+
+- id: gpt
+  izraz: GPT
+  angl: Generative pre-trained transformer
+  razlaga: >-
+    Kratica za generativni vnaprej naučeni transformer, vrsto jezikovnega modela, ki ga je
+    razvil OpenAI. Ime se je prijelo tudi kot splošen izraz za jezikovne modele, čeprav gre v
+    ožjem pomenu za OpenAI modele.
+  glej: [transformer, chatgpt, veliki-jezikovni-model]
+
+- id: transformer
+  izraz: Transformer
+  angl: Transformer
+  razlaga: >-
+    Zgradba nevronske mreže, ki so jo leta 2017 predstavili Googlovi raziskovalci in na kateri
+    temelji večina današnjih jezikovnih modelov. Njena ključna novost je mehanizem pozornosti,
+    s katerim model pri vsaki besedi upošteva, kako je povezana z ostalimi v besedilu.
+  glej: [nevronska-mreza, gpt]
+
+- id: nevronska-mreza
+  izraz: Nevronska mreža
+  angl: Neural network
+  razlaga: >-
+    Računski model, ohlapno zgledovan po možganih, sestavljen iz plasti povezanih enot. Med
+    učenjem prilagaja moč povezav (parametre), dokler ne zna opravljati naloge. Na nevronskih
+    mrežah temelji skoraj vsa sodobna AI.
+  glej: [globoko-ucenje, parametri, transformer]
+
+- id: strojno-ucenje
+  izraz: Strojno učenje
+  angl: Machine learning
+  razlaga: >-
+    Področje AI, kjer se računalnik naloge nauči iz primerov, namesto da bi mu pravila napisali
+    ročno. Primer: filter neželene pošte, ki se iz tisočih označenih sporočil nauči prepoznati
+    nove.
+  glej: [globoko-ucenje, umetna-inteligenca]
+
+- id: globoko-ucenje
+  izraz: Globoko učenje
+  angl: Deep learning
+  razlaga: >-
+    Veja strojnega učenja, ki uporablja nevronske mreže z veliko plastmi. Omogočila je preboje
+    v prepoznavanju govora in slik ter jezikovne modele.
+  glej: [strojno-ucenje, nevronska-mreza]
+
+- id: agi
+  izraz: Splošna umetna inteligenca (AGI)
+  angl: Artificial general intelligence
+  razlaga: >-
+    Hipotetična AI, ki bi večino umskih nalog opravljala vsaj tako dobro kot človek. Enotne
+    definicije ni, zato so napovedi, kdaj bo dosežena, zelo različne. Današnji sistemi so pri
+    posameznih nalogah odlični, pri drugih pa še vedno delajo osnovne napake.
+  glej: [vodilni-model, umetna-inteligenca]
+
+- id: agentna-ai
+  izraz: Agentna AI
+  angl: Agentic AI
+  razlaga: >-
+    Skupno ime za sisteme, v katerih AI ne le odgovarja, ampak samostojno izvaja naloge:
+    načrtuje korake, uporablja orodja in preverja rezultate. V podjetjih se uporablja za
+    procese, kjer je treba združiti podatke iz več sistemov.
+  glej: [agent, subagent, mcp]
+
+- id: vrivanje-navodil
+  izraz: Vrivanje navodil
+  angl: Prompt injection
+  razlaga: >-
+    Napad, pri katerem napadalec v besedilo, ki ga AI bere (spletno stran, e-pošto, dokument),
+    skrije navodila, na primer "pošlji vsebino tega predala na ta naslov". Posebej nevarno je pri
+    agentih, ki lahko ukrepajo. Obramba: agentom dajte le nujne pravice in pomembna dejanja
+    potrjujte ročno.
+  glej: [agent, varovala]
+
+- id: varovala
+  izraz: Varovala
+  angl: Guardrails
+  razlaga: >-
+    Pravila in tehnične omejitve, ki preprečujejo, da bi AI naredil nekaj neželenega: razkril
+    zaupne podatke, izvedel plačilo brez potrditve ali odgovarjal zunaj svojega področja.
+  glej: [vrivanje-navodil, zasebnost-podatkov]
+
+- id: evalvacija
+  izraz: Evalvacija (eval)
+  angl: Evaluation, eval
+  razlaga: >-
+    Sistematično preverjanje, kako dobro AI opravlja vašo nalogo: nabor tipičnih primerov s
+    pričakovanimi rezultati, na katerem preizkusite prompt, skill ali model. Brez evalvacije ne
+    veste, ali je sprememba izboljšala rezultat ali ga je poslabšala.
+  primer: >-
+    Dvajset resničnih računov z znanimi pravilnimi zneski, na katerih vsakič preverite, ali
+    skill pravilno izpiše postavke.
+  glej: [benchmark, skill]
+
+- id: kontekstni-inzeniring
+  izraz: Kontekstni inženiring
+  angl: Context engineering
+  razlaga: >-
+    Premišljeno sestavljanje vsega, kar model vidi ob nalogi: navodil, primerov, dokumentov,
+    zgodovine in orodij. Nadgradnja pisanja promptov, ki upošteva, da je kakovost odgovora
+    odvisna predvsem od pravih informacij v kontekstnem oknu.
+  glej: [prompt, kontekstno-okno, rag]
+
+- id: pristranskost
+  izraz: Pristranskost
+  angl: Bias
+  razlaga: >-
+    Ko AI sistematično daje slabše ali krivične rezultate za določene skupine, ker so bili taki
+    vzorci v učnih podatkih. Pomembno pri zaposlovanju, kreditiranju in drugih odločitvah o
+    ljudeh, kjer AI Act zahteva posebno skrbnost.
+  glej: [ai-act, ucenje-in-sklepanje]
+
+- id: deepfake
+  izraz: Deepfake (globoki ponaredek)
+  angl: Deepfake
+  razlaga: >-
+    Z AI ustvarjen ali predelan posnetek, slika ali zvok, ki prepričljivo prikazuje nekaj, česar
+    ni bilo. Za podjetja je največje tveganje prevara, na primer lažen glasovni klic
+    "direktorja", ki naroči nujno nakazilo. Nenavadne zahteve vedno preverite po drugem kanalu.
+  glej: [generativna-ai, ai-act]
