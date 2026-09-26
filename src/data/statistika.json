@@ -16,14 +16,14 @@
    7.7,
    8.1,
    13.5,
-   20.0
+   20
   ]
  },
  "podjetja_drzave": [
   {
    "koda": "DK",
    "ime": "Danska",
-   "v": 42.0
+   "v": 42
   },
   {
    "koda": "FI",
@@ -33,7 +33,7 @@
   {
    "koda": "SE",
    "ime": "Švedska",
-   "v": 35.0
+   "v": 35
   },
   {
    "koda": "BE",
@@ -53,12 +53,12 @@
   {
    "koda": "AT",
    "ime": "Avstrija",
-   "v": 30.0
+   "v": 30
   },
   {
    "koda": "DE",
    "ime": "Nemčija",
-   "v": 26.0
+   "v": 26
   },
   {
    "koda": "EE",
@@ -98,7 +98,7 @@
   {
    "koda": "SK",
    "ime": "Slovaška",
-   "v": 18.0
+   "v": 18
   },
   {
    "koda": "CZ",
@@ -156,12 +156,12 @@
    "v": 5.2
   }
  ],
- "podjetja_drzave_EU": 20.0,
+ "podjetja_drzave_EU": 20,
  "podjetja_velikost": [
   {
    "k": "10 do 49 zaposlenih",
    "SI": 18.3,
-   "EU": 17.0
+   "EU": 17
   },
   {
    "k": "50 do 249 zaposlenih",
@@ -171,7 +171,7 @@
   {
    "k": "250 ali več zaposlenih",
    "SI": 71.7,
-   "EU": 55.0
+   "EU": 55
   }
  ],
  "podjetja_namen": [
@@ -183,7 +183,7 @@
   {
    "k": "Poslovna administracija ali vodenje",
    "SI": 35.2,
-   "EU": 31.0
+   "EU": 31
   },
   {
    "k": "Trženje ali prodaja",
@@ -198,7 +198,7 @@
   {
    "k": "Razvoj in inovacije",
    "SI": 19.2,
-   "EU": 19.0
+   "EU": 19
   },
   {
    "k": "Računovodstvo ali finance",
@@ -244,15 +244,16 @@
   },
   {
    "k": "Etični pomisleki",
-   "SI": 3.0,
+   "SI": 3,
    "EU": 2.7
   },
   {
    "k": "AI ni uporaben za podjetje",
    "SI": 2.4,
-   "EU": 2.0
+   "EU": 2
   }
  ],
+ "prebivalci_leto": 2025,
  "prebivalci_drzave": [
   {
    "koda": "DK",
@@ -302,12 +303,12 @@
   {
    "koda": "BE",
    "ime": "Belgija",
-   "v": 42.0
+   "v": 42
   },
   {
    "koda": "SE",
    "ime": "Švedska",
-   "v": 42.0
+   "v": 42
   },
   {
    "koda": "AT",
@@ -394,7 +395,7 @@
  "prebivalci_starost": [
   {
    "k": "16 do 24 let",
-   "SI": 73.0,
+   "SI": 73,
    "EU": 63.8
   },
   {
@@ -405,7 +406,7 @@
   {
    "k": "35 do 44 let",
    "SI": 46.3,
-   "EU": 39.0
+   "EU": 39
   },
   {
    "k": "45 do 54 let",
@@ -426,13 +427,13 @@
  "prebivalci_namen": [
   {
    "k": "Zasebno",
-   "SI": 83.0,
-   "EU": 78.0
+   "SI": 83,
+   "EU": 78
   },
   {
    "k": "Pri delu",
    "SI": 40.6,
-   "EU": 47.0
+   "EU": 47
   },
   {
    "k": "Pri formalnem izobraževanju",
@@ -440,6 +441,7 @@
    "EU": 28.5
   }
  ],
+ "microsoft_obdobje": "2. čet. 2026",
  "microsoft_drzave": [
   {
    "koda": "IE",
@@ -549,7 +551,7 @@
   {
    "koda": "RO",
    "ime": "Romunija",
-   "v": 18.0
+   "v": 18
   }
  ],
  "microsoft_si": {
@@ -562,7 +564,7 @@
   "SI": [
    24.6,
    26.5,
-   29.0,
+   29,
    30.1
   ]
  },
@@ -659,5 +661,26 @@
   "Microsoft Copilot": 3.55,
   "Perplexity": 3.5,
   "Claude": 2.81
+ },
+ "_meta": {
+  "preverjeno": "2026-09-27",
+  "viri": {
+   "podjetja": {
+    "dataset": "isoc_eb_ai",
+    "eurostat_updated": "2026-06-15T11:00:00+0200"
+   },
+   "prebivalci": {
+    "dataset": "isoc_ai_iaiu",
+    "eurostat_updated": "2026-06-05T11:00:00+0200"
+   },
+   "microsoft": {
+    "file": "AI_Diffusion_Q22026_Update.csv",
+    "zadnje_obdobje": "2. čet. 2026"
+   },
+   "statcounter": {
+    "od": "2025-09",
+    "do": "2026-08"
+   }
+  }
  }
 }
