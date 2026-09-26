@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Newsletter from '../../components/Newsletter.astro';
 import { getPosts } from '../../lib';
 import { TYPE_LABEL, formatDate } from '../../site';
 
@@ -51,5 +52,6 @@ const { Content } = await render(post);
       je pred objavo pregledal in uredil Anže Noč. Ste opazili napako?
       <a href="https://github.com/AnzeNocAI/ej-aj/issues">Sporočite jo na GitHubu</a>.
     </p>
+    <Newsletter />
   </article>
 </Base>

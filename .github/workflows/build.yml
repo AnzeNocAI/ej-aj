@@ -17,6 +17,12 @@ jobs:
       - run: npm ci
       - name: Content checks
         run: node scripts/preveri.mjs
+      - name: No unfinished placeholders in pages
+        run: |
+          if grep -rn "\[DOPOLNI" src/pages src/components src/layouts; then
+            echo "Fill in or remove every [DOPOLNI: ...] before merging."
+            exit 1
+          fi
       - name: No em or en dashes in page templates
         run: |
           if grep -rn "[—–]" src/pages src/components src/layouts; then
