@@ -92,7 +92,7 @@ oddan. Analitika: Cloudflare Web Analytics (brez piškotkov).
 - Prompt:
 
 ```
-You are running as a scheduled local routine for Anže Noč. Task: prepare the next weekly AI news digest ("Tedenski pregled") for his public site ej-aj.si and open a pull request. You never merge and never push to main; merging is publishing and only Anže does that.
+You are running as a scheduled local routine for Anže. Task: prepare the next weekly AI news digest ("Tedenski pregled") for his public site ej-aj.si and open a pull request. You never merge and never push to main; merging is publishing and only Anže does that.
 
 Repo: /Users/anze/Desktop/ej-aj (GitHub: AnzeNocAI/ej-aj). Always use absolute paths.
 
@@ -115,7 +115,7 @@ Steps:
 - Prompt:
 
 ```
-You are running as a scheduled local routine for Anže Noč. Task: re-check the model comparison on his public site ej-aj.si (src/data/modeli.yaml) against the providers' official pages and open a pull request if anything changed. You never merge and never push to main; merging is publishing and only Anže does that.
+You are running as a scheduled local routine for Anže. Task: re-check the model comparison on his public site ej-aj.si (src/data/modeli.yaml) against the providers' official pages and open a pull request if anything changed. You never merge and never push to main; merging is publishing and only Anže does that.
 
 Repo: /Users/anze/Desktop/ej-aj (GitHub: AnzeNocAI/ej-aj). Always use absolute paths.
 
