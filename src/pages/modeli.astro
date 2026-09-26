@@ -3,6 +3,22 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { formatDate } from '../site';
 
+// Subscriptions (src/data/narocnine.yaml): what a person or a company pays per seat.
+const PRODUCT_ORDER = ['ChatGPT', 'Claude', 'Gemini', 'Microsoft Copilot', 'Mistral Le Chat', 'Perplexity'];
+const plans = (await getCollection('narocnine')).sort((a, b) => {
+  const pa = PRODUCT_ORDER.indexOf(a.data.produkt);
+  const pb = PRODUCT_ORDER.indexOf(b.data.produkt);
+  if (pa !== pb) return (pa === -1 ? 99 : pa) - (pb === -1 ? 99 : pb);
+  const pa2 = a.data.cena_mesec ?? a.data.cena_letno ?? 1e9;
+  const pb2 = b.data.cena_mesec ?? b.data.cena_letno ?? 1e9;
+  return pa2 - pb2;
+});
+const groups = [
+  { key: 'podjetje', title: 'Za podjetja in ekipe' },
+  { key: 'posameznik', title: 'Za posameznike' },
+] as const;
+
+// Models (src/data/modeli.yaml): API prices per million tokens.
 const PROVIDER_ORDER = ['Anthropic', 'OpenAI', 'Google', 'Mistral', 'Meta', 'DeepSeek', 'CJVT / UL FRI'];
 const models = (await getCollection('modeli')).sort((a, b) => {
   const pa = PROVIDER_ORDER.indexOf(a.data.ponudnik);
@@ -11,21 +27,40 @@ const models = (await getCollection('modeli')).sort((a, b) => {
   return (b.data.cena_izhod ?? 0) - (a.data.cena_izhod ?? 0);
 });
 
-const lastChecked = new Date(Math.max(...models.map((m) => m.data.preverjeno.valueOf())));
+const lastChecked = new Date(
+  Math.max(...models.map((m) => m.data.preverjeno.valueOf()), ...plans.map((p) => p.data.preverjeno.valueOf())),
+);
 const usd = new Intl.NumberFormat('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const money = new Intl.NumberFormat('sl-SI', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 const num = new Intl.NumberFormat('sl-SI');
 
-function price(v: number | null) {
+function apiPrice(v: number | null) {
   return v === null ? 'ni podatka' : `${usd.format(v)} $`;
+}
+function planPrice(v: number | null, currency: string) {
+  if (v === null) return 'po dogovoru';
+  if (v === 0) return 'brezplačno';
+  return `${money.format(v)} ${currency === 'EUR' ? '€' : '$'}`;
 }
 function context(v: number | null) {
   if (v === null) return 'ni podatka';
   if (v >= 1_000_000) return `${num.format(v / 1_000_000)} mio.`;
   return `${num.format(Math.round(v / 1000))} tisoč`;
 }
+// Slovenian plural: 1 uporabnik, 2 uporabnika, 3-4 uporabniki, 5+ uporabnikov.
+function users(n: number) {
+  const m = n % 100;
+  if (m === 1) return `${n} uporabnik`;
+  if (m === 2) return `${n} uporabnika`;
+  if (m === 3 || m === 4) return `${n} uporabniki`;
+  return `${n} uporabnikov`;
+}
+function host(url: string) {
+  return new URL(url).hostname.replace(/^www\./, '');
+}
 // Link labels: hostname, numbered when one model cites the same host twice.
 function sourceLabels(urls: string[]) {
-  const hosts = urls.map((u) => new URL(u).hostname.replace(/^www\./, ''));
+  const hosts = urls.map(host);
   return hosts.map((h, i) => {
     const same = hosts.filter((x) => x === h).length;
     return same > 1 ? `${h} (${hosts.slice(0, i + 1).filter((x) => x === h).length})` : h;
@@ -34,96 +69,165 @@ function sourceLabels(urls: string[]) {
 ---
 
 <Base
-  title="Primerjava AI modelov"
-  description="Claude, GPT, Gemini, Mistral, Llama, DeepSeek in slovenski GaMS: cene, kontekstno okno in za kaj je kateri model primeren."
+  title="Cene AI orodij in primerjava modelov"
+  description="Naročnine za ChatGPT, Claude, Gemini, Microsoft Copilot in druga AI orodja ter cene modelov prek API-ja. Za posameznike in podjetja, z viri in datumom preverjanja."
 >
   <div class="wrap">
     <header class="article-head narrow">
-      <span class="eyebrow">Primerjava</span>
-      <h1>AI modeli na enem mestu</h1>
+      <span class="eyebrow">Modeli in cene</span>
+      <h1>AI orodja in modeli: cene na enem mestu</h1>
       <p class="lede">
-        Cene za uporabo prek API-ja, velikost kontekstnega okna in naše priporočilo, za kaj je
-        kateri model primeren. Vsak podatek ima vir. Zadnje preverjanje: {formatDate(lastChecked)}.
+        Koliko stanejo naročnine na ChatGPT, Claude, Gemini, Copilot in druga orodja ter koliko
+        stane uporaba modelov prek API-ja. Vsak podatek ima vir. Zadnje preverjanje:{' '}
+        {formatDate(lastChecked)}.
       </p>
+      <nav class="jump" aria-label="Na tej strani">
+        <a href="#narocnine">Naročnine</a>
+        <a href="#modeli">Modeli prek API</a>
+        <a href="#kako-izbrati">Kako izbrati</a>
+      </nav>
     </header>
 
-    <div class="how narrow">
-      <p>
-        <strong>Kako brati tabelo.</strong> Cene veljajo za uporabo prek{' '}
-        <a href="/slovar/#api">API-ja</a> in so v ameriških dolarjih na milijon{' '}
-        <a href="/slovar/#token">tokenov</a> (več sto tisoč besed; slovensko besedilo porabi več tokenov kot angleško). Če uporabljate klepetalnik z mesečno naročnino, vas te cene ne zadevajo neposredno,
-        kažejo pa razmerje med modeli. <a href="/slovar/#kontekstno-okno">Kontekstno okno</a> pove,
-        koliko besedila model upošteva naenkrat.
+    <section id="narocnine" class="block">
+      <h2>Naročnine</h2>
+      <p class="how narrow">
+        To plačate, ko orodje uporabljate v brskalniku, aplikaciji ali v Wordu in Gmailu. Cene so na
+        uporabnika na mesec, popust za letno plačilo je naveden posebej. Ponudniki cene prilagajajo
+        državi; pri vsaki postavki je označeno, ali vključuje DDV.
       </p>
-    </div>
 
-    <div class="table-wrap">
-      <table class="models">
-        <thead>
-          <tr>
-            <th scope="col">Model</th>
-            <th scope="col" class="num">Vhod</th>
-            <th scope="col" class="num">Izhod</th>
-            <th scope="col" class="num">Kontekst</th>
-            <th scope="col">Za kaj</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            models.map((m) => (
-              <tr id={m.id}>
-                <th scope="row">
-                  <span class="name">{m.data.ime}</span>
-                  <span class="provider">
-                    {m.data.ponudnik}
-                    {m.data.odprte_utezi && <span class="tag">odprte uteži</span>}
-                  </span>
-                </th>
-                <td class="num" data-label="Vhod">{price(m.data.cena_vhod)}</td>
-                <td class="num" data-label="Izhod">{price(m.data.cena_izhod)}</td>
-                <td class="num" data-label="Kontekst">{context(m.data.kontekst)}</td>
-                <td class="use" data-label="Za kaj">
-                  {m.data.za_kaj}
-                  {m.data.opomba && <span class="note">{m.data.opomba}</span>}
-                  <span class="sources">
-                    Dostop: {m.data.dostop}. Vir:{' '}
-                    {sourceLabels(m.data.viri).map((label, i) => (
-                      <>
-                        {i > 0 && ', '}
-                        <a href={m.data.viri[i]}>{label}</a>
-                      </>
+      {
+        groups.map((g) => {
+          const rows = plans.filter((p) => p.data.za === g.key);
+          return (
+            <>
+              <h3>{g.title}</h3>
+              <div class="table-wrap">
+                <table class="data">
+                  <thead>
+                    <tr>
+                      <th scope="col">Paket</th>
+                      <th scope="col" class="num">Mesečno</th>
+                      <th scope="col" class="num">Pri letnem plačilu</th>
+                      <th scope="col">Kaj dobite</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rows.map((p) => (
+                      <tr id={p.id}>
+                        <th scope="row">
+                          <span class="name">
+                            {p.data.produkt} {p.data.paket}
+                          </span>
+                          {p.data.min_uporabnikov && <span class="sub">najmanj {users(p.data.min_uporabnikov)}</span>}
+                        </th>
+                        <td class="num" data-label="Mesečno">
+                          {p.data.cena_mesec === null && p.data.cena_letno !== null
+                            ? 'samo letno'
+                            : planPrice(p.data.cena_mesec, p.data.valuta)}
+                        </td>
+                        <td class="num" data-label="Pri letnem plačilu">
+                          {p.data.cena_letno === null ? 'ni' : planPrice(p.data.cena_letno, p.data.valuta)}
+                        </td>
+                        <td class="use" data-label="Kaj dobite">
+                          {p.data.kaj_dobite}
+                          {p.data.opomba && <span class="note">{p.data.opomba}</span>}
+                          <span class="sources">
+                            {p.data.ddv && <>{p.data.ddv}. </>}Vir: <a href={p.data.vir}>{host(p.data.vir)}</a>
+                          </span>
+                        </td>
+                      </tr>
                     ))}
-                  </span>
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
-    </div>
+                  </tbody>
+                </table>
+              </div>
+            </>
+          );
+        })
+      }
+    </section>
 
-    <div class="prose narrow notes">
+    <section id="modeli" class="block">
+      <h2>Modeli prek API</h2>
+      <p class="how narrow">
+        To plačate, ko model uporabljate v lastni aplikaciji ali avtomatizaciji prek{' '}
+        <a href="/slovar/api/">API-ja</a>. Cene so v ameriških dolarjih na milijon{' '}
+        <a href="/slovar/token/">tokenov</a> (več sto tisoč besed; slovensko besedilo porabi več
+        tokenov kot angleško). <a href="/slovar/kontekstno-okno/">Kontekstno okno</a> pove, koliko
+        besedila model upošteva naenkrat. Pod "Dostop" piše, v katerih orodjih in paketih je model
+        na voljo.
+      </p>
+
+      <div class="table-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th scope="col">Model</th>
+              <th scope="col" class="num">Vhod</th>
+              <th scope="col" class="num">Izhod</th>
+              <th scope="col" class="num">Kontekst</th>
+              <th scope="col">Za kaj</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              models.map((m) => (
+                <tr id={m.id}>
+                  <th scope="row">
+                    <span class="name">{m.data.ime}</span>
+                    <span class="provider">
+                      {m.data.ponudnik}
+                      {m.data.odprte_utezi && <span class="tag">odprte uteži</span>}
+                    </span>
+                  </th>
+                  <td class="num" data-label="Vhod">{apiPrice(m.data.cena_vhod)}</td>
+                  <td class="num" data-label="Izhod">{apiPrice(m.data.cena_izhod)}</td>
+                  <td class="num" data-label="Kontekst">{context(m.data.kontekst)}</td>
+                  <td class="use" data-label="Za kaj">
+                    {m.data.za_kaj}
+                    {m.data.opomba && <span class="note">{m.data.opomba}</span>}
+                    <span class="sources">
+                      Dostop: {m.data.dostop}. Vir:{' '}
+                      {sourceLabels(m.data.viri).map((label, i) => (
+                        <>
+                          {i > 0 && ', '}
+                          <a href={m.data.viri[i]}>{label}</a>
+                        </>
+                      ))}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="prose narrow notes" id="kako-izbrati">
       <h2>Kako izbrati</h2>
-      <ul>
-        <li>
-          <strong>Za vsakdanje delo v podjetju</strong> (maili, povzetki, ponudbe) zadošča srednji
-          model. Najdražji modeli se splačajo pri zahtevnih analizah, daljših samostojnih nalogah in
-          programiranju.
-        </li>
-        <li>
-          <strong>Za avtomatizacije z veliko ponovitvami</strong> (razvrščanje e-pošte, izpisovanje
-          podatkov iz računov) izberite najcenejši model, ki nalogo še zanesljivo opravi, in ga
-          preizkusite na svojih primerih.
-        </li>
-        <li>
-          <strong>Kadar podatki ne smejo zapustiti hiše</strong>, pridejo v poštev modeli z odprtimi
-          utežmi, ki jih poganjate sami. To zahteva zmogljivo strojno opremo in nekoga, ki sistem
-          vzdržuje.
-        </li>
-      </ul>
+      <p>
+        Za službene podatke izberite poslovni paket (Business, Team, Google Workspace ali Microsoft
+        365 Copilot). Ti imajo skrbniške nastavitve in pogodbo o obdelavi podatkov, pri brezplačnih
+        in osebnih paketih pa se pogovori lahko uporabijo za učenje modelov. Več o tem v vodniku{' '}
+        <a href="/vodniki/varna-raba-ai-v-podjetju/">Kateri podatki ne sodijo v ChatGPT</a>.
+      </p>
+      <p>
+        Izbira je pogosto odvisna od okolja, v katerem podjetje že dela: Gemini je vključen v Google
+        Workspace Business Standard, Copilot se doda k Microsoft 365. ChatGPT in Claude sta
+        samostojni orodji. Postopek izbire je opisan v vodniku{' '}
+        <a href="/vodniki/kako-izbrati-ai-orodje-za-podjetje/">Kako izbrati AI orodje za podjetje</a>.
+      </p>
+      <p>
+        API je smiseln za avtomatizacije z veliko ponovitvami, na primer razvrščanje e-pošte ali
+        izpisovanje podatkov iz računov. Izberite najcenejši model, ki nalogo še zanesljivo opravi,
+        in ga preizkusite na svojih primerih. Kadar podatki ne smejo zapustiti hiše, pridejo v poštev
+        modeli z odprtimi utežmi, ki jih poganjate sami. To zahteva zmogljivo strojno opremo in
+        nekoga, ki sistem vzdržuje.
+      </p>
       <p>
         Stolpec "Za kaj" je naše mnenje, ostali podatki so povzeti po uradnih straneh ponudnikov.
-        Tabelo osvežujemo mesečno. Ste opazili napako?
+        Obe tabeli osvežujemo mesečno. Ste opazili napako?{' '}
         <a href="https://github.com/AnzeNocAI/ej-aj/issues">Sporočite jo na GitHubu</a>.
       </p>
     </div>
@@ -131,10 +235,40 @@ function sourceLabels(urls: string[]) {
 </Base>
 
 <style>
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .jump a {
+    padding: 4px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    background: var(--surface);
+  }
+  .block,
+  #kako-izbrati {
+    scroll-margin-top: 80px;
+  }
+  .block {
+    margin: 40px 0;
+  }
+  .block h2 {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    margin: 0 0 10px;
+  }
+  .block h3 {
+    font-size: 1.1rem;
+    margin: 28px 0 12px;
+  }
   .how {
-    margin-bottom: 24px;
     color: var(--muted);
     font-size: 0.98rem;
+    margin: 0 0 8px;
   }
   .table-wrap {
     border: 1px solid var(--line);
@@ -142,27 +276,30 @@ function sourceLabels(urls: string[]) {
     background: var(--surface);
     overflow: hidden;
   }
-  .models {
+  .data {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.95rem;
   }
-  .models th,
-  .models td {
+  .data th,
+  .data td {
     text-align: left;
     vertical-align: top;
     padding: 14px 16px;
     border-bottom: 1px solid var(--line);
   }
-  .models thead th {
+  .data thead th {
     font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--muted);
     background: var(--bg);
   }
-  .models tbody tr:last-child > * {
+  .data tbody tr:last-child > * {
     border-bottom: 0;
+  }
+  .data tbody tr {
+    scroll-margin-top: 80px;
   }
   .num {
     text-align: right !important;
@@ -182,54 +319,62 @@ function sourceLabels(urls: string[]) {
     font-size: 0.85rem;
     color: var(--muted);
   }
-  .use {
-    min-width: 260px;
-  }
+  .sub,
   .note,
   .sources {
     display: block;
     margin-top: 6px;
     font-size: 0.82rem;
     color: var(--muted);
+    font-weight: 400;
+  }
+  .use {
+    min-width: 260px;
   }
   .notes {
     margin-top: 16px;
   }
 
   @media (max-width: 760px) {
+    /* The sticky header wraps to two rows on phones. */
+    .block,
+    #kako-izbrati,
+    .data tbody tr {
+      scroll-margin-top: 150px;
+    }
     .table-wrap {
       border: 0;
       background: transparent;
     }
-    .models thead {
+    .data thead {
       display: none;
     }
-    .models,
-    .models tbody,
-    .models tr,
-    .models th,
-    .models td {
+    .data,
+    .data tbody,
+    .data tr,
+    .data th,
+    .data td {
       display: block;
       width: 100%;
     }
-    .models tr {
+    .data tr {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       margin-bottom: 12px;
       padding: 6px 0;
     }
-    .models th,
-    .models td {
+    .data th,
+    .data td {
       border-bottom: 0;
       padding: 6px 16px;
     }
-    .models td.num {
+    .data td.num {
       display: flex;
       justify-content: space-between;
       text-align: right;
     }
-    .models td.num::before {
+    .data td.num::before {
       content: attr(data-label);
       color: var(--muted);
       font-size: 0.85rem;

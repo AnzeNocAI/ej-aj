@@ -71,7 +71,7 @@ Vir: [Informacijski pooblaščenec, priporočila (PDF)](https://www.ip-rs.si/fil
 
 ## Kaj ponudniki naredijo z vašimi podatki
 
-Stanje po uradnih straneh ponudnikov, preverjeno 26. septembra 2026. Cene paketov so na strani [Cene AI orodij](/cene/).
+Stanje po uradnih straneh ponudnikov, preverjeno 26. septembra 2026. Cene paketov so na strani [Modeli in cene](/modeli/#narocnine).
 
 | Orodje in paket | Učenje na vaših pogovorih | Hramba | Pogodba o obdelavi |
 |---|---|---|---|
