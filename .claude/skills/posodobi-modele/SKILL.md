@@ -55,7 +55,10 @@ Launch one more subagent for `src/data/narocnine.yaml` with this task:
 > on an opened page. Return JSON: `{"plans": [{"id", "cena_mesec", "cena_letno", "valuta",
 > "ddv", "min_uporabnikov", "source_url", "notes"}], "new_plans": [...], "failed_sources": [...]}`
 
-Microsoft pages only showed US prices in USD in September 2026; keep them marked as such.
+Microsoft has Slovenian EUR prices (excl. VAT) at
+https://www.microsoft.com/sl-si/microsoft-365-copilot/business (found 27 September 2026); use
+them instead of the US page. Mistral's pricing page lets you pick the country: use Slovenia
+(30,49 € for Team in September 2026), not France.
 
 ## 2c. Refresh the statistics page (while the subagents run)
 
