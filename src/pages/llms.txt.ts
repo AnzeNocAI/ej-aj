@@ -2,7 +2,7 @@
 // answer engines. Generated from the content collections, so it never goes stale.
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
-import { getPosts } from '../lib';
+import { getPosts, postPath } from '../lib';
 import { SITE } from '../site';
 
 export const GET: APIRoute = async ({ site }) => {
@@ -26,7 +26,7 @@ export const GET: APIRoute = async ({ site }) => {
     '',
     '## Novice',
     '',
-    ...posts.map((p) => `- [${p.data.title}](${abs(`/novice/${p.id}/`)}): ${p.data.description}`),
+    ...posts.map((p) => `- [${p.data.title}](${abs(postPath(p))}): ${p.data.description}`),
     '',
     '## AI slovar',
     '',
