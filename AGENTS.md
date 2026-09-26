@@ -2,7 +2,7 @@
 
 Slovenian AI hub: weekly AI news digest, model comparison and practical guides for Slovenian
 businesses. Owner and editor: Anže Noč. Public repo `AnzeNocAI/ej-aj`, deployed by Cloudflare
-Pages on every push to `main`.
+Workers (static assets, `wrangler.jsonc`) on every push to `main`.
 
 ## How publishing works
 

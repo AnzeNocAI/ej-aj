@@ -7,7 +7,7 @@ Stran je tudi poskus, koliko dela lahko opravi AI (Claude Code) pod človeškim 
 nadzorom. Pravila, po katerih AI piše, so v [`AGENTS.md`](AGENTS.md).
 
 - Ogrodje: [Astro](https://astro.build), vsebina v Markdownu (`src/content/novice/`)
-- Gostovanje: Cloudflare Pages, objava ob vsakem merge v `main`
+- Gostovanje: Cloudflare Workers (statične datoteke), objava ob vsakem merge v `main`
 
 ```
 npm install
