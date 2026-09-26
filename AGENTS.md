@@ -4,6 +4,9 @@ Slovenian AI hub: weekly AI news digest, model comparison and practical guides f
 businesses. Owner and editor: Anže Noč. Public repo `AnzeNocAI/ej-aj`, deployed by Cloudflare
 Workers (static assets, `wrangler.jsonc`) on every push to `main`.
 
+Current state, open items, merge permissions and next-feature ideas: `docs/stanje-projekta.md`.
+Read it at the start of every session.
+
 ## How publishing works
 
 - Content lives in `src/content/novice/*.md` (schema in `src/content.config.ts`).
