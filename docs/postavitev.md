@@ -7,11 +7,11 @@ https://ej-aj.anze999.workers.dev; each branch and PR gets its own preview URL.
 - `www.ej-aj.si` redirects 301 to `ej-aj.si` (Cloudflare Redirect Rule, keeps the query string).
 - Cloudflare Web Analytics: site `ej-aj.si`, beacon in `src/layouts/Base.astro`
   (token in `src/site.ts`, public).
-- Google Search Console: domain property `ej-aj.si` added on anze999@gmail.com; TXT record
-  `google-site-verification=...` is in Cloudflare DNS. Verification still has to be confirmed
-  in Search Console, then submit `https://ej-aj.si/sitemap-index.xml`.
-- Email: `pozdrav@ej-aj.si` via Cloudflare Email Routing to anze999@gmail.com is planned, not
-  yet set up.
+- Google Search Console: domain property `ej-aj.si` verified on anze999@gmail.com (TXT in
+  Cloudflare DNS), sitemap `https://ej-aj.si/sitemap-index.xml` submitted on 2026-09-26.
+- Email: `pozdrav@ej-aj.si` forwards to anze999@gmail.com (Cloudflare Email Routing, MX and SPF
+  added by Cloudflare). Catch-all is off. The site cannot send mail from this address.
+- Bing Webmaster Tools: not set up yet (needs Anže's sign-in; import from Search Console).
 
 - Domain `ej-aj.si` registered at **Domenca** (domenca.com).
 - Hosting: **Cloudflare Workers** (static assets only, config in `wrangler.jsonc`), connected
