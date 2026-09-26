@@ -1,0 +1,36 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getPosts } from '../../lib';
+import { TYPE_LABEL, formatDate } from '../../site';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={post.data.title} description={post.data.description} type="article">
+  <article class="wrap narrow">
+    <header class="article-head">
+      <div class="meta">
+        <span class="tag">{TYPE_LABEL[post.data.type]}</span>
+        <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        {post.data.period && <span>Obdobje: {post.data.period}</span>}
+      </div>
+      <h1>{post.data.title}</h1>
+      <p class="lede">{post.data.description}</p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    <p class="disclosure">
+      Pri pripravi je pomagal AI (Claude). Vsako trditev smo preverili pri navedenem viru, besedilo
+      je pred objavo pregledal in uredil Anže Noč. Ste opazili napako?
+      <a href="https://github.com/AnzeNocAI/ej-aj/issues">Sporočite jo na GitHubu</a>.
+    </p>
+  </article>
+</Base>

@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import PostCard from '../components/PostCard.astro';
+import { getPosts } from '../lib';
+
+const posts = (await getPosts()).slice(0, 6);
+
+const soon = [
+  {
+    title: 'Primerjava modelov',
+    text: 'Claude, GPT, Gemini in slovenski modeli na enem mestu: cene, zmožnosti in kako dobro znajo slovensko.',
+  },
+  {
+    title: 'Praktični vodniki',
+    text: 'Kako AI uporabiti pri računih, ponudbah, zapisnikih in drugih vsakdanjih opravilih v podjetju.',
+  },
+  {
+    title: 'AI slovar',
+    text: 'Token, agent, MCP, halucinacija: izrazi, razloženi po domače.',
+  },
+];
+---
+
+<Base>
+  <section class="wrap hero">
+    <span class="eyebrow">ej-aj.si</span>
+    <h1>Umetna inteligenca <em>po slovensko</em>.</h1>
+    <p>
+      Vsak petek najpomembnejše AI novice tedna in kaj pomenijo za slovenska podjetja. Brez
+      navdušenja na prazno, z viri.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>Zadnje</h2>
+      <a href="/novice/">Vse novice</a>
+    </div>
+    <div class="grid">
+      {posts.map((post) => <PostCard post={post} />)}
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>Kmalu</h2>
+    </div>
+    <div class="grid">
+      {
+        soon.map((item) => (
+          <div class="card soon">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,24 @@
+name: Build
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: No em dashes in content
+        run: |
+          if grep -rn "—" src/content src/pages src/components src/layouts; then
+            echo "Em dash found. Use a comma, colon, parentheses or a new sentence."
+            exit 1
+          fi

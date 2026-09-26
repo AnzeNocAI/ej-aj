@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPosts } from '../../lib';
+import { TYPE_LABEL, formatDate } from '../../site';
+
+const posts = await getPosts();
+---
+
+<Base title="Novice" description="Tedenski pregledi AI novic in članki v slovenščini.">
+  <div class="wrap narrow">
+    <header class="article-head">
+      <span class="eyebrow">Arhiv</span>
+      <h1>Novice</h1>
+      <p class="lede">Tedenski pregledi in članki, najnovejši na vrhu.</p>
+    </header>
+    <ul class="post-list">
+      {
+        posts.map((post) => (
+          <li>
+            <div class="meta">
+              <span class="tag">{TYPE_LABEL[post.data.type]}</span>
+              <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+            </div>
+            <h2>
+              <a href={`/novice/${post.id}/`}>{post.data.title}</a>
+            </h2>
+            <p>{post.data.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>
