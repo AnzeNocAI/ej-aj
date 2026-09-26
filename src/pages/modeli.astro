@@ -1,0 +1,241 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { formatDate } from '../site';
+
+const PROVIDER_ORDER = ['Anthropic', 'OpenAI', 'Google', 'Mistral', 'Meta', 'DeepSeek', 'CJVT / UL FRI'];
+const models = (await getCollection('modeli')).sort((a, b) => {
+  const pa = PROVIDER_ORDER.indexOf(a.data.ponudnik);
+  const pb = PROVIDER_ORDER.indexOf(b.data.ponudnik);
+  if (pa !== pb) return (pa === -1 ? 99 : pa) - (pb === -1 ? 99 : pb);
+  return (b.data.cena_izhod ?? 0) - (a.data.cena_izhod ?? 0);
+});
+
+const lastChecked = new Date(Math.max(...models.map((m) => m.data.preverjeno.valueOf())));
+const usd = new Intl.NumberFormat('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const num = new Intl.NumberFormat('sl-SI');
+
+function price(v: number | null) {
+  return v === null ? 'ni podatka' : `${usd.format(v)} $`;
+}
+function context(v: number | null) {
+  if (v === null) return 'ni podatka';
+  if (v >= 1_000_000) return `${num.format(v / 1_000_000)} mio.`;
+  return `${num.format(Math.round(v / 1000))} tisoč`;
+}
+// Link labels: hostname, numbered when one model cites the same host twice.
+function sourceLabels(urls: string[]) {
+  const hosts = urls.map((u) => new URL(u).hostname.replace(/^www\./, ''));
+  return hosts.map((h, i) => {
+    const same = hosts.filter((x) => x === h).length;
+    return same > 1 ? `${h} (${hosts.slice(0, i + 1).filter((x) => x === h).length})` : h;
+  });
+}
+---
+
+<Base
+  title="Primerjava AI modelov"
+  description="Claude, GPT, Gemini, Mistral, Llama, DeepSeek in slovenski GaMS: cene, kontekstno okno in za kaj je kateri model primeren."
+>
+  <div class="wrap">
+    <header class="article-head narrow">
+      <span class="eyebrow">Primerjava</span>
+      <h1>AI modeli na enem mestu</h1>
+      <p class="lede">
+        Cene za uporabo prek API-ja, velikost kontekstnega okna in naše priporočilo, za kaj je
+        kateri model primeren. Vsak podatek ima vir. Zadnje preverjanje: {formatDate(lastChecked)}.
+      </p>
+    </header>
+
+    <div class="how narrow">
+      <p>
+        <strong>Kako brati tabelo.</strong> Cene veljajo za uporabo prek{' '}
+        <a href="/slovar/#api">API-ja</a> in so v ameriških dolarjih na milijon{' '}
+        <a href="/slovar/#token">tokenov</a> (več sto tisoč besed; slovensko besedilo porabi več tokenov kot angleško). Če uporabljate klepetalnik z mesečno naročnino, vas te cene ne zadevajo neposredno,
+        kažejo pa razmerje med modeli. <a href="/slovar/#kontekstno-okno">Kontekstno okno</a> pove,
+        koliko besedila model upošteva naenkrat.
+      </p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="models">
+        <thead>
+          <tr>
+            <th scope="col">Model</th>
+            <th scope="col" class="num">Vhod</th>
+            <th scope="col" class="num">Izhod</th>
+            <th scope="col" class="num">Kontekst</th>
+            <th scope="col">Za kaj</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            models.map((m) => (
+              <tr id={m.id}>
+                <th scope="row">
+                  <span class="name">{m.data.ime}</span>
+                  <span class="provider">
+                    {m.data.ponudnik}
+                    {m.data.odprte_utezi && <span class="tag">odprte uteži</span>}
+                  </span>
+                </th>
+                <td class="num" data-label="Vhod">{price(m.data.cena_vhod)}</td>
+                <td class="num" data-label="Izhod">{price(m.data.cena_izhod)}</td>
+                <td class="num" data-label="Kontekst">{context(m.data.kontekst)}</td>
+                <td class="use" data-label="Za kaj">
+                  {m.data.za_kaj}
+                  {m.data.opomba && <span class="note">{m.data.opomba}</span>}
+                  <span class="sources">
+                    Dostop: {m.data.dostop}. Vir:{' '}
+                    {sourceLabels(m.data.viri).map((label, i) => (
+                      <>
+                        {i > 0 && ', '}
+                        <a href={m.data.viri[i]}>{label}</a>
+                      </>
+                    ))}
+                  </span>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose narrow notes">
+      <h2>Kako izbrati</h2>
+      <ul>
+        <li>
+          <strong>Za vsakdanje delo v podjetju</strong> (maili, povzetki, ponudbe) zadošča srednji
+          model. Najdražji modeli se splačajo pri zahtevnih analizah, daljših samostojnih nalogah in
+          programiranju.
+        </li>
+        <li>
+          <strong>Za avtomatizacije z veliko ponovitvami</strong> (razvrščanje e-pošte, izpisovanje
+          podatkov iz računov) izberite najcenejši model, ki nalogo še zanesljivo opravi, in ga
+          preizkusite na svojih primerih.
+        </li>
+        <li>
+          <strong>Kadar podatki ne smejo zapustiti hiše</strong>, pridejo v poštev modeli z odprtimi
+          utežmi, ki jih poganjate sami. To zahteva zmogljivo strojno opremo in nekoga, ki sistem
+          vzdržuje.
+        </li>
+      </ul>
+      <p>
+        Stolpec "Za kaj" je naše mnenje, ostali podatki so povzeti po uradnih straneh ponudnikov.
+        Tabelo osvežujemo mesečno. Ste opazili napako?
+        <a href="https://github.com/AnzeNocAI/ej-aj/issues">Sporočite jo na GitHubu</a>.
+      </p>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .how {
+    margin-bottom: 24px;
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+  .table-wrap {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .models {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .models th,
+  .models td {
+    text-align: left;
+    vertical-align: top;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .models thead th {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    background: var(--bg);
+  }
+  .models tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+  .num {
+    text-align: right !important;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .name {
+    display: block;
+    font-weight: 700;
+  }
+  .provider {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .use {
+    min-width: 260px;
+  }
+  .note,
+  .sources {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .notes {
+    margin-top: 16px;
+  }
+
+  @media (max-width: 760px) {
+    .table-wrap {
+      border: 0;
+      background: transparent;
+    }
+    .models thead {
+      display: none;
+    }
+    .models,
+    .models tbody,
+    .models tr,
+    .models th,
+    .models td {
+      display: block;
+      width: 100%;
+    }
+    .models tr {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      padding: 6px 0;
+    }
+    .models th,
+    .models td {
+      border-bottom: 0;
+      padding: 6px 16px;
+    }
+    .models td.num {
+      display: flex;
+      justify-content: space-between;
+      text-align: right;
+    }
+    .models td.num::before {
+      content: attr(data-label);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .use {
+      min-width: 0;
+    }
+  }
+</style>

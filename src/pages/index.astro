@@ -7,10 +7,6 @@ const posts = (await getPosts()).slice(0, 6);
 
 const soon = [
   {
-    title: 'Primerjava modelov',
-    text: 'Claude, GPT, Gemini in slovenski modeli na enem mestu: cene, zmožnosti in kako dobro znajo slovensko.',
-  },
-  {
     title: 'Praktični vodniki',
     text: 'Kako AI uporabiti pri računih, ponudbah, zapisnikih in drugih vsakdanjih opravilih v podjetju.',
   },
@@ -35,6 +31,17 @@ const soon = [
     <div class="grid">
       {posts.map((post) => <PostCard post={post} />)}
     </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>Primerjava modelov</h2>
+      <a href="/modeli/">Odpri primerjavo</a>
+    </div>
+    <p class="section-lede">
+      Claude, GPT, Gemini, Mistral, Llama, DeepSeek in slovenski GaMS: cene, kontekstno okno in za
+      kaj je kateri model primeren. Vsak podatek ima vir.
+    </p>
   </section>
 
   <section class="wrap section">
