@@ -7,7 +7,7 @@ type: vodnik
 
 Podjetje, ki želi zaposlenim urediti AI, običajno izbira med štirimi orodji: ChatGPT, Claude, Gemini in Microsoft Copilot. Vsa znajo pisati, povzemati in analizirati dokumente, razlike so v ceni, v tem, kako se povežejo z orodji, ki jih podjetje že uporablja, in v pogojih za podatke. Ta vodnik gre skozi vprašanja, ki odločitev zožijo, s cenami, preverjenimi 26. septembra 2026.
 
-> Cene se spreminjajo, zato jih pred nakupom preverite na strani [Cene AI orodij](/cene/), ki jo osvežujemo vsak mesec, ali pri ponudniku.
+> Cene se spreminjajo, zato jih pred nakupom preverite na strani [Modeli in cene](/modeli/#narocnine), ki jo osvežujemo vsak mesec, ali pri ponudniku.
 
 ## Na kratko
 
