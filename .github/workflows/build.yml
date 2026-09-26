@@ -15,10 +15,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm run build
-      - name: No em dashes in content
+      - name: Content checks
+        run: node scripts/preveri.mjs
+      - name: No em or en dashes in page templates
         run: |
-          if grep -rn "—" src/content src/pages src/components src/layouts; then
-            echo "Em dash found. Use a comma, colon, parentheses or a new sentence."
+          if grep -rn "[—–]" src/pages src/components src/layouts; then
+            echo "Dash found. Use a comma, colon, parentheses or a new sentence."
             exit 1
           fi
+      - run: npm run build
