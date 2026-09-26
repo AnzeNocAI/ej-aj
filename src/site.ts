@@ -5,6 +5,8 @@ export const SITE = {
   description:
     'Tedenski pregled AI novic, primerjava modelov in praktični vodniki za slovenska podjetja.',
   author: 'Anže Noč',
+  // Cloudflare Web Analytics site tag (public, cookieless; not a secret).
+  analyticsToken: 'ac8e62820c2148d4907a4bf8752809e2',
 };
 
 export const TYPE_LABEL: Record<string, string> = {

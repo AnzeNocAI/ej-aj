@@ -14,6 +14,8 @@ export async function GET(context) {
       description: post.data.description,
       pubDate: post.data.date,
       link: `/novice/${post.id}/`,
+      // Full article HTML (content:encoded) for feed readers and email tools.
+      content: post.rendered?.html,
     })),
   });
 }
