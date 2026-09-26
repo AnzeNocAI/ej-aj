@@ -46,4 +46,24 @@ const modeli = defineCollection({
   }),
 });
 
-export const collections = { novice, slovar, modeli };
+const narocnine = defineCollection({
+  loader: file('src/data/narocnine.yaml'),
+  schema: z.object({
+    produkt: z.string(),
+    paket: z.string(),
+    za: z.enum(['posameznik', 'podjetje']),
+    // Cena na uporabnika na mesec pri mesečnem plačilu; null = cena po dogovoru ali brezplačno.
+    cena_mesec: z.number().nullable(),
+    // Cena na uporabnika na mesec pri letnem plačilu.
+    cena_letno: z.number().nullable().default(null),
+    valuta: z.enum(['EUR', 'USD']),
+    ddv: z.string().nullable().default(null),
+    min_uporabnikov: z.number().nullable().default(null),
+    kaj_dobite: z.string(),
+    opomba: z.string().optional(),
+    vir: z.url(),
+    preverjeno: z.coerce.date(),
+  }),
+});
+
+export const collections = { novice, slovar, modeli, narocnine };
