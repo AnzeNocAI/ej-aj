@@ -20,6 +20,7 @@ export const GET: APIRoute = async ({ site }) => {
     '## Glavne strani',
     '',
     `- [Primerjava AI modelov](${abs('/modeli/')}): cene API, kontekstno okno in priporočila za Claude, GPT, Gemini, Mistral, Llama, DeepSeek in slovenski GaMS, z viri in datumom preverjanja.`,
+    `- [AI v Sloveniji v številkah](${abs('/statistika/')}): delež podjetij in prebivalcev, ki uporabljajo AI, primerjava z državami EU in delež klepetalnikov (Eurostat, SURS, Microsoft, StatCounter).`,
     `- [AI slovar](${abs('/slovar/')}): ${terms.length} izrazov umetne inteligence, razloženih po domače.`,
     `- [Novice](${abs('/novice/')}): tedenski pregledi AI novic z vplivom na slovenska podjetja.`,
     `- [O projektu](${abs('/o-projektu/')}): kdo piše in kako nastaja vsebina.`,

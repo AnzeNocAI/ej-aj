@@ -1,0 +1,681 @@
+---
+import Base from '../layouts/Base.astro';
+import stat from '../data/statistika.json';
+
+// Retrieval date of every dataset in src/data/statistika.json.
+const PREVERJENO = '26. september 2026';
+
+const fmt = new Intl.NumberFormat('sl-SI', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const pct = (v: number | null) => (v === null ? 'ni podatka' : `${fmt.format(v)} %`);
+const rank = (rows: { koda: string }[]) => rows.findIndex((r) => r.koda === 'SI') + 1;
+
+const SI = { name: 'Slovenija', color: '--s1' };
+const EU = { name: 'Povprečje EU', color: '--s2' };
+const pair = (rows: { k: string; SI: number; EU: number }[]) => ({
+  type: 'bars',
+  rows: rows.map((r) => r.k),
+  series: [
+    { ...SI, values: rows.map((r) => r.SI) },
+    { ...EU, values: rows.map((r) => r.EU) },
+  ],
+});
+
+const t = stat.podjetja_trend;
+const lastYear = t.leta.length - 1;
+const bots = stat.klepetalniki_si;
+const BOTS = [
+  { key: 'ChatGPT', name: 'ChatGPT', color: '--s1' },
+  { key: 'Google Gemini', name: 'Gemini', color: '--s2' },
+  { key: 'Microsoft Copilot', name: 'Copilot', color: '--s3' },
+  { key: 'Perplexity', name: 'Perplexity', color: '--s4' },
+  { key: 'Claude', name: 'Claude', color: '--s5' },
+] as const;
+const MESECI = ['jan.', 'feb.', 'mar.', 'apr.', 'maj', 'jun.', 'jul.', 'avg.', 'sep.', 'okt.', 'nov.', 'dec.'];
+const mesec = (ym: string) => {
+  const [y, m] = ym.split('-');
+  return `${MESECI[Number(m) - 1]} ${y.slice(2)}`;
+};
+const mesecDolgo = (ym: string) => {
+  const [y, m] = ym.split('-');
+  const imena = ['januar', 'februar', 'marec', 'april', 'maj', 'junij', 'julij', 'avgust', 'september', 'oktober', 'november', 'december'];
+  return `${imena[Number(m) - 1]} ${y}`;
+};
+// "avgusta 2026": month in the genitive, for "v mesecu" sentences.
+const mesecKdaj = (ym: string) => {
+  const [y, m] = ym.split('-');
+  const imena = ['januarja', 'februarja', 'marca', 'aprila', 'maja', 'junija', 'julija', 'avgusta', 'septembra', 'oktobra', 'novembra', 'decembra'];
+  return `${imena[Number(m) - 1]} ${y}`;
+};
+const lastMonth = bots.meseci.length - 1;
+const chatgptLast = bots.ChatGPT[lastMonth];
+const eu = stat.klepetalniki_evropa;
+
+const cfg = {
+  trend: {
+    type: 'line',
+    x: t.leta.map(String),
+    xPos: t.leta,
+    series: [
+      { ...SI, values: t.SI },
+      { ...EU, values: t.EU },
+    ],
+  },
+  rank: {
+    type: 'rank',
+    views: [
+      {
+        key: 'podjetja',
+        label: 'Podjetja (2025)',
+        rows: stat.podjetja_drzave,
+        eu: stat.podjetja_drzave_EU,
+        note: 'Delež podjetij z vsaj 10 zaposlenimi, ki uporabljajo vsaj eno tehnologijo AI. Eurostat, 2025.',
+      },
+      {
+        key: 'prebivalci',
+        label: 'Prebivalci (2025)',
+        rows: stat.prebivalci_drzave,
+        eu: stat.prebivalci_drzave_EU,
+        note: 'Delež prebivalcev, starih od 16 do 74 let, ki so v zadnjih treh mesecih uporabili orodje generativne AI. Eurostat, 2025.',
+      },
+      {
+        key: 'microsoft',
+        label: 'Ocena Microsofta (2026)',
+        rows: stat.microsoft_drzave,
+        note: 'Microsoftova ocena deleža prebivalcev v delovni starosti, ki uporabljajo AI, drugo četrtletje 2026. Ocena temelji na podatkih o rabi Microsoftovih naprav in storitev, ni anketa. Za 5 držav EU podatka ni.',
+      },
+    ],
+  },
+  velikost: pair(stat.podjetja_velikost),
+  namen: pair(stat.podjetja_namen),
+  razlogi: pair(stat.podjetja_razlogi),
+  starost: pair(stat.prebivalci_starost),
+  prebNamen: pair(stat.prebivalci_namen),
+  microsoft: {
+    type: 'line',
+    x: stat.microsoft_si.obdobja,
+    series: [{ name: 'Slovenija', color: '--s1', values: stat.microsoft_si.SI }],
+  },
+  bots: {
+    type: 'line',
+    toggle: true,
+    x: bots.meseci.map(mesec),
+    series: BOTS.map((b) => ({ name: b.name, color: b.color, values: bots[b.key] })),
+  },
+  botsEu: {
+    type: 'bars',
+    rows: BOTS.map((b) => b.name),
+    series: [
+      { name: 'Slovenija', color: '--s1', values: BOTS.map((b) => bots[b.key][lastMonth]) },
+      { name: 'Evropa', color: '--s2', values: BOTS.map((b) => eu[b.key]) },
+    ],
+  },
+};
+
+const json = (o: unknown) => JSON.stringify(o);
+
+const VIRI = {
+  eurostatPodjetja: 'https://ec.europa.eu/eurostat/databrowser/view/isoc_eb_ai/default/table',
+  eurostatPrebivalci: 'https://ec.europa.eu/eurostat/databrowser/view/isoc_ai_iaiu/default/table',
+  sursPodjetja: 'https://www.stat.si/StatWeb/News/Index/13906',
+  sursPrebivalci: 'https://www.stat.si/StatWeb/News/Index/13908',
+  microsoft: 'https://github.com/microsoft/ai-diffusion-report/blob/main/data/AI_Diffusion_Q22026_Update.csv',
+  microsoftBlog: 'https://blogs.microsoft.com/on-the-issues/2026/09/21/the-continued-state-of-global-ai-diffusion-in-2026/',
+  statcounter: 'https://gs.statcounter.com/ai-chatbot-market-share/all/slovenia',
+  statcounterMetoda: 'https://gs.statcounter.com/press/new-statcounter-ai-data-finds-chatgpt-sends-79-perc-of-all-chatbot-referrals-to-websites',
+};
+---
+
+<Base
+  title="AI v Sloveniji v številkah"
+  description="Koliko slovenskih podjetij in prebivalcev uporablja AI, kako smo v primerjavi z EU in katere klepetalnike uporabljamo. Podatki Eurostata, SURS, Microsofta in StatCounterja."
+>
+  <div class="wrap narrow">
+    <header class="article-head">
+      <span class="eyebrow">Statistika</span>
+      <h1>AI v Sloveniji v številkah</h1>
+      <p class="lede">
+        Koliko podjetij in ljudi v Sloveniji uporablja AI, kje smo v primerjavi z drugimi državami
+        EU in katere klepetalnike uporabljamo. Podatki so iz Eurostata, Statističnega urada RS,
+        Microsofta in StatCounterja, preverjeni {PREVERJENO}.
+      </p>
+    </header>
+
+    <div class="tiles">
+      <div class="tile">
+        <span class="tile-label">Podjetja, ki uporabljajo AI</span>
+        <span class="tile-value">{pct(t.SI[lastYear])}</span>
+        <span class="tile-note">podjetij z vsaj 10 zaposlenimi, {t.leta[lastYear]}. EU: {pct(t.EU[lastYear])}</span>
+      </div>
+      <div class="tile">
+        <span class="tile-label">Prebivalci, ki uporabljajo generativno AI</span>
+        <span class="tile-value">{pct(stat.prebivalci_drzave.find((r) => r.koda === 'SI')!.v)}</span>
+        <span class="tile-note">starih od 16 do 74 let, 2025. EU: {pct(stat.prebivalci_drzave_EU)}</span>
+      </div>
+      <div class="tile">
+        <span class="tile-label">ChatGPT med klepetalniki</span>
+        <span class="tile-value">{pct(chatgptLast)}</span>
+        <span class="tile-note">obiskov spletnih strani iz klepetalnikov, {mesecDolgo(bots.meseci[lastMonth])}</span>
+      </div>
+    </div>
+
+    <section class="stat-section">
+      <h2>Podjetja</h2>
+      <p>
+        Leta 2021 je AI uporabljalo {pct(t.SI[0])} slovenskih podjetij z vsaj 10 zaposlenimi, leta
+        {' '}{t.leta[lastYear]} {pct(t.SI[lastYear])}. Povprečje EU je v istem času zraslo s {pct(t.EU[0])}{' '}
+        na {pct(t.EU[lastYear])}, zato se je razlika v korist Slovenije zmanjšala na manj kot dve odstotni točki. Za leto 2022 podatka ni. Leta 2025 je Eurostat seznam tehnologij razširil (ustvarjanje slik, videa in zvoka), zato primerjava z leti prej ni povsem neposredna.
+      </p>
+
+      <figure class="viz" data-label="Delež podjetij, ki uporabljajo AI, Slovenija in EU">
+        <figcaption>Delež podjetij, ki uporabljajo vsaj eno tehnologijo AI</figcaption>
+        <div class="viz-plot"></div>
+        <script type="application/json" set:html={json(cfg.trend)} />
+        <details class="viz-table">
+          <summary>Tabela</summary>
+          <table>
+            <thead><tr><th>Leto</th><th class="num">Slovenija</th><th class="num">EU</th></tr></thead>
+            <tbody>{t.leta.map((y, i) => <tr><td>{y}</td><td class="num">{pct(t.SI[i])}</td><td class="num">{pct(t.EU[i])}</td></tr>)}</tbody>
+          </table>
+        </details>
+        <p class="viz-source">Vir: <a href={VIRI.eurostatPodjetja}>Eurostat, isoc_eb_ai</a> (brez finančnega sektorja).</p>
+      </figure>
+
+      <p>
+        Med državami EU je Slovenija leta 2025 pri podjetjih na {rank(stat.podjetja_drzave)}. mestu od 27, pri
+        prebivalcih, ki uporabljajo generativno AI, pa na {rank(stat.prebivalci_drzave)}. mestu. V grafu
+        lahko preklopite med kazalniki.
+      </p>
+
+      <figure class="viz" data-label="Države EU po rabi AI">
+        <figcaption>Države EU po rabi AI</figcaption>
+        <p class="viz-view-note"></p>
+        <div class="viz-plot"></div>
+        <script type="application/json" set:html={json(cfg.rank)} />
+        <details class="viz-table">
+          <summary>Tabela</summary>
+          <table>
+            <thead><tr><th>Država</th><th class="num">Podjetja 2025</th><th class="num">Prebivalci 2025</th><th class="num">Microsoft 2026</th></tr></thead>
+            <tbody>
+              {stat.podjetja_drzave
+                .slice()
+                .sort((a, b) => a.ime.localeCompare(b.ime, 'sl'))
+                .map((r) => (
+                  <tr>
+                    <td>{r.ime}</td>
+                    <td class="num">{pct(r.v)}</td>
+                    <td class="num">{pct(stat.prebivalci_drzave.find((x) => x.koda === r.koda)?.v ?? null)}</td>
+                    <td class="num">{pct(stat.microsoft_drzave.find((x) => x.koda === r.koda)?.v ?? null)}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </details>
+        <p class="viz-source">
+          Viri: <a href={VIRI.eurostatPodjetja}>Eurostat, podjetja</a>,{' '}
+          <a href={VIRI.eurostatPrebivalci}>Eurostat, prebivalci</a>,{' '}
+          <a href={VIRI.microsoft}>Microsoft AI Diffusion</a>.
+        </p>
+      </figure>
+
+      <p>
+        Razlika je predvsem pri velikih podjetjih: AI uporablja {pct(stat.podjetja_velikost[2].SI)} slovenskih
+        podjetij z 250 ali več zaposlenimi, v EU {pct(stat.podjetja_velikost[2].EU)}. Pri malih in srednjih
+        podjetjih smo blizu povprečja.
+      </p>
+
+      <figure class="viz" data-label="Raba AI po velikosti podjetja, 2025">
+        <figcaption>Delež podjetij, ki uporabljajo AI, po velikosti (2025)</figcaption>
+        <div class="viz-plot"></div>
+        <script type="application/json" set:html={json(cfg.velikost)} />
+        <details class="viz-table">
+          <summary>Tabela</summary>
+          <table>
+            <thead><tr><th>Velikost</th><th class="num">Slovenija</th><th class="num">EU</th></tr></thead>
+            <tbody>{stat.podjetja_velikost.map((r) => <tr><td>{r.k}</td><td class="num">{pct(r.SI)}</td><td class="num">{pct(r.EU)}</td></tr>)}</tbody>
+          </table>
+        </details>
+        <p class="viz-source">Vir: <a href={VIRI.eurostatPodjetja}>Eurostat, isoc_eb_ai</a>.</p>
+      </figure>
+
+      <p>
+        Slovenska podjetja, ki AI uporabljajo, ga največkrat uporabljajo za varnost IKT
+        ({pct(stat.podjetja_namen[0].SI)}, v EU {pct(stat.podjetja_namen[0].EU)}). Za računovodstvo in
+        finance ga uporablja {pct(stat.podjetja_namen.find((r) => r.k.startsWith('Računovodstvo'))!.SI)}, kar
+        je približno pol manj kot v EU.
+      </p>
+
+      <figure class="viz" data-label="Za kaj podjetja uporabljajo AI, 2025">
+        <figcaption>Za kaj podjetja uporabljajo AI (delež med podjetji, ki AI uporabljajo, 2025)</figcaption>
+        <div class="viz-plot"></div>
+        <script type="application/json" set:html={json(cfg.namen)} />
+        <details class="viz-table">
+          <summary>Tabela</summary>
+          <table>
+            <thead><tr><th>Namen</th><th class="num">Slovenija</th><th class="num">EU</th></tr></thead>
+            <tbody>{stat.podjetja_namen.map((r) => <tr><td>{r.k}</td><td class="num">{pct(r.SI)}</td><td class="num">{pct(r.EU)}</td></tr>)}</tbody>
+          </table>
+        </details>
+        <p class="viz-source">
+          Vir: <a href={VIRI.eurostatPodjetja}>Eurostat, isoc_eb_ai</a>, delež izračunan glede na podjetja,
+          ki uporabljajo AI. Enako navaja <a href={VIRI.sursPodjetja}>SURS</a>.
+        </p>
+      </figure>
+
+      <p>
+        Pri podjetjih, ki AI ne uporabljajo, sta najpogostejša razloga pomanjkanje znanja in nejasne
+        pravne posledice. Skrb za varstvo podatkov je na tretjem mestu, tik pred nezdružljivostjo z
+        obstoječimi sistemi. Vprašanje o razlogih so dobila le podjetja, ki AI ne uporabljajo, a so o
+        njegovi uporabi že razmišljala, zato so deleži glede na vsa podjetja majhni. Po podatkih{' '}
+        <a href={VIRI.sursPodjetja}>SURS</a> je takih 14 % podjetij brez AI, med njimi jih je 69 %
+        navedlo pomanjkanje znanja.
+      </p>
+
+      <figure class="viz" data-label="Razlogi, zakaj podjetja AI ne uporabljajo, 2025">
+        <figcaption>Razlogi, zakaj podjetja AI ne uporabljajo (delež vseh podjetij, 2025)</figcaption>
+        <div class="viz-plot"></div>
+        <script type="application/json" set:html={json(cfg.razlogi)} />
+        <details class="viz-table">
+          <summary>Tabela</summary>
+          <table>
+            <thead><tr><th>Razlog</th><th class="num">Slovenija</th><th class="num">EU</th></tr></thead>
+            <tbody>{stat.podjetja_razlogi.map((r) => <tr><td>{r.k}</td><td class="num">{pct(r.SI)}</td><td class="num">{pct(r.EU)}</td></tr>)}</tbody>
+          </table>
+        </details>
+        <p class="viz-source">Vir: <a href={VIRI.eurostatPodjetja}>Eurostat, isoc_eb_ai</a>.</p>
+      </figure>
+    </section>
+
+    <section class="stat-section">
+      <h2>Prebivalci</h2>
+      <p>
+        Generativno AI (ChatGPT, Gemini, Copilot in podobna orodja) je v prvem četrtletju 2025
+        uporabilo {pct(stat.prebivalci_drzave.find((r) => r.koda === 'SI')!.v)} prebivalcev Slovenije, starih od 16 do 74
+        let. Med mladimi od 16 do 24 let jih je {pct(stat.prebivalci_starost[0].SI)}, med starimi od 65 do
+        74 let {pct(stat.prebivalci_starost[5].SI)}. V vseh starostnih skupinah je delež višji od
+        povprečja EU.
+      </p>
+
+      <figure class="viz" data-label="Raba generativne AI po starosti, 2025">
+        <figcaption>Delež prebivalcev, ki uporabljajo generativno AI, po starosti (2025)</figcaption>
+        <div class="viz-plot"></div>
+        <script type="application/json" set:html={json(cfg.starost)} />
+        <details class="viz-table">
+          <summary>Tabela</summary>
+          <table>
+            <thead><tr><th>Starost</th><th class="num">Slovenija</th><th class="num">EU</th></tr></thead>
+            <tbody>{stat.prebivalci_starost.map((r) => <tr><td>{r.k}</td><td class="num">{pct(r.SI)}</td><td class="num">{pct(r.EU)}</td></tr>)}</tbody>
+          </table>
+        </details>
+        <p class="viz-source">
+          Vir: <a href={VIRI.eurostatPrebivalci}>Eurostat, isoc_ai_iaiu</a>,{' '}
+          <a href={VIRI.sursPrebivalci}>SURS</a>.
+        </p>
+      </figure>
+
+      <p>
+        Večina uporabnikov AI uporablja zasebno. Pri delu ga uporablja {pct(stat.prebivalci_namen[1].SI)}{' '}
+        slovenskih uporabnikov, v EU {pct(stat.prebivalci_namen[1].EU)}.
+      </p>
+
+      <figure class="viz" data-label="Za kaj ljudje uporabljajo generativno AI, 2025">
+        <figcaption>Za kaj ljudje uporabljajo generativno AI (delež med uporabniki, 2025)</figcaption>
+        <div class="viz-plot"></div>
+        <script type="application/json" set:html={json(cfg.prebNamen)} />
+        <details class="viz-table">
+          <summary>Tabela</summary>
+          <table>
+            <thead><tr><th>Namen</th><th class="num">Slovenija</th><th class="num">EU</th></tr></thead>
+            <tbody>{stat.prebivalci_namen.map((r) => <tr><td>{r.k}</td><td class="num">{pct(r.SI)}</td><td class="num">{pct(r.EU)}</td></tr>)}</tbody>
+          </table>
+        </details>
+        <p class="viz-source">Vir: <a href={VIRI.eurostatPrebivalci}>Eurostat, isoc_ai_iaiu</a>. En uporabnik lahko navede več namenov.</p>
+      </figure>
+
+      <p>
+        Novejše podatke ima Microsoft, ki delež uporabnikov AI ocenjuje za polletja, od leta 2026 pa četrtletno. Za Slovenijo je ocena
+        zrasla s {pct(stat.microsoft_si.SI[0])} v prvi polovici 2025 na {pct(stat.microsoft_si.SI[3])} v drugem
+        četrtletju 2026. Ocena ni anketa in ni neposredno primerljiva z Eurostatom.
+      </p>
+
+      <figure class="viz" data-label="Microsoftova ocena deleža uporabnikov AI v Sloveniji">
+        <figcaption>Delež prebivalcev v delovni starosti, ki uporabljajo AI (ocena Microsofta)</figcaption>
+        <div class="viz-plot"></div>
+        <script type="application/json" set:html={json(cfg.microsoft)} />
+        <details class="viz-table">
+          <summary>Tabela</summary>
+          <table>
+            <thead><tr><th>Obdobje</th><th class="num">Slovenija</th></tr></thead>
+            <tbody>{stat.microsoft_si.obdobja.map((o, i) => <tr><td>{o}</td><td class="num">{pct(stat.microsoft_si.SI[i])}</td></tr>)}</tbody>
+          </table>
+        </details>
+        <p class="viz-source">
+          Vir: <a href={VIRI.microsoft}>Microsoft AI Diffusion, podatki</a>,{' '}
+          <a href={VIRI.microsoftBlog}>poročilo</a>.
+        </p>
+      </figure>
+    </section>
+
+    <section class="stat-section">
+      <h2>Katere klepetalnike uporabljamo</h2>
+      <p>
+        Uradne statistike o tem, katera orodja uporabljajo ljudje v Sloveniji, nismo našli. Najbližje je StatCounter, ki
+        meri, iz katerega klepetalnika pridejo obiskovalci na spletne strani z njegovo kodo.{' '}
+        {mesecKdaj(bots.meseci[lastMonth]).replace(/^./, (c) => c.toUpperCase())} je bil delež ChatGPT v Sloveniji {pct(chatgptLast)}, v Evropi {pct(eu.ChatGPT)}. Gemini je v
+        Evropi pri {pct(eu['Google Gemini'])}, pri nas pri {pct(bots['Google Gemini'][lastMonth])}.
+      </p>
+
+      <figure class="viz" data-label="Delež obiskov iz klepetalnikov v Sloveniji po mesecih">
+        <figcaption>Delež obiskov spletnih strani iz posameznega klepetalnika, Slovenija</figcaption>
+        <p class="viz-hint">Kliknite ChatGPT v legendi, da ga skrijete in povečate ostale.</p>
+        <div class="viz-plot"></div>
+        <script type="application/json" set:html={json(cfg.bots)} />
+        <details class="viz-table">
+          <summary>Tabela</summary>
+          <table>
+            <thead><tr><th>Mesec</th>{BOTS.map((b) => <th class="num">{b.name}</th>)}</tr></thead>
+            <tbody>
+              {bots.meseci.map((m, i) => (
+                <tr><td>{mesecDolgo(m)}</td>{BOTS.map((b) => <td class="num">{pct(bots[b.key][i])}</td>)}</tr>
+              ))}
+            </tbody>
+          </table>
+        </details>
+        <p class="viz-source">Vir: <a href={VIRI.statcounter}>StatCounter, AI Chatbot Market Share, Slovenija</a>.</p>
+      </figure>
+
+      <figure class="viz" data-label="Delež obiskov iz klepetalnikov, Slovenija in Evropa">
+        <figcaption>Slovenija in Evropa, {mesecDolgo(eu.mesec)}</figcaption>
+        <div class="viz-plot"></div>
+        <script type="application/json" set:html={json(cfg.botsEu)} />
+        <details class="viz-table">
+          <summary>Tabela</summary>
+          <table>
+            <thead><tr><th>Klepetalnik</th><th class="num">Slovenija</th><th class="num">Evropa</th></tr></thead>
+            <tbody>{BOTS.map((b) => <tr><td>{b.name}</td><td class="num">{pct(bots[b.key][lastMonth])}</td><td class="num">{pct(eu[b.key])}</td></tr>)}</tbody>
+          </table>
+        </details>
+        <p class="viz-source">Vir: <a href={VIRI.statcounter}>StatCounter</a>.</p>
+      </figure>
+
+      <p>
+        StatCounter ne šteje uporabnikov. Ne vidi rabe v aplikacijah in odgovorov, ki ne vodijo na
+        spletno stran, deleži pa med meseci precej nihajo (na primer marca 2026).{' '}
+        <a href={VIRI.statcounterMetoda}>Opis metode</a>.
+      </p>
+    </section>
+
+    <section class="stat-section">
+      <h2>O podatkih</h2>
+      <ul>
+        <li>
+          Eurostat in SURS podatke o podjetjih in prebivalcih zbirata z letnima anketama. SURS je
+          podatke za 2025 objavil oktobra 2025. Ko izidejo podatki za 2026, stran osvežimo.
+        </li>
+        <li>Podatki o podjetjih zajemajo podjetja z vsaj 10 zaposlenimi, brez finančnega sektorja.</li>
+        <li>
+          Podatki o prebivalcih veljajo za ljudi od 16 do 74 let, ki so orodje uporabili v zadnjih treh
+          mesecih pred anketo.
+        </li>
+        <li>Odstotki so zaokroženi na eno decimalko.</li>
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import '../scripts/grafi.ts';
+</script>
+
+<style is:global>
+  .viz {
+    --s1: #2a78d6;
+    --s2: #eb6834;
+    --s3: #1baf7a;
+    --s4: #eda100;
+    --s5: #e87ba4;
+    --ref: #c9c7c0;
+    --grid: #eeece6;
+    --axis: #cfccc4;
+    position: relative;
+    margin: 28px 0 36px;
+    padding: 18px 18px 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  @media (prefers-color-scheme: dark) {
+    .viz {
+      --s1: #3987e5;
+      --s2: #d95926;
+      --s3: #199e70;
+      --s4: #c98500;
+      --s5: #d55181;
+      --ref: #4a4d55;
+      --grid: #262a32;
+      --axis: #3a3f49;
+    }
+  }
+  .viz figcaption {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .viz-plot {
+    width: 100%;
+    min-height: 40px;
+  }
+  .viz-plot svg {
+    display: block;
+    overflow: visible;
+  }
+  .viz-grid {
+    stroke: var(--grid);
+    stroke-width: 1;
+  }
+  .viz-axis {
+    stroke: var(--axis);
+    stroke-width: 1;
+  }
+  .viz-cross {
+    stroke: var(--muted);
+    stroke-width: 1;
+  }
+  .viz-ref-line {
+    stroke: var(--ink);
+    stroke-width: 1;
+    opacity: 0.55;
+  }
+  .viz-dot {
+    stroke: var(--surface);
+    stroke-width: 2;
+  }
+  .viz-bar {
+    cursor: default;
+    outline: none;
+  }
+  .viz-bar:hover,
+  .viz-bar:focus {
+    opacity: 0.8;
+  }
+  .viz-tick {
+    fill: var(--muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .viz-label {
+    fill: var(--ink);
+    font-size: 13px;
+  }
+  .viz-value {
+    fill: var(--muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .viz-strong {
+    fill: var(--ink);
+    font-weight: 600;
+  }
+  .viz-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin: 0 0 10px;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .viz-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+  button.viz-legend-item {
+    cursor: pointer;
+  }
+  button.viz-legend-item[aria-pressed='false'] {
+    opacity: 0.4;
+    text-decoration: line-through;
+  }
+  .viz-key-line {
+    display: inline-block;
+    width: 14px;
+    height: 2px;
+    border-radius: 1px;
+  }
+  .viz-key-rect {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+  .viz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .viz-tabs button {
+    font: inherit;
+    font-size: 0.88rem;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .viz-tabs button[aria-pressed='true'] {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .viz-view-note,
+  .viz-hint {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin: 0 0 10px;
+  }
+  .viz-tip {
+    position: absolute;
+    z-index: 5;
+    pointer-events: none;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.08);
+    white-space: nowrap;
+  }
+  .viz-tip-title {
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .viz-tip-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .viz-tip-row strong {
+    font-variant-numeric: tabular-nums;
+  }
+  .viz-tip-row span:last-child {
+    color: var(--muted);
+  }
+  .viz-table {
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
+  .viz-table summary {
+    cursor: pointer;
+    color: var(--muted);
+  }
+  .viz-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+  .viz-table th,
+  .viz-table td {
+    text-align: left;
+    padding: 4px 8px 4px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .viz-table .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .viz-source {
+    margin: 10px 0 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 8px 0 20px;
+  }
+  .tile {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .tile-label {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .tile-value {
+    font-size: 2.2rem;
+    font-weight: 650;
+    line-height: 1.1;
+  }
+  .tile-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .stat-section {
+    margin: 36px 0;
+  }
+  .stat-section h2 {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    margin: 0 0 12px;
+  }
+  @media (max-width: 520px) {
+    .viz {
+      padding: 14px 12px 12px;
+      margin-left: -4px;
+      margin-right: -4px;
+    }
+  }
+</style>

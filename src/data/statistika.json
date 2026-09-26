@@ -1,0 +1,663 @@
+{
+ "podjetja_trend": {
+  "leta": [
+   2021,
+   2023,
+   2024,
+   2025
+  ],
+  "SI": [
+   11.7,
+   11.4,
+   20.9,
+   21.6
+  ],
+  "EU": [
+   7.7,
+   8.1,
+   13.5,
+   20.0
+  ]
+ },
+ "podjetja_drzave": [
+  {
+   "koda": "DK",
+   "ime": "Danska",
+   "v": 42.0
+  },
+  {
+   "koda": "FI",
+   "ime": "Finska",
+   "v": 37.8
+  },
+  {
+   "koda": "SE",
+   "ime": "Švedska",
+   "v": 35.0
+  },
+  {
+   "koda": "BE",
+   "ime": "Belgija",
+   "v": 34.5
+  },
+  {
+   "koda": "LU",
+   "ime": "Luksemburg",
+   "v": 33.6
+  },
+  {
+   "koda": "NL",
+   "ime": "Nizozemska",
+   "v": 33.2
+  },
+  {
+   "koda": "AT",
+   "ime": "Avstrija",
+   "v": 30.0
+  },
+  {
+   "koda": "DE",
+   "ime": "Nemčija",
+   "v": 26.0
+  },
+  {
+   "koda": "EE",
+   "ime": "Estonija",
+   "v": 23.4
+  },
+  {
+   "koda": "SI",
+   "ime": "Slovenija",
+   "v": 21.6
+  },
+  {
+   "koda": "MT",
+   "ime": "Malta",
+   "v": 21.5
+  },
+  {
+   "koda": "LT",
+   "ime": "Litva",
+   "v": 21.3
+  },
+  {
+   "koda": "ES",
+   "ime": "Španija",
+   "v": 20.3
+  },
+  {
+   "koda": "IE",
+   "ime": "Irska",
+   "v": 19.6
+  },
+  {
+   "koda": "FR",
+   "ime": "Francija",
+   "v": 18.2
+  },
+  {
+   "koda": "SK",
+   "ime": "Slovaška",
+   "v": 18.0
+  },
+  {
+   "koda": "CZ",
+   "ime": "Češka",
+   "v": 17.6
+  },
+  {
+   "koda": "IT",
+   "ime": "Italija",
+   "v": 16.4
+  },
+  {
+   "koda": "HR",
+   "ime": "Hrvaška",
+   "v": 15.2
+  },
+  {
+   "koda": "LV",
+   "ime": "Latvija",
+   "v": 12.2
+  },
+  {
+   "koda": "PT",
+   "ime": "Portugalska",
+   "v": 11.5
+  },
+  {
+   "koda": "HU",
+   "ime": "Madžarska",
+   "v": 10.4
+  },
+  {
+   "koda": "CY",
+   "ime": "Ciper",
+   "v": 9.3
+  },
+  {
+   "koda": "EL",
+   "ime": "Grčija",
+   "v": 8.9
+  },
+  {
+   "koda": "BG",
+   "ime": "Bolgarija",
+   "v": 8.6
+  },
+  {
+   "koda": "PL",
+   "ime": "Poljska",
+   "v": 8.4
+  },
+  {
+   "koda": "RO",
+   "ime": "Romunija",
+   "v": 5.2
+  }
+ ],
+ "podjetja_drzave_EU": 20.0,
+ "podjetja_velikost": [
+  {
+   "k": "10 do 49 zaposlenih",
+   "SI": 18.3,
+   "EU": 17.0
+  },
+  {
+   "k": "50 do 249 zaposlenih",
+   "SI": 30.6,
+   "EU": 30.4
+  },
+  {
+   "k": "250 ali več zaposlenih",
+   "SI": 71.7,
+   "EU": 55.0
+  }
+ ],
+ "podjetja_namen": [
+  {
+   "k": "Varnost IKT",
+   "SI": 39.7,
+   "EU": 19.7
+  },
+  {
+   "k": "Poslovna administracija ali vodenje",
+   "SI": 35.2,
+   "EU": 31.0
+  },
+  {
+   "k": "Trženje ali prodaja",
+   "SI": 29.9,
+   "EU": 34.7
+  },
+  {
+   "k": "Proizvodni procesi",
+   "SI": 20.9,
+   "EU": 20.8
+  },
+  {
+   "k": "Razvoj in inovacije",
+   "SI": 19.2,
+   "EU": 19.0
+  },
+  {
+   "k": "Računovodstvo ali finance",
+   "SI": 11.2,
+   "EU": 23.1
+  },
+  {
+   "k": "Logistika",
+   "SI": 5.6,
+   "EU": 6.1
+  }
+ ],
+ "podjetja_razlogi": [
+  {
+   "k": "Premalo znanja",
+   "SI": 7.5,
+   "EU": 7.8
+  },
+  {
+   "k": "Nejasne pravne posledice",
+   "SI": 6.1,
+   "EU": 5.9
+  },
+  {
+   "k": "Skrb za varstvo podatkov",
+   "SI": 5.5,
+   "EU": 5.8
+  },
+  {
+   "k": "Nezdružljivost z obstoječimi sistemi",
+   "SI": 5.4,
+   "EU": 4.6
+  },
+  {
+   "k": "Dostopnost ali kakovost podatkov",
+   "SI": 5.1,
+   "EU": 4.8
+  },
+  {
+   "k": "Previsoki stroški",
+   "SI": 4.5,
+   "EU": 4.2
+  },
+  {
+   "k": "Etični pomisleki",
+   "SI": 3.0,
+   "EU": 2.7
+  },
+  {
+   "k": "AI ni uporaben za podjetje",
+   "SI": 2.4,
+   "EU": 2.0
+  }
+ ],
+ "prebivalci_drzave": [
+  {
+   "koda": "DK",
+   "ime": "Danska",
+   "v": 48.4
+  },
+  {
+   "koda": "EE",
+   "ime": "Estonija",
+   "v": 46.6
+  },
+  {
+   "koda": "MT",
+   "ime": "Malta",
+   "v": 46.5
+  },
+  {
+   "koda": "FI",
+   "ime": "Finska",
+   "v": 46.3
+  },
+  {
+   "koda": "IE",
+   "ime": "Irska",
+   "v": 44.9
+  },
+  {
+   "koda": "NL",
+   "ime": "Nizozemska",
+   "v": 44.7
+  },
+  {
+   "koda": "CY",
+   "ime": "Ciper",
+   "v": 44.2
+  },
+  {
+   "koda": "EL",
+   "ime": "Grčija",
+   "v": 44.1
+  },
+  {
+   "koda": "LU",
+   "ime": "Luksemburg",
+   "v": 42.5
+  },
+  {
+   "koda": "BE",
+   "ime": "Belgija",
+   "v": 42.0
+  },
+  {
+   "koda": "SE",
+   "ime": "Švedska",
+   "v": 42.0
+  },
+  {
+   "koda": "AT",
+   "ime": "Avstrija",
+   "v": 39.4
+  },
+  {
+   "koda": "PT",
+   "ime": "Portugalska",
+   "v": 38.7
+  },
+  {
+   "koda": "ES",
+   "ime": "Španija",
+   "v": 37.9
+  },
+  {
+   "koda": "SI",
+   "ime": "Slovenija",
+   "v": 37.6
+  },
+  {
+   "koda": "FR",
+   "ime": "Francija",
+   "v": 37.5
+  },
+  {
+   "koda": "LT",
+   "ime": "Litva",
+   "v": 36.9
+  },
+  {
+   "koda": "CZ",
+   "ime": "Češka",
+   "v": 35.4
+  },
+  {
+   "koda": "LV",
+   "ime": "Latvija",
+   "v": 33.4
+  },
+  {
+   "koda": "DE",
+   "ime": "Nemčija",
+   "v": 32.3
+  },
+  {
+   "koda": "SK",
+   "ime": "Slovaška",
+   "v": 30.8
+  },
+  {
+   "koda": "HU",
+   "ime": "Madžarska",
+   "v": 29.6
+  },
+  {
+   "koda": "HR",
+   "ime": "Hrvaška",
+   "v": 27.5
+  },
+  {
+   "koda": "PL",
+   "ime": "Poljska",
+   "v": 22.7
+  },
+  {
+   "koda": "BG",
+   "ime": "Bolgarija",
+   "v": 22.5
+  },
+  {
+   "koda": "IT",
+   "ime": "Italija",
+   "v": 19.9
+  },
+  {
+   "koda": "RO",
+   "ime": "Romunija",
+   "v": 17.8
+  }
+ ],
+ "prebivalci_drzave_EU": 32.7,
+ "prebivalci_starost": [
+  {
+   "k": "16 do 24 let",
+   "SI": 73.0,
+   "EU": 63.8
+  },
+  {
+   "k": "25 do 34 let",
+   "SI": 55.8,
+   "EU": 50.7
+  },
+  {
+   "k": "35 do 44 let",
+   "SI": 46.3,
+   "EU": 39.0
+  },
+  {
+   "k": "45 do 54 let",
+   "SI": 35.1,
+   "EU": 28.4
+  },
+  {
+   "k": "55 do 64 let",
+   "SI": 18.8,
+   "EU": 16.5
+  },
+  {
+   "k": "65 do 74 let",
+   "SI": 9.9,
+   "EU": 6.5
+  }
+ ],
+ "prebivalci_namen": [
+  {
+   "k": "Zasebno",
+   "SI": 83.0,
+   "EU": 78.0
+  },
+  {
+   "k": "Pri delu",
+   "SI": 40.6,
+   "EU": 47.0
+  },
+  {
+   "k": "Pri formalnem izobraževanju",
+   "SI": 24.4,
+   "EU": 28.5
+  }
+ ],
+ "microsoft_drzave": [
+  {
+   "koda": "IE",
+   "ime": "Irska",
+   "v": 49.9
+  },
+  {
+   "koda": "FR",
+   "ime": "Francija",
+   "v": 49.6
+  },
+  {
+   "koda": "ES",
+   "ime": "Španija",
+   "v": 45.1
+  },
+  {
+   "koda": "NL",
+   "ime": "Nizozemska",
+   "v": 43.5
+  },
+  {
+   "koda": "BE",
+   "ime": "Belgija",
+   "v": 40.3
+  },
+  {
+   "koda": "SE",
+   "ime": "Švedska",
+   "v": 37.3
+  },
+  {
+   "koda": "AT",
+   "ime": "Avstrija",
+   "v": 35.4
+  },
+  {
+   "koda": "HU",
+   "ime": "Madžarska",
+   "v": 33.3
+  },
+  {
+   "koda": "DK",
+   "ime": "Danska",
+   "v": 32.4
+  },
+  {
+   "koda": "DE",
+   "ime": "Nemčija",
+   "v": 32.3
+  },
+  {
+   "koda": "PL",
+   "ime": "Poljska",
+   "v": 32.3
+  },
+  {
+   "koda": "IT",
+   "ime": "Italija",
+   "v": 31.4
+  },
+  {
+   "koda": "CZ",
+   "ime": "Češka",
+   "v": 31.2
+  },
+  {
+   "koda": "BG",
+   "ime": "Bolgarija",
+   "v": 30.7
+  },
+  {
+   "koda": "FI",
+   "ime": "Finska",
+   "v": 30.6
+  },
+  {
+   "koda": "SI",
+   "ime": "Slovenija",
+   "v": 30.1
+  },
+  {
+   "koda": "PT",
+   "ime": "Portugalska",
+   "v": 27.4
+  },
+  {
+   "koda": "HR",
+   "ime": "Hrvaška",
+   "v": 27.2
+  },
+  {
+   "koda": "SK",
+   "ime": "Slovaška",
+   "v": 27.1
+  },
+  {
+   "koda": "LT",
+   "ime": "Litva",
+   "v": 25.1
+  },
+  {
+   "koda": "EL",
+   "ime": "Grčija",
+   "v": 21.5
+  },
+  {
+   "koda": "RO",
+   "ime": "Romunija",
+   "v": 18.0
+  }
+ ],
+ "microsoft_si": {
+  "obdobja": [
+   "1. pol. 2025",
+   "2. pol. 2025",
+   "1. čet. 2026",
+   "2. čet. 2026"
+  ],
+  "SI": [
+   24.6,
+   26.5,
+   29.0,
+   30.1
+  ]
+ },
+ "klepetalniki_si": {
+  "meseci": [
+   "2025-09",
+   "2025-10",
+   "2025-11",
+   "2025-12",
+   "2026-01",
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06",
+   "2026-07",
+   "2026-08"
+  ],
+  "ChatGPT": [
+   90.48,
+   89.67,
+   91.78,
+   89.54,
+   88.73,
+   88.91,
+   80.66,
+   84.02,
+   89.05,
+   90.77,
+   90.27,
+   90.28
+  ],
+  "Google Gemini": [
+   1.11,
+   1.13,
+   1.29,
+   1.78,
+   3.03,
+   3.81,
+   7.62,
+   4.74,
+   2.98,
+   3.04,
+   5.01,
+   5.71
+  ],
+  "Microsoft Copilot": [
+   5.08,
+   4.96,
+   3.58,
+   4.58,
+   5.56,
+   4.77,
+   7.25,
+   7.77,
+   3.81,
+   3.45,
+   2.15,
+   1.95
+  ],
+  "Perplexity": [
+   2.7,
+   3.68,
+   3.13,
+   3.81,
+   2.49,
+   1.96,
+   3.19,
+   2.21,
+   2.41,
+   1.37,
+   1.49,
+   1.13
+  ],
+  "Claude": [
+   0.63,
+   0.56,
+   0.22,
+   0.28,
+   0.19,
+   0.54,
+   1.28,
+   1.26,
+   1.71,
+   1.37,
+   1.07,
+   0.93
+  ]
+ },
+ "klepetalniki_evropa": {
+  "mesec": "2026-08",
+  "ChatGPT": 79.24,
+  "Google Gemini": 10.87,
+  "Microsoft Copilot": 3.55,
+  "Perplexity": 3.5,
+  "Claude": 2.81
+ }
+}
