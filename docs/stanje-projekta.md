@@ -13,7 +13,7 @@ Stanje: 27. september 2026.
 | `/novice/` | tedenski pregledi in članki | `src/content/novice/*.md` |
 | `/vodniki/` | praktični vodniki (trajni naslovi brez datuma) | `src/content/novice/*.md`, `type: vodnik` |
 | `/modeli/` | naročnine (23 paketov) in 15 modelov s cenami API | `src/data/narocnine.yaml`, `src/data/modeli.yaml` |
-| `/cene/` | zdaj ločena stran; po PR #20 preusmeritev 301 na `/modeli/#narocnine` | `public/_redirects` |
+| `/cene/` | preusmeritev 301 na `/modeli/#narocnine` | `public/_redirects` |
 | `/statistika/` | raba AI v Sloveniji, 10 interaktivnih grafov | `src/data/statistika.json`, generira `scripts/osvezi-statistiko.mjs` |
 | `/slovar/`, `/slovar/<id>/` | 53 izrazov, vsak s svojo stranjo | `src/data/slovar.yaml` |
 | `/o-projektu/`, `/zasebnost/` (še v PR #7) | | |
@@ -88,36 +88,34 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 
 ## Odprto
 
-1. **PR #20 Modeli in cene na eni strani** čaka na Anžetov pregled. Po združitvi preveri, da
-   `https://ej-aj.si/cene/` vrne 301 na `/modeli/#narocnine`.
-2. **PR #7 newsletter** (draft): čaka, da Anže odpre račun na Buttondown in pošlje URL obrazca
+1. **PR #7 newsletter** (draft): čaka, da Anže odpre račun na Buttondown in pošlje URL obrazca
    (`newsletterAction` v `src/site.ts`). PR je treba uskladiti z `main`: komponento `<Newsletter />`
    vstavi v `src/layouts/Post.astro` (pod opozorilo o AI). V `src/pages/zasebnost.astro` ostajata dve
    oznaki `[DOPOLNI]` (podatki o Buttondownu, datum objave).
-3. **Rutini** sta od 26. 9. 2026 ustvarjeni v tej instanci (glej spodaj). Anže naj stari v instanci
+2. **Rutini** sta od 26. 9. 2026 ustvarjeni v tej instanci (glej spodaj). Anže naj stari v instanci
    DIA izklopi in novi prvič požene z "Run now", da se shranijo odobritve orodij. Prvi zagoni:
    posodobitev modelov 1. oktobra, tedenski pregled #2 2. oktobra.
-4. **Tabela naročnin:** Microsoft je še v USD (obstajajo slovenske cene v EUR), Mistral Team po
+3. **Tabela naročnin:** Microsoft je še v USD (obstajajo slovenske cene v EUR), Mistral Team po
    francoski ceni (za Slovenijo 30,49 €). Popravi ju mesečna rutina 1. oktobra; skill to že ve.
-5. E-pošta `pozdrav@ej-aj.si` se preusmerja na anze999@gmail.com (Cloudflare Email Routing).
+4. E-pošta `pozdrav@ej-aj.si` se preusmerja na anze999@gmail.com (Cloudflare Email Routing).
 
 ## Narejeno 26. in 27. septembra 2026
 
 Vodnika o varni rabi AI in o izbiri orodja, stran `/statistika/`, samodejne povezave na slovar,
 popravek vodnika AI Act (podaljšan rok za člen 50(2)), samo ime brez priimka, `docs/slog.md`,
 mesečna rutina osvežuje tudi statistiko, tedenski pregled predlaga gesla za slovar (predlogi 1 do 4
-s prejšnjega seznama).
+s prejšnjega seznama). Stran s cenami je združena z `/modeli/`. Predloga pravil rabe AI v Wordu
+(`public/predloge/pravila-rabe-ai.docx`, generira `scripts/predloga-pravil.mjs`; besedilo urejaj v
+skripti, ne v Wordu) z vodnikom `/vodniki/predloga-pravil-rabe-ai/`.
 
 ## Predlogi za naslednje funkcije (po vrednosti)
 
 1. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v `~/Desktop/ej-aj-inbox/` kaj.
    Največ vrednosti, ker gre za njegovo izkušnjo, ki je drugje ni.
-2. **Predloga internih pravil rabe AI za prenos** (Word), razširjena iz vodnika o varni rabi.
-   Uporabno za delavnice in podjetja, dober razlog za povezave na stran.
-3. **Slika za deljenje za vsak članek** (naslov članka na `og.png`), da so objave na omrežjih
+2. **Slika za deljenje za vsak članek** (naslov članka na `og.png`), da so objave na omrežjih
    prepoznavne. Generator je v `scripts/og-image.mjs`.
-4. **Newsletter** (PR #7), ko Anže odpre Buttondown.
-5. Iskanje (Pagefind), ko bo strani več kot približno 30 člankov.
+3. **Newsletter** (PR #7), ko Anže odpre Buttondown.
+4. Iskanje (Pagefind), ko bo strani več kot približno 30 člankov.
 
 ## Rutine (za ponovno ustvarjanje)
 

@@ -143,6 +143,8 @@ Pravila naj bodo dovolj kratka, da jih zaposleni preberejo. Predloga, ki jo pril
 
 Taka pravila so hkrati del ukrepov za [AI pismenost po AI Act](/vodniki/ai-act-za-slovenska-podjetja/) in razumnih ukrepov za varstvo poslovne skrivnosti. Brez njih zaposleni pogosto uporabljajo lastne brezplačne račune, čemur pravimo [senčna AI](/slovar/sencna-ai/).
 
+Daljša predloga v Wordu, z dovoljenimi orodji, označevanjem, evidenco usposabljanj in izjavo o seznanitvi, je v vodniku [Predloga pravil rabe AI v podjetju](/vodniki/predloga-pravil-rabe-ai/).
+
 ## Kontrolni seznam
 
 - [ ] Vemo, katera AI orodja in kateri paketi se v podjetju uporabljajo.
