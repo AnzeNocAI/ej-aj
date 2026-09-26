@@ -1,0 +1,13 @@
+---
+import Post from '../../layouts/Post.astro';
+import { getPosts, guideSlug } from '../../lib';
+
+export async function getStaticPaths() {
+  const guides = (await getPosts()).filter((p) => p.data.type === 'vodnik');
+  return guides.map((post) => ({ params: { slug: guideSlug(post.id) }, props: { post } }));
+}
+
+const { post } = Astro.props;
+---
+
+<Post post={post} />

@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { TYPE_LABEL, formatDate } from '../site';
+import { postPath } from '../lib';
 
 interface Props {
   post: CollectionEntry<'novice'>;
@@ -14,6 +15,6 @@ const { post } = Astro.props;
     <span class="tag">{TYPE_LABEL[post.data.type]}</span>
     <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
   </div>
-  <h3><a href={`/novice/${post.id}/`}>{post.data.title}</a></h3>
+  <h3><a href={postPath(post)}>{post.data.title}</a></h3>
   <p>{post.data.description}</p>
 </article>

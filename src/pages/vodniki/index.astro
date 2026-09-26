@@ -1,24 +1,28 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getPosts, postPath } from '../../lib';
-import { TYPE_LABEL, formatDate } from '../../site';
+import { formatDate } from '../../site';
 
-const posts = await getPosts();
+const guides = (await getPosts()).filter((p) => p.data.type === 'vodnik');
 ---
 
-<Base title="Novice" description="Tedenski pregledi AI novic in članki v slovenščini.">
+<Base
+  title="Vodniki"
+  description="Praktični vodniki o umetni inteligenci za slovenska podjetja: pravila, orodja in postopki, korak za korakom."
+>
   <div class="wrap narrow">
     <header class="article-head">
-      <span class="eyebrow">Arhiv</span>
-      <h1>Novice</h1>
-      <p class="lede">Tedenski pregledi in članki, najnovejši na vrhu.</p>
+      <span class="eyebrow">Vodniki</span>
+      <h1>Praktični vodniki</h1>
+      <p class="lede">
+        Kako AI uvesti v podjetje: pravila, ki jih morate poznati, in postopki, ki delujejo v praksi.
+      </p>
     </header>
     <ul class="post-list">
       {
-        posts.map((post) => (
+        guides.map((post) => (
           <li>
             <div class="meta">
-              <span class="tag">{TYPE_LABEL[post.data.type]}</span>
               <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
             </div>
             <h2>

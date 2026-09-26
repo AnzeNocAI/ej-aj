@@ -5,12 +5,6 @@ import { getPosts } from '../lib';
 
 const posts = (await getPosts()).slice(0, 6);
 
-const soon = [
-  {
-    title: 'Praktični vodniki',
-    text: 'Kako AI uporabiti pri računih, ponudbah, zapisnikih in drugih vsakdanjih opravilih v podjetju.',
-  },
-];
 ---
 
 <Base>
@@ -57,17 +51,12 @@ const soon = [
 
   <section class="wrap section">
     <div class="section-head">
-      <h2>Kmalu</h2>
+      <h2>Vodniki</h2>
+      <a href="/vodniki/">Vsi vodniki</a>
     </div>
-    <div class="grid">
-      {
-        soon.map((item) => (
-          <div class="card soon">
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </div>
-        ))
-      }
-    </div>
+    <p class="section-lede">
+      Praktični vodniki za uvajanje AI v podjetje, od pravil do postopkov.
+      <a href="/vodniki/ai-act-za-slovenska-podjetja/">AI Act za slovenska podjetja</a>
+    </p>
   </section>
 </Base>
