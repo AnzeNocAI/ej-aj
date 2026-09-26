@@ -154,8 +154,10 @@ for (const file of files) {
     const results = await Promise.all(links.map(async (url) => ({ url, ...(await probe(url)) })));
     for (const r of results) {
       if (r.status >= 200 && r.status < 400) continue;
-      if ((r.status === 403 || r.status === 429) && BOT_BLOCKING_HOSTS.includes(r.host)) {
-        warn(file, `povezava ${r.url}: HTTP ${r.status} (stran blokira skripte, preveri ročno)`);
+      if (r.status === 429) {
+        warn(file, `povezava ${r.url}: HTTP 429 (omejitev zahtev, preveri ročno)`);
+      } else if (r.status === 403 && BOT_BLOCKING_HOSTS.includes(r.host)) {
+        warn(file, `povezava ${r.url}: HTTP 403 (stran blokira skripte, preveri ročno)`);
       } else if (r.status === 0) {
         warn(file, `povezava ${r.url}: ni odziva (${r.reason})`);
       } else {
