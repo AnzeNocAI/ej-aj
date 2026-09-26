@@ -1,0 +1,22 @@
+# Setup: domain and hosting
+
+State as of 2026-09-26.
+
+- Domain `ej-aj.si` registered at **Domenca** (domenca.com).
+- Hosting: **Cloudflare Pages**, project connected to `AnzeNocAI/ej-aj`.
+  - Build command: `npm run build`
+  - Output directory: `dist`
+  - Environment variable: `NODE_VERSION=24`
+  - Production branch: `main`; every PR gets its own preview URL.
+- DNS: Cloudflare nameservers set at Domenca (Domenca only keeps the registration).
+- Analytics: Cloudflare Web Analytics (no cookies, so no cookie banner).
+
+## Steps (one-time, done by Anže)
+
+1. Cloudflare account: add site `ej-aj.si` (Free plan). Cloudflare shows two nameservers.
+2. Domenca: My domains, `ej-aj.si`, nameservers: replace Domenca's with the two from
+   Cloudflare. .si changes usually apply within a few hours.
+3. Cloudflare: Workers & Pages, create a Pages project, connect GitHub (grant access only to
+   `AnzeNocAI/ej-aj`), settings as above.
+4. Pages project, Custom domains: add `ej-aj.si` and `www.ej-aj.si`.
+5. Optional: Email Routing for `pozdrav@ej-aj.si` forwarding to a personal inbox.
