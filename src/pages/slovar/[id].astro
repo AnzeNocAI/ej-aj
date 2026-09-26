@@ -1,0 +1,136 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const entries = (await getCollection('slovar')).sort((a, b) =>
+    a.data.izraz.localeCompare(b.data.izraz, 'sl'),
+  );
+  return entries.map((entry, i) => ({
+    params: { id: entry.id },
+    props: { entry, entries, prev: entries[i - 1], next: entries[i + 1] },
+  }));
+}
+
+const { entry, entries, prev, next } = Astro.props;
+const { izraz, angl, razlaga, primer, glej } = entry.data;
+const byId = new Map(entries.map((e) => [e.id, e]));
+const related = glej.filter((id) => byId.has(id)).map((id) => byId.get(id)!);
+const url = new URL(`/slovar/${entry.id}/`, Astro.site).toString();
+const setUrl = new URL('/slovar/', Astro.site).toString();
+// Meta description: first sentence of the definition, trimmed to search-snippet length.
+const firstSentence = razlaga.split(/(?<=\.)\s/)[0];
+const description = firstSentence.length > 155 ? `${firstSentence.slice(0, 152)}...` : firstSentence;
+---
+
+<Base
+  title={`${izraz}: kaj pomeni?`}
+  description={description}
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'DefinedTerm',
+      '@id': url,
+      name: izraz,
+      ...(angl ? { alternateName: angl } : {}),
+      description: razlaga,
+      inLanguage: 'sl-SI',
+      url,
+      inDefinedTermSet: setUrl,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'AI slovar', item: setUrl },
+        { '@type': 'ListItem', position: 2, name: izraz, item: url },
+      ],
+    },
+  ]}
+>
+  <article class="wrap narrow">
+    <header class="article-head">
+      <a class="eyebrow" href="/slovar/">AI slovar</a>
+      <h1>{izraz}</h1>
+      {angl && angl !== izraz && <p class="angl">Angleško: {angl}</p>}
+    </header>
+
+    <div class="prose">
+      <p>{razlaga}</p>
+      {
+        primer && (
+          <blockquote>
+            <p>
+              <strong>Primer:</strong> {primer}
+            </p>
+          </blockquote>
+        )
+      }
+    </div>
+
+    {
+      related.length > 0 && (
+        <section class="related">
+          <h2>Povezani izrazi</h2>
+          <ul>
+            {related.map((r) => (
+              <li>
+                <a href={`/slovar/${r.id}/`}>{r.data.izraz}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <nav class="pager" aria-label="Sosednja gesla">
+      {prev ? <a href={`/slovar/${prev.id}/`}>← {prev.data.izraz}</a> : <span />}
+      <a href="/slovar/">Vsi izrazi</a>
+      {next ? <a href={`/slovar/${next.id}/`}>{next.data.izraz} →</a> : <span />}
+    </nav>
+  </article>
+</Base>
+
+<style>
+  .eyebrow {
+    text-decoration: none;
+  }
+  .angl {
+    color: var(--muted);
+    font-style: italic;
+    margin: 0;
+  }
+  .related {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+  .related h2 {
+    font-size: 1rem;
+    margin: 0 0 8px;
+  }
+  .related ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .related a {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 40px;
+    font-size: 0.95rem;
+    flex-wrap: wrap;
+  }
+</style>

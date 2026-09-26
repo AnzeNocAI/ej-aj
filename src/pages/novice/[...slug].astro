@@ -13,7 +13,26 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Base title={post.data.title} description={post.data.description} type="article">
+<Base
+  title={post.data.title}
+  description={post.data.description}
+  type="article"
+  published={post.data.date}
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': post.data.type === 'tedenski-pregled' ? 'NewsArticle' : 'Article',
+      headline: post.data.title,
+      description: post.data.description,
+      datePublished: post.data.date.toISOString(),
+      inLanguage: 'sl-SI',
+      author: { '@id': `${Astro.site}#avtor` },
+      publisher: { '@id': `${Astro.site}#avtor` },
+      mainEntityOfPage: new URL(`/novice/${post.id}/`, Astro.site).toString(),
+      image: new URL('/og.png', Astro.site).toString(),
+    },
+  ]}
+>
   <article class="wrap narrow">
     <header class="article-head">
       <div class="meta">
