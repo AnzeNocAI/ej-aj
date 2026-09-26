@@ -2,8 +2,16 @@
 import Base from '../layouts/Base.astro';
 import PostCard from '../components/PostCard.astro';
 import { getPosts } from '../lib';
+import stat from '../data/statistika.json';
 
 const posts = (await getPosts()).slice(0, 6);
+
+// Headline number for the statistics teaser, from the same data as /statistika/.
+const trend = stat.podjetja_trend;
+const entYear = trend.leta[trend.leta.length - 1];
+const entSI = trend.SI[trend.SI.length - 1];
+const entEU = trend.EU[trend.EU.length - 1];
+const pct = (v: number) => `${new Intl.NumberFormat('sl-SI', { minimumFractionDigits: 1 }).format(v)} %`;
 
 ---
 
@@ -35,6 +43,18 @@ const posts = (await getPosts()).slice(0, 6);
     <p class="section-lede">
       Claude, GPT, Gemini, Mistral, Llama, DeepSeek in slovenski GaMS: cene, kontekstno okno in za
       kaj je kateri model primeren. Vsak podatek ima vir.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>AI v Sloveniji v številkah</h2>
+      <a href="/statistika/">Odpri statistiko</a>
+    </div>
+    <p class="section-lede">
+      Leta {entYear} je AI uporabljalo {pct(entSI)} slovenskih podjetij z vsaj 10 zaposlenimi (EU{' '}
+      {pct(entEU)}). Kje smo med državami EU, kdo AI uporablja in katere klepetalnike, v grafih s
+      podatki Eurostata, SURS, Microsofta in StatCounterja.
     </p>
   </section>
 
