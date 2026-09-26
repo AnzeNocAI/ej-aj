@@ -14,6 +14,7 @@ zaupnosti), nato ta dokument, `docs/postavitev.md` (domena, Cloudflare, računi)
 | `/modeli/` | primerjava 15 modelov (API cene, kontekst) | `src/data/modeli.yaml` |
 | `/cene/` | cene naročnin AI orodij (23 paketov) | `src/data/narocnine.yaml` |
 | `/slovar/`, `/slovar/<id>/` | 53 izrazov, vsak s svojo stranjo | `src/data/slovar.yaml` |
+| `/statistika/` (PR #17) | raba AI v Sloveniji, interaktivni grafi | `src/data/statistika.json`, generira `scripts/osvezi-statistiko.mjs` |
 | `/o-projektu/`, `/zasebnost/` (še v PR #7) | | |
 | `/rss.xml`, `/llms.txt`, `/sitemap-index.xml` | generirano | |
 
@@ -111,11 +112,11 @@ Steps:
 
 ### ej-aj-posodobi-modele
 
-- Urnik: 1. v mesecu ob 10.00 (`0 10 1 * *`).
+- Urnik: 1. v mesecu ob 10.00 (`0 10 1 * *`). Od 27. 9. 2026 osveži tudi statistiko (`scripts/osvezi-statistiko.mjs`).
 - Prompt:
 
 ```
-You are running as a scheduled local routine for Anže. Task: re-check the model comparison on his public site ej-aj.si (src/data/modeli.yaml) against the providers' official pages and open a pull request if anything changed. You never merge and never push to main; merging is publishing and only Anže does that.
+You are running as a scheduled local routine for Anže. Task: re-check the model comparison (src/data/modeli.yaml), the subscription prices (src/data/narocnine.yaml) and the AI statistics page (src/data/statistika.json, page /statistika/) on his public site ej-aj.si, and open a pull request if anything changed. You never merge and never push to main; merging is publishing and only Anže does that.
 
 Repo: /Users/anze/Desktop/ej-aj (GitHub: AnzeNocAI/ej-aj). Always use absolute paths.
 
@@ -126,8 +127,10 @@ Steps:
 2. Load the current instructions from main:
    git show origin/main:.claude/skills/posodobi-modele/SKILL.md
    git show origin/main:AGENTS.md
+   git show origin/main:docs/slog.md (if it exists)
    If the skill or src/data/modeli.yaml does not exist on origin/main, stop and report in Slovenian: "Primerjava modelov še ni na main. Mergaj PR #1 in #2 (https://github.com/AnzeNocAI/ej-aj/pulls), potem rutino zaženi ročno." Do nothing else.
-3. Follow the skill exactly. It works in its own worktree under /Users/anze/.cache/ej-aj-worktrees/ (outside iCloud), uses one subagent per provider, changes only values confirmed on an opened official page, and opens a PR with a table of changes. If nothing changed, it opens no PR.
+   If scripts/osvezi-statistiko.mjs does not exist on origin/main yet, skip the statistics part and say in the final message: "Statistika še ni na main (PR #17)."
+3. Follow the skill exactly. It works in its own worktree under /Users/anze/.cache/ej-aj-worktrees/ (outside iCloud), uses one subagent per provider, changes only values confirmed on an opened official page, refreshes the statistics only with scripts/osvezi-statistiko.mjs (never by hand) and has a fact-checker subagent re-check the page's sentences against new statistics, and opens one PR with a table of changes. If nothing changed, it opens no PR.
 4. Slovenian copy, no em dashes or en dashes. Never fill a value from memory.
-5. Final message in Slovenian, short: PR link or "brez sprememb", the list of changes, failed sources. If a step failed, say which one and what state things were left in.
+5. Final message in Slovenian, short: PR link or "brez sprememb", the list of changes (models, prices, statistics), failed sources. If a step failed, say which one and what state things were left in.
 ```
