@@ -1,5 +1,5 @@
 import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const novice = defineCollection({
@@ -15,4 +15,15 @@ const novice = defineCollection({
   }),
 });
 
-export const collections = { novice };
+const slovar = defineCollection({
+  loader: file('src/data/slovar.yaml'),
+  schema: z.object({
+    izraz: z.string(),
+    angl: z.string().optional(),
+    razlaga: z.string(),
+    primer: z.string().optional(),
+    glej: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { novice, slovar };

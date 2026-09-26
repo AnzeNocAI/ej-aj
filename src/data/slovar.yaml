@@ -1,0 +1,335 @@
+# AI slovar za ej-aj.si. Razlage so splošne in ne vsebujejo podatkov, ki hitro zastarajo
+# (cen, imen najnovejših modelov, datumov izidov). Vsako geslo: id (slug), izraz, angl
+# (angleški izraz, neobvezno), razlaga (2 do 4 povedi), primer (neobvezno), glej (id-ji).
+
+- id: umetna-inteligenca
+  izraz: Umetna inteligenca (AI)
+  angl: Artificial intelligence
+  razlaga: >-
+    Skupno ime za računalniške sisteme, ki opravljajo naloge, za katere smo včasih
+    potrebovali človeško presojo: razumejo besedilo, prepoznajo slike, odgovarjajo na
+    vprašanja ali sprejemajo odločitve. Ko danes rečemo AI, večinoma mislimo na
+    generativno AI, kot sta ChatGPT in Claude.
+  glej: [generativna-ai, veliki-jezikovni-model]
+
+- id: generativna-ai
+  izraz: Generativna AI
+  angl: Generative AI
+  razlaga: >-
+    AI, ki ustvarja novo vsebino: besedilo, slike, zvok, video ali programsko kodo. Ne
+    išče že obstoječih odgovorov, ampak jih sestavi sproti na podlagi vzorcev, ki se jih je
+    naučila.
+  glej: [veliki-jezikovni-model, halucinacija]
+
+- id: veliki-jezikovni-model
+  izraz: Veliki jezikovni model (LLM)
+  angl: Large language model
+  razlaga: >-
+    Model, naučen na ogromni količini besedil, ki zna nadaljevati, povzemati, prevajati in
+    pisati besedilo. Na njem temeljijo klepetalniki, kot so ChatGPT, Claude in Gemini.
+    "Velik" se nanaša na število parametrov in količino učnih podatkov.
+  glej: [parametri, token, klepetalnik]
+
+- id: token
+  izraz: Token
+  angl: Token
+  razlaga: >-
+    Osnovna enota besedila, s katero dela jezikovni model. Token je lahko cela beseda, del
+    besede ali ločilo. Po tokenih se računa cena uporabe prek API-ja in meri, koliko
+    besedila model sprejme naenkrat. Slovensko besedilo porabi praviloma več tokenov kot
+    enako dolgo angleško.
+  primer: Beseda "podjetje" je lahko razdeljena na dva ali tri tokene.
+  glej: [kontekstno-okno, api]
+
+- id: kontekstno-okno
+  izraz: Kontekstno okno
+  angl: Context window
+  razlaga: >-
+    Največja količina besedila (v tokenih), ki jo model upošteva naenkrat: vaše navodilo,
+    priložene dokumente, dosedanji pogovor in njegov odgovor. Kar pade izven okna, model
+    "pozabi". Večje okno pomeni, da lahko v en pogovor naložite daljše pogodbe ali več
+    dokumentov hkrati.
+  glej: [token]
+
+- id: prompt
+  izraz: Prompt (poziv, navodilo)
+  angl: Prompt
+  razlaga: >-
+    Besedilo, s katerim modelu poveste, kaj želite. Dober prompt vsebuje kontekst (kdo ste
+    in za koga je rezultat), nalogo, primer želenega rezultata in omejitve. Kakovost
+    odgovora je močno odvisna od kakovosti prompta.
+  primer: >-
+    Namesto "Napiši mail" raje: "Napiši kratek, vljuden mail stranki, ki zamuja s plačilom
+    15 dni. Ton: prijazen, a jasen. Dolžina: največ 5 povedi."
+  glej: [sistemski-prompt]
+
+- id: sistemski-prompt
+  izraz: Sistemski prompt
+  angl: System prompt
+  razlaga: >-
+    Navodila, ki veljajo za cel pogovor in jih model upošteva pred vsakim vašim sporočilom.
+    Z njimi določite vlogo, ton, jezik in pravila. V orodjih jih pogosto najdete pod imeni
+    "navodila po meri", "projekt" ali "instructions".
+  glej: [prompt, skill]
+
+- id: halucinacija
+  izraz: Halucinacija
+  angl: Hallucination
+  razlaga: >-
+    Ko model samozavestno navede nekaj, kar ni res: izmišljen podatek, vir, citat ali
+    številko. Zgodi se, ker model sestavlja verjetne odgovore, ne pa preverjenih. Tveganje
+    zmanjšate tako, da modelu daste lastne vire, zahtevate navedbo virov in pomembne
+    podatke vedno preverite.
+  glej: [rag, generativna-ai]
+
+- id: klepetalnik
+  izraz: Klepetalnik
+  angl: Chatbot
+  razlaga: >-
+    Program, s katerim se pogovarjate v naravnem jeziku. Sodobni klepetalniki (ChatGPT,
+    Claude, Gemini, Copilot) so vmesnik do velikega jezikovnega modela, pogosto z dodatki,
+    kot so iskanje po spletu, branje datotek in povezave z drugimi orodji.
+  glej: [veliki-jezikovni-model, asistent]
+
+- id: asistent
+  izraz: AI asistent (copilot)
+  angl: AI assistant, copilot
+  razlaga: >-
+    AI, vgrajen v orodje, ki ga že uporabljate (e-pošta, urejevalnik besedil, CRM,
+    računovodski program), in vam pomaga pri delu v tem orodju. Microsoft Copilot je
+    najbolj znan primer, a izraz se uporablja splošno.
+  glej: [klepetalnik, agent]
+
+- id: agent
+  izraz: Agent
+  angl: AI agent
+  razlaga: >-
+    AI, ki nalogo opravi v več korakih sam: načrtuje, uporablja orodja (brskalnik,
+    datoteke, e-pošto, druge programe), preveri rezultat in nadaljuje, dokler ni končano.
+    Razlika od klepetalnika: klepetalnik odgovori, agent naredi.
+  primer: >-
+    "Poišči vse neplačane račune iz prejšnjega meseca, pripravi opomnike in mi jih pokaži
+    pred pošiljanjem."
+  glej: [subagent, mcp, uporaba-racunalnika]
+
+- id: subagent
+  izraz: Subagent
+  angl: Subagent
+  razlaga: >-
+    Pomožni agent, ki mu glavni agent preda del naloge. Več subagentov lahko dela
+    vzporedno, vsak s svojim ozkim navodilom, glavni agent pa rezultate združi. Tako je
+    delo hitrejše in bolj pregledno.
+  primer: >-
+    Tedenski pregled na ej-aj.si pripravijo trije subagenti, ki vzporedno zbirajo novice,
+    in četrti, ki preveri vsako trditev.
+  glej: [agent]
+
+- id: skill
+  izraz: Skill (veščina)
+  angl: Skill
+  razlaga: >-
+    Zapisan postopek, ki ga AI asistent (na primer Claude) uporabi, ko prepozna ustrezno
+    nalogo. Vsebuje navodila, predloge in po potrebi skripte. Skill je način, da
+    ponavljajoče se delo v podjetju opišete enkrat, nato pa ga AI vsakič izvede enako.
+  primer: Skill za pripravo ponudbe, ki vedno uporabi vašo predlogo, cenik in ton.
+  glej: [sistemski-prompt, rutina]
+
+- id: mcp
+  izraz: MCP (Model Context Protocol)
+  angl: Model Context Protocol
+  razlaga: >-
+    Odprt standard, prek katerega se AI asistent poveže z drugimi orodji in podatki:
+    e-pošto, koledarjem, CRM-jem, bazo podatkov, datotekami. Deluje kot univerzalni
+    priključek: ko ima orodje MCP strežnik, ga lahko uporabljajo različni AI asistenti.
+  glej: [konektor, agent]
+
+- id: konektor
+  izraz: Konektor
+  angl: Connector
+  razlaga: >-
+    Povezava med AI asistentom in drugo aplikacijo (Gmail, Google Drive, Notion, Slack ...),
+    ki asistentu omogoči branje ali urejanje podatkov v njej. Večina konektorjev danes
+    temelji na MCP.
+  glej: [mcp]
+
+- id: rutina
+  izraz: Rutina (načrtovano opravilo)
+  angl: Routine, scheduled task
+  razlaga: >-
+    Naloga, ki jo AI izvede samodejno ob določenem času, na primer vsak ponedeljek zjutraj
+    pripravi pregled prodaje. Rutina običajno zažene skill, zato je rezultat vsakič
+    pripravljen na enak način.
+  glej: [skill, agent]
+
+- id: rag
+  izraz: RAG (iskanje z generiranjem)
+  angl: Retrieval-augmented generation
+  razlaga: >-
+    Pristop, pri katerem AI pred odgovorom poišče ustrezne dele vaših dokumentov in odgovor
+    oblikuje na njihovi podlagi. Tako odgovarja iz vaših podatkov (pravilnikov, priročnikov,
+    pogodb) in ne iz splošnega znanja, kar zmanjša halucinacije.
+  glej: [vlozitev, halucinacija]
+
+- id: vlozitev
+  izraz: Vložitev (embedding)
+  angl: Embedding
+  razlaga: >-
+    Zapis pomena besedila v obliki številk, ki omogoča iskanje po pomenu namesto po
+    ključnih besedah. Na vložitvah temelji večina sistemov RAG: "odpoved pogodbe" in
+    "prekinitev sodelovanja" sta si po pomenu blizu, čeprav nimata skupnih besed.
+  glej: [rag]
+
+- id: parametri
+  izraz: Parametri
+  angl: Parameters
+  razlaga: >-
+    Številke v modelu, ki se nastavijo med učenjem in v katerih je shranjeno, kar se je
+    model naučil. Modeli imajo od nekaj milijard do več bilijonov parametrov. Več
+    parametrov običajno pomeni zmogljivejši, a dražji in počasnejši model.
+  glej: [ucenje-in-sklepanje, odprte-utezi]
+
+- id: ucenje-in-sklepanje
+  izraz: Učenje in sklepanje
+  angl: Training and inference
+  razlaga: >-
+    Učenje je enkraten, zelo drag postopek, v katerem model nastane iz podatkov. Sklepanje
+    je vsaka nadaljnja uporaba modela, ko vam odgovori na vprašanje. Ko plačujete
+    naročnino ali API, plačujete sklepanje.
+  glej: [parametri, fino-uglasevanje]
+
+- id: fino-uglasevanje
+  izraz: Fino uglaševanje
+  angl: Fine-tuning
+  razlaga: >-
+    Dodatno učenje obstoječega modela na vaših primerih, da se prilagodi posebni nalogi ali
+    slogu. Za večino podjetij je danes bolj praktično dobro navodilo, skill ali RAG, ker so
+    cenejši in jih lažje posodobite.
+  glej: [rag, skill]
+
+- id: odprte-utezi
+  izraz: Odprte uteži (odprtokodni model)
+  angl: Open weights
+  razlaga: >-
+    Model, katerega parametre (uteži) lahko prenesete in ga poganjate na lastni strojni
+    opremi ali v lastnem oblaku. Prednost: podatki ne zapustijo vašega okolja. Slabost:
+    potrebujete zmogljive računalnike in znanje za vzdrževanje.
+  primer: Slovenski model GaMS in družina modelov Llama sta modela z odprtimi utežmi.
+  glej: [parametri, zasebnost-podatkov]
+
+- id: multimodalnost
+  izraz: Multimodalnost
+  angl: Multimodality
+  razlaga: >-
+    Zmožnost modela, da poleg besedila razume ali ustvarja tudi slike, zvok, video ali
+    dokumente, kot so PDF-ji in preglednice. Multimodalen model lahko na primer prebere
+    fotografijo računa in izpiše postavke.
+  glej: [veliki-jezikovni-model]
+
+- id: razmisljanje
+  izraz: Razmišljanje (reasoning)
+  angl: Reasoning, extended thinking
+  razlaga: >-
+    Način delovanja, pri katerem model pred odgovorom nalogo razčleni in preveri korake.
+    Odgovor traja dlje in stane več, je pa pri zahtevnejših nalogah (analize, izračuni,
+    programiranje) opazno boljši.
+  glej: [veliki-jezikovni-model]
+
+- id: temperatura
+  izraz: Temperatura
+  angl: Temperature
+  razlaga: >-
+    Nastavitev, ki določa, koliko naključnosti je v odgovorih. Nizka temperatura da bolj
+    predvidljive in ponovljive odgovore, visoka bolj raznolike in ustvarjalne. V klepetalnikih
+    je običajno ne nastavljate sami, pri uporabi prek API-ja pa jo lahko.
+  glej: [api]
+
+- id: api
+  izraz: API
+  angl: Application programming interface
+  razlaga: >-
+    Programski vmesnik, prek katerega model uporabljate iz lastne aplikacije ali
+    avtomatizacije, brez klepetalnika. Pri API-ju plačujete po porabi (po tokenih), ne s
+    fiksno mesečno naročnino.
+  glej: [token, predpomnjenje-pozivov]
+
+- id: predpomnjenje-pozivov
+  izraz: Predpomnjenje pozivov
+  angl: Prompt caching
+  razlaga: >-
+    Ko pri API-ju večkrat pošljete enak začetek prompta (na primer dolg priročnik), ga
+    ponudnik shrani in ga pri naslednjih klicih zaračuna precej ceneje. Pri avtomatizacijah
+    lahko to stroške občutno zniža.
+  glej: [api, token]
+
+- id: benchmark
+  izraz: Benchmark (primerjalni test)
+  angl: Benchmark
+  razlaga: >-
+    Standardiziran nabor nalog, s katerim primerjamo modele. Rezultati so koristni za grobo
+    primerjavo, a ne povedo vsega: model, ki blesti na testu, ni nujno najboljši za vašo
+    nalogo. Najzanesljivejši test je preizkus na lastnih primerih.
+  glej: [vodilni-model]
+
+- id: vodilni-model
+  izraz: Vodilni model
+  angl: Frontier model
+  razlaga: >-
+    Najzmogljivejši modeli največjih razvijalcev (OpenAI, Anthropic, Google in drugih), ki
+    določajo, kaj AI trenutno zmore. Za vsakdanje naloge pogosto zadostujejo cenejši in
+    hitrejši manjši modeli istih ponudnikov.
+  glej: [benchmark]
+
+- id: destilacija
+  izraz: Destilacija
+  angl: Distillation
+  razlaga: >-
+    Postopek, pri katerem manjši model uči posnemati večjega. Rezultat je cenejši in
+    hitrejši model, ki za pogoste naloge ohrani velik del zmogljivosti večjega.
+  glej: [parametri]
+
+- id: uporaba-racunalnika
+  izraz: Uporaba računalnika
+  angl: Computer use
+  razlaga: >-
+    Zmožnost AI, da upravlja računalnik ali brskalnik kot človek: vidi zaslon, klika,
+    tipka in izpolnjuje obrazce. Uporabno za programe, ki nimajo povezave (API ali MCP), je
+    pa počasnejše in manj zanesljivo od neposredne povezave.
+  glej: [agent, mcp]
+
+- id: vibe-coding
+  izraz: Vibe coding
+  angl: Vibe coding
+  razlaga: >-
+    Programiranje, pri katerem opišete, kaj želite, AI pa napiše kodo, pogosto ne da bi
+    jo podrobno brali. Primerno za prototipe in interna orodja. Za sisteme, ki obdelujejo
+    občutljive podatke ali denar, je pregled kode še vedno nujen.
+  glej: [agent]
+
+- id: sencna-ai
+  izraz: Senčna AI
+  angl: Shadow AI
+  razlaga: >-
+    Uporaba AI orodij v podjetju brez vednosti ali odobritve vodstva, na primer zaposleni v
+    brezplačni klepetalnik prilepijo pogodbo stranke. Tveganje ni AI sam, ampak to, da ni
+    pravil, kaj se sme deliti in s katerim orodjem.
+  glej: [zasebnost-podatkov]
+
+- id: zasebnost-podatkov
+  izraz: Zasebnost podatkov pri AI
+  angl: Data privacy
+  razlaga: >-
+    Vprašanje, kam gredo podatki, ki jih vnesete v AI orodje, kdo jih vidi in ali se z
+    njimi uči model. Poslovni paketi večjih ponudnikov običajno zagotavljajo, da se z vašimi
+    podatki modeli ne učijo, pri brezplačnih različicah pa to ni nujno. Pred uvedbo
+    preverite pogoje in GDPR.
+  glej: [sencna-ai, odprte-utezi, ai-act]
+
+- id: ai-act
+  izraz: AI Act (Akt o umetni inteligenci)
+  angl: EU Artificial Intelligence Act
+  razlaga: >-
+    Uredba EU, ki ureja razvoj in uporabo AI glede na tveganje: nekatere rabe prepoveduje,
+    za visoko tvegane (na primer pri zaposlovanju) zahteva stroge pogoje, za večino
+    vsakdanje rabe pa predvsem preglednost. Veljati je začela avgusta 2024, obveznosti pa se
+    uvajajo postopoma v več letih.
+  glej: [zasebnost-podatkov]
