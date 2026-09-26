@@ -1,9 +1,17 @@
 # Setup: domain and hosting
 
-State as of 2026-09-26: Worker `ej-aj` deployed, live at https://ej-aj.anze999.workers.dev.
-Custom domains `ej-aj.si` and `www.ej-aj.si` attached to the Worker. Nameservers changed at
-Domenca to `amit.ns.cloudflare.com` and `sandy.ns.cloudflare.com` (whois confirms); waiting for
-the .si registry to publish the new domain, after which Cloudflare activates the zone.
+State as of 2026-09-26 evening: **ej-aj.si is live** (the .si registry published the
+Cloudflare nameservers around 21:30). Worker `ej-aj` also answers on
+https://ej-aj.anze999.workers.dev; each branch and PR gets its own preview URL.
+
+- `www.ej-aj.si` redirects 301 to `ej-aj.si` (Cloudflare Redirect Rule, keeps the query string).
+- Cloudflare Web Analytics: site `ej-aj.si`, beacon in `src/layouts/Base.astro`
+  (token in `src/site.ts`, public).
+- Google Search Console: domain property `ej-aj.si` added on anze999@gmail.com; TXT record
+  `google-site-verification=...` is in Cloudflare DNS. Verification still has to be confirmed
+  in Search Console, then submit `https://ej-aj.si/sitemap-index.xml`.
+- Email: `pozdrav@ej-aj.si` via Cloudflare Email Routing to anze999@gmail.com is planned, not
+  yet set up.
 
 - Domain `ej-aj.si` registered at **Domenca** (domenca.com).
 - Hosting: **Cloudflare Workers** (static assets only, config in `wrangler.jsonc`), connected
