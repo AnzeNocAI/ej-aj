@@ -26,4 +26,24 @@ const slovar = defineCollection({
   }),
 });
 
-export const collections = { novice, slovar };
+const modeli = defineCollection({
+  loader: file('src/data/modeli.yaml'),
+  schema: z.object({
+    ponudnik: z.string(),
+    ime: z.string(),
+    api_id: z.string().nullable().default(null),
+    izid: z.string().nullable().default(null),
+    // USD na milijon tokenov, standardna cena (brez paketnih popustov).
+    cena_vhod: z.number().nullable(),
+    cena_izhod: z.number().nullable(),
+    kontekst: z.number().nullable(),
+    odprte_utezi: z.boolean(),
+    dostop: z.string(),
+    za_kaj: z.string(),
+    opomba: z.string().optional(),
+    viri: z.array(z.url()).min(1),
+    preverjeno: z.coerce.date(),
+  }),
+});
+
+export const collections = { novice, slovar, modeli };

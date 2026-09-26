@@ -1,0 +1,249 @@
+# Primerjava modelov za ej-aj.si. Vsaka številka mora biti razvidna iz strani v "viri".
+# Cene: USD na milijon tokenov, standardna cena za API (brez paketnih popustov, najnižja
+# standardna stopnja). null pomeni, da podatka na uradni strani ni. "za_kaj" je naše mnenje,
+# "opomba" samo dejstva iz vira. Osvežuje ga skill posodobi-modele.
+
+- id: claude-fable-5-1
+  ponudnik: Anthropic
+  ime: Claude Fable 5.1
+  api_id: claude-fable-5-1
+  izid: '2026-09-01'
+  cena_vhod: 10
+  cena_izhod: 50
+  kontekst: 1000000
+  odprte_utezi: false
+  dostop: Claude API, AWS, Google Cloud, Microsoft Foundry
+  za_kaj: Najzahtevnejše analize in dolge samostojne naloge, ko cenejši modeli ne zadoščajo.
+  viri:
+    - https://platform.claude.com/docs/en/about-claude/models/overview
+    - https://platform.claude.com/docs/en/models/fable-5-1/overview
+  preverjeno: 2026-09-26
+
+- id: claude-mythos-5-1
+  ponudnik: Anthropic
+  ime: Claude Mythos 5.1
+  api_id: claude-mythos-5-1
+  izid: '2026-09-01'
+  cena_vhod: 10
+  cena_izhod: 50
+  kontekst: 1000000
+  odprte_utezi: false
+  dostop: samo na povabilo (Project Glasswing)
+  za_kaj: Za večino podjetij ni dosegljiv; v tabeli je zaradi popolnosti.
+  opomba: Enaka cena kot Fable 5.1, dostop le za udeležence programa Project Glasswing.
+  viri:
+    - https://platform.claude.com/docs/en/models/mythos-5-1/overview
+  preverjeno: 2026-09-26
+
+- id: claude-opus-5-5
+  ponudnik: Anthropic
+  ime: Claude Opus 5.5
+  api_id: claude-opus-5-5
+  izid: '2026-09-22'
+  cena_vhod: 4
+  cena_izhod: 20
+  kontekst: 1000000
+  odprte_utezi: false
+  dostop: Claude aplikacije, Claude API, AWS, Google Cloud, Microsoft Foundry
+  za_kaj: Dobra privzeta izbira za zahtevnejše delo, agente in programiranje.
+  opomba: Anthropic ga priporoča kot izhodišče za večino nalog.
+  viri:
+    - https://platform.claude.com/docs/en/about-claude/models/overview
+    - https://www.anthropic.com/claude-opus-5-5
+  preverjeno: 2026-09-26
+
+- id: claude-sonnet-5
+  ponudnik: Anthropic
+  ime: Claude Sonnet 5
+  api_id: claude-sonnet-5
+  izid: '2026-06-30'
+  cena_vhod: 2
+  cena_izhod: 10
+  kontekst: 1000000
+  odprte_utezi: false
+  dostop: Claude aplikacije, Claude API, AWS, Google Cloud, Microsoft Foundry
+  za_kaj: Vsakdanje pisarniško delo in avtomatizacije, kjer štejeta hitrost in cena.
+  viri:
+    - https://platform.claude.com/docs/en/about-claude/models/overview
+    - https://platform.claude.com/docs/en/models/sonnet-5/overview
+  preverjeno: 2026-09-26
+
+- id: claude-haiku-4-5
+  ponudnik: Anthropic
+  ime: Claude Haiku 4.5
+  api_id: claude-haiku-4-5
+  izid: '2025-10-15'
+  cena_vhod: 1
+  cena_izhod: 5
+  kontekst: 200000
+  odprte_utezi: false
+  dostop: Claude API, AWS, Google Cloud, Microsoft Foundry
+  za_kaj: Preproste naloge v velikih količinah, na primer razvrščanje sporočil.
+  opomba: Anthropic ga ne bo umaknil pred 15. oktobrom 2026.
+  viri:
+    - https://platform.claude.com/docs/en/about-claude/models/overview
+  preverjeno: 2026-09-26
+
+- id: gpt-6-astra
+  ponudnik: OpenAI
+  ime: GPT-6 Astra
+  api_id: gpt-6-astra
+  izid: null
+  cena_vhod: 10
+  cena_izhod: 50
+  kontekst: 1050000
+  odprte_utezi: false
+  dostop: ChatGPT, OpenAI API
+  za_kaj: Najzahtevnejše naloge v ekosistemu ChatGPT.
+  opomba: Najzmogljivejši OpenAI model.
+  viri:
+    - https://developers.openai.com/api/docs/models
+  preverjeno: 2026-09-26
+
+- id: gpt-6-sol
+  ponudnik: OpenAI
+  ime: GPT-6 Sol
+  api_id: gpt-6-sol
+  izid: '2026-09-22'
+  cena_vhod: 2
+  cena_izhod: 10
+  kontekst: 1050000
+  odprte_utezi: false
+  dostop: ChatGPT (plačljivi paketi), Codex, OpenAI API
+  za_kaj: Vsakdanje delo in avtomatizacije za podjetja, ki uporabljajo ChatGPT.
+  viri:
+    - https://developers.openai.com/api/docs/models
+    - https://community.openai.com/t/announcing-gpt-6-sol-and-gpt-6-luna-in-the-api-codex-and-chatgpt/1399925
+  preverjeno: 2026-09-26
+
+- id: gpt-6-luna
+  ponudnik: OpenAI
+  ime: GPT-6 Luna
+  api_id: gpt-6-luna
+  izid: '2026-09-22'
+  cena_vhod: 0.1
+  cena_izhod: 0.5
+  kontekst: 1050000
+  odprte_utezi: false
+  dostop: ChatGPT (tudi brezplačno v namizni aplikaciji), OpenAI API
+  za_kaj: Zelo poceni obdelava velikih količin preprostih nalog.
+  viri:
+    - https://developers.openai.com/api/docs/models
+    - https://community.openai.com/t/announcing-gpt-6-sol-and-gpt-6-luna-in-the-api-codex-and-chatgpt/1399925
+  preverjeno: 2026-09-26
+
+- id: gemini-3-1-pro
+  ponudnik: Google
+  ime: Gemini 3.1 Pro (predogled)
+  api_id: gemini-3.1-pro-preview
+  izid: null
+  cena_vhod: 2
+  cena_izhod: 12
+  kontekst: null
+  odprte_utezi: false
+  dostop: Gemini API, Google AI Studio, Vertex AI
+  za_kaj: Zahtevnejše naloge za podjetja, ki delajo v Google Workspace.
+  opomba: Še v fazi predogleda. Za pozive nad 200 tisoč tokenov je cena višja (4 $ in 18 $).
+  viri:
+    - https://ai.google.dev/gemini-api/docs/pricing
+    - https://ai.google.dev/gemini-api/docs/models
+  preverjeno: 2026-09-26
+
+- id: gemini-3-8-flash
+  ponudnik: Google
+  ime: Gemini 3.8 Flash
+  api_id: gemini-3.8-flash
+  izid: null
+  cena_vhod: 0.75
+  cena_izhod: 3.75
+  kontekst: null
+  odprte_utezi: false
+  dostop: Gemini aplikacija, Gemini API, Google AI Studio, Vertex AI
+  za_kaj: Hitre in cenovno ugodne avtomatizacije v Googlovem okolju.
+  opomba: Promocijska cena do 31. decembra 2026, od 1. januarja 2027 1,50 $ in 7,50 $.
+  viri:
+    - https://ai.google.dev/gemini-api/docs/pricing
+  preverjeno: 2026-09-26
+
+- id: mistral-medium-3-5
+  ponudnik: Mistral
+  ime: Mistral Medium 3.5
+  api_id: mistral-medium-3-5
+  izid: '2026-04-28'
+  cena_vhod: 1.5
+  cena_izhod: 7.5
+  kontekst: 256000
+  odprte_utezi: true
+  dostop: Mistral API (La Plateforme), prenos uteži
+  za_kaj: Evropski ponudnik z odprtimi utežmi; za podjetja, ki želijo ostati v EU.
+  opomba: Licenca Modified MIT.
+  viri:
+    - https://mistral.ai/pricing/api/
+    - https://docs.mistral.ai/models/mistral-medium-3-5-26-04
+  preverjeno: 2026-09-26
+
+- id: ministral-3-8b
+  ponudnik: Mistral
+  ime: Ministral 3 8B
+  api_id: ministral-8b-2512
+  izid: '2025-12-02'
+  cena_vhod: 0.15
+  cena_izhod: 0.15
+  kontekst: 256000
+  odprte_utezi: true
+  dostop: Mistral API, prenos uteži
+  za_kaj: Majhen model, ki ga lahko poganjate tudi na lastnem strežniku.
+  opomba: Licenca Apache 2.0.
+  viri:
+    - https://mistral.ai/pricing/api/
+    - https://docs.mistral.ai/models/ministral-3-8b-25-12
+  preverjeno: 2026-09-26
+
+- id: llama-4-maverick
+  ponudnik: Meta
+  ime: Llama 4 Maverick
+  api_id: null
+  izid: '2025-04-05'
+  cena_vhod: null
+  cena_izhod: null
+  kontekst: 1000000
+  odprte_utezi: true
+  dostop: prenos uteži (Hugging Face), pri različnih ponudnikih gostovanja
+  za_kaj: Za lastno postavitev, ko podatki ne smejo zapustiti vašega okolja.
+  opomba: Meta ga ne prodaja prek lastnega API-ja, zato uradne cene ni. Licenca Llama 4 Community License.
+  viri:
+    - https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct
+  preverjeno: 2026-09-26
+
+- id: deepseek-v4-pro
+  ponudnik: DeepSeek
+  ime: DeepSeek V4 Pro
+  api_id: deepseek-v4-pro
+  izid: null
+  cena_vhod: 1.32
+  cena_izhod: 3.96
+  kontekst: 1000000
+  odprte_utezi: true
+  dostop: DeepSeek API, prenos uteži (Hugging Face)
+  za_kaj: Nizka cena in odprte uteži; ponudnik je kitajsko podjetje, zato pred pošiljanjem poslovnih podatkov preverite pogoje obdelave.
+  opomba: Prikazana je cena v konici. Izven konice je cena za polovico nižja (0,66 $ in 1,98 $). Licenca MIT.
+  viri:
+    - https://api-docs.deepseek.com/quick_start/pricing
+    - https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813
+  preverjeno: 2026-09-26
+
+- id: gams3-12b
+  ponudnik: CJVT / UL FRI
+  ime: GaMS3 12B Instruct
+  api_id: null
+  izid: null
+  cena_vhod: null
+  cena_izhod: null
+  kontekst: 131072
+  odprte_utezi: true
+  dostop: prenos uteži (Hugging Face)
+  za_kaj: Slovenski jezikovni model za lastno postavitev in raziskave; za poslovno rabo ga najprej preizkusite na svojih nalogah.
+  opomba: Razvit na Univerzi v Ljubljani na osnovi modela Gemma 3. Licenca Gemma.
+  viri:
+    - https://huggingface.co/cjvt/GaMS3-12B-Instruct
+  preverjeno: 2026-09-26
