@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Base from '../layouts/Base.astro';
+import Base from '../../layouts/Base.astro';
 
 const entries = (await getCollection('slovar')).sort((a, b) =>
   a.data.izraz.localeCompare(b.data.izraz, 'sl'),
@@ -19,6 +19,20 @@ for (const entry of entries) {
 <Base
   title="AI slovar"
   description="Izrazi umetne inteligence, razloženi po domače: token, agent, MCP, halucinacija, RAG in drugi."
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'DefinedTermSet',
+      '@id': new URL('/slovar/', Astro.site).toString(),
+      name: 'AI slovar',
+      inLanguage: 'sl-SI',
+      hasDefinedTerm: entries.map((e) => ({
+        '@type': 'DefinedTerm',
+        name: e.data.izraz,
+        url: new URL(`/slovar/${e.id}/`, Astro.site).toString(),
+      })),
+    },
+  ]}
 >
   <div class="wrap narrow">
     <header class="article-head">
@@ -41,7 +55,7 @@ for (const entry of entries) {
             {list.map((e) => (
               <div class="term" id={e.id}>
                 <dt>
-                  <a href={`#${e.id}`}>{e.data.izraz}</a>
+                  <a href={`/slovar/${e.id}/`}>{e.data.izraz}</a>
                   {e.data.angl && e.data.angl !== e.data.izraz && <span class="angl">{e.data.angl}</span>}
                 </dt>
                 <dd>
