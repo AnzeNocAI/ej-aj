@@ -1,0 +1,122 @@
+---
+// A YouTube video that loads only on click (youtube-nocookie.com). Until then the page shows
+// the thumbnail and title, so nothing from YouTube runs and no cookies are set.
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../site';
+
+interface Props {
+  video: CollectionEntry<'videi'>;
+  compact?: boolean;
+}
+
+const { video, compact = false } = Astro.props;
+const { naslov, kanal, datum, trajanje, opis, zakaj } = video.data;
+const thumb = `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`;
+const watch = `https://www.youtube.com/watch?v=${video.id}`;
+---
+
+<figure class:list={['video', { compact }]} data-video-id={video.id}>
+  <button type="button" class="video-play" aria-label={`Predvajaj video: ${naslov}`}>
+    <img src={thumb} alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="480" height="360" />
+    <span class="video-icon" aria-hidden="true">
+      <svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3Z" fill="#000" fill-opacity=".72"/><path d="m27 34 18-10-18-10z" fill="#fff"/></svg>
+    </span>
+  </button>
+  <figcaption>
+    <strong class="video-title">{naslov}</strong>
+    <span class="video-meta">{kanal} · {formatDate(datum)}{trajanje && ` · ${trajanje}`}</span>
+    {!compact && <p>{opis}</p>}
+    <p class="video-why">{zakaj}</p>
+    <a class="video-link" href={watch}>Odpri na YouTubu</a>
+  </figcaption>
+</figure>
+
+<script>
+  // Swap the thumbnail for the player on click. The iframe comes from youtube-nocookie.com.
+  for (const fig of document.querySelectorAll<HTMLElement>('figure.video')) {
+    const button = fig.querySelector<HTMLButtonElement>('.video-play');
+    button?.addEventListener('click', () => {
+      const id = fig.dataset.videoId;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+      iframe.title = button.getAttribute('aria-label') ?? 'Video';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.allowFullscreen = true;
+      iframe.className = 'video-frame';
+      button.replaceWith(iframe);
+    });
+  }
+</script>
+
+<style>
+  .video {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .video-play,
+  .video :global(.video-frame) {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    padding: 0;
+    background: #000;
+    cursor: pointer;
+  }
+  .video-play img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.92;
+    transition: opacity 0.15s;
+  }
+  .video-play:hover img,
+  .video-play:focus-visible img {
+    opacity: 1;
+  }
+  .video-play:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .video-icon {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .video-play:hover .video-icon path:first-child {
+    fill: #f00;
+    fill-opacity: 1;
+  }
+  .video figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .video-title {
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+  .video-meta,
+  .video-link {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .video figcaption p {
+    margin: 4px 0 0;
+    font-size: 0.95rem;
+  }
+  .video-why {
+    color: var(--muted);
+  }
+  .video-link {
+    margin-top: 2px;
+  }
+</style>

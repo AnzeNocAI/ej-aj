@@ -12,6 +12,29 @@ const novice = defineCollection({
     // Obdobje, ki ga pokriva tedenski pregled, npr. "17. do 26. september 2026".
     period: z.string().optional(),
     draft: z.boolean().default(false),
+    // Series of guides with a hub page, e.g. "prirocnik" -> /prirocnik/; korak orders them.
+    serija: z.enum(['prirocnik']).optional(),
+    korak: z.number().optional(),
+    // YouTube ids from src/data/videi.yaml, shown as recommended videos under the article.
+    videi: z.array(z.string()).default([]),
+  }),
+});
+
+const videi = defineCollection({
+  loader: file('src/data/videi.yaml'),
+  schema: z.object({
+    // id is the 11-character YouTube video id.
+    naslov: z.string(),
+    kanal: z.string(),
+    datum: z.coerce.date(),
+    trajanje: z.string().optional(),
+    // Slovenian summary in our words, 2 to 3 sentences; facts from the episode page.
+    opis: z.string(),
+    // One sentence: why it is worth the time for a Slovenian business reader.
+    zakaj: z.string(),
+    izpostavljen: z.boolean().default(false),
+    vir: z.url(),
+    preverjeno: z.coerce.date(),
   }),
 });
 
@@ -66,4 +89,4 @@ const narocnine = defineCollection({
   }),
 });
 
-export const collections = { novice, slovar, modeli, narocnine };
+export const collections = { novice, slovar, modeli, narocnine, videi };
