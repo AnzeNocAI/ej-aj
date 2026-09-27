@@ -14,9 +14,10 @@ Read it at the start of every session.
   `clanek/<slug>`), open a PR, and let Anže review it on the Cloudflare preview URL. Merging is
   publishing.
 - File names: `YYYY-MM-DD-<slug>.md`. Weekly digests: `YYYY-MM-DD-tedenski-pregled-<n>.md`.
-- Before opening a PR run `node scripts/preveri.mjs --links <file>` (content validator: front
-  matter, dashes, digest structure, sources, links) and `npm run build`. Both must pass; CI runs
-  the validator again on every PR.
+- Before opening a PR run `node scripts/og-slike.mjs` (share image `public/og/<id>.png`, rendered
+  with this Mac's fonts and committed), `node scripts/preveri.mjs --links <file>` (content
+  validator: front matter, dashes, digest structure, sources, links, share image) and
+  `npm run build`. The validator and the build must pass; CI runs the validator again on every PR.
 
 ## Skills and routines
 

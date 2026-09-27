@@ -10,12 +10,14 @@ interface Props {
   published?: Date;
   /** Page-specific schema.org objects, added next to the site-wide ones. */
   jsonLd?: Record<string, unknown>[];
+  /** Share image path (1200x630), e.g. "/og/<id>.png". Defaults to the site image. */
+  image?: string;
 }
 
-const { title, description = SITE.description, type = 'website', published, jsonLd = [] } = Astro.props;
+const { title, description = SITE.description, type = 'website', published, jsonLd = [], image = '/og.png' } = Astro.props;
 const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name}: ${SITE.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/og.png', Astro.site);
+const ogImage = new URL(image, Astro.site);
 const siteLd = [
   {
     '@context': 'https://schema.org',

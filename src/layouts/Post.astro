@@ -1,4 +1,5 @@
 ---
+import { existsSync } from 'node:fs';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import Base from './Base.astro';
@@ -13,6 +14,8 @@ const { post } = Astro.props;
 const { Content, headings } = await render(post);
 // Table of contents for longer guides.
 const toc = post.data.type === 'vodnik' ? headings.filter((h) => h.depth === 2) : [];
+// Per-article share image from scripts/og-slike.mjs; the site image when it hasn't been made yet.
+const image = existsSync(`public/og/${post.id}.png`) ? `/og/${post.id}.png` : '/og.png';
 ---
 
 
@@ -21,6 +24,7 @@ const toc = post.data.type === 'vodnik' ? headings.filter((h) => h.depth === 2) 
   description={post.data.description}
   type="article"
   published={post.data.date}
+  image={image}
   jsonLd={[
     {
       '@context': 'https://schema.org',
@@ -32,7 +36,7 @@ const toc = post.data.type === 'vodnik' ? headings.filter((h) => h.depth === 2) 
       author: { '@id': `${Astro.site}#avtor` },
       publisher: { '@id': `${Astro.site}#avtor` },
       mainEntityOfPage: new URL(postPath(post), Astro.site).toString(),
-      image: new URL('/og.png', Astro.site).toString(),
+      image: new URL(image, Astro.site).toString(),
     },
   ]}
 >
