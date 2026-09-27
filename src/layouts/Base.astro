@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { SITE } from '../site';
+import Ikona from '../components/Ikona.astro';
 
 interface Props {
   title?: string;
@@ -58,6 +59,7 @@ const nav = [
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:type" content={type} />
@@ -81,7 +83,7 @@ const nav = [
   <body>
     <header class="site-header">
       <div class="wrap">
-        <a class="logo" href="/">ej<span>-</span>aj</a>
+        <a class="logo" href="/"><Ikona /><span>ej<span class="logo-crta">-</span>aj</span></a>
         <nav class="nav" aria-label="Glavna navigacija">
           {
             nav.map((item) => (

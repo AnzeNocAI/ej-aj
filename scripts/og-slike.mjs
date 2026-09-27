@@ -10,6 +10,7 @@
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import sharp from 'sharp';
+import { IKONA } from '../src/data/ikona.mjs';
 
 const CONTENT = 'src/content/novice';
 const OUT = 'public/og';
@@ -83,7 +84,12 @@ function svg({ title, type, date }) {
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
   <circle cx="1080" cy="80" r="220" fill="#ffffff" opacity="0.06"/>
-  <text x="90" y="112" font-family="${FONT}" font-size="44" font-weight="800" fill="#ffffff" letter-spacing="-1.5">ej<tspan fill="#8ea0ff">-</tspan>aj</text>
+  <svg x="90" y="66" width="60" height="60" viewBox="0 0 ${IKONA.size} ${IKONA.size}">
+    <rect width="${IKONA.size}" height="${IKONA.size}" rx="${IKONA.radius}" fill="#fbfaf7"/>
+    <circle cx="${IKONA.dot.cx}" cy="${IKONA.dot.cy}" r="${IKONA.dot.r}" fill="#1f3bd6"/>
+    <path d="${IKONA.letters}" fill="#16181d"/>
+  </svg>
+  <text x="166" y="112" font-family="${FONT}" font-size="44" font-weight="800" fill="#ffffff" letter-spacing="-1.5">ej<tspan fill="#8ea0ff">-</tspan>aj</text>
   <text x="90" y="170" font-family="${FONT}" font-size="28" font-weight="600" fill="#8ea0ff">${esc(meta)}</text>
   ${text}
   <text x="90" y="572" font-family="${FONT}" font-size="28" fill="#dfe4ff">ej-aj.si · Umetna inteligenca po slovensko</text>

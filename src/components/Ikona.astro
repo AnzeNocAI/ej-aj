@@ -1,0 +1,31 @@
+---
+// The site icon as inline SVG, coloured with the theme variables so it follows dark mode.
+import { IKONA } from '../data/ikona.mjs';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const { size, radius, dot, letters } = IKONA;
+---
+
+<svg class:list={['ikona', className]} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
+  <rect width={size} height={size} rx={radius} class="ikona-bg" />
+  <circle cx={dot.cx} cy={dot.cy} r={dot.r} class="ikona-pika" />
+  <path d={letters} class="ikona-crke" />
+</svg>
+
+<style>
+  .ikona-bg {
+    fill: var(--surface);
+    stroke: var(--line);
+    stroke-width: 16;
+  }
+  .ikona-pika {
+    fill: var(--accent);
+  }
+  .ikona-crke {
+    fill: var(--ink);
+  }
+</style>
