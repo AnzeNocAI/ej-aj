@@ -11,7 +11,7 @@ Vsa večja AI orodja odgovarjajo v slovenščini, vprašanje je, kako dobro. Ta 
 
 - Na EuroEvalu in SloBenchovi lestvici za prevajanje so najboljši modeli Googla, Anthropica in OpenAI-ja blizu skupaj. Na CJVT-jevi areni je Gemini 2.5 Pro opazno pred ostalimi, Claude pa tam ni ocenjen.
 - Slovenski model GaMS3 je na CJVT-jevi areni, kjer ljudje slepo ocenjujejo odgovore v slovenščini, drugi, takoj za Gemini 2.5 Pro.
-- Microsoft slovenščino izrecno navaja med jeziki, ki jih je za Copilot preizkusil. Claude slovenščine nima med jeziki vmesnika, pogovarja pa se v njej. stranska plošča Gemini v Gmailu in Dokumentih slovenščine nima med podprtimi jeziki, Mistral je nima med jeziki, v katerih pričakuje dobro delovanje.
+- Microsoft slovenščino izrecno navaja med jeziki, ki jih je za Copilot preizkusil. Claude slovenščine nima med jeziki vmesnika, pogovarja pa se v njej. Stranska plošča Gemini v Gmailu in Dokumentih slovenščine nima med podprtimi jeziki, Mistral je nima med jeziki, v katerih pričakuje dobro delovanje.
 - Za prepoznavo slovenskega govora je na SloBenchovi lestvici najboljše slovensko orodje, ne svetovni ponudniki.
 - Najzanesljivejši test je vaš: isto nalogo v slovenščini dajte dvema orodjema in primerjajte.
 
