@@ -70,9 +70,12 @@ Work on a branch `vodnik/<slug>` from `origin/main`, in a worktree under
 `/Users/anze/.cache/ej-aj-worktrees/` like the other skills. Then:
 
 ```bash
+node scripts/og-slike.mjs                               # share image public/og/<id>.png
 node scripts/preveri.mjs src/content/novice/<file>.md   # errors only for [DOPOLNI] are expected
 npm run build
 ```
+
+Commit the image (`public/og/<id>.png`, `scripts/og-slike.json`) together with the guide.
 
 Open the PR (`gh pr create --repo AnzeNocAI/ej-aj --base main`), title
 `Vodnik: <title>`, body in Slovenian: what the guide covers, the list of `[DOPOLNI]` places,

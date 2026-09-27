@@ -161,6 +161,7 @@ than 5, continue anyway and open the PR as a draft, explaining why in the PR bod
 ## 7. Deterministic checks
 
 ```bash
+node scripts/og-slike.mjs          # share image public/og/<id>.png (needs this Mac's fonts)
 node scripts/preveri.mjs --links src/content/novice/<file>.md
 npm run build
 ```
@@ -171,7 +172,7 @@ in the PR body. Other warnings: fix if they are real.
 ## 8. Commit, push, open the PR
 
 ```bash
-git add src/content/novice/<file>.md src/data/slovar.yaml src/markdown/slovar-povezave.mjs
+git add src/content/novice/<file>.md src/data/slovar.yaml src/markdown/slovar-povezave.mjs public/og scripts/og-slike.json
 git commit -m "Weekly digest #N (<period>)" -m "Co-Authored-By: Claude <noreply@anthropic.com>"
 GH_TOKEN="$(gh auth token --user AnzeNocAI)" git push -u origin "pregled/$TODAY"
 GH_TOKEN="$(gh auth token --user AnzeNocAI)" gh pr create --repo AnzeNocAI/ej-aj \
