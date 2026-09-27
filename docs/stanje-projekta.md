@@ -21,9 +21,10 @@ Stanje: 27. september 2026 (zvečer).
 | `/o-projektu/`, `/zasebnost/` (še v PR #7) | | |
 | `/rss.xml`, `/llms.txt`, `/sitemap-index.xml` | generirano | |
 
-Objavljeno (20 člankov): tedenski pregled #1, 9 samostojnih vodnikov (AI Act, varna raba,
+Objavljeno (22 člankov): tedenski pregled #1, 11 samostojnih vodnikov (AI Act, varna raba,
 izbira orodja, predloga pravil v Wordu, kako dobro AI zna slovensko, AI v Excelu/Wordu/Outlooku,
-AI v računovodstvu, AI za pravnike in odvetnike, ChatGPT ali Claude ali Gemini) in 10 vodnikov
+AI v računovodstvu, AI za pravnike in odvetnike, ChatGPT ali Claude ali Gemini, odpoved
+naročnine, AI pismenost zaposlenih) in 10 vodnikov
 priročnika. SEO: JSON-LD na vseh straneh,
 `public/og.png`, Search Console in Bing potrjena, sitemap oddan, samodejne notranje povezave na
 slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
@@ -113,8 +114,8 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 - Samodejne povezave na slovar, slika za deljenje za vsak članek (`scripts/og-slike.mjs`).
 - Samo ime brez priimka, `docs/slog.md`, popravek vodnika AI Act (člen 50(2)).
 - Rutini: mesečna osvežuje tudi statistiko, tedenski pregled predlaga gesla za slovar.
-- Zvečer 27. 9.: vodnika "AI za pravnike in odvetnike" (#29) in "ChatGPT, Claude ali Gemini"
-  (#30), krajši opis na naslovnici po Anžetovem besedilu (#28, #32), popravek presledka v nogi
+- Zvečer 27. 9.: vodniki "AI za pravnike in odvetnike" (#29), "ChatGPT, Claude ali Gemini"
+  (#30), odpoved naročnine (#34) in AI pismenost zaposlenih (#37), krajši opis na naslovnici po Anžetovem besedilu (#28, #32), popravek presledka v nogi
   (Astro pobriše presledek za izrazom `{SITE.author}.`, zato `{' '}`). Validator pri `--links`
   obravnava `chatgpt.com` in `help.openai.com` kot gostitelja, ki blokirata skripte.
 - Besedilo PDF-jev (CCBE, sodbe) se na tem Macu izvleče s PDFKit prek kratke skripte v Swiftu
@@ -129,17 +130,14 @@ Trends; brez podatkov o obsegu iskanj):
 
 1. ~~AI za pravnike in odvetnike~~ (objavljeno 27. 9.).
 2. ~~ChatGPT ali Claude ali Gemini~~ (objavljeno 27. 9.).
-3. **Odpoved naročnine in vračilo denarja** (Trends: "how to cancel chatgpt subscription"
-   raste): v delu 27. 9. zvečer, vodnik `odpoved-narocnine-ai`. Cene paketov so že na `/modeli/`
-   in v primerjalnem vodniku.
-4. **AI pismenost in izobraževanje zaposlenih** (AI Act, 4. člen, po AI Omnibusu omiljen).
-   Vodnik AI Act je treba preveriti glede te spremembe.
+3. ~~Odpoved naročnine in vračilo denarja~~ (objavljeno 27. 9., #34).
+4. ~~AI pismenost zaposlenih~~ (objavljeno 27. 9., #37).
 5. **Search Console**: čez nekaj tednov pogledati, kateri iskalni nizi prinašajo obiske (Anže
    mora dovoliti delo v svojem Chrome profilu).
 6. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v `~/Desktop/ej-aj-inbox/` kaj.
 7. **Newsletter** (PR #7), ko Anže odpre Buttondown; na strani o zasebnosti omeniti tudi
    sličice videov z i.ytimg.com.
-8. Iskanje (Pagefind): z 20 članki se približujemo meji približno 30.
+8. Iskanje (Pagefind): z 22 članki se približujemo meji približno 30.
 
 ## Rutine (za ponovno ustvarjanje)
 
