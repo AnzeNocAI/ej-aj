@@ -416,3 +416,37 @@ img {
   color: var(--muted);
   max-width: 60ch;
 }
+
+.toc {
+  margin: 8px 0 32px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 0.95rem;
+}
+
+.toc ol {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
+.toc li {
+  margin: 4px 0;
+}
+
+.prose h2 {
+  scroll-margin-top: 80px;
+}
+
+/* Automatic links to glossary terms (src/markdown/slovar-povezave.mjs): quieter than normal links. */
+.prose a.slovar-link {
+  color: inherit;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--muted);
+}
+
+.prose a.slovar-link:hover {
+  color: var(--accent);
+  text-decoration-style: solid;
+}

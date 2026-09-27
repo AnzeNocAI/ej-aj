@@ -1,8 +1,11 @@
 # ej-aj.si
 
 Slovenian AI hub: weekly AI news digest, model comparison and practical guides for Slovenian
-businesses. Owner and editor: Anže Noč. Public repo `AnzeNocAI/ej-aj`, deployed by Cloudflare
+businesses. Owner and editor: Anže. Public repo `AnzeNocAI/ej-aj`, deployed by Cloudflare
 Workers (static assets, `wrangler.jsonc`) on every push to `main`.
+
+Current state, open items, merge permissions and next-feature ideas: `docs/stanje-projekta.md`.
+Read it at the start of every session.
 
 ## How publishing works
 
@@ -34,6 +37,9 @@ Workers (static assets, `wrangler.jsonc`) on every push to `main`.
 - **No em dashes (—).** Use a comma, colon, parentheses or a new sentence. No en dash as a
   substitute either; write ranges as "17. do 26. september".
 - Plain, concrete language. No hype, no obvious AI phrasing, no stacked short fragments.
+  Follow `docs/slog.md` (words and structures that read as AI, with a pre-PR check).
+- Name: on the site and in the repo Anže appears by first name only ("Anže"), never with his
+  surname.
 - Slovenian number format: `1.500`, `0,10 USD`, `40 %`.
 - Separate fact (what was announced) from interpretation (**Kaj to pomeni za vas:**).
 

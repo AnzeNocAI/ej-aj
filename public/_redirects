@@ -1,0 +1,4 @@
+# Cloudflare Workers static assets redirects (https://developers.cloudflare.com/workers/static-assets/redirects/)
+# /cene/ was merged into /modeli/ on 27 September 2026.
+/cene /modeli/#narocnine 301
+/cene/ /modeli/#narocnine 301

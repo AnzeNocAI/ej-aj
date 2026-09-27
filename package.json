@@ -13,11 +13,16 @@
     "preveri": "node scripts/preveri.mjs"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "^0.4.2",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
-    "astro": "^7.3.5"
+    "astro": "^7.3.5",
+    "js-yaml": "^4.3.2"
   },
   "allowScripts": {
     "esbuild": true
+  },
+  "devDependencies": {
+    "docx": "^9.7.2"
   }
 }

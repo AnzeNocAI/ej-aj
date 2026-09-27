@@ -3,15 +3,17 @@ import Base from '../layouts/Base.astro';
 import PostCard from '../components/PostCard.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { getPosts } from '../lib';
+import stat from '../data/statistika.json';
 
 const posts = (await getPosts()).slice(0, 6);
 
-const soon = [
-  {
-    title: 'Praktični vodniki',
-    text: 'Kako AI uporabiti pri računih, ponudbah, zapisnikih in drugih vsakdanjih opravilih v podjetju.',
-  },
-];
+// Headline number for the statistics teaser, from the same data as /statistika/.
+const trend = stat.podjetja_trend;
+const entYear = trend.leta[trend.leta.length - 1];
+const entSI = trend.SI[trend.SI.length - 1];
+const entEU = trend.EU[trend.EU.length - 1];
+const pct = (v: number) => `${new Intl.NumberFormat('sl-SI', { minimumFractionDigits: 1 }).format(v)} %`;
+
 ---
 
 <Base>
@@ -19,8 +21,8 @@ const soon = [
     <span class="eyebrow">ej-aj.si</span>
     <h1>Umetna inteligenca <em>po slovensko</em>.</h1>
     <p>
-      Vsak petek najpomembnejše AI novice tedna in kaj pomenijo za slovenska podjetja. Brez
-      navdušenja na prazno, z viri.
+      Vsak petek pregled AI novic tedna in kratka razlaga, kaj pomenijo za podjetja pri nas. Ob
+      tem še cene orodij in modelov, statistika, slovar in vodniki.
     </p>
   </section>
 
@@ -40,12 +42,24 @@ const soon = [
 
   <section class="wrap section">
     <div class="section-head">
-      <h2>Primerjava modelov</h2>
+      <h2>Modeli in cene</h2>
       <a href="/modeli/">Odpri primerjavo</a>
     </div>
     <p class="section-lede">
-      Claude, GPT, Gemini, Mistral, Llama, DeepSeek in slovenski GaMS: cene, kontekstno okno in za
-      kaj je kateri model primeren. Vsak podatek ima vir.
+      Naročnine za ChatGPT, Claude, Gemini, Copilot in druga orodja, za posameznike in podjetja, ter
+      cene modelov prek API-ja, od Clauda in GPT do slovenskega GaMS. Vsak podatek ima vir.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>AI v Sloveniji v številkah</h2>
+      <a href="/statistika/">Odpri statistiko</a>
+    </div>
+    <p class="section-lede">
+      Leta {entYear} je AI uporabljalo {pct(entSI)} slovenskih podjetij z vsaj 10 zaposlenimi (EU{' '}
+      {pct(entEU)}). Kje smo med državami EU, kdo AI uporablja in katere klepetalnike, v grafih s
+      podatki Eurostata, SURS, Microsofta in StatCounterja.
     </p>
   </section>
 
@@ -62,17 +76,12 @@ const soon = [
 
   <section class="wrap section">
     <div class="section-head">
-      <h2>Kmalu</h2>
+      <h2>Vodniki</h2>
+      <a href="/vodniki/">Vsi vodniki</a>
     </div>
-    <div class="grid">
-      {
-        soon.map((item) => (
-          <div class="card soon">
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </div>
-        ))
-      }
-    </div>
+    <p class="section-lede">
+      Kaj velja, kaj smete in kako se česa lotiti, ko AI uvajate v podjetje.
+      <a href="/vodniki/ai-act-za-slovenska-podjetja/">AI Act za slovenska podjetja</a>
+    </p>
   </section>
 </Base>
