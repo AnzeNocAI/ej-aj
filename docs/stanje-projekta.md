@@ -15,7 +15,9 @@ Stanje: 27. september 2026.
 | `/modeli/` | naročnine (23 paketov) in 15 modelov s cenami API | `src/data/narocnine.yaml`, `src/data/modeli.yaml` |
 | `/cene/` | preusmeritev 301 na `/modeli/#narocnine` | `public/_redirects` |
 | `/statistika/` | raba AI v Sloveniji, 10 interaktivnih grafov | `src/data/statistika.json`, generira `scripts/osvezi-statistiko.mjs` |
-| `/slovar/`, `/slovar/<id>/` | 53 izrazov, vsak s svojo stranjo | `src/data/slovar.yaml` |
+| `/prirocnik/` | priročnik: 10 vodnikov o dobri rabi Claude (`serija: prirocnik`, `korak`) | `src/content/novice/*.md` |
+| `/videi/` | priporočeni videi (YouTube, naloži se šele ob kliku) | `src/data/videi.yaml` |
+| `/slovar/`, `/slovar/<id>/` | 54 izrazov, vsak s svojo stranjo | `src/data/slovar.yaml` |
 | `/o-projektu/`, `/zasebnost/` (še v PR #7) | | |
 | `/rss.xml`, `/llms.txt`, `/sitemap-index.xml` | generirano | |
 
@@ -112,10 +114,23 @@ skripti, ne v Wordu) z vodnikom `/vodniki/predloga-pravil-rabe-ai/`.
 
 ## Predlogi za naslednje funkcije (po vrednosti)
 
-1. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v `~/Desktop/ej-aj-inbox/` kaj.
-   Največ vrednosti, ker gre za njegovo izkušnjo, ki je drugje ni.
-2. **Newsletter** (PR #7), ko Anže odpre Buttondown.
-3. Iskanje (Pagefind), ko bo strani več kot približno 30 člankov.
+Iz raziskave ključnih besed 27. 9. 2026 (predlogi iskanja Google in Bing za Slovenijo, Google
+Trends; brez podatkov o obsegu iskanj). Najmočnejše slovenske teme, ki jih stran še ne pokriva:
+
+1. **Kako dobro AI zna slovensko** (ChatGPT, Claude, Gemini, Copilot v slovenščini, GaMS):
+   največji slovenski sklop iskanj ("chatgpt slovenščina", "v slovenščini", "brezplačno").
+2. **AI v računovodstvu** in **AI za pravnike**: več slovenskih predlogov v obeh iskalnikih.
+3. **AI v Excelu, Wordu in Outlooku** (Claude for Excel, Copilot 365).
+4. **ChatGPT ali Claude ali Gemini**: primerjalna stran za iskanja "chatgpt vs ...".
+5. **Cene paketov za posameznike in odpoved naročnine** (Trends: "chatgpt plans", "how to
+   cancel chatgpt subscription" rastejo).
+6. **AI pismenost in izobraževanje zaposlenih** (povezava z AI Act, 4. člen).
+7. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v `~/Desktop/ej-aj-inbox/` kaj.
+8. **Newsletter** (PR #7), ko Anže odpre Buttondown.
+9. Iskanje (Pagefind), ko bo strani več kot približno 30 člankov (s priročnikom jih je 15).
+
+Teme o Claude Code (skilli, subagenti, hooki) se iščejo skoraj samo v angleščini; priročnik
+zato v naslovih uporablja angleške izraze, ki jih ljudje vpisujejo.
 
 ## Rutine (za ponovno ustvarjanje)
 

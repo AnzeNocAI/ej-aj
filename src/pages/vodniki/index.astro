@@ -3,7 +3,8 @@ import Base from '../../layouts/Base.astro';
 import { getPosts, postPath } from '../../lib';
 import { formatDate } from '../../site';
 
-const guides = (await getPosts()).filter((p) => p.data.type === 'vodnik');
+const guides = (await getPosts()).filter((p) => p.data.type === 'vodnik' && !p.data.serija);
+const handbookCount = (await getPosts()).filter((p) => p.data.serija === 'prirocnik').length;
 ---
 
 <Base
@@ -18,6 +19,10 @@ const guides = (await getPosts()).filter((p) => p.data.type === 'vodnik');
         Kako AI uvesti v podjetje: pravila, ki jih morate poznati, in postopki, ki delujejo v praksi.
       </p>
     </header>
+    <a class="handbook-box" href="/prirocnik/">
+      <strong>Priročnik: kako dobro uporabljati Claude</strong>
+      <span>{handbookCount} vodnikov po vrsti, od prvega prompta do lastnega agenta.</span>
+    </a>
     <ul class="post-list">
       {
         guides.map((post) => (
@@ -35,3 +40,22 @@ const guides = (await getPosts()).filter((p) => p.data.type === 'vodnik');
     </ul>
   </div>
 </Base>
+
+<style>
+  .handbook-box {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0 0 24px;
+    padding: 16px 18px;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .handbook-box span {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+</style>

@@ -134,6 +134,16 @@
   primer: Skill za pripravo ponudbe, ki vedno uporabi vašo predlogo, cenik in ton.
   glej: [sistemski-prompt, rutina]
 
+- id: hook
+  izraz: Hook
+  angl: Hook
+  razlaga: >-
+    Ukaz, ki se v Claude Code samodejno izvede ob določenem dogodku, na primer preden Claude
+    zapiše datoteko ali ko konča nalogo. Za razliko od navodil, ki jih model praviloma
+    upošteva, se hook izvede vsakič, zato z njim lahko dejanje tudi zaustavite.
+  primer: Hook, ki prepreči vsako spremembo datotek v mapi s pogodbami.
+  glej: [skill, subagent, agent]
+
 - id: mcp
   izraz: MCP (Model Context Protocol)
   angl: Model Context Protocol

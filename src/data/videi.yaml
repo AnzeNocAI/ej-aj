@@ -1,0 +1,129 @@
+# Priporočeni videi za ej-aj.si (stran /videi/, priročnik, konec vodnikov).
+# id je 11-mestni YouTube id. opis in zakaj pišemo sami, v slovenščini, samo iz opisa epizode
+# na YouTubu ali v opombah podcasta (vir). Nič iz spomina. Vgradnja se preveri z
+# https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=<id>&format=json
+
+- id: zObYdmNB2Bo
+  naslov: Claude is BACK with Opus 5.5
+  kanal: How I AI (Claire Vo)
+  datum: 2026-09-22
+  trajanje: 25 min
+  opis: >-
+    Claire Vo pove, zakaj je Claude za nekaj mesecev opustila in zakaj se je vrnila. Teden
+    resničnega dela z Opus 5.5: dolge samostojne naloge, prenova spletne strani, pisanje v
+    lastnem slogu, montaža videa. Pojasni tudi, zakaj je pri agentih cena pomembnejša kot pri
+    posameznem vprašanju.
+  zakaj: Pošten pregled novega modela na resničnem delu, z mesti, kjer je konkurenca še vedno boljša.
+  izpostavljen: true
+  vir: https://www.youtube.com/watch?v=zObYdmNB2Bo
+  preverjeno: 2026-09-27
+
+- id: LMT-bknLmNo
+  naslov: I reviewed Opus 5.5 and GPT-6 Sol live
+  kanal: How I AI (Claire Vo)
+  datum: 2026-09-22
+  trajanje: 39 min
+  opis: >-
+    Posneto na dan, ko sta Anthropic in OpenAI izdala nove modele. Slepa primerjava na
+    vsakdanjih nalogah: e-pošta, specifikacije izdelka, prototipi, dolge samostojne naloge.
+    Na koncu pove, za kaj je po njenem posamezen model najboljši, in zakaj se sodnik AI z
+    njo ni strinjal.
+  zakaj: Dober primer, kako modele primerjati na svojih nalogah namesto na lestvicah.
+  vir: https://www.youtube.com/watch?v=LMT-bknLmNo
+  preverjeno: 2026-09-27
+
+- id: p2qmX6TM0kw
+  naslov: I built a Claude Cowork system that does a week of PM work in a day
+  kanal: How I AI (Claire Vo)
+  datum: 2026-08-31
+  trajanje: 46 min
+  opis: >-
+    Produktni vodja Daniel Blum pokaže sistem v Claude Cowork, ki ureja njegovo tablo nalog,
+    obdeluje Slack in e-pošto ter vsako jutro pripravi povzetek. Sistem spremlja njegove popravke
+    in predlaga nove skille. Z vtičnikom za uvajanje dobi vsak zaposleni v podjetju svojo
+    nastavitev Clauda v približno 15 minutah.
+  zakaj: Najbližje temu, kar potrebuje slovensko podjetje, ki želi AI uporabljati za pisarniško delo brez programiranja.
+  izpostavljen: true
+  vir: https://www.youtube.com/watch?v=p2qmX6TM0kw
+  preverjeno: 2026-09-27
+
+- id: dLiXiD8hOAI
+  naslov: Agentic Loops for Knowledge Workers
+  kanal: The AI Daily Brief (Nathaniel Whittemore)
+  datum: 2026-09-04
+  trajanje: 53 min
+  opis: >-
+    Delavnica o delu z agenti, ki tečejo, dokler ne dosežejo merljivega cilja, namesto enega
+    vprašanja in odgovora. Kako določiti jasen konec naloge, da agent sam preveri svoje delo,
+    katere naloge se splača tako avtomatizirati in kako preprečiti, da stroški uidejo. Na koncu
+    povezovanje več agentov, ki raziskujejo, pregledujejo in izboljšujejo delo drug drugega.
+  zakaj: Razumljiva razlaga dela z več agenti za ljudi, ki niso programerji.
+  izpostavljen: true
+  vir: https://www.youtube.com/watch?v=dLiXiD8hOAI
+  preverjeno: 2026-09-27
+
+- id: HNFhXFZxMYQ
+  naslov: 7 Ways How We Use AI Is Changing
+  kanal: The AI Daily Brief (Nathaniel Whittemore)
+  datum: 2026-09-20
+  trajanje: 23 min
+  opis: >-
+    Sedem sprememb v tem, kako ljudje vsak dan uporabljajo AI. Med njimi stalni pogovori,
+    glasovni ukazi in klepetalniki, ki usklajujejo ekipe agentov. Premik od promptov k ciljem,
+    obvladovanje stroškov modelov in skupni agenti za ekipe.
+  zakaj: Hiter pregled za vodje, ki želijo razumeti, kam gre raba AI.
+  vir: https://www.youtube.com/watch?v=HNFhXFZxMYQ
+  preverjeno: 2026-09-27
+
+- id: S-sYlFiGFv8
+  naslov: How the Claude Code team uses Claude Code
+  kanal: Claude
+  datum: 2026-09-02
+  trajanje: 22 min
+  opis: >-
+    Trije člani ekipe Claude Code opišejo svoje vsakdanje delo. Claudu dajejo cilje, ne
+    posameznih nalog, rutine in zanke poganjajo na daljavo, preverjanje dela pa gradijo v
+    postopek. Povedo tudi, zakaj odstranjujejo funkcije, ko jih modeli prerastejo.
+  zakaj: Iz prve roke, kako orodje uporabljajo ljudje, ki ga razvijajo.
+  vir: https://www.youtube.com/watch?v=S-sYlFiGFv8
+  preverjeno: 2026-09-27
+
+- id: mWvtOHlZM-I
+  naslov: Tool, skill, or subagent? Decomposing an agent that outgrew its prompt
+  kanal: Claude
+  datum: 2026-05-22
+  trajanje: 45 min
+  opis: >-
+    Kdaj naj bo del logike orodje, kdaj skill in kdaj subagent. Na primeru agenta za zaloge s
+    promptom dolgim več sto vrstic pokaže, kako ga razstaviti, in po vsaki spremembi požene
+    evalvacije, da vidi, kaj se je spremenilo.
+  zakaj: Za tiste, ki že gradijo lastne agente in se jim je prompt razrasel.
+  vir: https://www.youtube.com/watch?v=mWvtOHlZM-I
+  preverjeno: 2026-09-27
+
+- id: qtKkzsQjAy0
+  naslov: How to Build a Multi-Agent Review Swarm
+  kanal: Every (Dan Shipper)
+  datum: 2026-07-24
+  trajanje: 12 min
+  opis: >-
+    Inženir pri Notion AI pokaže, kako iz govorjenega opisa nastane naloga, delujoča koda in
+    popravek, ki ga pred človekom pregleda skupina agentov. Ključno je, da agentu pred začetkom
+    določi cilj, omejitve, orodja in način preverjanja, standarde ekipe pa zapiše v skill.
+  zakaj: Kratek in konkreten primer, kako se več agentov pregleduje med sabo.
+  vir: https://www.youtube.com/watch?v=qtKkzsQjAy0
+  preverjeno: 2026-09-27
+
+- id: 4_SHhSMHzNo
+  naslov: The AI factory playbook for engineering teams
+  kanal: How I AI (Claire Vo)
+  datum: 2026-09-21
+  trajanje: 47 min
+  opis: >-
+    Direktor podjetja Warp opiše njihovo "tovarno programske opreme": ideja iz Slacka gre prek
+    sistema nalog in pregleda do združene spremembe kode. Merijo, kolikokrat mora poseči človek,
+    koliko stane posamezna sprememba in kako model oceni vsak tek agenta. Pokaže tudi, kako AI
+    uporablja za netehnično delo direktorja (Figma, Granola, raziskovalni agenti).
+  zakaj: Za razvojne ekipe, ki razmišljajo, kako daleč lahko gre avtomatizacija.
+  vir: https://www.youtube.com/watch?v=4_SHhSMHzNo
+  preverjeno: 2026-09-27
