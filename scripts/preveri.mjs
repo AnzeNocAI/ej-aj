@@ -23,7 +23,7 @@ if (files.length === 0) {
 
 const TYPES = ['tedenski-pregled', 'clanek', 'vodnik'];
 // Hosts that block scripted requests but are fine in a browser.
-const BOT_BLOCKING_HOSTS = ['openai.com', 'www.openai.com', 'x.com', 'twitter.com', 'www.linkedin.com'];
+const BOT_BLOCKING_HOSTS = ['openai.com', 'www.openai.com', 'chatgpt.com', 'help.openai.com', 'x.com', 'twitter.com', 'www.linkedin.com'];
 
 let errors = 0;
 let warnings = 0;
