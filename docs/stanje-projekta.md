@@ -88,10 +88,10 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 
 ## Odprto
 
-1. **PR #7 newsletter** (draft): čaka, da Anže odpre račun na Buttondown in pošlje URL obrazca
-   (`newsletterAction` v `src/site.ts`). PR je treba uskladiti z `main`: komponento `<Newsletter />`
-   vstavi v `src/layouts/Post.astro` (pod opozorilo o AI). V `src/pages/zasebnost.astro` ostajata dve
-   oznaki `[DOPOLNI]` (podatki o Buttondownu, datum objave).
+1. **PR #7 newsletter** (draft, 27. 9. usklajen z `main`): obrazec je v `src/layouts/Post.astro` in
+   na naslovnici, skrit, dokler je `newsletterAction` v `src/site.ts` `null`. Čaka, da Anže odpre
+   račun na Buttondown in pošlje URL obrazca. V `src/pages/zasebnost.astro` ostajata dve oznaki
+   `[DOPOLNI]` (kje Buttondown hrani podatke, datum objave); CI zato namenoma pade.
 2. **Rutini** sta od 26. 9. 2026 ustvarjeni v tej instanci (glej spodaj). Anže naj stari v instanci
    DIA izklopi in novi prvič požene z "Run now", da se shranijo odobritve orodij. Prvi zagoni:
    posodobitev modelov 1. oktobra, tedenski pregled #2 2. oktobra.
@@ -105,6 +105,8 @@ Vodnika o varni rabi AI in o izbiri orodja, stran `/statistika/`, samodejne pove
 popravek vodnika AI Act (podaljšan rok za člen 50(2)), samo ime brez priimka, `docs/slog.md`,
 mesečna rutina osvežuje tudi statistiko, tedenski pregled predlaga gesla za slovar (predlogi 1 do 4
 s prejšnjega seznama). Stran s cenami je združena z `/modeli/`. Predloga pravil rabe AI v Wordu
+Slika za deljenje za vsak članek (`public/og/<id>.png`, generira `scripts/og-slike.mjs` na Macu,
+ker potrebuje pisave s šumniki; validator opozori, če manjka). Predloga pravil rabe AI v Wordu
 (`public/predloge/pravila-rabe-ai.docx`, generira `scripts/predloga-pravil.mjs`; besedilo urejaj v
 skripti, ne v Wordu) z vodnikom `/vodniki/predloga-pravil-rabe-ai/`.
 
@@ -112,10 +114,8 @@ skripti, ne v Wordu) z vodnikom `/vodniki/predloga-pravil-rabe-ai/`.
 
 1. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v `~/Desktop/ej-aj-inbox/` kaj.
    Največ vrednosti, ker gre za njegovo izkušnjo, ki je drugje ni.
-2. **Slika za deljenje za vsak članek** (naslov članka na `og.png`), da so objave na omrežjih
-   prepoznavne. Generator je v `scripts/og-image.mjs`.
-3. **Newsletter** (PR #7), ko Anže odpre Buttondown.
-4. Iskanje (Pagefind), ko bo strani več kot približno 30 člankov.
+2. **Newsletter** (PR #7), ko Anže odpre Buttondown.
+3. Iskanje (Pagefind), ko bo strani več kot približno 30 člankov.
 
 ## Rutine (za ponovno ustvarjanje)
 
