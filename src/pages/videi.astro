@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Video from '../components/Video.astro';
+
+const videos = (await getCollection('videi')).sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf());
+---
+
+<Base
+  title="Priporočeni videi o AI"
+  description="Izbrane epizode podcastov in predavanja o delu z AI, od agentov do novih modelov, s kratkim povzetkom v slovenščini."
+>
+  <div class="wrap">
+    <header class="article-head narrow">
+      <span class="eyebrow">Videi</span>
+      <h1>Priporočeni videi</h1>
+      <p class="lede">
+        Epizode, ki jih je vredno pogledati, če želite AI uporabljati bolje. Pri vsaki je kratek
+        povzetek v slovenščini in razlog, zakaj smo jo izbrali. Videi so v angleščini.
+      </p>
+    </header>
+
+    <div class="video-grid">
+      {videos.map((v) => <Video video={v} />)}
+    </div>
+
+    <p class="note narrow">
+      Video se naloži šele, ko ga zaženete, prek YouTubovega načina z omejenimi piškotki
+      (youtube-nocookie.com). Do takrat stran prikaže samo sličico.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 32px 24px;
+    margin: 8px 0 32px;
+  }
+  .note {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+</style>
