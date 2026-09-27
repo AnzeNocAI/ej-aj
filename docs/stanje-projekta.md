@@ -21,8 +21,9 @@ Stanje: 27. september 2026.
 | `/o-projektu/`, `/zasebnost/` (še v PR #7) | | |
 | `/rss.xml`, `/llms.txt`, `/sitemap-index.xml` | generirano | |
 
-Objavljeno: tedenski pregled #1 in trije vodniki: "AI Act za slovenska podjetja", "Kateri podatki
-ne sodijo v ChatGPT" in "Kako izbrati AI orodje za podjetje". SEO: JSON-LD na vseh straneh,
+Objavljeno (18 člankov): tedenski pregled #1, 7 samostojnih vodnikov (AI Act, varna raba,
+izbira orodja, predloga pravil v Wordu, kako dobro AI zna slovensko, AI v Excelu/Wordu/Outlooku,
+AI v računovodstvu) in 10 vodnikov priročnika. SEO: JSON-LD na vseh straneh,
 `public/og.png`, Search Console in Bing potrjena, sitemap oddan, samodejne notranje povezave na
 slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 
@@ -103,34 +104,35 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 
 ## Narejeno 26. in 27. septembra 2026
 
-Vodnika o varni rabi AI in o izbiri orodja, stran `/statistika/`, samodejne povezave na slovar,
-popravek vodnika AI Act (podaljšan rok za člen 50(2)), samo ime brez priimka, `docs/slog.md`,
-mesečna rutina osvežuje tudi statistiko, tedenski pregled predlaga gesla za slovar (predlogi 1 do 4
-s prejšnjega seznama). Stran s cenami je združena z `/modeli/`. Predloga pravil rabe AI v Wordu
-Slika za deljenje za vsak članek (`public/og/<id>.png`, generira `scripts/og-slike.mjs` na Macu,
-ker potrebuje pisave s šumniki; validator opozori, če manjka). Predloga pravil rabe AI v Wordu
-(`public/predloge/pravila-rabe-ai.docx`, generira `scripts/predloga-pravil.mjs`; besedilo urejaj v
-skripti, ne v Wordu) z vodnikom `/vodniki/predloga-pravil-rabe-ai/`.
+- Vodniki: varna raba AI, izbira orodja, predloga pravil (Word, `scripts/predloga-pravil.mjs`),
+  kako dobro AI zna slovensko, AI v Excelu/Wordu/Outlooku, AI v računovodstvu.
+- Priročnik `/prirocnik/` z 10 vodniki (prompt, kontekst, Claude Code, GitHub, skilli, subagenti,
+  hooki, rutine, lasten agent) in stran `/videi/` z 9 videi.
+- Stran `/statistika/` s skripto za osveževanje, stran s cenami združena z `/modeli/`.
+- Samodejne povezave na slovar, slika za deljenje za vsak članek (`scripts/og-slike.mjs`).
+- Samo ime brez priimka, `docs/slog.md`, popravek vodnika AI Act (člen 50(2)).
+- Rutini: mesečna osvežuje tudi statistiko, tedenski pregled predlaga gesla za slovar.
+
+Odprta vprašanja za Anžeta so v `~/Desktop/ej-aj-vprasanja.md` (zunaj repa).
 
 ## Predlogi za naslednje funkcije (po vrednosti)
 
 Iz raziskave ključnih besed 27. 9. 2026 (predlogi iskanja Google in Bing za Slovenijo, Google
-Trends; brez podatkov o obsegu iskanj). Najmočnejše slovenske teme, ki jih stran še ne pokriva:
+Trends; brez podatkov o obsegu iskanj):
 
-1. **Kako dobro AI zna slovensko** (ChatGPT, Claude, Gemini, Copilot v slovenščini, GaMS):
-   največji slovenski sklop iskanj ("chatgpt slovenščina", "v slovenščini", "brezplačno").
-2. **AI v računovodstvu** in **AI za pravnike**: več slovenskih predlogov v obeh iskalnikih.
-3. **AI v Excelu, Wordu in Outlooku** (Claude for Excel, Copilot 365).
-4. **ChatGPT ali Claude ali Gemini**: primerjalna stran za iskanja "chatgpt vs ...".
-5. **Cene paketov za posameznike in odpoved naročnine** (Trends: "chatgpt plans", "how to
+1. **AI za pravnike in odvetnike**: več slovenskih predlogov v obeh iskalnikih; podlaga je že
+   CCBE vodnik (oktober 2025), ZOdv 6. člen.
+2. **ChatGPT ali Claude ali Gemini**: primerjalna stran za iskanja "chatgpt vs ...".
+3. **Cene paketov za posameznike in odpoved naročnine** (Trends: "chatgpt plans", "how to
    cancel chatgpt subscription" rastejo).
-6. **AI pismenost in izobraževanje zaposlenih** (povezava z AI Act, 4. člen).
-7. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v `~/Desktop/ej-aj-inbox/` kaj.
-8. **Newsletter** (PR #7), ko Anže odpre Buttondown.
-9. Iskanje (Pagefind), ko bo strani več kot približno 30 člankov (s priročnikom jih je 15).
-
-Teme o Claude Code (skilli, subagenti, hooki) se iščejo skoraj samo v angleščini; priročnik
-zato v naslovih uporablja angleške izraze, ki jih ljudje vpisujejo.
+4. **AI pismenost in izobraževanje zaposlenih** (AI Act, 4. člen, po AI Omnibusu omiljen).
+   Vodnik AI Act je treba preveriti glede te spremembe.
+5. **Search Console**: čez nekaj tednov pogledati, kateri iskalni nizi prinašajo obiske (Anže
+   mora dovoliti delo v svojem Chrome profilu).
+6. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v `~/Desktop/ej-aj-inbox/` kaj.
+7. **Newsletter** (PR #7), ko Anže odpre Buttondown; na strani o zasebnosti omeniti tudi
+   sličice videov z i.ytimg.com.
+8. Iskanje (Pagefind): s 18 članki se približujemo meji približno 30.
 
 ## Rutine (za ponovno ustvarjanje)
 
