@@ -37,8 +37,9 @@ Read it at the start of every session.
   substitute either; write ranges as "17. do 26. september".
 - Plain, concrete language. No hype, no obvious AI phrasing, no stacked short fragments.
   Follow `docs/slog.md` (words and structures that read as AI, with a pre-PR check).
-- Name: on the site and in the repo Anže appears by first name only ("Anže"), never with his
-  surname.
+- Name: no personal name anywhere on the site (pages, articles, metadata, share images). The
+  reviewer is "urednik" (`SITE.author`); "O projektu" must not reveal who runs the site. In the
+  repo Anže appears by first name only, never with his surname.
 - Slovenian number format: `1.500`, `0,10 USD`, `40 %`.
 - Separate fact (what was announced) from interpretation (**Kaj to pomeni za vas:**).
 

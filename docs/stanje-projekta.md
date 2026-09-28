@@ -34,7 +34,7 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 - Slovenščina za vse, kar bere Anže ali bralec. **Nikoli pomišljajev (em ali en dash).** Slog po
   `docs/slog.md`: brez sloganov ("Brez X, z Y"), brez alinej z odebeljenimi oznakami, brez
   izmišljenih izkušenj ("na vsaki delavnici ...").
-- **Na strani in v repu samo ime "Anže", nikoli priimek.** `git config user.name` je "Anže".
+- **Na strani nobenega osebnega imena** (tudi ne "Anže"): pregledovalec je "urednik" (`SITE.author`), stran "O projektu" ne razkrije, kdo stoji za njo. **V repu samo ime "Anže", nikoli priimek.** `git config user.name` je "Anže".
   Priimek ostaja v starih commitih in v imenu računa `AnzeNocAI`; zgodovine ne prepisujemo.
 - **Merge:** tehnične PR-je (SEO, hitrost, popravki, dokumentacija, skilli) lahko mergaš sam, ko je
   CI zelen. Nova vsebina (novice, vodniki, besedila strani, podatki v tabelah) vedno počaka na
