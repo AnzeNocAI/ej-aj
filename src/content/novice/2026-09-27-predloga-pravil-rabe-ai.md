@@ -50,4 +50,4 @@ Viri: [besedilo 5. člena](https://artificialintelligenceact.eu/article/5/), [be
 5. Pravila podpiše direktor ali druga odgovorna oseba. Zaposleni jih preberejo in podpišejo izjavo v Prilogi 2.
 6. Organizirajte usposabljanje in ga vpišite v Prilogo 1. Pravila in usposabljanje osvežite vsaj enkrat na leto.
 
-Predlogo lahko prosto uporabite, prilagodite in delite. Ste opazili napako ali imate predlog za izboljšavo? [Sporočite ga na GitHubu](https://github.com/AnzeNocAI/ej-aj/issues).
+Predlogo lahko prosto uporabite, prilagodite in delite. Ste opazili napako ali imate predlog za izboljšavo? [Sporočite ga na GitHubu](https://github.com/ej-aj-si/ej-aj/issues).
