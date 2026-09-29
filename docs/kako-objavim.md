@@ -7,7 +7,7 @@
 
 ## Objava (samo GitHub, brez terminala)
 
-1. Odpri https://github.com/AnzeNocAI/ej-aj/pulls. Tu so predlogi sprememb (PR-ji), ki jih
+1. Odpri https://github.com/ej-aj-pro/ej-aj/pulls. Tu so predlogi sprememb (PR-ji), ki jih
    pripravijo Claude ali rutine (tedenski pregled ob petkih, osvežitev modelov 1. v mesecu).
 2. Odpri PR in preberi opis: kaj se spreminja in kaj je treba preveriti.
 3. V komentarju Cloudflare bota klikni preview povezavo in preglej stran.

@@ -10,14 +10,14 @@ and `src/data/statistika.json`, and an open PR.
 **Never merge, never push to `main`.** Read `/Users/anze/Desktop/ej-aj/AGENTS.md` first.
 
 Every `gh` and network `git` command needs the prefix
-`GH_TOKEN="$(gh auth token --user AnzeNocAI)"` (the active gh account is a different one and
+`GH_TOKEN="$(gh auth token --user ej-aj-pro)"` (the active gh account is a different one and
 must not be switched).
 
 ## 1. Worktree
 
 ```bash
 cd /Users/anze/Desktop/ej-aj
-GH_TOKEN="$(gh auth token --user AnzeNocAI)" git fetch origin
+GH_TOKEN="$(gh auth token --user ej-aj-pro)" git fetch origin
 MONTH=$(date +%Y-%m)
 WT=/Users/anze/.cache/ej-aj-worktrees/modeli-$MONTH
 mkdir -p /Users/anze/.cache/ej-aj-worktrees
@@ -105,8 +105,8 @@ node scripts/osvezi-statistiko.mjs
 npm run build
 git add src/data/modeli.yaml src/data/narocnine.yaml src/data/statistika.json src/pages/statistika.astro
 git commit -m "Refresh model comparison ($MONTH)"
-GH_TOKEN="$(gh auth token --user AnzeNocAI)" git push -u origin "modeli/$MONTH"
-GH_TOKEN="$(gh auth token --user AnzeNocAI)" gh pr create --repo AnzeNocAI/ej-aj --base main \
+GH_TOKEN="$(gh auth token --user ej-aj-pro)" git push -u origin "modeli/$MONTH"
+GH_TOKEN="$(gh auth token --user ej-aj-pro)" gh pr create --repo ej-aj-pro/ej-aj --base main \
   --head "modeli/$MONTH" --title "Modeli in cene: osvežitev $MONTH" --body-file <body.md>
 ```
 

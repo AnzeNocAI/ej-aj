@@ -15,7 +15,7 @@ https://ej-aj.anze999.workers.dev; each branch and PR gets its own preview URL.
 
 - Domain `ej-aj.si` registered at **Domenca** (domenca.com).
 - Hosting: **Cloudflare Workers** (static assets only, config in `wrangler.jsonc`), connected
-  to `AnzeNocAI/ej-aj` through Workers Builds. Cloudflare now labels Pages as legacy.
+  to `ej-aj-pro/ej-aj` through Workers Builds. Cloudflare now labels Pages as legacy.
   - Build command: `npm run build`
   - Deploy command: `npx wrangler deploy`
   - Production branch: `main`; other branches get preview URLs.
@@ -29,6 +29,6 @@ https://ej-aj.anze999.workers.dev; each branch and PR gets its own preview URL.
 2. Domenca: My domains, `ej-aj.si`, nameservers: replace Domenca's with the two from
    Cloudflare. .si changes usually apply within a few hours.
 3. Cloudflare: Workers & Pages, create an application, connect GitHub, connect GitHub (grant access only to
-   `AnzeNocAI/ej-aj`), settings as above.
+   `ej-aj-pro/ej-aj`), settings as above.
 4. Worker settings, Domains & Routes: add `ej-aj.si` and `www.ej-aj.si`.
 5. Optional: Email Routing for `pozdrav@ej-aj.si` forwarding to a personal inbox.
