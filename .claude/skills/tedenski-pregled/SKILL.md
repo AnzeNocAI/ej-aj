@@ -16,7 +16,7 @@ everything below.
 
 GitHub auth: the active `gh` account is a different one and must not be switched. Prefix every
 network command (`git fetch`, `git push`, `gh ...`) with
-`GH_TOKEN="$(gh auth token --user ej-aj-pro)"`.
+`GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)"`.
 
 ## 1. Set up a clean worktree
 
@@ -24,7 +24,7 @@ Do not touch the main checkout (Anže may have uncommitted work there).
 
 ```bash
 cd /Users/anze/Desktop/ej-aj
-GH_TOKEN="$(gh auth token --user ej-aj-pro)" git fetch origin
+GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git fetch origin
 TODAY=$(date +%F)
 WT=/Users/anze/.cache/ej-aj-worktrees/pregled-$TODAY
 mkdir -p /Users/anze/.cache/ej-aj-worktrees
@@ -174,8 +174,8 @@ in the PR body. Other warnings: fix if they are real.
 ```bash
 git add src/content/novice/<file>.md src/data/slovar.yaml src/markdown/slovar-povezave.mjs public/og scripts/og-slike.json
 git commit -m "Weekly digest #N (<period>)" -m "Co-Authored-By: Claude <noreply@anthropic.com>"
-GH_TOKEN="$(gh auth token --user ej-aj-pro)" git push -u origin "pregled/$TODAY"
-GH_TOKEN="$(gh auth token --user ej-aj-pro)" gh pr create --repo ej-aj-pro/ej-aj \
+GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git push -u origin "pregled/$TODAY"
+GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" gh pr create --repo ej-aj-pro/ej-aj \
   --base main --head "pregled/$TODAY" --title "Tedenski pregled #N (<period>)" --body-file <body.md>
 ```
 

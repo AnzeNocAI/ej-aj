@@ -10,7 +10,7 @@ case written for a business reader: the problem, what you need, the steps, an ex
 the pitfalls. His notes are the raw material; you do the writing, he stays the author.
 
 Repo: `/Users/anze/Desktop/ej-aj`. Read `AGENTS.md` there first. Every network `git`/`gh`
-command needs the prefix `GH_TOKEN="$(gh auth token --user ej-aj-pro)"` (never `gh auth switch`).
+command needs the prefix `GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)"` (never `gh auth switch`).
 **Never merge and never push to `main`.**
 
 ## 1. Pick up the note

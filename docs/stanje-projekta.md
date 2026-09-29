@@ -3,7 +3,7 @@
 Za agenta, ki nadaljuje delo na ej-aj.si. Najprej preberi `AGENTS.md` (pravila pisanja, točnosti,
 zaupnosti), `docs/slog.md` (kako ne zveneti kot AI), nato ta dokument, `docs/postavitev.md`
 (domena, Cloudflare, računi) in `docs/kako-objavim.md` (kako Anže pregleduje in objavlja).
-Stanje: 27. september 2026 (zvečer).
+Stanje: 30. september 2026.
 
 ## Kaj je na strani (ej-aj.si)
 
@@ -21,10 +21,11 @@ Stanje: 27. september 2026 (zvečer).
 | `/o-projektu/`, `/zasebnost/` (še v PR #7) | | |
 | `/rss.xml`, `/llms.txt`, `/sitemap-index.xml` | generirano | |
 
-Objavljeno (22 člankov): tedenski pregled #1, 11 samostojnih vodnikov (AI Act, varna raba,
+Objavljeno (25 člankov): tedenski pregled #1, 2 novičarska članka (`type: clanek`: Claude Sonnet
+5.5, nov Microsoft Copilot s Home, Code in Autopilot), 12 samostojnih vodnikov (AI Act, varna raba,
 izbira orodja, predloga pravil v Wordu, kako dobro AI zna slovensko, AI v Excelu/Wordu/Outlooku,
 AI v računovodstvu, AI za pravnike in odvetnike, ChatGPT ali Claude ali Gemini, odpoved
-naročnine, AI pismenost zaposlenih) in 10 vodnikov
+naročnine, AI pismenost zaposlenih, preizkušanje AI rešitve na lastnih nalogah) in 10 vodnikov
 priročnika. SEO: JSON-LD na vseh straneh,
 `public/og.png`, Search Console in Bing potrjena, sitemap oddan, samodejne notranje povezave na
 slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
@@ -34,6 +35,9 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 - Slovenščina za vse, kar bere Anže ali bralec. **Nikoli pomišljajev (em ali en dash).** Slog po
   `docs/slog.md`: brez sloganov ("Brez X, z Y"), brez alinej z odebeljenimi oznakami, brez
   izmišljenih izkušenj ("na vsaki delavnici ...").
+- **Naslovi opisni, nikoli click bait; besedilo preprosto; vsak strokovni izraz pojasnjen ob prvi
+  omembi** (Anže, 29. 9. 2026; razdelek "Titles and clarity" v `docs/slog.md`). Vseh 22 starih
+  člankov je bilo 29. 9. pregledanih po tem pravilu (#48).
 - **Na strani nobenega osebnega imena** (tudi ne "Anže"): pregledovalec je "urednik" (`SITE.author`), stran "O projektu" ne razkrije, kdo stoji za njo. **V repu samo ime "Anže", nikoli priimek.** `git config user.name` je "Anže".
   Priimek in osebni e-naslov ostajata v starih commitih (račun se je prej imenoval drugače); zgodovine ne prepisujemo.
 - **Merge:** tehnične PR-je (SEO, hitrost, popravki, dokumentacija, skilli) lahko mergaš sam, ko je
@@ -53,7 +57,10 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 
 - Repo: `/Users/anze/Desktop/ej-aj`, GitHub `ej-aj-pro/ej-aj` (javen). Aktivni `gh` račun na Macu je
   **AnzeNoc** in ga ne preklapljaj (`gh auth switch` pokvari drugo sejo). Vsak omrežni ukaz:
-  `GH_TOKEN="$(gh auth token --user ej-aj-pro)" git push ...`, enako za `gh pr ...`.
+  `GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git push ...`, enako za `gh pr ...`.
+  Račun ej-aj-pro (id 326904133) je v gh keyringu še shranjen pod starim imenom **AnzeNocAI**, zato
+  `--user ej-aj-pro` sam ne deluje; oblika z `||` deluje zdaj in po morebitni ponovni prijavi.
+  Enaka oblika je v vseh skillih in rutinah (popravljeno 30. 9.).
 - Commiti gredo pod `326904133+ej-aj-pro@users.noreply.github.com` (nastavljeno v repo configu).
 - Gostovanje: Cloudflare Workers s statičnimi datotekami (`wrangler.jsonc`), vsak push v `main` se
   objavi, vsak PR dobi preview povezavo (komentar Cloudflare bota). Preusmeritve so v
@@ -78,7 +85,7 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 - Worktreeji rutin in skillov: `~/.cache/ej-aj-worktrees/` (Namizje se sinhronizira v iCloud).
 - Skilli v repu: `tedenski-pregled` (predlaga tudi do 3 nova gesla za slovar), `posodobi-modele`
   (modeli, naročnine in statistika), `nov-vodnik` (iz zapiska v `~/Desktop/ej-aj-inbox/`),
-  `newsletter` (v PR #7).
+  `newsletter`.
 - **Brskalnik:** Cloudflare, Domenca, Search Console in Bing so na računu anze999@gmail.com v
   Anžetovem Chrome profilu **anze999** (Claude in Chrome). V tem profilu klikanje po koordinatah
   pogosto zgreši (posnetki so razdrobljeni); deluje pa sprožanje dogodkov z `javascript_tool`
@@ -106,6 +113,10 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 3. **Tabela naročnin:** Microsoft je še v USD (obstajajo slovenske cene v EUR), Mistral Team po
    francoski ceni (za Slovenijo 30,49 €). Popravi ju mesečna rutina 1. oktobra; skill to že ve.
 4. E-pošta `pozdrav@ej-aj.si` se preusmerja na anze999@gmail.com (Cloudflare Email Routing).
+5. **Odprta PR-ja**, ki ju ta seja ni odpirala: #41 (tedenski pregled: zasebni reporti kot vir
+   praktičnih namigov) in #43 (newsletter pošilja z `newsletter@ej-aj.si`). Čakata Anžeta.
+6. Tedenski pregled #2 (2. 10.) bo zajel tudi Sonnet 5.5 in Microsoft Copilot: tam naj bo kratko
+   in s povezavo na že objavljena članka, ne ponavljanje.
 
 ## Narejeno 26. in 27. septembra 2026
 
@@ -124,6 +135,19 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 - Besedilo PDF-jev (CCBE, sodbe) se na tem Macu izvleče s PDFKit prek kratke skripte v Swiftu
   (`PDFDocument(url:).page(at:).string`); `pdftotext` in `pypdf` nista nameščena.
 
+## Narejeno 29. in 30. septembra 2026
+
+- Iz Anžetovega zasebnega tedenskega pregleda (samo kot seznam namigov, vsaka trditev preverjena
+  pri primarnem viru): članka Claude Sonnet 5.5 (#44) in Microsoft Copilot (#45), vodnik o
+  preizkušanju AI rešitve (#46). V `modeli.yaml` je Sonnet 5 zamenjan s Sonnet 5.5.
+- Novo pravilo za naslove in jasnost v `docs/slog.md` (#47) in pregled vseh starih člankov (#48):
+  5 novih naslovov, razlage izrazov v 20 člankih. Preverjevalec je našel 11 netočnosti v dodanih
+  razlagah; vse so popravljene.
+- Vsi PR-ji spreminjajo `scripts/og-slike.json` na koncu datoteke, zato pri zaporednem mergeanju
+  nastanejo konflikti. Rešitev: `git checkout --theirs scripts/og-slike.json` po merge-u `main` in
+  ponovno `node scripts/og-slike.mjs`.
+- Ukaz za GitHub žeton v skillih in tem dokumentu popravljen na obliko z rezervo (glej Tehnika).
+
 Odprta vprašanja za Anžeta so v `~/Desktop/ej-aj-vprasanja.md` (zunaj repa).
 
 ## Predlogi za naslednje funkcije (po vrednosti)
@@ -138,7 +162,7 @@ Trends; brez podatkov o obsegu iskanj):
 5. **Search Console**: čez nekaj tednov pogledati, kateri iskalni nizi prinašajo obiske (Anže
    mora dovoliti delo v svojem Chrome profilu).
 6. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v `~/Desktop/ej-aj-inbox/` kaj.
-8. Iskanje (Pagefind): z 22 članki se približujemo meji približno 30.
+7. Iskanje (Pagefind): s 25 članki se približujemo meji približno 30.
 
 ## Rutine (za ponovno ustvarjanje)
 
@@ -152,10 +176,10 @@ You are running as a scheduled local routine for Anže. Task: prepare the next w
 
 Repo: /Users/anze/Desktop/ej-aj (GitHub: ej-aj-pro/ej-aj). Always use absolute paths.
 
-GitHub auth: the active gh account on this Mac is a different one (AnzeNoc) and must NOT be switched with `gh auth switch`, because another Claude session relies on it. Prefix every network command (git fetch, git push, gh ...) with GH_TOKEN="$(gh auth token --user ej-aj-pro)".
+GitHub auth: the active gh account on this Mac is a different one (AnzeNoc) and must NOT be switched with `gh auth switch`, because another Claude session relies on it. Prefix every network command (git fetch, git push, gh ...) with GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)".
 
 Steps:
-1. cd /Users/anze/Desktop/ej-aj && GH_TOKEN="$(gh auth token --user ej-aj-pro)" git fetch origin
+1. cd /Users/anze/Desktop/ej-aj && GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git fetch origin
 2. Load the current instructions from main, not from whatever branch is checked out locally:
    git show origin/main:.claude/skills/tedenski-pregled/SKILL.md
    git show origin/main:AGENTS.md
@@ -175,10 +199,10 @@ You are running as a scheduled local routine for Anže. Task: re-check the model
 
 Repo: /Users/anze/Desktop/ej-aj (GitHub: ej-aj-pro/ej-aj). Always use absolute paths.
 
-GitHub auth: the active gh account on this Mac is a different one (AnzeNoc) and must NOT be switched with `gh auth switch`. Prefix every network command (git fetch, git push, gh ...) with GH_TOKEN="$(gh auth token --user ej-aj-pro)".
+GitHub auth: the active gh account on this Mac is a different one (AnzeNoc) and must NOT be switched with `gh auth switch`. Prefix every network command (git fetch, git push, gh ...) with GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)".
 
 Steps:
-1. cd /Users/anze/Desktop/ej-aj && GH_TOKEN="$(gh auth token --user ej-aj-pro)" git fetch origin
+1. cd /Users/anze/Desktop/ej-aj && GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git fetch origin
 2. Load the current instructions from main:
    git show origin/main:.claude/skills/posodobi-modele/SKILL.md
    git show origin/main:AGENTS.md
