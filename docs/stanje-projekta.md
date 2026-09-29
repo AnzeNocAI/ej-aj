@@ -54,6 +54,10 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 - Repo: `/Users/anze/Desktop/ej-aj`, GitHub `ej-aj-pro/ej-aj` (javen). Aktivni `gh` račun na Macu je
   **AnzeNoc** in ga ne preklapljaj (`gh auth switch` pokvari drugo sejo). Vsak omrežni ukaz:
   `GH_TOKEN="$(gh auth token --user ej-aj-pro)" git push ...`, enako za `gh pr ...`.
+  Če ukaz javi "no oauth token found for github.com account ej-aj-pro", je račun v `gh` shranjen še
+  pod starim imenom (račun je bil preimenovan). Anže ga popravi v terminalu: `gh auth login` (prijava
+  kot ej-aj-pro), nato `gh auth switch --user AnzeNoc`, da ostane aktiven isti račun kot prej.
+  Starega imena ne vpisuj v repo.
 - Commiti gredo pod `326904133+ej-aj-pro@users.noreply.github.com` (nastavljeno v repo configu).
 - Gostovanje: Cloudflare Workers s statičnimi datotekami (`wrangler.jsonc`), vsak push v `main` se
   objavi, vsak PR dobi preview povezavo (komentar Cloudflare bota). Preusmeritve so v
