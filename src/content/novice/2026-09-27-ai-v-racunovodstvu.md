@@ -13,7 +13,7 @@ Računovodstvo je delo z dokumenti in številkami, zato se zdi naravno področje
 
 - AI v računovodstvu pomaga predvsem pri branju dokumentov, analizi tabel, iskanju napak v Excelu in pisanju pojasnil strankam. Za končne izračune in oddaje je še vedno odgovoren računovodja.
 - Kodeks poklicne etike računovodje zahteva varovanje zaupnih informacij. Podatki strank zato sodijo samo v poslovna orodja s pogodbo o obdelavi podatkov.
-- Od 1. januarja 2028 bo izmenjava e-računov med podjetji v Sloveniji obvezna. E-račun je strukturiran dokument XML, ki ga program prebere brez AI; račun v PDF ni e-račun.
+- Od 1. januarja 2028 bo izmenjava e-računov med podjetji v Sloveniji obvezna. E-račun je datoteka v strukturirani obliki XML, ki jo računovodski program prebere sam, brez AI; račun v PDF ni e-račun.
 - Microsoft in Anthropic sama opozarjata, da njuna orodja v Excelu delajo napake in da je treba rezultate pred uporabo preveriti.
 
 ## Kje AI pomaga
@@ -54,7 +54,7 @@ Viri: [Microsoft, pogosta vprašanja o Copilotu v Excelu](https://support.micros
 
 ## E-računi od leta 2028
 
-Državni zbor je oktobra 2025 sprejel Zakon o izmenjavi elektronskih računov in drugih elektronskih dokumentov. Od 1. januarja 2028 bo izmenjava e-računov obvezna za vse subjekte, vpisane v Poslovni register Slovenije, in za fizične osebe, ki opravljajo dejavnost (na primer samostojne podjetnike). E-račun je strukturiran dokument v obliki XML; račun v PDF ni e-račun. Izmenjava bo mogoča prek ponudnikov e-poti, lastnih sistemov, omrežja PEPPOL ali brezplačne aplikacije miniBlagajna, pošiljanje po e-pošti pa ne bo dovoljeno, razen potrošnikom.
+Državni zbor je oktobra 2025 sprejel Zakon o izmenjavi elektronskih računov in drugih elektronskih dokumentov. Od 1. januarja 2028 bo izmenjava e-računov obvezna za vse subjekte, vpisane v Poslovni register Slovenije, in za fizične osebe, ki opravljajo dejavnost (na primer samostojne podjetnike). E-račun je strukturiran dokument v obliki XML; račun v PDF ni e-račun. Izmenjava bo mogoča prek ponudnikov e-poti, torej posrednikov za pošiljanje e-računov, lastnih sistemov, mednarodnega omrežja za e-račune PEPPOL ali brezplačne aplikacije miniBlagajna, pošiljanje po e-pošti pa ne bo dovoljeno, razen potrošnikom.
 
 To je pomembno za načrtovanje. Ko bodo domači računi prihajali kot XML, jih bo računovodski program prebral sam, brez AI. Branje z AI bo po naši oceni ostalo koristno predvsem za račune tujih dobaviteljev, blagajniške prejemke in druge dokumente, ki niso e-računi.
 
@@ -62,7 +62,7 @@ Vir: [OZS, sprejet zakon o izmenjavi e-računov (vir: MF in UJP)](https://www.oz
 
 ## AI Act
 
-Za večino računovodskega dela Akt o umetni inteligenci ne prinaša posebnih obveznosti; ostaja dolžnost, da podjetje podpira AI pismenost zaposlenih, ki je bila julija 2026 z AI Omnibusom omiljena. Med visoko tvegane rabe pa sodi ocenjevanje kreditne sposobnosti fizičnih oseb (razen odkrivanja goljufij); pravila za take rabe veljajo od 2. decembra 2027. Več v vodniku [AI Act za slovenska podjetja](/vodniki/ai-act-za-slovenska-podjetja/).
+Za večino računovodskega dela Akt o umetni inteligenci ne prinaša posebnih obveznosti; ostaja dolžnost, da podjetje podpira AI pismenost zaposlenih, ki je bila julija 2026 s spremembo AI Act (Digital Omnibus) omiljena. Med visoko tvegane rabe pa sodi ocenjevanje kreditne sposobnosti fizičnih oseb (razen odkrivanja goljufij); pravila za take rabe veljajo od 2. decembra 2027. Več v vodniku [AI Act za slovenska podjetja](/vodniki/ai-act-za-slovenska-podjetja/).
 
 Viri: [AI Act, Priloga III (EUR-Lex)](https://eur-lex.europa.eu/legal-content/SL/TXT/HTML/?uri=CELEX:32024R1689), [Evropska komisija, AI Omnibus](https://digital-strategy.ec.europa.eu/en/news/ai-omnibus-enters-force)
 

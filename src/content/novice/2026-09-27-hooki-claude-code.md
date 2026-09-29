@@ -1,5 +1,5 @@
 ---
-title: 'Hooki v Claude Code: pravila, ki veljajo vsakič'
+title: 'Hooki v Claude Code: kaj so in kako z njimi nastavite pravila, ki se izvedejo samodejno'
 description: 'Kaj so hooki v Claude Code, kako se razlikujejo od navodil v CLAUDE.md, katere dogodke poznajo, kako zaustavijo dejanje in na kaj paziti pri varnosti.'
 date: 2026-09-27
 type: vodnik
@@ -7,7 +7,7 @@ serija: prirocnik
 korak: 8
 ---
 
-Navodila v `CLAUDE.md` in skillih so nasveti: Claude jih praviloma upošteva, zagotovila pa ni. Hook je drugačen. To je ukaz, ki se samodejno izvede ob določenem dogodku, vsakič, ne glede na to, za kaj se model odloči. Anthropic to opisuje kot determinističen nadzor.
+Navodila v `CLAUDE.md` in skillih so nasveti: Claude jih praviloma upošteva, zagotovila pa ni. Hook je drugačen. To je ukaz, ki se samodejno izvede ob določenem dogodku, vsakič, ne glede na to, za kaj se model odloči. Anthropic to opisuje kot determinističen nadzor: hook se ob dogodku izvede vsakič, ne glede na presojo modela.
 
 ## Kdaj navodilo ni dovolj
 
@@ -24,7 +24,7 @@ Vir: [Claude Code, spomin in CLAUDE.md](https://code.claude.com/docs/en/memory)
 
 ## Dogodki
 
-Hook je vezan na dogodek v življenju seje. Najpomembnejši so:
+Hook je vezan na dogodek med delom Clauda. Najpomembnejši so:
 
 | Dogodek | Kdaj se zgodi |
 |---|---|
@@ -36,11 +36,11 @@ Hook je vezan na dogodek v življenju seje. Najpomembnejši so:
 | Stop | ko Claude konča odgovor |
 | SubagentStop | ko subagent konča |
 
-Dokumentacija jih našteje več kot trideset, med njimi tudi dogodke ob stiskanju konteksta in ob spremembi datotek. Z `matcher` hook omejite na določena orodja, na primer samo na urejanje datotek.
+Dokumentacija jih našteje več kot trideset, med njimi tudi dogodke ob stiskanju konteksta (ko Claude predolg pogovor povzame, da sprosti prostor) in ob spremembi datotek. S poljem `matcher` hook omejite na določena orodja, na primer samo na urejanje datotek.
 
 ## Kako hook ustavi dejanje
 
-Hook je najpogosteje ukaz v lupini, ki dobi podatke o dogodku. Njegova izhodna koda določi, kaj se zgodi. Koda 0 pomeni, da hook nima pripomb. Pri PreToolUse to ne pomeni odobritve: še vedno velja običajen postopek dovoljenj. Koda 2 dejanje ustavi, Claude pa kot razlog dobi besedilo, ki ga je hook izpisal na izhod za napake (stderr). Nekaterih dogodkov ni mogoče ustaviti.
+Hook je najpogosteje ukaz v lupini (ukazni vrstici računalnika), ki dobi podatke o dogodku. Ko se ukaz konča, vrne številko, imenovano izhodna koda, in ta določi, kaj se zgodi. Koda 0 pomeni, da hook nima pripomb. Pri PreToolUse to ne pomeni odobritve: še vedno velja običajen postopek dovoljenj. Koda 2 dejanje ustavi, Claude pa kot razlog dobi besedilo, ki ga je hook izpisal na izhod za napake (stderr). Nekaterih dogodkov ni mogoče ustaviti.
 
 Hooke nastavite v datoteki `settings.json`: v `~/.claude/` za vse vaše projekte ali v `.claude/` v projektu, da veljajo za ekipo. Pregledate jih z ukazom `/hooks`. Namesto ročnega pisanja lahko Clauda prosite, naj hook pripravi, na primer: "Dodaj hook, ki prepreči vsako spremembo datotek v mapi pogodbe."
 
@@ -63,7 +63,7 @@ Viri: [Claude Code, vodnik za hooke](https://code.claude.com/docs/en/hooks-guide
 
 ## Varnost
 
-Anthropic opozarja, da hooki z ukazi izvajajo ukaze z vsemi pravicami vašega uporabnika. Hook, ki ga je nekdo dodal v projekt, se izvede na vašem računalniku, ko projektu v oknu za zaupanje dovolite delo. Pred prvim zagonom projekta, ki ga niste pripravili sami, preglejte `.claude/settings.json` in vtičnike, ki jih namestite, saj lahko tudi ti vsebujejo hooke.
+Anthropic opozarja, da hooki z ukazi izvajajo ukaze z vsemi pravicami vašega uporabniškega računa na računalniku. Hook, ki ga je nekdo dodal v projekt, se izvede na vašem računalniku, ko projektu v oknu za zaupanje dovolite delo. Pred prvim zagonom projekta, ki ga niste pripravili sami, preglejte `.claude/settings.json` in vtičnike, ki jih namestite, saj lahko tudi ti vsebujejo hooke.
 
 ## Hook, skill ali navodilo
 

@@ -39,11 +39,11 @@ Viri: [Microsoft, Copilot za podjetja (Slovenija)](https://www.microsoft.com/sl-
 
 ## Claude za Microsoft 365
 
-Claude je v Microsoftovi trgovini AppSource na voljo kot dodatek "Claude for Microsoft 365" za Excel, Word in PowerPoint, ki je splošno dostopen v vseh plačljivih paketih (Pro, Max, Team, Enterprise). Za Outlook je ločen dodatek "Claude for Outlook", ki je v preizkusni različici.
+Claude je v Microsoftovi trgovini z dodatki AppSource na voljo kot dodatek "Claude for Microsoft 365" za Excel, Word in PowerPoint, ki je splošno dostopen v vseh plačljivih paketih (Pro, Max, Team, Enterprise). Za Outlook je ločen dodatek "Claude for Outlook", ki je v preizkusni različici.
 
-V Excelu Claude odgovarja na vprašanja o delovnem zvezku in pokaže točne celice, iz katerih je odgovor. Spremeni predpostavke, ne da bi pokvaril formule, poišče vzrok napak #REF!, zgradi model, razvršča, filtrira, ureja vrtilne tabele in doda pogojno oblikovanje. Makrov (VBA) ne podpira, prav tako ne deluje v Excelu 2016 in 2019, kupljenem za stalno, ter na iPadu in Androidu.
+V Excelu Claude odgovarja na vprašanja o delovnem zvezku in pokaže točne celice, iz katerih je odgovor. Spremeni predpostavke, ne da bi pokvaril formule, poišče vzrok napak, kot je #REF! (sklic na celico, ki je ni več), zgradi model, razvršča, filtrira, ureja vrtilne tabele in doda pogojno oblikovanje. Makrov (VBA) ne podpira, prav tako ne deluje v Excelu 2016 in 2019, kupljenem za stalno, ter na iPadu in Androidu.
 
-V Wordu vnese popravke v načinu sledenja spremembam, ki jih sprejmete ali zavrnete, obdela komentarje in povzame spremembe nasprotne strani. V Outlooku razvršča pošto, pripravi osnutke odgovorov, ki jih nikoli ne pošlje sam, povzema niti in išče termine sestankov; potrebuje Exchange Online in enkratno odobritev globalnega skrbnika Microsoft 365.
+V Wordu vnese popravke v načinu sledenja spremembam, ki jih sprejmete ali zavrnete, obdela komentarje in povzame spremembe nasprotne strani. V Outlooku razvršča pošto, pripravi osnutke odgovorov, ki jih nikoli ne pošlje sam, povzema niti in išče termine sestankov; potrebuje e-pošto v Microsoftovem oblaku (Exchange Online) in enkratno odobritev globalnega skrbnika Microsoft 365.
 
 Anthropic opozarja, naj Clauda v Excelu uporabljate samo z datotekami, ki jim zaupate, ker lahko tuje datoteke vsebujejo skrita navodila.
 
@@ -53,7 +53,7 @@ Viri: [Claude za Microsoft 365](https://claude.com/claude-for-microsoft-365), [C
 
 ## ChatGPT za Excel in Google Preglednice
 
-OpenAI ponuja dodatek ChatGPT za Excel in Google Preglednice v vseh paketih, od brezplačnega do Enterprise. V paketih Free in Go je raba omejena, v paketih Business in Enterprise se po koncu brezplačnega predogleda (2. junija 2026) raba obračuna po kreditih in pogojih posameznega paketa. OpenAI navaja, da makri morda ne delujejo v celoti in da so rezultati lahko nepopolni ali napačni.
+OpenAI ponuja dodatek ChatGPT za Excel in Google Preglednice v vseh paketih, od brezplačnega do Enterprise. V paketih Free in Go je raba omejena, v paketih Business in Enterprise se po koncu brezplačnega predogleda (2. junija 2026) raba obračuna po kreditih (enotah porabe) in pogojih posameznega paketa. OpenAI navaja, da makri morda ne delujejo v celoti in da so rezultati lahko nepopolni ali napačni.
 
 ChatGPT lahko povežete tudi z Outlookom, SharePointom in Teams (odvisno od paketa in nastavitev skrbnika). V paketih Business in Enterprise se podatki iz teh povezav privzeto ne uporabljajo za učenje, v paketih Free, Go, Plus in Pro pa se lahko, če je vklopljena nastavitev za izboljšanje modela.
 
