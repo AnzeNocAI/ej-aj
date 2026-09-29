@@ -9,7 +9,7 @@ Vsa večja AI orodja odgovarjajo v slovenščini, vprašanje je, kako dobro. Ta 
 
 ## Na kratko
 
-- Na EuroEvalu in SloBenchovi lestvici za prevajanje so najboljši modeli Googla, Anthropica in OpenAI-ja blizu skupaj. Na CJVT-jevi areni je Gemini 2.5 Pro opazno pred ostalimi, Claude pa tam ni ocenjen.
+- Na EuroEvalu (zbirki avtomatskih testov za evropske jezike) in SloBenchovi lestvici za prevajanje so najboljši modeli Googla, Anthropica in OpenAI-ja blizu skupaj. Na CJVT-jevi areni je Gemini 2.5 Pro opazno pred ostalimi, Claude pa tam ni ocenjen.
 - Slovenski model GaMS3 je na CJVT-jevi areni, kjer ljudje slepo ocenjujejo odgovore v slovenščini, drugi, takoj za Gemini 2.5 Pro.
 - Microsoft slovenščino izrecno navaja med jeziki, ki jih je za Copilot preizkusil. Claude slovenščine nima med jeziki vmesnika, pogovarja pa se v njej. Stranska plošča Gemini v Gmailu in Dokumentih slovenščine nima med podprtimi jeziki, Mistral je nima med jeziki, v katerih pričakuje dobro delovanje.
 - Za prepoznavo slovenskega govora je na SloBenchovi lestvici najboljše slovensko orodje, ne svetovni ponudniki.
@@ -21,7 +21,7 @@ Slovenskih meritev za jezikovne modele je nekaj, vsaka meri nekaj drugega. Noben
 
 ### Arena CJVT: kaj izberejo ljudje
 
-Center za jezikovne vire in tehnologije Univerze v Ljubljani vodi slovensko areno, kjer uporabniki dobijo dva odgovora na isto vprašanje v slovenščini, ne vedo, kateri model je napisal katerega, in izberejo boljšega. Iz glasov nastane lestvica. Na njej je 32 modelov; stran ne navaja datuma zadnje posodobitve. V tabeli je izbor.
+Center za jezikovne vire in tehnologije Univerze v Ljubljani vodi slovensko areno, kjer uporabniki dobijo dva odgovora na isto vprašanje v slovenščini, ne vedo, kateri model je napisal katerega, in izberejo boljšega. Iz glasov nastane lestvica. Na njej je 32 modelov; stran ne navaja datuma zadnje posodobitve. V tabeli je izbor. Ocena ELO se računa iz zmag in porazov v primerjavah, podobno kot pri šahu; višja je boljša.
 
 | Mesto | Model | Ocena (ELO) | Glasov |
 |---|---|---|---|
@@ -34,7 +34,7 @@ Center za jezikovne vire in tehnologije Univerze v Ljubljani vodi slovensko aren
 | 10 | Gemini 3 Pro (predogled) | 1.020 | 36 |
 | 13 | Mistral Large 3 | 1.008 | 82 |
 
-Pri večini modelov je negotovost ocene 20 do 30 točk, zato se intervali modelov od drugega do približno šestnajstega mesta prekrivajo. Gemini 2.5 Pro je edini jasno pred ostalimi. Nekateri novejši modeli imajo malo glasov. Modelov Claude in Copilot na lestvici ni.
+Pri večini modelov je negotovost ocene 20 do 30 točk, zato se razponi modelov od drugega do približno šestnajstega mesta prekrivajo. Gemini 2.5 Pro je edini jasno pred ostalimi. Nekateri novejši modeli imajo malo glasov. Modelov Claude in Copilot na lestvici ni.
 
 Vir: [Slovenska arena CJVT, lestvica](https://arena.cjvt.si/en/leaderboard)
 
@@ -46,7 +46,7 @@ Vir: [EuroEval, slovenska lestvica (podatki)](https://github.com/EuroEval/leader
 
 ### SloBench: prevajanje
 
-Na SloBenchu, zbirki slovenskih testov CJVT, je lestvica za strojno prevajanje iz angleščine v slovenščino. Po meri BERTScore so v vrhu DeepL (0,8812), Gemini 1.5 Pro (0,8791), Claude Sonnet 3.5 (0,8789) in GPT-4o (0,8784), GaMS3 12B Instruct je trinajsti (0,8714). Razlike so majhne, v testu pa so starejše različice modelov iz leta 2024.
+Na SloBenchu, zbirki slovenskih testov CJVT, je lestvica za strojno prevajanje iz angleščine v slovenščino. Po meri BERTScore, ki samodejno oceni, kako podoben je strojni prevod po pomenu človeškemu prevodu, so v vrhu DeepL (0,8812), Gemini 1.5 Pro (0,8791), Claude Sonnet 3.5 (0,8789) in GPT-4o (0,8784), GaMS3 12B Instruct je trinajsti (0,8714). Razlike so majhne, v testu pa so starejše različice modelov iz leta 2024.
 
 Vir: [SloBench, prevajanje iz angleščine v slovenščino](https://slobench.cjvt.si/leaderboard/view/8)
 
@@ -69,9 +69,9 @@ Viri: [OpenAI, jezik vmesnika ChatGPT](https://help.openai.com/en/articles/83578
 
 ## GaMS: slovenski model
 
-GaMS je družina jezikovnih modelov, ki jih v projektu PoVeJMo razvijajo na Fakulteti za računalništvo in informatiko ter CJVT Univerze v Ljubljani. Najnovejša različica, GaMS3 12B, temelji na Googlovem odprtem modelu Gemma 3, dodatno pa je učena na slovenskih besedilih. Za razvoj modela (priprava podatkov in učenje) so na evropskem superračunalniku Leonardo porabili približno 150 tisoč ur grafičnih procesorjev. Model razume slovensko in angleško, delno tudi hrvaško, bosansko in srbsko, in ima kontekstno okno 131.072 tokenov.
+GaMS je družina jezikovnih modelov, ki jih v projektu PoVeJMo razvijajo na Fakulteti za računalništvo in informatiko ter CJVT Univerze v Ljubljani. Najnovejša različica, GaMS3 12B (12 milijard parametrov), temelji na Googlovem odprtem modelu Gemma 3, ki ga lahko vsak prenese in uporablja pod Googlovimi pogoji, dodatno pa je učena na slovenskih besedilih. Za razvoj modela (priprava podatkov in učenje) so na evropskem superračunalniku Leonardo porabili približno 150 tisoč ur grafičnih procesorjev (čipov, na katerih se modeli učijo). Model razume slovensko in angleško, delno tudi hrvaško, bosansko in srbsko, in ima kontekstno okno 131.072 tokenov (toliko besedila model upošteva naenkrat).
 
-Uteži modela so prosto dostopne pod Googlovimi pogoji za Gemmo, zato ga podjetje lahko poganja na svoji strojni opremi in podatki ne zapustijo hiše. Po poročanju Univerze v Ljubljani so štiri podjetja (Semantika, Špica, Better in XLAB) model GaMS že prilagodila za svoje aplikacije. Klepetalnik z modelom je na voljo na povejmo.si, pri namestitvi pomaga SLAIF.
+Uteži modela (naučeni parametri, ki sestavljajo model) so prosto dostopne pod Googlovimi pogoji za Gemmo, zato ga podjetje lahko poganja na svoji strojni opremi in podatki ne zapustijo hiše. Po poročanju Univerze v Ljubljani so štiri podjetja (Semantika, Špica, Better in XLAB) model GaMS že prilagodila za svoje aplikacije. Klepetalnik z modelom je na voljo na povejmo.si, pri namestitvi pomaga SLAIF.
 
 Po naši oceni so za vsakdanje pisarniško delo veliki komercialni modeli bolj priročni. GaMS je smiseln, ko podatki ne smejo iz podjetja ali ko želite model prilagoditi svojim besedilom.
 

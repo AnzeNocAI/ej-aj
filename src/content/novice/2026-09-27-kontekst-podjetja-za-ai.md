@@ -11,7 +11,7 @@ Kakovost odgovora je zelo odvisna od tega, koliko AI ve o vaši nalogi. Kontekst
 
 ## Zakaj ne kar vsega
 
-Mika, da bi AI-ju dali vse dokumente podjetja naenkrat. Anthropic v članku o kontekstnem inženiringu opozarja, da je kontekst omejen vir, nekakšen proračun pozornosti. Ko je besedila v kontekstu vedno več, model vse slabše natančno prikliče, kar v njem piše. Temu pravijo "context rot".
+Mika, da bi AI-ju dali vse dokumente podjetja naenkrat. Kontekst je besedilo, ki ga ima model med delom pred sabo. Anthropic v članku o kontekstnem inženiringu, torej o tem, katere informacije dati AI-ju, opozarja, da je kontekst omejen vir, nekakšen proračun pozornosti. Ko je besedila v kontekstu vedno več, model vse slabše natančno prikliče, kar v njem piše. Temu pravijo "context rot".
 
 Zato je cilj najmanjša količina informacij, ki zadošča za dobro delo. Namesto celotnega arhiva raje kratek dokument o podjetju in dostop do ostalih dokumentov, ko jih AI potrebuje. Anthropic temu pravi pridobivanje ob pravem času: AI ima seznam, kje kaj najde, in dokument odpre šele, ko ga potrebuje.
 
@@ -52,4 +52,4 @@ Kontekst ni narejen enkrat za vselej. Ko AI večkrat naredi isto napako, dopiši
 
 ## Kontekst v Claude Code
 
-V Claude Code ima kontekst obliko datoteke `CLAUDE.md`, ki jo Claude prebere na začetku vsake seje. Ker je to navadna datoteka, jo lahko hranite skupaj z ostalimi dokumenti podjetja, tudi na GitHubu. Ali je to dobra ideja, je opisano v delu [Kontekst podjetja na GitHubu: da ali ne](/vodniki/kontekst-podjetja-na-githubu/).
+V Claude Code ima kontekst obliko datoteke `CLAUDE.md`, ki jo Claude prebere na začetku vsake seje. Ker je to navadna datoteka, jo lahko hranite skupaj z ostalimi dokumenti podjetja, tudi na GitHubu. Ali je to dobra ideja, je opisano v delu [Ali hraniti kontekst podjetja za AI na GitHubu](/vodniki/kontekst-podjetja-na-githubu/).

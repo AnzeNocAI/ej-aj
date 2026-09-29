@@ -37,7 +37,7 @@ Praktična razdelitev v tri skupine:
 
 **Nikoli, ne glede na paket:**
 
-- gesla, dostopni ključi (API ključi), podatki za prijavo v bančne in druge sisteme,
+- gesla, dostopni ključi (API ključi, s katerimi programi dostopajo do storitev), podatki za prijavo v bančne in druge sisteme,
 - podatki, zaščiteni s poklicno tajnostjo, če tega ne dovoljujejo pravila vašega poklica (na primer odvetniki in zdravniki),
 - posebne vrste osebnih podatkov iz člena 9 GDPR brez jasne pravne podlage: zdravje, rasno ali etnično poreklo, politično mnenje, versko ali filozofsko prepričanje, članstvo v sindikatu, genetski podatki, biometrični podatki za edinstveno identifikacijo, spolno življenje ali usmerjenost.
 
@@ -82,18 +82,18 @@ Stanje po uradnih straneh ponudnikov, preverjeno 26. septembra 2026. Cene paketo
 | Gemini (osebni račun) | da, če je vklopljena Dejavnost (Keep Activity) | privzeto 18 mesecev, pregledani pogovori do 3 leta | ni navedena |
 | Gemini v Google Workspace | ne brez vašega dovoljenja | določi skrbnik (3, 18 ali 36 mesecev) | da |
 | Copilot (osebni Microsoftov račun) | lahko, izklopite v nastavitvah | zgodovina 18 mesecev | ni navedena |
-| Copilot s službenim računom (Entra ID) | ne | po nastavitvah Microsoft Purview | da |
+| Copilot s službenim računom Microsoft 365 | ne | po nastavitvah skrbnika (Microsoft Purview) | da |
 | Mistral Vibe (prej Le Chat), osebni paketi | da, razen če izklopite | podatki privzeto v EU | ni navedena |
 
 "Ni navedena" pomeni, da ponudnik pogodbo o obdelavi omenja le pri poslovnih paketih. Nekaj podrobnosti, ki jih tabela ne pove:
 
 Pri ChatGPT učenje izklopite v Nastavitve, Nadzor podatkov, stikalo "Improve the model for everyone". Začasni klepet (Temporary Chat) se ne uporablja za učenje in se hrani do 30 dni. Pozor: če pri odgovoru kliknete palec gor ali dol, lahko celoten pogovor vseeno pride v učenje. Hramba podatkov v Evropi je na voljo samo za API in nove prostore ChatGPT Enterprise in Edu, ne za Business.
 
-Pri Claudu od jeseni 2025 osebni paketi zahtevajo izbiro, ali dovolite učenje. Nastavitev spremenite v nastavitvah zasebnosti. Anthropic na svoji platformi za razvijalce (API) hrambe podatkov v EU trenutno ne ponuja, na voljo sta le ZDA in globalna obdelava. Pri AWS Bedrock in Google Cloud je regija odvisna od izbrane končne točke.
+Pri Claudu od jeseni 2025 osebni paketi zahtevajo izbiro, ali dovolite učenje. Nastavitev spremenite v nastavitvah zasebnosti. Anthropic na svoji platformi za razvijalce (API) hrambe podatkov v EU trenutno ne ponuja, na voljo sta le ZDA in globalna obdelava. Pri Amazonovi storitvi Bedrock in pri Google Cloud je regija odvisna od tega, katero lokacijo strežnikov izberete.
 
 Pri Geminiju z osebnim računom pogovore lahko pregledujejo ljudje, Google pa sam svetuje, da ne vnašate zaupnih podatkov, ki jih ne bi želeli pokazati pregledovalcu. Z izklopljeno Dejavnostjo (Keep Activity) se pogovori hranijo 72 ur.
 
-Pri Copilotu z osebnim računom učenje izklopite v Nastavitve, Zasebnost. S službenim računom velja Microsoftova zaščita podatkov za podjetja. Za organizacije v EU velja tudi EU Data Boundary, z izjemami: spletno iskanje prek Binga in modeli podjetja Anthropic so izvzeti.
+Pri Copilotu z osebnim računom učenje izklopite v Nastavitve, Zasebnost. S službenim računom velja Microsoftova zaščita podatkov za podjetja. Za organizacije v EU velja tudi EU Data Boundary, Microsoftova zaveza, da podatke hrani in obdeluje v EU in EFTA, vendar z izjemami: spletno iskanje prek Binga in modeli podjetja Anthropic so izvzeti.
 
 Mistral je evropski ponudnik in podatke privzeto hrani v EU, vendar se pri osebnih paketih pogovori privzeto uporabljajo za učenje. V paketu Enterprise je učenje privzeto izklopljeno. Tudi pri Mistralu lahko ocena odgovora s komentarjem pogovor pošlje v učenje.
 
@@ -106,7 +106,7 @@ Poslovni paket reši večino težav, ne pa vseh. Pred uvedbo preverite:
 1. Pogodbo o obdelavi podatkov. Pri OpenAI jo za Business, Enterprise in API sklenete prek obrazca, pri Anthropicu je del poslovnih pogojev, pri Googlu in Microsoftu je del pogodbe za Workspace oziroma Microsoft 365.
 2. Kje se podatki obdelujejo. Večina ponudnikov je v ZDA. Prenos podatkov v ZDA je trenutno mogoč na podlagi okvira EU in ZDA za zasebnost podatkov (Data Privacy Framework), ki ga je Splošno sodišče EU septembra 2025 potrdilo (zadeva T-553/23). Zoper sodbo je po poročanju vložena pritožba na Sodišče EU (C-703/25 P), zato stanje spremljajte.
 3. Hrambo in dostop. Kdo v podjetju vidi pogovore drugih, kako dolgo se hranijo, ali jih lahko skrbnik izvozi ali izbriše.
-4. Konektorje. Ko orodje povežete z e-pošto, diskom ali CRM, dobi dostop do veliko več podatkov kot pri ročnem lepljenju. Omogočite le tiste, ki jih res potrebujete.
+4. Konektorje, torej povezave AI orodja z drugimi aplikacijami. Ko orodje povežete z e-pošto, diskom ali CRM, dobi dostop do veliko več podatkov kot pri ročnem lepljenju. Omogočite le tiste, ki jih res potrebujete.
 5. Oceno učinka. Če obdelava verjetno pomeni veliko tveganje za posameznike, na primer obsežna obdelava posebnih vrst podatkov ali sistematično ocenjevanje oseb, GDPR v členu 35 zahteva oceno učinka na varstvo podatkov.
 
 Viri: [OpenAI, zasebnost za podjetja](https://openai.com/enterprise-privacy/), [GDPR](https://eur-lex.europa.eu/legal-content/SL/TXT/HTML/?uri=CELEX:32016R0679), [Sodišče EU, sporočilo za javnost 106/25 (PDF)](https://curia.europa.eu/site/upload/docs/application/pdf/2025-09/cp250106en.pdf), [Digital Policy Alert, pritožba Latombe](https://digitalpolicyalert.org/event/35459-latombe-filed-appeal-against-general-court-dismissal-of-challenge-to-european-unionunited-states-data-protection-framework-adequacy-decision-in-latombe-v-commission), [Informacijski pooblaščenec, UI in varstvo osebnih podatkov](https://www.ip-rs.si/varstvo-osebnih-podatkov/klju%C4%8Dna-podro%C4%8Dja-uredbe/umetna-inteligenca-in-varstvo-osebnih-podatkov)
@@ -114,7 +114,7 @@ Viri: [OpenAI, zasebnost za podjetja](https://openai.com/enterprise-privacy/), [
 ## Kaj se je že zgodilo
 
 - Samsung, april 2023: po poročanju medijev so zaposleni v ChatGPT vnesli interne podatke podjetja. Samsung je nato od 1. maja 2023 prepovedal rabo generativnih AI orodij na službenih napravah.
-- ChatGPT, 20. marec 2023: zaradi napake v odprtokodni knjižnici so nekateri uporabniki videli naslove pogovorov drugih uporabnikov. Pri približno 1,2 % naročnikov ChatGPT Plus, ki so bili aktivni v devetih urah tistega dne, so bili drugim lahko vidni ime, e-naslov, naslov za plačilo ter zadnje štiri številke in datum veljavnosti kartice.
+- ChatGPT, 20. marec 2023: zaradi napake v odprtokodni programski knjižnici (njena koda je javno dostopna), ki jo je uporabljal ChatGPT, so nekateri uporabniki videli naslove pogovorov drugih uporabnikov. Pri približno 1,2 % naročnikov ChatGPT Plus, ki so bili aktivni v devetih urah tistega dne, so bili drugim lahko vidni ime, e-naslov, naslov za plačilo ter zadnje štiri številke in datum veljavnosti kartice.
 - Deljeni pogovori v Googlu, julij 2025: javne povezave do pogovorov v ChatGPT, pri katerih so uporabniki označili, da jih je mogoče najti, so se pojavile v rezultatih iskanja. OpenAI je 31. julija 2025 umaknil možnost, da so deljeni pogovori vidni iskalnikom.
 
 Pri napaki iz marca 2023 uporabniki niso naredili ničesar narobe, napaka je bila pri ponudniku. Pogovor z zaupnimi podatki pa ne sodi v deljeno povezavo, tudi če funkcija deluje, kot je predvideno.

@@ -15,11 +15,11 @@ Vsako podjetje, ki zaposlenim omogoči ChatGPT, Claude, Copilot ali drugo AI oro
 - Certifikat ni potreben. Komisija navaja, da lahko podjetje vodi interni zapis usposabljanj in drugih ukrepov.
 - Samo navodilo "preberite navodila za uporabo" po oceni Komisije v mnogih primerih ni učinkovito.
 - Vsebino prilagodite vlogam: kdor s klepetalnikom piše maile, potrebuje manj kot kdor z AI obdeluje podatke strank ali gradi avtomatizacije.
-- V Sloveniji AI pismenost nadzira inšpekcija za informacijsko družbo, ZIUDHPUI pa za kršitev člena 4 predvideva globe.
+- V Sloveniji AI pismenost nadzira inšpekcija za informacijsko družbo, slovenski zakon o izvajanju AI Act (ZIUDHPUI) pa za kršitev člena 4 predvideva globe.
 
 ## Kaj zahteva člen 4
 
-Po spremembi, ki jo je prinesel Digital Omnibus, člen 4 od ponudnikov in uvajalcev sistemov AI zahteva, da sprejmejo ukrepe, s katerimi podpirajo razvoj AI pismenosti svojega osebja in drugih oseb, ki sisteme AI upravljajo ali uporabljajo v njihovem imenu. Pri tem morajo upoštevati njihovo tehnično znanje, izkušnje, izobrazbo in usposobljenost, okoliščine rabe ter osebe, na katerih se bodo sistemi uporabljali. Nova odstavka dodajata, da Komisija in države članice pri tem pomagajo, zlasti malim in srednjim podjetjem, Evropski odbor za umetno inteligenco pa sprejme priporočila s skupnimi cilji.
+Po spremembi, ki jo je julija 2026 prinesel Digital Omnibus (paket sprememb, s katerim je EU spremenila AI Act), člen 4 od ponudnikov sistemov AI (tistih, ki jih razvijejo) in uvajalcev (tistih, ki jih uporabljajo) zahteva, da sprejmejo ukrepe, s katerimi podpirajo razvoj AI pismenosti svojega osebja in drugih oseb, ki sisteme AI upravljajo ali uporabljajo v njihovem imenu. Pri tem morajo upoštevati njihovo tehnično znanje, izkušnje, izobrazbo in usposobljenost, okoliščine rabe ter osebe, na katerih se bodo sistemi uporabljali. Nova odstavka dodajata, da Komisija in države članice pri tem pomagajo, zlasti malim in srednjim podjetjem, Evropski odbor za umetno inteligenco pa sprejme priporočila s skupnimi cilji.
 
 AI pismenost uredba v členu 3(56) opredeli kot znanje, spretnosti in razumevanje, ki omogočajo premišljeno uvajanje sistemov AI ter zavedanje o priložnostih, tveganjih in možni škodi.
 
@@ -35,7 +35,7 @@ Usposabljanje v ožjem smislu ni vedno obvezno, vendar po Komisiji zgolj navodil
 
 Obveznost ne velja samo za zaposlene. Komisija med osebe, ki AI uporabljajo v imenu podjetja, šteje tudi pogodbenike in ponudnike storitev. Za uvajalce visoko tveganih sistemov (na primer AI pri izbiri kandidatov) bo od 2. decembra 2027 veljala strožja zahteva iz člena 26: ljudje, ki sistem nadzirajo, morajo biti ustrezno usposobljeni.
 
-Komisija vodi tudi zbirko več kot 40 primerov programov AI pismenosti iz podjetij in javnega sektorja. Po njenih besedah posnemanje teh primerov samodejno ne pomeni domneve skladnosti. Zbirka je namenjena učenju in izmenjavi izkušenj, zato je uporabna kot vir idej.
+Komisija vodi tudi zbirko več kot 40 primerov programov AI pismenosti iz podjetij in javnega sektorja. Po njenih besedah podjetje zahtev ne izpolni samodejno že s tem, da posnema te primere. Zbirka je namenjena učenju in izmenjavi izkušenj, zato je uporabna kot vir idej.
 
 Viri: [Evropska komisija, vprašanja in odgovori o AI pismenosti](https://digital-strategy.ec.europa.eu/en/faqs/ai-literacy-questions-answers), [Evropska komisija, zbirka primerov AI pismenosti](https://digital-strategy.ec.europa.eu/en/library/living-repository-foster-learning-and-exchange-ai-literacy), [besedilo člena 26](https://artificialintelligenceact.eu/article/26/)
 
@@ -48,7 +48,7 @@ Uredba in Komisija ne predpisujeta programa. Spodnja razdelitev je naš predlog 
 | Vsi, ki uporabljajo klepetalnik | kaj je jezikovni model in zakaj se moti, katera orodja so dovoljena, katerih podatkov ne vnašamo, kako preveriti rezultat | kratka delavnica ali spletni tečaj in interna pravila |
 | Kdor dela s podatki strank ali osebnimi podatki | razlika med osebnim in poslovnim paketom, pogodba o obdelavi podatkov, poklicne tajnosti | dodatna ura z nekom, ki pozna varstvo podatkov |
 | Kdor z AI pripravlja vsebino za stranke ali javnost | preverjanje dejstev in virov, avtorske pravice, označevanje vsebin po členu 50 | delavnica z vajami na lastnih primerih |
-| Kdor gradi avtomatizacije ali agente | vrivanje navodil, dostop do podatkov, stroški API, preverjanje rezultatov | tehnično usposabljanje in pregled rešitve pred uvedbo |
+| Kdor gradi avtomatizacije ali agente | vrivanje navodil (skrita navodila v vsebini, ki jo AI bere), dostop do podatkov, stroški API, preverjanje rezultatov | tehnično usposabljanje in pregled rešitve pred uvedbo |
 | Vodstvo | tveganja, odgovornost, stroški, kaj zahteva AI Act | kratek povzetek in odločitev o pravilih |
 | HR, če AI uporablja pri zaposlovanju | zahteve za visoko tvegane sisteme od 2. decembra 2027, človeški nadzor | posebno usposabljanje ob uvedbi |
 

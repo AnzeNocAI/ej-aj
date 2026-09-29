@@ -12,7 +12,7 @@ Subagent je pomočnik, ki mu glavni Claude preda del naloge. Opravi ga v svojem,
 
 ## Zakaj ločen kontekst
 
-Vsak subagent ima svoje okno konteksta, svoja navodila, svoja orodja in dovoljenja. Ko na primer preišče sto datotek, da najde tri pomembne, v glavni pogovor ne pride vseh sto, ampak samo ugotovitev. Subagent ne vidi zgodovine glavnega pogovora, ampak samo sporočilo, s katerim mu je bila naloga predana. Zato mora biti to sporočilo samostojno: kaj naj naredi, kje, in kaj naj vrne.
+Vsak subagent ima svoje kontekstno okno (besedilo, ki ga upošteva med delom), svoja navodila, svoja orodja in dovoljenja. Ko na primer preišče sto datotek, da najde tri pomembne, v glavni pogovor ne pride vseh sto, ampak samo ugotovitev. Subagent ne vidi zgodovine glavnega pogovora, ampak samo sporočilo, s katerim mu je bila naloga predana. Zato mora biti to sporočilo samostojno: kaj naj naredi, kje, in kaj naj vrne.
 
 Anthropic v članku o kontekstnem inženiringu opisuje isti razlog: subagenti s čistim kontekstom vrnejo zgoščene povzetke, glavni agent pa ostane osredotočen.
 
@@ -22,7 +22,7 @@ Viri: [Claude Code, subagenti](https://code.claude.com/docs/en/sub-agents), [Ant
 
 ## Vgrajeni subagenti
 
-Claude Code ima tri glavne vgrajene subagente. Explore išče po datotekah in jih samo bere. Plan v načinu načrtovanja zbira kontekst, preden Claude predstavi načrt, in prav tako samo bere. General-purpose raziskuje in tudi ukrepa. Claude jih uporabi sam, ko presodi, da je to smiselno.
+Claude Code ima tri glavne vgrajene subagente. Explore išče po datotekah in jih samo bere. Plan v načinu načrtovanja zbira kontekst, preden Claude predstavi načrt, in prav tako samo bere. General-purpose (splošni) raziskuje in tudi ukrepa, na primer spreminja datoteke. Claude jih uporabi sam, ko presodi, da je to smiselno.
 
 ## Kdaj se splačajo
 
@@ -36,7 +36,7 @@ Ne splačajo se pri majhnih nalogah, kjer bi predaja naloge vzela več časa kot
 
 ## Kako naredite svojega
 
-Subagent je datoteka Markdown v mapi `.claude/agents/` v projektu ali `~/.claude/agents/` za vse vaše projekte. Obvezna sta samo ime in opis, neobvezno pa lahko določite orodja, model in dovoljenja. Namesto ročnega pisanja lahko Clauda prosite, naj datoteko pripravi.
+Subagent je besedilna datoteka v obliki Markdown v mapi `.claude/agents/` v projektu ali `~/.claude/agents/` za vse vaše projekte. Obvezna sta samo ime in opis, neobvezno pa lahko določite orodja, model in dovoljenja. Namesto ročnega pisanja lahko Clauda prosite, naj datoteko pripravi.
 
 ```markdown
 ---
@@ -51,7 +51,7 @@ preveri, ali jo vir res navaja. Vrni seznam: trditev, kaj piše v viru, povezava
 Trditev, ki je vir ne navaja, označi kot nepreverjeno, tudi če je verjetno resnična.
 ```
 
-Claude subagenta uporabi sam, ko opis ustreza nalogi, ali pa ga pokličete po imenu. Če v opis napišete, naj ga uporablja proaktivno, ga bo pogosteje.
+Claude subagenta uporabi sam, ko opis ustreza nalogi, ali pa ga pokličete po imenu. Če v opis napišete, naj ga uporablja proaktivno (sam od sebe, brez vašega poziva), ga bo uporabljal pogosteje.
 
 V novejših različicah lahko subagenti zaženejo tudi svoje subagente, privzeto do tri ravni globoko, hkrati pa jih teče največ 20.
 

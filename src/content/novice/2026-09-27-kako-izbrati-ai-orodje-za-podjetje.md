@@ -14,7 +14,7 @@ Podjetje, ki želi zaposlenim urediti AI, običajno izbira med štirimi orodji: 
 - Če podjetje dela v Google Workspace, je Gemini že vključen v paket Business Standard. Če dela v Microsoft 365, se Copilot doda kot dodatek k obstoječemu paketu.
 - ChatGPT Business in Claude Team sta samostojni orodji za najmanj 2 uporabnika. Staneta od 18 € (Claude, letno plačilo, brez DDV) do 26 € (ChatGPT, mesečno plačilo) na uporabnika na mesec.
 - Za službene podatke izberite poslovni paket, ne osebnega. Poslovni paketi imajo skrbniške nastavitve in pogodbo o obdelavi podatkov, OpenAI, Anthropic, Google in Microsoft pa se v njih na vaših podatkih privzeto ne učijo.
-- Za avtomatizacije z veliko ponovitvami je primernejši API, kjer plačate porabo, ne sedeža.
+- Za avtomatizacije z veliko ponovitvami je primernejši API (povezava, prek katere vaši programi uporabljajo model), kjer plačate porabo, ne licence na uporabnika.
 - Preden se odločite, dve orodji preizkusite na istih nalogah iz svojega dela.
 
 ## Najprej: kje vaši ljudje že delajo
@@ -41,7 +41,7 @@ Viri: [Google Workspace, cene](https://workspace.google.com/pricing), [Microsoft
 
 Cene veljajo na uporabnika na mesec. Pri ChatGPT in Google Workspace stran ne navaja, ali je DDV vključen. Pri ChatGPT in Claude je na voljo tudi sedež Premium s petkrat več uporabe, ki pri mesečnem plačilu stane 130 € oziroma 105,23 € brez DDV. Smiseln je predvsem za nekoga, ki orodje uporablja ves dan. Mistral zahteva najmanj 2 uporabnika, torej vsaj 61 € na mesec z DDV.
 
-ChatGPT Business vključuje konektorje za Google Workspace, Microsoft 365, Slack in GitHub, enotno prijavo (SSO) in skrbniške nastavitve. Claude Team je namenjen ekipam od 2 do 150 ljudi in ima osrednje plačevanje in skrbniške nastavitve. Za večja podjetja imata oba ponudnika paket Enterprise: pri OpenAI je cena po dogovoru, Anthropic pa navaja 20 USD na sedež na mesec ob letnem plačilu, poleg tega pa porabo po cenah API.
+ChatGPT Business vključuje konektorje za Google Workspace, Microsoft 365, Slack in GitHub, enotno prijavo s službenim računom (SSO) in skrbniške nastavitve. Claude Team je namenjen ekipam od 2 do 150 ljudi in ima osrednje plačevanje in skrbniške nastavitve. Za večja podjetja imata oba ponudnika paket Enterprise: pri OpenAI je cena po dogovoru, Anthropic pa navaja 20 USD na sedež na mesec ob letnem plačilu, poleg tega pa porabo po cenah API.
 
 Viri: [ChatGPT, cene za podjetja](https://chatgpt.com/pricing/?type=team), [Claude, cene](https://claude.com/pricing), [Mistral, cene](https://mistral.ai/pricing/)
 
@@ -57,7 +57,7 @@ Viri: [ChatGPT, cene](https://chatgpt.com/pricing/), [Claude, cene](https://clau
 
 ## Kdaj API namesto naročnine
 
-Naročnina plača sedež za človeka, ki se z orodjem pogovarja. Če želite, da AI sam obdela vsak prejeti račun, razvrsti vsa sporočila v nabiralniku ali povzame vsak klic v klicnem centru, je primernejši API: plačate porabo, merjeno v tokenih, in izberete model, ki je za nalogo dovolj dober.
+Naročnina plača sedež za človeka, ki se z orodjem pogovarja. Če želite, da AI sam obdela vsak prejeti račun, razvrsti vsa sporočila v nabiralniku ali povzame vsak klic v klicnem centru, je primernejši API: plačate porabo, merjeno v tokenih (koščkih besedila), in izberete model, ki je za nalogo dovolj dober.
 
 Razlike v ceni med modeli so velike. Na naši [primerjavi modelov](/modeli/) najcenejši modeli stanejo manj kot 1 USD za milijon vhodnih tokenov, najzmogljivejši 10 USD. Za preprosto razvrščanje zadošča poceni model, za analizo pogodb potrebujete zmogljivejšega. API podjetij OpenAI in Anthropic vaših podatkov privzeto ne uporablja za učenje, pri drugih ponudnikih to preverite v pogojih.
 
@@ -69,7 +69,7 @@ Viri: [OpenAI, zasebnost za podjetja](https://openai.com/enterprise-privacy/), [
 
 Mistral je francoski ponudnik, ki podatke privzeto hrani v EU. Za podjetja, pri katerih stranke ali notranja pravila zahtevajo obdelavo v EU, je to lahko odločilno. Pri paketih Free, Pro in Team Mistral pogovore privzeto uporablja za učenje, dokler tega ne izklopite, v paketu Enterprise je učenje privzeto izklopljeno.
 
-Kadar podatki sploh ne smejo zapustiti podjetja, pridejo v poštev modeli z odprtimi utežmi, ki jih poganjate na svoji strojni opremi, na primer Llama, manjši Mistralovi modeli ali slovenski GaMS. To zahteva zmogljiv strežnik in nekoga, ki sistem vzdržuje. Modeli podjetij OpenAI, Anthropic in Google iz naše [primerjave](/modeli/) nimajo odprtih uteži, zato jih na ta način ni mogoče poganjati.
+Kadar podatki sploh ne smejo zapustiti podjetja, pridejo v poštev modeli z odprtimi utežmi, torej modeli, ki jih lahko prenesete in poganjate na svoji strojni opremi, na primer Llama, manjši Mistralovi modeli ali slovenski GaMS. To zahteva zmogljiv strežnik in nekoga, ki sistem vzdržuje. Modeli podjetij OpenAI, Anthropic in Google iz naše [primerjave](/modeli/) nimajo odprtih uteži, zato jih na ta način ni mogoče poganjati.
 
 Viri: [Mistral, cene](https://mistral.ai/pricing/), [Mistral, hramba podatkov](https://help.mistral.ai/en/articles/347629-where-do-you-store-my-data-or-my-organization-s-data), [Mistral, učenje na podatkih](https://help.mistral.ai/en/articles/347617-do-you-use-my-user-data-to-train-your-artificial-intelligence-models)
 
