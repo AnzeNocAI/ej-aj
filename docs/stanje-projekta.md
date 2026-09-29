@@ -51,10 +51,10 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 
 ## Tehnika, ki jo moraš poznati
 
-- Repo: `/Users/anze/Desktop/ej-aj`, GitHub `ej-aj-si/ej-aj` (javen). Aktivni `gh` račun na Macu je
+- Repo: `/Users/anze/Desktop/ej-aj`, GitHub `ej-aj-pro/ej-aj` (javen). Aktivni `gh` račun na Macu je
   **AnzeNoc** in ga ne preklapljaj (`gh auth switch` pokvari drugo sejo). Vsak omrežni ukaz:
-  `GH_TOKEN="$(gh auth token --user ej-aj-si)" git push ...`, enako za `gh pr ...`.
-- Commiti gredo pod `326904133+ej-aj-si@users.noreply.github.com` (nastavljeno v repo configu).
+  `GH_TOKEN="$(gh auth token --user ej-aj-pro)" git push ...`, enako za `gh pr ...`.
+- Commiti gredo pod `326904133+ej-aj-pro@users.noreply.github.com` (nastavljeno v repo configu).
 - Gostovanje: Cloudflare Workers s statičnimi datotekami (`wrangler.jsonc`), vsak push v `main` se
   objavi, vsak PR dobi preview povezavo (komentar Cloudflare bota). Preusmeritve so v
   `public/_redirects`.
@@ -149,16 +149,16 @@ Trends; brez podatkov o obsegu iskanj):
 ```
 You are running as a scheduled local routine for Anže. Task: prepare the next weekly AI news digest ("Tedenski pregled") for his public site ej-aj.si and open a pull request. You never merge and never push to main; merging is publishing and only Anže does that.
 
-Repo: /Users/anze/Desktop/ej-aj (GitHub: ej-aj-si/ej-aj). Always use absolute paths.
+Repo: /Users/anze/Desktop/ej-aj (GitHub: ej-aj-pro/ej-aj). Always use absolute paths.
 
-GitHub auth: the active gh account on this Mac is a different one (AnzeNoc) and must NOT be switched with `gh auth switch`, because another Claude session relies on it. Prefix every network command (git fetch, git push, gh ...) with GH_TOKEN="$(gh auth token --user ej-aj-si)".
+GitHub auth: the active gh account on this Mac is a different one (AnzeNoc) and must NOT be switched with `gh auth switch`, because another Claude session relies on it. Prefix every network command (git fetch, git push, gh ...) with GH_TOKEN="$(gh auth token --user ej-aj-pro)".
 
 Steps:
-1. cd /Users/anze/Desktop/ej-aj && GH_TOKEN="$(gh auth token --user ej-aj-si)" git fetch origin
+1. cd /Users/anze/Desktop/ej-aj && GH_TOKEN="$(gh auth token --user ej-aj-pro)" git fetch origin
 2. Load the current instructions from main, not from whatever branch is checked out locally:
    git show origin/main:.claude/skills/tedenski-pregled/SKILL.md
    git show origin/main:AGENTS.md
-   If the skill file does not exist on origin/main, stop and report in Slovenian: "Skill tedenski-pregled še ni na main. Mergaj PR #3 (https://github.com/ej-aj-si/ej-aj/pull/3), potem rutino zaženi ročno." Do nothing else.
+   If the skill file does not exist on origin/main, stop and report in Slovenian: "Skill tedenski-pregled še ni na main. Mergaj PR #3 (https://github.com/ej-aj-pro/ej-aj/pull/3), potem rutino zaženi ročno." Do nothing else.
 3. Follow the skill exactly, step by step. It creates its own worktree under /Users/anze/.cache/ej-aj-worktrees/ (outside iCloud), uses parallel subagents to collect news, a fact-checker subagent, runs scripts/preveri.mjs and the build, and opens the PR. Do not touch the main checkout at /Users/anze/Desktop/ej-aj beyond git fetch and git worktree commands.
 4. Rules that always apply: Slovenian copy, no em dashes or en dashes; every news item has a source link and every number, date and name must come from an opened source; never invent anything; no client names or client data (his private knowledge-base report may be read only as a list of leads, never copied).
 5. Final message in Slovenian, short: the PR link, the headlines, failed sources, and anything Anže must check by hand. If any step failed, say exactly which one and what state things were left in; do not work around failures silently.
@@ -172,17 +172,17 @@ Steps:
 ```
 You are running as a scheduled local routine for Anže. Task: re-check the model comparison (src/data/modeli.yaml), the subscription prices (src/data/narocnine.yaml) and the AI statistics page (src/data/statistika.json, page /statistika/) on his public site ej-aj.si, and open a pull request if anything changed. You never merge and never push to main; merging is publishing and only Anže does that.
 
-Repo: /Users/anze/Desktop/ej-aj (GitHub: ej-aj-si/ej-aj). Always use absolute paths.
+Repo: /Users/anze/Desktop/ej-aj (GitHub: ej-aj-pro/ej-aj). Always use absolute paths.
 
-GitHub auth: the active gh account on this Mac is a different one (AnzeNoc) and must NOT be switched with `gh auth switch`. Prefix every network command (git fetch, git push, gh ...) with GH_TOKEN="$(gh auth token --user ej-aj-si)".
+GitHub auth: the active gh account on this Mac is a different one (AnzeNoc) and must NOT be switched with `gh auth switch`. Prefix every network command (git fetch, git push, gh ...) with GH_TOKEN="$(gh auth token --user ej-aj-pro)".
 
 Steps:
-1. cd /Users/anze/Desktop/ej-aj && GH_TOKEN="$(gh auth token --user ej-aj-si)" git fetch origin
+1. cd /Users/anze/Desktop/ej-aj && GH_TOKEN="$(gh auth token --user ej-aj-pro)" git fetch origin
 2. Load the current instructions from main:
    git show origin/main:.claude/skills/posodobi-modele/SKILL.md
    git show origin/main:AGENTS.md
    git show origin/main:docs/slog.md (if it exists)
-   If the skill or src/data/modeli.yaml does not exist on origin/main, stop and report in Slovenian: "Primerjava modelov še ni na main. Mergaj PR #1 in #2 (https://github.com/ej-aj-si/ej-aj/pulls), potem rutino zaženi ročno." Do nothing else.
+   If the skill or src/data/modeli.yaml does not exist on origin/main, stop and report in Slovenian: "Primerjava modelov še ni na main. Mergaj PR #1 in #2 (https://github.com/ej-aj-pro/ej-aj/pulls), potem rutino zaženi ročno." Do nothing else.
    If scripts/osvezi-statistiko.mjs does not exist on origin/main yet, skip the statistics part and say in the final message: "Statistika še ni na main (PR #17)."
 3. Follow the skill exactly. It works in its own worktree under /Users/anze/.cache/ej-aj-worktrees/ (outside iCloud), uses one subagent per provider, changes only values confirmed on an opened official page, refreshes the statistics only with scripts/osvezi-statistiko.mjs (never by hand) and has a fact-checker subagent re-check the page's sentences against new statistics, and opens one PR with a table of changes. If nothing changed, it opens no PR.
 4. Slovenian copy, no em dashes or en dashes. Never fill a value from memory.

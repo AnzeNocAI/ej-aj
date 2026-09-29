@@ -1,7 +1,7 @@
 # ej-aj.si
 
 Slovenian AI hub: weekly AI news digest, model comparison and practical guides for Slovenian
-businesses. Owner and editor: Anže. Public repo `ej-aj-si/ej-aj`, deployed by Cloudflare
+businesses. Owner and editor: Anže. Public repo `ej-aj-pro/ej-aj`, deployed by Cloudflare
 Workers (static assets, `wrangler.jsonc`) on every push to `main`.
 
 Current state, open items, merge permissions and next-feature ideas: `docs/stanje-projekta.md`.
