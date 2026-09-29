@@ -10,7 +10,7 @@ export const SITE = {
   analyticsToken: 'ac8e62820c2148d4907a4bf8752809e2',
   // Buttondown subscribe form action URL (from Buttondown: Settings, Embedding).
   // While null, the newsletter form is hidden everywhere.
-  newsletterAction: null as string | null,
+  newsletterAction: 'https://buttondown.com/api/emails/embed-subscribe/ej-aj' as string | null,
 };
 
 export const TYPE_LABEL: Record<string, string> = {
