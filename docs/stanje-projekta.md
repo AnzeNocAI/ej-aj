@@ -3,7 +3,7 @@
 Za agenta, ki nadaljuje delo na ej-aj.si. Najprej preberi `AGENTS.md` (pravila pisanja, točnosti,
 zaupnosti), `docs/slog.md` (kako ne zveneti kot AI), nato ta dokument, `docs/postavitev.md`
 (domena, Cloudflare, računi) in `docs/kako-objavim.md` (kako Anže pregleduje in objavlja).
-Stanje: 27. september 2026 (zvečer).
+Stanje: 29. september 2026.
 
 ## Kaj je na strani (ej-aj.si)
 
@@ -93,13 +93,21 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 
 ## Odprto
 
-1. **Newsletter** (PR #7 objavljen 29. 9.): Buttondown, uporabnik `ej-aj`, račun noc.anze@gmail.com,
+1. **Newsletter** (PR #7 objavljen 29. 9.): Buttondown, uporabnik `ej-aj`, Anžetov Gmail račun,
    brezplačni paket. Ime ej-aj.si, barva #1f3bd6, odgovori na pozdrav@ej-aj.si, slovenska noga.
    Slovenščine Buttondown ne podpira, potrditveni mail je v angleščini (lastno besedilo zahteva
    paket Standard). API ključ je v `~/.zshrc` kot `BUTTONDOWN_API_KEY`. Prvi mail je osnutek v
    Buttondownu (`~/Desktop/ej-aj-newsletter/2026-09-29.md`), pošlje ga Anže. Brez stalnega urnika,
-   zato besedilo ne obljublja "vsak petek". Odprto: pošiljanje z `newsletter@ej-aj.si` (sending
-   domain v Buttondownu, DNS v Cloudflare, Email Routing za ta naslov; Anže je odobril).
+   zato besedilo ne obljublja "vsak petek".
+   Pošiljanje z `newsletter@ej-aj.si` je urejeno (29. 9.): sending domain `ej-aj.si` je v Buttondownu
+   potrjen (`sending_domain_status: valid`), pošiljatelj je `newsletter@ej-aj.si`, ime pošiljatelja
+   "ej-aj.si". V Cloudflare DNS so dodani DKIM (TXT `20260929134901pm._domainkey`), CNAME
+   `pm-bounces` na `pm.mtasv.net` in `track` na `webhook-consumer.buttondown.email` (oba DNS only)
+   ter DMARC (TXT `_dmarc`, `p=quarantine`, poročila na Postmark). Email Routing posreduje
+   `newsletter@ej-aj.si` na isti cilj kot `pozdrav@`. Obstoječi MX, SPF in DKIM za Email Routing so
+   nespremenjeni. Pozor: zaradi `p=quarantine` pošta, poslana "kot" `@ej-aj.si` mimo Buttondowna
+   (npr. iz Gmaila prek njegovega SMTP), ne prestane DMARC. Tabela zapisov v Buttondownu včasih
+   za hip pokaže "Required"; merodajen je API ali `dig`.
 2. **Rutini** sta od 26. 9. 2026 ustvarjeni v tej instanci (glej spodaj). Anže naj stari v instanci
    DIA izklopi in novi prvič požene z "Run now", da se shranijo odobritve orodij. Prvi zagoni:
    posodobitev modelov 1. oktobra, tedenski pregled #2 2. oktobra.
