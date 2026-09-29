@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site';
+---
+
+<Base title="Zasebnost" description="Kako ej-aj.si ravna z osebnimi podatki: analitika brez piškotkov in newsletter.">
+  <article class="wrap narrow">
+    <header class="article-head">
+      <span class="eyebrow">Zasebnost</span>
+      <h1>Izjava o zasebnosti</h1>
+      <p class="lede">Na kratko: stran ne uporablja piškotkov in ne sledi posameznim obiskovalcem.</p>
+    </header>
+
+    <div class="prose">
+      <h2>Kdo upravlja podatke</h2>
+      <p>
+        Upravljavec je {SITE.author}. Za vprašanja o zasebnosti in uveljavljanje pravic pišite na
+        <a href="mailto:pozdrav@ej-aj.si">pozdrav@ej-aj.si</a>.
+      </p>
+
+      <h2>Obisk strani</h2>
+      <p>
+        Stran gostuje pri podjetju Cloudflare. Za merjenje obiska uporabljamo Cloudflare Web
+        Analytics, ki ne uporablja piškotkov in ne sledi posameznim obiskovalcem. Vidimo le zbirne
+        podatke, na primer število ogledov posamezne strani in države obiskovalcev. Ker piškotkov ne
+        uporabljamo, vas za soglasje ne sprašujemo.
+      </p>
+
+      <h2>Videi</h2>
+      <p>
+        Na nekaterih straneh so videi z YouTuba. Dokler videa ne zaženete, stran prikaže samo
+        sličico, ki se naloži s strežnika YouTube (i.ytimg.com), zato ta vidi vaš IP naslov.
+        Predvajalnik se naloži šele ob kliku, in sicer z youtube-nocookie.com, ki piškotkov ne
+        nastavi, dokler videa ne predvajate.
+      </p>
+
+      <h2>Newsletter</h2>
+      <p>
+        Če se prijavite na pregled novic po e-pošti, shranimo vaš e-poštni naslov in datum
+        prijave. Naslov uporabljamo izključno za pošiljanje pregleda, ga ne prodajamo in ne delimo
+        z drugimi. Pravna podlaga je vaša privolitev, ki jo lahko kadarkoli prekličete s klikom na
+        povezavo za odjavo v vsakem sporočilu.
+      </p>
+      <p>
+        Pošiljanje izvaja storitev Buttondown, ki podatke hrani v ZDA pri Amazon Web Services.
+        Z Buttondownom imamo pogodbo o obdelavi osebnih podatkov, prenos v ZDA pa temelji na
+        standardnih pogodbenih klavzulah Evropske komisije. Prijavo potrdite s klikom na povezavo
+        v prvem sporočilu.
+      </p>
+
+      <h2>Vaše pravice</h2>
+      <p>
+        Imate pravico do dostopa do svojih podatkov, popravka, izbrisa, omejitve obdelave in
+        ugovora. Če menite, da z vašimi podatki ne ravnamo pravilno, se lahko pritožite pri
+        <a href="https://www.ip-rs.si/">Informacijskem pooblaščencu</a>.
+      </p>
+
+      <p><em>Zadnja sprememba: 29. september 2026.</em></p>
+    </div>
+  </article>
+</Base>

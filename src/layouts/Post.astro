@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 import Video from '../components/Video.astro';
 import Base from './Base.astro';
+import Newsletter from '../components/Newsletter.astro';
 import { getPosts, postPath } from '../lib';
 import { SITE, TYPE_LABEL, formatDate } from '../site';
 
@@ -120,6 +121,7 @@ const image = existsSync(`public/og/${post.id}.png`) ? `/og/${post.id}.png` : '/
       je pred objavo pregledal in uredil {SITE.author}. Ste opazili napako?
       <a href="https://github.com/ej-aj-pro/ej-aj/issues">Sporočite jo na GitHubu</a>.
     </p>
+    <Newsletter />
   </article>
 </Base>
 

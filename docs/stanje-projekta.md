@@ -93,10 +93,13 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 
 ## Odprto
 
-1. **PR #7 newsletter** (draft, 27. 9. usklajen z `main`): obrazec je v `src/layouts/Post.astro` in
-   na naslovnici, skrit, dokler je `newsletterAction` v `src/site.ts` `null`. Čaka, da Anže odpre
-   račun na Buttondown in pošlje URL obrazca. V `src/pages/zasebnost.astro` ostajata dve oznaki
-   `[DOPOLNI]` (kje Buttondown hrani podatke, datum objave); CI zato namenoma pade.
+1. **Newsletter** (PR #7 objavljen 29. 9.): Buttondown, uporabnik `ej-aj`, račun noc.anze@gmail.com,
+   brezplačni paket. Ime ej-aj.si, barva #1f3bd6, odgovori na pozdrav@ej-aj.si, slovenska noga.
+   Slovenščine Buttondown ne podpira, potrditveni mail je v angleščini (lastno besedilo zahteva
+   paket Standard). API ključ je v `~/.zshrc` kot `BUTTONDOWN_API_KEY`. Prvi mail je osnutek v
+   Buttondownu (`~/Desktop/ej-aj-newsletter/2026-09-29.md`), pošlje ga Anže. Brez stalnega urnika,
+   zato besedilo ne obljublja "vsak petek". Odprto: pošiljanje z `newsletter@ej-aj.si` (sending
+   domain v Buttondownu, DNS v Cloudflare, Email Routing za ta naslov; Anže je odobril).
 2. **Rutini** sta od 26. 9. 2026 ustvarjeni v tej instanci (glej spodaj). Anže naj stari v instanci
    DIA izklopi in novi prvič požene z "Run now", da se shranijo odobritve orodij. Prvi zagoni:
    posodobitev modelov 1. oktobra, tedenski pregled #2 2. oktobra.
@@ -135,8 +138,6 @@ Trends; brez podatkov o obsegu iskanj):
 5. **Search Console**: čez nekaj tednov pogledati, kateri iskalni nizi prinašajo obiske (Anže
    mora dovoliti delo v svojem Chrome profilu).
 6. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v `~/Desktop/ej-aj-inbox/` kaj.
-7. **Newsletter** (PR #7), ko Anže odpre Buttondown; na strani o zasebnosti omeniti tudi
-   sličice videov z i.ytimg.com.
 8. Iskanje (Pagefind): z 22 članki se približujemo meji približno 30.
 
 ## Rutine (za ponovno ustvarjanje)

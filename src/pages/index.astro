@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PostCard from '../components/PostCard.astro';
+import Newsletter from '../components/Newsletter.astro';
 import Video from '../components/Video.astro';
 import { getCollection } from 'astro:content';
 import { getPosts, postPath } from '../lib';
@@ -42,6 +43,10 @@ const pct = (v: number) => `${new Intl.NumberFormat('sl-SI', { minimumFractionDi
       {posts.map((post) => <PostCard post={post} />)}
     </div>
   </section>
+
+  <div class="wrap">
+    <Newsletter />
+  </div>
 
   <section class="wrap section">
     <div class="section-head">

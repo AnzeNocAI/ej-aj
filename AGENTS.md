@@ -27,6 +27,8 @@ Read it at the start of every session.
 - `.claude/skills/nov-vodnik/`: turns a note from `~/Desktop/ej-aj-inbox/` (outside the repo,
   synced via iCloud) into a draft guide PR, with a confidentiality pass and `[DOPOLNI: ...]`
   placeholders that the validator blocks. Manual for now.
+- `.claude/skills/newsletter/`: turns the latest published digest into a newsletter email
+  (file in `~/Desktop/ej-aj-newsletter/`, optional Buttondown draft via API). Never sends.
 - Routines and skills do their work in git worktrees under `~/.cache/ej-aj-worktrees/`, never
   in the main checkout and never inside iCloud-synced folders.
 

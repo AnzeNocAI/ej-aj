@@ -1,0 +1,89 @@
+---
+import { SITE } from '../site';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+{
+  SITE.newsletterAction && (
+    <section class:list={['newsletter', { compact }]} aria-labelledby="newsletter-title">
+      <div>
+        <h2 id="newsletter-title">AI novice na e-mail</h2>
+        <p>
+          Pregled AI novic in kratka razlaga, kaj pomenijo za podjetja pri nas.
+          Brez oglasov, odjava z enim klikom.
+        </p>
+      </div>
+      <form action={SITE.newsletterAction} method="post" target="_blank" class="nl-form">
+        <label class="sr-only" for="nl-email">
+          E-poštni naslov
+        </label>
+        <input id="nl-email" type="email" name="email" required placeholder="tvoj@email.si" autocomplete="email" />
+        <input type="hidden" name="embed" value="1" />
+        <button type="submit">Prijava</button>
+      </form>
+      <p class="nl-note">
+        Naslov uporabimo samo za pošiljanje pregleda. Več v <a href="/zasebnost/">izjavi o zasebnosti</a>.
+      </p>
+    </section>
+  )
+}
+
+<style>
+  .newsletter {
+    margin: 48px 0 0;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+  }
+  .newsletter h2 {
+    margin: 0 0 6px;
+    font-size: 1.2rem;
+  }
+  .newsletter p {
+    margin: 0;
+    color: var(--muted);
+  }
+  .nl-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .nl-form input[type='email'] {
+    flex: 1 1 220px;
+    padding: 10px 12px;
+    font: inherit;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--ink);
+  }
+  .nl-form button {
+    padding: 10px 18px;
+    font: inherit;
+    font-weight: 600;
+    border: 0;
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--bg);
+    cursor: pointer;
+  }
+  .nl-note {
+    margin-top: 10px !important;
+    font-size: 0.85rem;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+</style>
