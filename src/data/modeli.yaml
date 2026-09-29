@@ -52,21 +52,23 @@
     - https://www.anthropic.com/claude-opus-5-5
   preverjeno: 2026-09-26
 
-- id: claude-sonnet-5
+- id: claude-sonnet-5-5
   ponudnik: Anthropic
-  ime: Claude Sonnet 5
-  api_id: claude-sonnet-5
-  izid: '2026-06-30'
+  ime: Claude Sonnet 5.5
+  api_id: claude-sonnet-5-5
+  izid: '2026-09-28'
   cena_vhod: 2
   cena_izhod: 10
   kontekst: 1000000
   odprte_utezi: false
   dostop: Claude aplikacije, Claude API, AWS, Google Cloud, Microsoft Foundry
-  za_kaj: Vsakdanje pisarniško delo in avtomatizacije, kjer štejeta hitrost in cena.
+  za_kaj: Vsakdanje pisarniško delo, dokumenti, predstavitve in preglednice, kjer štejeta hitrost in cena.
+  opomba: Nasledil je Sonnet 5; na nalogo do 30 % cenejši pri isti ceni na token.
   viri:
     - https://platform.claude.com/docs/en/about-claude/models/overview
-    - https://platform.claude.com/docs/en/models/sonnet-5/overview
-  preverjeno: 2026-09-26
+    - https://www.anthropic.com/claude-sonnet-5-5
+    - https://www.anthropic.com/claude/sonnet
+  preverjeno: 2026-09-29
 
 - id: claude-haiku-4-5
   ponudnik: Anthropic
