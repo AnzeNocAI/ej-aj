@@ -1,5 +1,5 @@
 ---
-title: 'Kontekst podjetja na GitHubu: da ali ne'
+title: 'Ali hraniti kontekst podjetja za AI na GitHubu: prednosti, tveganja in kdaj raje ne'
 description: 'Ali naj podjetje dokumente za AI (CLAUDE.md, pravila, predloge) hrani v repozitoriju na GitHubu? Prednosti, tveganja, zasebni repozitoriji, gesla in kdaj je bolje ne.'
 date: 2026-09-27
 type: vodnik
@@ -7,13 +7,13 @@ serija: prirocnik
 korak: 5
 ---
 
-Ko podjetje začne resno uporabljati AI, se nabere veliko navodil: dokument o podjetju, pravila pisanja, predloge, skilli. Vprašanje je, kje jih hraniti, da so vsem dostopni, urejeni in varni. Ena od možnosti je repozitorij na GitHubu. Ta vodnik našteje dejstva, na koncu pa povemo, kaj priporočamo.
+Ko podjetje začne resno uporabljati AI, se nabere veliko navodil: dokument o podjetju, pravila pisanja, predloge, skilli. Vprašanje je, kje jih hraniti, da so vsem dostopni, urejeni in varni. Ena od možnosti je repozitorij na GitHubu, torej mapa z datotekami na spletni storitvi GitHub, ki beleži vsako shranjeno spremembo. Ta vodnik našteje dejstva, na koncu pa povemo, kaj priporočamo.
 
 ## Kako Claude bere kontekst iz datotek
 
-Claude Code na začetku vsake seje prebere datoteko `CLAUDE.md`. Ta je lahko v domači mapi uporabnika (velja za vse njegove projekte), v korenu projekta (velja za projekt) ali v podmapah; datoteke v podmapah prebere, ko začne delati v tisti mapi. Datoteke se ne izključujejo, ampak seštevajo. Anthropic svetuje, naj bo posamezna datoteka krajša od 200 vrstic. Z ukazom `/init` Claude pripravi prvi osnutek, datoteko pa je smiselno shraniti v Git, da jo ima vsa ekipa. Claude Code bere tudi datoteko `AGENTS.md`, ki jo uporabljajo nekatera druga orodja, privzeto le, kadar `CLAUDE.md` ni.
+Claude Code na začetku vsake seje prebere datoteko `CLAUDE.md`. Ta je lahko v domači mapi uporabnika (velja za vse njegove projekte), v glavni mapi projekta (velja za projekt) ali v podmapah; datoteke v podmapah prebere, ko začne delati v tisti mapi. Datoteke se ne izključujejo, ampak seštevajo. Anthropic svetuje, naj bo posamezna datoteka krajša od 200 vrstic. Z ukazom `/init` Claude pripravi prvi osnutek, datoteko pa je smiselno shraniti v Git (sistem, ki beleži različice datotek), da jo ima vsa ekipa. Claude Code bere tudi datoteko `AGENTS.md`, ki jo uporabljajo nekatera druga orodja, privzeto le, kadar `CLAUDE.md` ni.
 
-Tudi Claude v brskalniku lahko bere z GitHuba. V pogovor ali projekt dodate izbrane datoteke in mape z repozitorija. Claude sinhronizira samo imena in vsebino datotek na izbrani veji, brez zgodovine sprememb. Najnovejše spremembe prenesete z gumbom "Sync now". Za zasebne repozitorije je treba namestiti aplikacijo Claude za GitHub. Integracija datoteke z GitHuba samo prebere v pogovor ali projekt.
+Tudi Claude v brskalniku lahko bere z GitHuba. V pogovor ali projekt dodate izbrane datoteke in mape z repozitorija. Claude sinhronizira samo imena in vsebino datotek na izbrani veji (različici repozitorija), brez zgodovine sprememb. Najnovejše spremembe prenesete z gumbom "Sync now". Za zasebne repozitorije je treba namestiti aplikacijo Claude za GitHub. Integracija datoteke z GitHuba samo prebere v pogovor ali projekt.
 
 Viri: [Claude Code, spomin in CLAUDE.md](https://code.claude.com/docs/en/memory), [Claude, CLAUDE.md in boljši prompti](https://support.claude.com/en/articles/14553240-give-claude-context-claude-md-and-better-prompts), [Claude, povezava z GitHubom](https://support.claude.com/en/articles/10167454-use-the-github-integration)
 
@@ -29,7 +29,7 @@ Eno mesto za vse. Isti `CLAUDE.md`, skilli in predloge veljajo za vse, ki delajo
 
 Javno ali zasebno. Javni repozitorij vidi vsak na internetu. Zasebnega vidite vi, ljudje, s katerimi ga delite, in nekateri člani organizacije; lastniki organizacije vidijo vse repozitorije. Kontekst podjetja sodi izključno v zasebni repozitorij.
 
-Gesla in ključi. Pogosta napaka je, da v repozitorij pride geslo ali dostopni ključ. GitHub ima pregledovanje skrivnosti, ki preišče celotno zgodovino na vseh vejah. Za javne repozitorije je brezplačno, za zasebne repozitorije organizacije je potreben plačljivi dodatek Secret Protection (paketa Team ali Enterprise Cloud), za zasebne repozitorije osebnih računov pa običajno ni na voljo. Zaščita pred potiskom za uporabnike je privzeto vklopljena in prepreči, da bi skrivnost potisnili v javni repozitorij. Pri zasebnih repozitorijih jo je treba vklopiti na ravni repozitorija, kar zahteva plačljivi dodatek.
+Gesla in ključi. Pogosta napaka je, da v repozitorij pride geslo ali dostopni ključ. GitHub ima pregledovanje skrivnosti (secret scanning), ki gesla in ključe išče v celotni zgodovini na vseh vejah. Za javne repozitorije je brezplačno, za zasebne repozitorije organizacije je potreben plačljivi dodatek Secret Protection (paketa Team ali Enterprise Cloud), za zasebne repozitorije osebnih računov pa običajno ni na voljo. Zaščita pred potiskom (push protection) je za uporabnike privzeto vklopljena in prepreči, da bi skrivnost naložili v javni repozitorij. Pri zasebnih repozitorijih jo je treba vklopiti na ravni repozitorija, kar zahteva plačljivi dodatek.
 
 Brisanje ni izbris. Če datoteko z geslom izbrišete, ostane v zgodovini. GitHub svetuje, da skrivnost najprej prekličete ali zamenjate; to je pogosto dovolj. Odstranjevanje iz zgodovine je zahtevno, kopije, ki so jih ljudje že prenesli, pa jo lahko še vedno vsebujejo.
 

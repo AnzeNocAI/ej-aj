@@ -1,5 +1,5 @@
 ---
-title: 'Claude skills: kako zgraditi skill, ki deluje vsakič'
+title: 'Claude skills: kaj je skill in kako ga napisati po Anthropicovih priporočilih'
 description: 'Kaj je skill v Claudu, kje deluje in kako ga napisati po Anthropicovih dobrih praksah: jedrnat, nedvoumen, s skriptami za občutljive korake in preizkušen na primerih.'
 date: 2026-09-27
 type: vodnik
@@ -8,7 +8,7 @@ korak: 6
 videi: [mWvtOHlZM-I]
 ---
 
-Skill je zapisan postopek, ki ga Claude uporabi, ko naleti na nalogo, za katero je namenjen. Namesto da vsakič razlagate, kako pripravite ponudbo ali mesečno poročilo, to enkrat zapišete v skill. Ta vodnik razloži, kako skill deluje in kako ga napisati, da daje enak rezultat vsakič.
+Skill je zapisan postopek, ki ga Claude uporabi, ko naleti na nalogo, za katero je namenjen. Namesto da vsakič razlagate, kako pripravite ponudbo ali mesečno poročilo, to enkrat zapišete v skill. Ta vodnik razloži, kako skill deluje in kako ga napisati, da daje zanesljive rezultate.
 
 ## Kako skill deluje
 
@@ -16,7 +16,7 @@ Skill je mapa z datoteko `SKILL.md`. Na vrhu datoteke sta ime in opis, pod njima
 
 Claude skillov ne bere v celoti vnaprej. Anthropic temu pravi postopno razkrivanje in ima tri ravni:
 
-1. Ime in opis vseh skillov (približno 100 tokenov na skill) sta v kontekstu vedno.
+1. Ime in opis vseh skillov (približno 100 tokenov na skill; token je košček besedila, pogosto del besede) sta vedno v kontekstu, torej v besedilu, ki ga ima Claude med delom pred sabo.
 2. Ko opis ustreza nalogi, Claude prebere navodila iz `SKILL.md`.
 3. Dodatne datoteke in skripte odpre ali požene šele, ko jih potrebuje. Pri skriptah v kontekst pride samo rezultat, ne koda.
 
@@ -32,13 +32,13 @@ Anthropic za ime predpisuje največ 64 znakov, male črke, številke in vezaje, 
 
 Opis je dolg največ 1.024 znakov in napisan v tretji osebi. Pove, kaj skill naredi in kdaj ga uporabiti, z besedami, ki jih bo uporabnik res napisal. Slab opis je "Pomaga pri ponudbah". Dober opis je "Pripravi ponudbo za storitve čiščenja iz cenika in predloge podjetja. Uporabi, ko uporabnik prosi za ponudbo, predračun ali oceno cene za čiščenje."
 
-## Pravila za skill, ki deluje vsakič
+## Pravila za zanesljiv skill
 
 Jedrnatost. Anthropic pravi, da je kontekst skupno dobro. Predpostavite, da je Claude že pameten, in zapišite samo tisto, česar ne ve: vaša pravila, vaše predloge, vaše izjeme. Navodila v `SKILL.md` naj bodo krajša od 500 vrstic; podrobnosti prestavite v ločene datoteke, na katere se `SKILL.md` sklicuje neposredno, brez verige sklicev.
 
 Prava mera svobode. Kjer je več pravilnih poti, na primer pri pisanju besedila, dajte splošna navodila. Kjer je en korak občutljiv in mora biti vsakič enak, na primer izračun cene ali ime datoteke, dajte natančen postopek ali skripto. Anthropic to primerja z ozkim mostom s prepadi na obeh straneh, kjer potrebujete ograjo, in odprtim poljem, kjer je vsaka pot v redu.
 
-Skripte za determinističen del. Izračun, preverjanje oblike ali pretvorbo datoteke naj naredi skripta, ne model. Skripta naj napake obravnava sama, namesto da jih prepusti Claudu, in naj nima nepojasnjenih številk.
+Skripte za del, ki mora biti vsakič enak. Izračun, preverjanje oblike ali pretvorbo datoteke naj naredi skripta, ne model. Skripta naj napake obravnava sama, namesto da jih prepusti Claudu, in naj nima nepojasnjenih številk.
 
 Nedvoumnost. Za isto stvar uporabljajte vedno isto besedo. Ne ponujajte več možnosti, kjer zadošča ena. Dodajte konkreten primer vhoda in izhoda.
 
@@ -52,7 +52,7 @@ Vir: [Anthropic, dobre prakse za pisanje skillov](https://platform.claude.com/do
 
 Anthropic svetuje, da preizkuse pripravite, preden napišete večino skilla. Zapišite vsaj tri scenarije z zahtevo in pričakovanim rezultatom, najprej pa preverite, kako Claude nalogo opravi brez skilla. Tako vidite, kaj skill res doda.
 
-Priporočen način dela je z dvema instancama: v eni s Claudom pišete in popravljate skill, v drugi, novi seji ga preizkušate na resnični nalogi. Kar gre narobe, popravite v prvi. Skill preizkusite z vsemi modeli, s katerimi ga boste uporabljali, ker manjši modeli potrebujejo natančnejša navodila.
+Priporočen način dela je z dvema ločenima sejama Clauda: v eni s Claudom pišete in popravljate skill, v drugi, novi seji ga preizkušate na resnični nalogi. Kar gre narobe, popravite v prvi. Skill preizkusite z vsemi modeli, s katerimi ga boste uporabljali, ker manjši modeli potrebujejo natančnejša navodila.
 
 ## Primer
 

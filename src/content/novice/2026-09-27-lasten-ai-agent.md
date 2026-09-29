@@ -1,5 +1,5 @@
 ---
-title: 'Kako ustvarite svojega AI agenta: od projekta do Agent SDK'
+title: 'Kako naredite svojega AI agenta s Claudom: pet načinov od najpreprostejšega do programiranja'
 description: 'Pet načinov, kako s Claudom narediti lastnega AI agenta: projekt, skill z rutino, subagent, Agent SDK in Managed Agents. Kdaj izbrati katerega in kaj potrebujete.'
 date: 2026-09-27
 type: vodnik
@@ -12,7 +12,7 @@ Beseda agent se uporablja za marsikaj. Tu z njo mislimo AI, ki samostojno opravi
 
 ## 1. Projekt z navodili
 
-Najpreprostejši agent je projekt v aplikaciji Claude z dobrimi navodili in dokumenti. Ne dela sam, a vsakič, ko ga odprete, ve, kdo ste, kaj je naloga in kje so podatki. Z vklopljenimi konektorji lahko bere tudi iz drugih orodij. Na voljo je v vseh paketih, v brezplačnem do pet projektov. Kako ga napolniti, je opisano v delu [Kako AI-ju dati kontekst podjetja](/vodniki/kontekst-podjetja-za-ai/).
+Najpreprostejši agent je projekt v aplikaciji Claude z dobrimi navodili in dokumenti. Ne dela sam, a vsakič, ko ga odprete, ve, kdo ste, kaj je naloga in kje so podatki. Z vklopljenimi konektorji (povezavami z drugimi aplikacijami) lahko bere tudi iz drugih orodij. Na voljo je v vseh paketih, v brezplačnem do pet projektov. Kako ga napolniti, je opisano v delu [Kako AI-ju dati kontekst podjetja](/vodniki/kontekst-podjetja-za-ai/).
 
 Vir: [Claude, kaj so projekti](https://support.claude.com/en/articles/9517075-what-are-projects)
 
@@ -32,7 +32,7 @@ Primerno za: naloge, ki jih je smiselno ločiti od glavnega dela, ker potrebujej
 
 ## 4. Claude Agent SDK
 
-Agent SDK je knjižnica za Python in TypeScript, ki ponuja ista orodja, zanko in upravljanje konteksta, kot jih uporablja Claude Code, za vgradnjo v lastne programe. Z njo razvijalec naredi agenta, ki teče v vašem sistemu, na primer v spletni aplikaciji ali na strežniku. Potrebuje ključ za API.
+Agent SDK je knjižnica za programska jezika Python in TypeScript, torej zbirka pripravljene kode. Razvijalcem ponuja ista orodja, isto zanko delovanja agenta in upravljanje konteksta kot Claude Code, da jih vgradijo v lastne programe. Z njo razvijalec naredi agenta, ki teče v vašem sistemu, na primer v spletni aplikaciji ali na strežniku. Za delo potrebuje ključ za API, geslo, s katerim program dostopa do Claudove povezave za razvijalce.
 
 Primerno za: agente, ki morajo biti del vašega izdelka ali notranjega sistema.
 
@@ -40,7 +40,7 @@ Vir: [Claude Agent SDK, pregled](https://code.claude.com/docs/en/agent-sdk/overv
 
 ## 5. Managed Agents
 
-Managed Agents so Anthropicova storitev, ki agenta izvaja privzeto v Anthropicovem oblaku, za dolge in asinhrone naloge. Storitev je v fazi beta in je namenjena razvijalcem.
+Managed Agents so Anthropicova storitev, ki agenta izvaja privzeto v Anthropicovem oblaku, za dolge naloge, ki tečejo v ozadju, ne da bi čakali nanje. Storitev je v preizkusni fazi (beta) in je namenjena razvijalcem.
 
 Vir: [Anthropic, Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 
@@ -48,7 +48,7 @@ Vir: [Anthropic, Managed Agents](https://platform.claude.com/docs/en/managed-age
 
 Agent je uporaben toliko, kolikor ima dostop do orodij in podatkov. MCP (Model Context Protocol) je odprt standard za povezovanje AI z orodji, kot so Google Drive, Jira ali Slack. V aplikaciji Claude jih dodate kot konektorje v meniju Customize > Connectors, v brezplačnem paketu lahko dodate en konektor po meri. V Claude Code jih dodate z ukazom `claude mcp add`.
 
-Anthropic opozarja, naj uporabljate samo strežnike MCP, ki jim zaupate, ker lahko vsebina, ki jo agent prebere, vsebuje skrita navodila. Temu pravimo [vrivanje navodil](/slovar/vrivanje-navodil/).
+Anthropic opozarja, naj uporabljate samo strežnike MCP (programe, ki AI povežejo z določenim orodjem), ki jim zaupate, ker lahko vsebina, ki jo agent prebere, vsebuje skrita navodila. Temu pravimo [vrivanje navodil](/slovar/vrivanje-navodil/).
 
 Viri: [Claude Code, MCP](https://code.claude.com/docs/en/mcp), [Claude, konektorji](https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities)
 

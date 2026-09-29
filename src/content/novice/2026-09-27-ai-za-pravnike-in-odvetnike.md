@@ -31,7 +31,7 @@ Za iskanje slovenskih virov sta primernejša pomočnika, ki odgovarjata iz preve
 
 TFL AI portala Tax-Fin-Lex po navedbah ponudnika odgovarja iz več kot 1,4 milijona dokumentov (predpisi, sodne odločbe, strokovni članki) in pri odgovorih navaja vire. Stane 80 € na mesec za 150 vprašanj ali 120 € za različico PLUS s 450 vprašanji (cene s strani ponudnika, DDV ni naveden). Na voljo je 7-dnevni brezplačni preizkus s 30 vprašanji. Ponudnik navaja, da podatkov uporabnikov ne uporablja za učenje modelov in da jih hrani v EU.
 
-LEXI portala IUS-INFO odgovarja samo iz zbirke IUS-INFO, ki vključuje slovensko in evropsko zakonodajo in sodno prakso, strokovne knjige in pojasnila FURS, in ne brska po spletu. Vsak odgovor ima navedene vire, v strokovnem načinu pa jih pred prikazom preveri še ločen agent. Vključen je v pakete IUS-INFO od A do D. Ponudnik navaja, da vprašanj in naloženih dokumentov ne uporablja za učenje modela in da pogovor v načinu EU ostane v EU.
+LEXI portala IUS-INFO odgovarja samo iz zbirke IUS-INFO, ki vključuje slovensko in evropsko zakonodajo in sodno prakso, strokovne knjige in pojasnila FURS, in ne brska po spletu. Vsak odgovor ima navedene vire, v strokovnem načinu pa jih pred prikazom preveri še ločen AI program (agent). Vključen je v pakete IUS-INFO od A do D. Ponudnik navaja, da vprašanj in naloženih dokumentov ne uporablja za učenje modela in da pogovor v načinu EU ostane v EU.
 
 Tudi pri teh orodjih odgovor ni pravno mnenje. Vir, na katerega se sklicujete, odprite in preberite.
 
@@ -45,7 +45,7 @@ CCBE opozarja, da je odvetnik odgovoren za podatke, ki jih vnese v orodje AI, in
 
 1. Osebnih, zaupnih ali drugih podatkov stranke ne vnašajte v orodje AI, razen če so zagotovljene ustrezne zaščite. Kot primere navaja pogodbeno zavezo ponudnika, da podatke obravnava kot zaupne ali jih ne hrani, pogodbo o obdelavi podatkov, po kateri se podatki uporabljajo samo za namene pisarne, in orodje, ki teče lokalno ali v zavarovanem okolju pod nadzorom pisarne.
 2. Preberite pogoje ponudnika, da razumete, kaj se z vnesenimi podatki zgodi, in orodje nastavite tako, da deljenje podatkov izklopite, kjer je to mogoče.
-3. Upoštevajte standarde kibernetske varnosti in predpise o varstvu podatkov, kjer je primerno tudi z obdelavo podatkov v EU ali EGP.
+3. Upoštevajte standarde kibernetske varnosti in predpise o varstvu podatkov, kjer je primerno tudi z obdelavo podatkov v EU ali Evropskem gospodarskem prostoru (EGP).
 
 CCBE posebej opozarja, da je AI danes vgrajena tudi v prevajalnike, bralnike PDF in urejevalnike besedil, pogosto brez jasne oznake, in da velja enaka previdnost tudi zanje.
 
