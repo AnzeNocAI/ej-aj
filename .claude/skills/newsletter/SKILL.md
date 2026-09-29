@@ -15,7 +15,7 @@ Buttondown himself.
 ## 1. Find the issue
 
 Use the newest `type: tedenski-pregled` file on `origin/main`
-(`git fetch origin` with `GH_TOKEN="$(gh auth token --user AnzeNocAI)"`, then
+(`git fetch origin` with `GH_TOKEN="$(gh auth token --user ej-aj-pro)"`, then
 `git show origin/main:src/content/novice/<file>`). Only published issues go out: if the newest
 digest is still in an open PR, stop and say so.
 

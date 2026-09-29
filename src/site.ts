@@ -4,7 +4,8 @@ export const SITE = {
   tagline: 'Umetna inteligenca po slovensko',
   description:
     'Tedenski pregled AI novic, primerjava modelov in praktični vodniki za slovenska podjetja.',
-  author: 'Anže',
+  // Reader-facing name of the person who reviews content. No personal name on the site.
+  author: 'urednik',
   // Cloudflare Web Analytics site tag (public, cookieless; not a secret).
   analyticsToken: 'ac8e62820c2148d4907a4bf8752809e2',
   // Buttondown subscribe form action URL (from Buttondown: Settings, Embedding).

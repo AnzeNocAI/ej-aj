@@ -1,0 +1,132 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Video from '../components/Video.astro';
+import { getPosts, postPath } from '../lib';
+
+const steps = (await getPosts())
+  .filter((p) => p.data.serija === 'prirocnik')
+  .sort((a, b) => (a.data.korak ?? 99) - (b.data.korak ?? 99));
+const featured = (await getCollection('videi'))
+  .filter((v) => v.data.izpostavljen)
+  .sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf())
+  .slice(0, 2);
+---
+
+<Base
+  title="Priročnik: kako dobro uporabljati Claude"
+  description="Vodniki za boljše delo s Claudom: prompti, kontekst podjetja, Claude Code, skilli, subagenti, hooki, rutine in lastni agenti. Brezplačno, v slovenščini."
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Priročnik: kako dobro uporabljati Claude',
+      itemListElement: steps.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: new URL(postPath(p), Astro.site).toString(),
+        name: p.data.title,
+      })),
+    },
+  ]}
+>
+  <div class="wrap narrow">
+    <header class="article-head">
+      <span class="eyebrow">Priročnik</span>
+      <h1>Kako dobro uporabljati Claude</h1>
+      <p class="lede">
+        Vodniki, ki gredo od prvega dobrega prompta do lastnega agenta, ki dela sam. Veljajo
+        predvsem za Claude, večina nasvetov pa tudi za ChatGPT in druga orodja. Berete jih lahko po
+        vrsti ali posamezno.
+      </p>
+    </header>
+
+    <ol class="steps">
+      {
+        steps.map((p) => (
+          <li>
+            <a href={postPath(p)}>
+              <span class="step-title">{p.data.title}</span>
+              <span class="step-desc">{p.data.description}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+
+    {
+      featured.length > 0 && (
+        <section class="videos">
+          <h2>Za ogled</h2>
+          <div class="video-grid">
+            {featured.map((v) => (
+              <Video video={v} compact />
+            ))}
+          </div>
+          <p>
+            <a href="/videi/">Vsi priporočeni videi</a>
+          </p>
+        </section>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    padding: 0;
+    margin: 8px 0 40px;
+    display: grid;
+    gap: 12px;
+  }
+  .steps li {
+    counter-increment: step;
+  }
+  .steps a {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .steps a::before {
+    content: counter(step);
+    grid-row: 1 / span 2;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .steps a:hover {
+    border-color: var(--accent);
+  }
+  .step-title {
+    font-weight: 650;
+    line-height: 1.35;
+  }
+  .step-desc {
+    color: var(--muted);
+    font-size: 0.93rem;
+    margin-top: 4px;
+  }
+  .videos h2 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+  }
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+</style>

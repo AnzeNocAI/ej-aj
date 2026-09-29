@@ -2,10 +2,19 @@
 import Base from '../layouts/Base.astro';
 import PostCard from '../components/PostCard.astro';
 import Newsletter from '../components/Newsletter.astro';
-import { getPosts } from '../lib';
+import Video from '../components/Video.astro';
+import { getCollection } from 'astro:content';
+import { getPosts, postPath } from '../lib';
 import stat from '../data/statistika.json';
 
-const posts = (await getPosts()).slice(0, 6);
+const all = await getPosts();
+// Handbook steps have their own section, so they don't push the digests out of "Zadnje".
+const posts = all.filter((p) => !p.data.serija).slice(0, 6);
+const handbook = all.filter((p) => p.data.serija === 'prirocnik').sort((a, b) => (a.data.korak ?? 99) - (b.data.korak ?? 99));
+const videos = (await getCollection('videi'))
+  .filter((v) => v.data.izpostavljen)
+  .sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf())
+  .slice(0, 3);
 
 // Headline number for the statistics teaser, from the same data as /statistika/.
 const trend = stat.podjetja_trend;
@@ -21,8 +30,7 @@ const pct = (v: number) => `${new Intl.NumberFormat('sl-SI', { minimumFractionDi
     <span class="eyebrow">ej-aj.si</span>
     <h1>Umetna inteligenca <em>po slovensko</em>.</h1>
     <p>
-      Vsak petek pregled AI novic tedna in kratka razlaga, kaj pomenijo za podjetja pri nas. Ob
-      tem še cene orodij in modelov, statistika, slovar in vodniki.
+      AI novice, orodja in nasveti za slovenska podjetja.
     </p>
   </section>
 
@@ -39,6 +47,42 @@ const pct = (v: number) => `${new Intl.NumberFormat('sl-SI', { minimumFractionDi
   <div class="wrap">
     <Newsletter />
   </div>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>Priročnik: kako dobro uporabljati Claude</h2>
+      <a href="/prirocnik/">Celoten priročnik</a>
+    </div>
+    <p class="section-lede">
+      Od prvega dobrega prompta do agenta, ki dela sam: kontekst podjetja, Claude Code, skilli,
+      subagenti, hooki in rutine.
+    </p>
+    <ol class="handbook">
+      {
+        handbook.map((p) => (
+          <li>
+            <a href={postPath(p)}>{p.data.title.split(':')[0]}</a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  {
+    videos.length > 0 && (
+      <section class="wrap section">
+        <div class="section-head">
+          <h2>Za ogled</h2>
+          <a href="/videi/">Vsi videi</a>
+        </div>
+        <div class="video-row">
+          {videos.map((v) => (
+            <Video video={v} compact />
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   <section class="wrap section">
     <div class="section-head">
@@ -85,3 +129,21 @@ const pct = (v: number) => `${new Intl.NumberFormat('sl-SI', { minimumFractionDi
     </p>
   </section>
 </Base>
+
+<style>
+  .handbook {
+    columns: 2 280px;
+    column-gap: 32px;
+    margin: 12px 0 0;
+    padding-left: 1.4em;
+  }
+  .handbook li {
+    margin: 0 0 6px;
+    break-inside: avoid;
+  }
+  .video-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+</style>

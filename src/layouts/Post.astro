@@ -1,9 +1,11 @@
 ---
+import { existsSync } from 'node:fs';
 import type { CollectionEntry } from 'astro:content';
-import { render } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import Video from '../components/Video.astro';
 import Base from './Base.astro';
 import Newsletter from '../components/Newsletter.astro';
-import { postPath } from '../lib';
+import { getPosts, postPath } from '../lib';
 import { SITE, TYPE_LABEL, formatDate } from '../site';
 
 interface Props {
@@ -14,6 +16,20 @@ const { post } = Astro.props;
 const { Content, headings } = await render(post);
 // Table of contents for longer guides.
 const toc = post.data.type === 'vodnik' ? headings.filter((h) => h.depth === 2) : [];
+// Per-article share image from scripts/og-slike.mjs; the site image when it hasn't been made yet.
+// Series (e.g. the Claude handbook): previous and next step for the navigation under the article.
+const series = post.data.serija
+  ? (await getPosts())
+      .filter((p) => p.data.serija === post.data.serija)
+      .sort((a, b) => (a.data.korak ?? 99) - (b.data.korak ?? 99))
+  : [];
+const at = series.findIndex((p) => p.id === post.id);
+const prev = at > 0 ? series[at - 1] : undefined;
+const next = at >= 0 && at < series.length - 1 ? series[at + 1] : undefined;
+// Recommended videos listed in the front matter, in the given order.
+const allVideos = post.data.videi.length ? await getCollection('videi') : [];
+const videos = post.data.videi.map((id) => allVideos.find((v) => v.id === id)).filter((v) => v !== undefined);
+const image = existsSync(`public/og/${post.id}.png`) ? `/og/${post.id}.png` : '/og.png';
 ---
 
 
@@ -22,6 +38,7 @@ const toc = post.data.type === 'vodnik' ? headings.filter((h) => h.depth === 2) 
   description={post.data.description}
   type="article"
   published={post.data.date}
+  image={image}
   jsonLd={[
     {
       '@context': 'https://schema.org',
@@ -33,7 +50,7 @@ const toc = post.data.type === 'vodnik' ? headings.filter((h) => h.depth === 2) 
       author: { '@id': `${Astro.site}#avtor` },
       publisher: { '@id': `${Astro.site}#avtor` },
       mainEntityOfPage: new URL(postPath(post), Astro.site).toString(),
-      image: new URL('/og.png', Astro.site).toString(),
+      image: new URL(image, Astro.site).toString(),
     },
   ]}
 >
@@ -64,11 +81,97 @@ const toc = post.data.type === 'vodnik' ? headings.filter((h) => h.depth === 2) 
     <div class="prose">
       <Content />
     </div>
+    {
+      videos.length > 0 && (
+        <section class="post-videos">
+          <h2>{videos.length === 1 ? 'Priporočen video' : videos.length === 2 ? 'Priporočena videa' : 'Priporočeni videi'}</h2>
+          {videos.map((v) => (
+            <Video video={v} />
+          ))}
+        </section>
+      )
+    }
+    {
+      series.length > 0 && (
+        <nav class="series-nav" aria-label="Priročnik">
+          <a class="series-hub" href="/prirocnik/">
+            Priročnik: korak {at + 1} od {series.length}
+          </a>
+          <div class="series-links">
+            {prev ? (
+              <a href={postPath(prev)} rel="prev">
+                <span>Prejšnji</span>
+                {prev.data.title}
+              </a>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <a href={postPath(next)} rel="next" class="next">
+                <span>Naslednji</span>
+                {next.data.title}
+              </a>
+            )}
+          </div>
+        </nav>
+      )
+    }
     <p class="disclosure">
       Pri pripravi je pomagal AI (Claude). Vsako trditev smo preverili pri navedenem viru, besedilo
       je pred objavo pregledal in uredil {SITE.author}. Ste opazili napako?
-      <a href="https://github.com/AnzeNocAI/ej-aj/issues">Sporočite jo na GitHubu</a>.
+      <a href="https://github.com/ej-aj-pro/ej-aj/issues">Sporočite jo na GitHubu</a>.
     </p>
     <Newsletter />
   </article>
 </Base>
+
+<style>
+  .post-videos {
+    margin: 40px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .post-videos h2 {
+    font-size: 1.2rem;
+    margin: 0 0 -16px;
+  }
+  .series-nav {
+    margin: 40px 0 0;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .series-hub {
+    font-weight: 650;
+  }
+  .series-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .series-links a {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+  .series-links a span {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .series-links .next {
+    text-align: right;
+  }
+  @media (max-width: 520px) {
+    .series-links {
+      grid-template-columns: 1fr;
+    }
+    .series-links .next {
+      text-align: left;
+    }
+  }
+</style>

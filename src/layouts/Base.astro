@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { SITE } from '../site';
+import Ikona from '../components/Ikona.astro';
 
 interface Props {
   title?: string;
@@ -10,12 +11,14 @@ interface Props {
   published?: Date;
   /** Page-specific schema.org objects, added next to the site-wide ones. */
   jsonLd?: Record<string, unknown>[];
+  /** Share image path (1200x630), e.g. "/og/<id>.png". Defaults to the site image. */
+  image?: string;
 }
 
-const { title, description = SITE.description, type = 'website', published, jsonLd = [] } = Astro.props;
+const { title, description = SITE.description, type = 'website', published, jsonLd = [], image = '/og.png' } = Astro.props;
 const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name}: ${SITE.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/og.png', Astro.site);
+const ogImage = new URL(image, Astro.site);
 const siteLd = [
   {
     '@context': 'https://schema.org',
@@ -30,9 +33,9 @@ const siteLd = [
   },
   {
     '@context': 'https://schema.org',
-    '@type': 'Person',
+    '@type': 'Organization',
     '@id': `${Astro.site}#avtor`,
-    name: SITE.author,
+    name: SITE.domain,
     url: new URL('/o-projektu/', Astro.site).toString(),
   },
 ];
@@ -40,6 +43,7 @@ const path = Astro.url.pathname;
 const nav = [
   { href: '/novice/', label: 'Novice' },
   { href: '/vodniki/', label: 'Vodniki' },
+  { href: '/prirocnik/', label: 'Priročnik' },
   { href: '/modeli/', label: 'Modeli in cene' },
   { href: '/statistika/', label: 'Statistika' },
   { href: '/slovar/', label: 'Slovar' },
@@ -55,6 +59,7 @@ const nav = [
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:type" content={type} />
@@ -78,7 +83,7 @@ const nav = [
   <body>
     <header class="site-header">
       <div class="wrap">
-        <a class="logo" href="/">ej<span>-</span>aj</a>
+        <a class="logo" href="/"><Ikona /><span>ej<span class="logo-crta">-</span>aj</span></a>
         <nav class="nav" aria-label="Glavna navigacija">
           {
             nav.map((item) => (
@@ -99,7 +104,7 @@ const nav = [
       <div class="wrap">
         <p><strong>ej-aj.si</strong>: {SITE.tagline.toLowerCase()}.</p>
         <p>
-          Vsebino pripravlja AI (Claude Code), pred objavo jo pregleda in uredi {SITE.author}.
+          Vsebino pripravlja AI (Claude Code), pred objavo jo pregleda in uredi {SITE.author}.{' '}
           <a href="/o-projektu/">O projektu</a> · <a href="/zasebnost/">Zasebnost</a> · <a href="/rss.xml">RSS</a>
         </p>
       </div>

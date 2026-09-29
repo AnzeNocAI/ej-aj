@@ -10,13 +10,13 @@ Output: one new file `src/content/novice/YYYY-MM-DD-tedenski-pregled-N.md` on a 
 pull request. **Never merge, never push to `main`.** Merging
 is publishing, and only Anže does that.
 
-Repo: `/Users/anze/Desktop/ej-aj` (public, `AnzeNocAI/ej-aj`). Read `AGENTS.md` and
+Repo: `/Users/anze/Desktop/ej-aj` (public, `ej-aj-pro/ej-aj`). Read `AGENTS.md` and
 `docs/slog.md` there first: their writing, accuracy and confidentiality rules apply to
 everything below.
 
 GitHub auth: the active `gh` account is a different one and must not be switched. Prefix every
 network command (`git fetch`, `git push`, `gh ...`) with
-`GH_TOKEN="$(gh auth token --user AnzeNocAI)"`.
+`GH_TOKEN="$(gh auth token --user ej-aj-pro)"`.
 
 ## 1. Set up a clean worktree
 
@@ -24,7 +24,7 @@ Do not touch the main checkout (Anže may have uncommitted work there).
 
 ```bash
 cd /Users/anze/Desktop/ej-aj
-GH_TOKEN="$(gh auth token --user AnzeNocAI)" git fetch origin
+GH_TOKEN="$(gh auth token --user ej-aj-pro)" git fetch origin
 TODAY=$(date +%F)
 WT=/Users/anze/.cache/ej-aj-worktrees/pregled-$TODAY
 mkdir -p /Users/anze/.cache/ej-aj-worktrees
@@ -161,6 +161,7 @@ than 5, continue anyway and open the PR as a draft, explaining why in the PR bod
 ## 7. Deterministic checks
 
 ```bash
+node scripts/og-slike.mjs          # share image public/og/<id>.png (needs this Mac's fonts)
 node scripts/preveri.mjs --links src/content/novice/<file>.md
 npm run build
 ```
@@ -171,10 +172,10 @@ in the PR body. Other warnings: fix if they are real.
 ## 8. Commit, push, open the PR
 
 ```bash
-git add src/content/novice/<file>.md src/data/slovar.yaml src/markdown/slovar-povezave.mjs
+git add src/content/novice/<file>.md src/data/slovar.yaml src/markdown/slovar-povezave.mjs public/og scripts/og-slike.json
 git commit -m "Weekly digest #N (<period>)" -m "Co-Authored-By: Claude <noreply@anthropic.com>"
-GH_TOKEN="$(gh auth token --user AnzeNocAI)" git push -u origin "pregled/$TODAY"
-GH_TOKEN="$(gh auth token --user AnzeNocAI)" gh pr create --repo AnzeNocAI/ej-aj \
+GH_TOKEN="$(gh auth token --user ej-aj-pro)" git push -u origin "pregled/$TODAY"
+GH_TOKEN="$(gh auth token --user ej-aj-pro)" gh pr create --repo ej-aj-pro/ej-aj \
   --base main --head "pregled/$TODAY" --title "Tedenski pregled #N (<period>)" --body-file <body.md>
 ```
 

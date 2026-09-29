@@ -91,6 +91,9 @@ img {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-weight: 800;
   font-size: 1.35rem;
   letter-spacing: -0.03em;
@@ -98,7 +101,13 @@ img {
   text-decoration: none;
 }
 
-.logo span {
+.logo .ikona {
+  width: 32px;
+  height: 32px;
+  flex: none;
+}
+
+.logo .logo-crta {
   color: var(--accent);
 }
 

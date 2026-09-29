@@ -8,7 +8,7 @@
 //
 // Exit code 1 when any error is found. Warnings never fail the run.
 
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, basename } from 'node:path';
 
 const CONTENT_DIR = 'src/content/novice';
@@ -23,7 +23,7 @@ if (files.length === 0) {
 
 const TYPES = ['tedenski-pregled', 'clanek', 'vodnik'];
 // Hosts that block scripted requests but are fine in a browser.
-const BOT_BLOCKING_HOSTS = ['openai.com', 'www.openai.com', 'x.com', 'twitter.com', 'www.linkedin.com'];
+const BOT_BLOCKING_HOSTS = ['openai.com', 'www.openai.com', 'chatgpt.com', 'help.openai.com', 'x.com', 'twitter.com', 'www.linkedin.com'];
 
 let errors = 0;
 let warnings = 0;
@@ -107,6 +107,9 @@ for (const file of files) {
   if (data.type && !TYPES.includes(data.type)) error(file, `front matter: neznan type "${data.type}"`);
   if (data.description && data.description.length > 200) {
     error(file, `description ima ${data.description.length} znakov (največ 200)`);
+  }
+  if (!existsSync(join('public/og', name.replace(/\.md$/, '.png')))) {
+    warn(file, 'manjka slika za deljenje (zaženi: node scripts/og-slike.mjs)');
   }
   if (data.date && !name.startsWith(data.date)) {
     error(file, `datum v imenu datoteke se ne ujema z date: ${data.date}`);

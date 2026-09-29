@@ -10,7 +10,7 @@ case written for a business reader: the problem, what you need, the steps, an ex
 the pitfalls. His notes are the raw material; you do the writing, he stays the author.
 
 Repo: `/Users/anze/Desktop/ej-aj`. Read `AGENTS.md` there first. Every network `git`/`gh`
-command needs the prefix `GH_TOKEN="$(gh auth token --user AnzeNocAI)"` (never `gh auth switch`).
+command needs the prefix `GH_TOKEN="$(gh auth token --user ej-aj-pro)"` (never `gh auth switch`).
 **Never merge and never push to `main`.**
 
 ## 1. Pick up the note
@@ -70,11 +70,14 @@ Work on a branch `vodnik/<slug>` from `origin/main`, in a worktree under
 `/Users/anze/.cache/ej-aj-worktrees/` like the other skills. Then:
 
 ```bash
+node scripts/og-slike.mjs                               # share image public/og/<id>.png
 node scripts/preveri.mjs src/content/novice/<file>.md   # errors only for [DOPOLNI] are expected
 npm run build
 ```
 
-Open the PR (`gh pr create --repo AnzeNocAI/ej-aj --base main`), title
+Commit the image (`public/og/<id>.png`, `scripts/og-slike.json`) together with the guide.
+
+Open the PR (`gh pr create --repo ej-aj-pro/ej-aj --base main`), title
 `Vodnik: <title>`, body in Slovenian: what the guide covers, the list of `[DOPOLNI]` places,
 what you removed or generalised for confidentiality, and "Merge = objava na ej-aj.si". Open it
 as a draft (`--draft`) while any `[DOPOLNI]` remains.

@@ -1,7 +1,7 @@
 # ej-aj.si
 
 Slovenian AI hub: weekly AI news digest, model comparison and practical guides for Slovenian
-businesses. Owner and editor: Anže. Public repo `AnzeNocAI/ej-aj`, deployed by Cloudflare
+businesses. Owner and editor: Anže. Public repo `ej-aj-pro/ej-aj`, deployed by Cloudflare
 Workers (static assets, `wrangler.jsonc`) on every push to `main`.
 
 Current state, open items, merge permissions and next-feature ideas: `docs/stanje-projekta.md`.
@@ -14,9 +14,10 @@ Read it at the start of every session.
   `clanek/<slug>`), open a PR, and let Anže review it on the Cloudflare preview URL. Merging is
   publishing.
 - File names: `YYYY-MM-DD-<slug>.md`. Weekly digests: `YYYY-MM-DD-tedenski-pregled-<n>.md`.
-- Before opening a PR run `node scripts/preveri.mjs --links <file>` (content validator: front
-  matter, dashes, digest structure, sources, links) and `npm run build`. Both must pass; CI runs
-  the validator again on every PR.
+- Before opening a PR run `node scripts/og-slike.mjs` (share image `public/og/<id>.png`, rendered
+  with this Mac's fonts and committed), `node scripts/preveri.mjs --links <file>` (content
+  validator: front matter, dashes, digest structure, sources, links, share image) and
+  `npm run build`. The validator and the build must pass; CI runs the validator again on every PR.
 
 ## Skills and routines
 
@@ -38,8 +39,9 @@ Read it at the start of every session.
   substitute either; write ranges as "17. do 26. september".
 - Plain, concrete language. No hype, no obvious AI phrasing, no stacked short fragments.
   Follow `docs/slog.md` (words and structures that read as AI, with a pre-PR check).
-- Name: on the site and in the repo Anže appears by first name only ("Anže"), never with his
-  surname.
+- Name: no personal name anywhere on the site (pages, articles, metadata, share images). The
+  reviewer is "urednik" (`SITE.author`); "O projektu" must not reveal who runs the site. In the
+  repo Anže appears by first name only, never with his surname.
 - Slovenian number format: `1.500`, `0,10 USD`, `40 %`.
 - Separate fact (what was announced) from interpretation (**Kaj to pomeni za vas:**).
 

@@ -22,6 +22,8 @@ export const GET: APIRoute = async ({ site }) => {
     `- [Cene AI orodij in primerjava modelov](${abs('/modeli/')}): naročnine za ChatGPT, Claude, Gemini, Microsoft Copilot in druga orodja (posamezniki in podjetja) ter cene API, kontekstno okno in priporočila za Claude, GPT, Gemini, Mistral, Llama, DeepSeek in slovenski GaMS, z viri in datumom preverjanja.`,
     `- [AI v Sloveniji v številkah](${abs('/statistika/')}): delež podjetij in prebivalcev, ki uporabljajo AI, primerjava z državami EU in delež klepetalnikov (Eurostat, SURS, Microsoft, StatCounter).`,
     `- [AI slovar](${abs('/slovar/')}): ${terms.length} izrazov umetne inteligence, razloženih po domače.`,
+    `- [Priročnik: kako dobro uporabljati Claude](${abs('/prirocnik/')}): 10 vodnikov po vrsti o promptih, kontekstu podjetja, Claude Code, skillih, subagentih, hookih, rutinah in lastnih agentih.`,
+    `- [Priporočeni videi](${abs('/videi/')}): izbrane epizode o delu z AI s povzetki v slovenščini.`,
     `- [Novice](${abs('/novice/')}): tedenski pregledi AI novic z vplivom na slovenska podjetja.`,
     `- [O projektu](${abs('/o-projektu/')}): kdo piše in kako nastaja vsebina.`,
     '',
