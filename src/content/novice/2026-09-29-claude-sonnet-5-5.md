@@ -11,7 +11,7 @@ Anthropic je 28. septembra izdal nov model Claude Sonnet 5.5. Je drugi model iz 
 
 ## Kaj je novega
 
-Anthropic navaja, da Sonnet 5.5 odgovore piše več kot 30 % hitreje kot prejšnji Sonnet 5. Za isto nalogo porabi manj tokenov, zato je naloga do 30 % cenejša. Token je košček besedila, običajno del besede, in po številu tokenov se obračunava raba modela.
+Anthropic navaja, da Sonnet 5.5 odgovore piše več kot 30 % hitreje kot prejšnji Sonnet 5. Za isto nalogo porabi manj tokenov, zato je naloga do 30 % cenejša. Token je košček besedila, pogosto del besede, in po številu tokenov se obračunava raba modela.
 
 Cena na token je ostala enaka kot pri Sonnet 5: 2 USD za milijon tokenov, ki jih modelu pošljete, in 10 USD za milijon tokenov, ki jih model napiše. Opus 5.5 stane 4 oziroma 20 USD. Ti ceni veljata za razvijalce, ki model uporabljajo prek API-ja, torej povezave, prek katere lastni programi uporabljajo model. Pri mesečni naročnini na Claude se ne plačuje po tokenih.
 
