@@ -36,7 +36,7 @@ Viri: [ChatGPT, cene](https://chatgpt.com/pricing/), [Claude, cene](https://clau
 
 ChatGPT Free ponuja neomejen klepet z modelom GPT-5.6 Luna ob pravilih poštene rabe, omejeno pa nalaganje datotek, ustvarjanje slik, glasovni pogovor, poglobljeno raziskovanje in spomin.
 
-Claude Free omogoča klepet na spletu, namizju in telefonu, iskanje po spletu, ustvarjanje datotek z izvajanjem kode, spomin med pogovori, konektorje za druge aplikacije in do 5 projektov. Poglobljenega raziskovanja (Research) v brezplačnem paketu ni. Omejitve uporabe se obnavljajo na pet ur.
+Claude Free omogoča klepet na spletu, namizju in telefonu, iskanje po spletu, ustvarjanje datotek (Claude pri tem sam napiše in požene kodo), spomin med pogovori, konektorje (povezave z drugimi aplikacijami) in do 5 projektov. Poglobljenega raziskovanja (Research) v brezplačnem paketu ni. Omejitve uporabe se obnavljajo na pet ur.
 
 Gemini brez naročnine ponuja model 3.6 Flash, različno obsežen dostop do modela 3.1 Pro, ustvarjanje in urejanje slik, Deep Research, glasovni pogovor Gemini Live in Canvas, poleg tega pa 15 GB prostora za Gmail, Drive in Foto.
 
@@ -70,7 +70,7 @@ Viri: [ChatGPT, cene](https://chatgpt.com/pricing/), [Claude, cene](https://clau
 
 V plačljivih paketih dobite zmogljivejše modele kot brezplačno, najzmogljivejši pa so ponekod le v najdražjih paketih ali za doplačilo. ChatGPT Plus vključuje modele GPT-6 (Astra, Sol in Luna), Pro pa razširjen dostop do njih in način Pro reasoning z modelom GPT-6 Astra. Claude Pro vključuje modele Opus, Sonnet in Haiku (v brezplačnem paketu Opusa ni), model Fable pa je v paketu Pro na voljo le z dokupljenimi krediti za uporabo. Google AI Pro navaja razširjen dostop do modela Gemini 3.1 Pro, funkcijo Deep Think pa le paket Ultra.
 
-Primerjava modelov s cenami za rabo prek API je na strani [Modeli in cene](/modeli/). Meritve splošnih zmožnosti se z vsako novo različico spremenijo, zato se ob izbiri osebnega paketa po naši oceni bolj splača gledati funkcije in povezave kot lestvice.
+Primerjava modelov s cenami za rabo prek API (povezave, prek katere programi uporabljajo model) je na strani [Modeli in cene](/modeli/). Meritve splošnih zmožnosti se z vsako novo različico spremenijo, zato se ob izbiri osebnega paketa po naši oceni bolj splača gledati funkcije in povezave kot lestvice.
 
 Viri: [ChatGPT, cene](https://chatgpt.com/pricing/), [Claude, cene](https://claude.com/pricing), [Gemini, naročnine](https://gemini.google/subscriptions/)
 

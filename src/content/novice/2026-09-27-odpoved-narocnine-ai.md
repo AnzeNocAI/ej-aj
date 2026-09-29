@@ -13,7 +13,7 @@ Naročnino na AI orodje je lahko skleniti, pri odpovedi pa se hitro zatakne: kje
 - Izbris aplikacije naročnine ne odpove. Izbris računa pri ChatGPT odpove le naročnino, plačano neposredno pri OpenAI, naročnine prek Apple ne.
 - Pri ChatGPT in Claudu odpovejte vsaj 24 ur pred naslednjim plačilom, sicer vam lahko zaračunajo še eno obdobje.
 - Po odpovedi plačljive funkcije praviloma ostanejo do konca obdobja, ki ste ga plačali. Denarja za to obdobje praviloma ne dobite nazaj samodejno (izjema je Mistral ob odpovedi v 14 dneh od prvega nakupa).
-- OpenAI, Anthropic in Google za kupce v EU oziroma EGP navajajo pravico do vračila ali odstopa v 14 dneh od nakupa, Mistral pa vrne denar ob odpovedi v 14 dneh od prvega nakupa na spletu. Pri OpenAI in Anthropicu je vračilo sorazmerno, Microsoft pa ima svoja pravila.
+- OpenAI, Anthropic in Google za kupce v EU oziroma Evropskem gospodarskem prostoru (EGP) navajajo pravico do vračila ali odstopa v 14 dneh od nakupa, Mistral pa vrne denar ob odpovedi v 14 dneh od prvega nakupa na spletu. Pri OpenAI in Anthropicu je vračilo sorazmerno, Microsoft pa ima svoja pravila.
 
 ## ChatGPT
 

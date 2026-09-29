@@ -12,7 +12,7 @@ Dobrodošli v prvem tedenskem pregledu ej-aj.si. Vsak petek izberemo novice, ki 
 
 ## 1. Anthropic predstavil Claude Opus 5.5
 
-Anthropic je 22. septembra izdal Claude Opus 5.5. Po navedbah podjetja se pri večini nalog kosa s Claude Fable 5.1, ki v API-ju stane dvakrat več, v primerjavi s prejšnjim Opus 5 pa je pri tipičnem delu približno 40 % cenejši in več kot 30 % hitrejši pri pisanju odgovorov. Cena v API-ju je 4 USD za milijon vhodnih in 20 USD za milijon izhodnih tokenov. Na voljo je na vseh Anthropicovih platformah, tudi pri AWS, Google Cloud in Microsoft Azure. Naročnikom paketov Pro, Max, Team in Enterprise so hkrati zvišali peturne omejitve uporabe.
+Anthropic je 22. septembra izdal Claude Opus 5.5. Po navedbah podjetja se pri večini nalog kosa s Claude Fable 5.1, ki v API-ju (povezavi za razvijalce) stane dvakrat več, v primerjavi s prejšnjim Opus 5 pa je pri tipičnem delu približno 40 % cenejši in več kot 30 % hitrejši pri pisanju odgovorov. Cena v API-ju je 4 USD za milijon tokenov, ki jih modelu pošljete, in 20 USD za milijon tokenov, ki jih model napiše. Token je košček besedila, pogosto del besede. Na voljo je na vseh Anthropicovih platformah, tudi pri AWS, Google Cloud in Microsoft Azure. Naročnikom paketov Pro, Max, Team in Enterprise so hkrati zvišali omejitve uporabe, ki se obnavljajo vsakih pet ur.
 
 **Kaj to pomeni za vas:** Anthropic Opus 5.5 zdaj priporoča kot izhodišče za večino nalog. Pri avtomatizacijah prek API-ja se splača primerjati račun pred in po zamenjavi modela.
 
@@ -28,7 +28,7 @@ Viri: [OpenAI, Introducing GPT-6 Sol and Luna](https://openai.com/index/introduc
 
 ## 3. Claudovi agenti pomagali odkriti nov encimski sistem
 
-Anthropic je 23. septembra objavil, da so Claudovi agenti v veliki bazi zaporedij DNK naleteli na doslej neznan sistem encimov, ki spominja na CRISPR. Agenti so pregledali več kot 200.000 reverznih transkriptaz, izbrali 3.500 kandidatov in jih zožili na 20 najobetavnejših. Po 21 urah iskanja, v katerem je sodelovalo okoli 950 agentov, je eden od njih opazil nenavaden vzorec ponovitev ob genu za reverzno transkriptazo. Da gre za nov encimski sistem, so potrdili z nadaljnjo analizo in testi v laboratoriju, ugotovitve pa objavili kot preprint.
+Anthropic je 23. septembra objavil, da so Claudovi agenti v veliki bazi zaporedij DNK naleteli na doslej neznan sistem encimov, ki spominja na CRISPR (bakterijski obrambni sistem, iz katerega so znanstveniki razvili orodje za urejanje genov). Agenti so pregledali več kot 200.000 reverznih transkriptaz (encimov, ki iz RNK prepišejo DNK), izbrali 3.500 kandidatov in jih zožili na 20 najobetavnejših. Po 21 urah iskanja, v katerem je sodelovalo okoli 950 agentov, je eden od njih opazil nenavaden vzorec ponovitev ob genu za reverzno transkriptazo. Da gre za nov encimski sistem, so potrdili z nadaljnjo analizo in testi v laboratoriju, ugotovitve pa objavili kot preprint, torej članek pred strokovno recenzijo.
 
 **Kaj to pomeni za vas:** to ni novica samo za znanstvenike. Kaže, da agenti zmorejo več ur samostojnega dela na veliki količini podatkov. Enak vzorec (preišči, izberi, utemelji) se v podjetjih uporablja za pregled pogodb, reklamacij ali ponudb.
 
@@ -36,7 +36,7 @@ Vir: [Anthropic, Claude discovers a novel enzyme system](https://www.anthropic.c
 
 ## 4. Google, OpenAI in Anthropic naj bi ustanovili skupno telo za varnostne standarde
 
-Po poročanju The Information so se Google, OpenAI in Anthropic dogovorili za ustanovitev samoregulativne organizacije Standards Authority for Frontier AI (SAFA). Ta bi postavljala skupne standarde za ocenjevanje najzmogljivejših modelov in jih primerjalno testirala. Zgled je ameriška samoregulativna organizacija FINRA. Za položaje v organizaciji naj bi nagovarjali več znanih imen, med njimi Sriram Krishnana, nekdanjega svetovalca Bele hiše za AI. Organizacija naj bi zaživela konec leta ali v začetku 2027. Podjetja ustanovitve še niso potrdila.
+Po poročanju The Information so se Google, OpenAI in Anthropic dogovorili za ustanovitev organizacije Standards Authority for Frontier AI (SAFA). Ta bi postavljala skupne standarde za ocenjevanje najzmogljivejših modelov in jih primerjalno testirala. Zgled je ameriška organizacija FINRA, prek katere panoga sama ureja borzne posrednike. Za položaje v organizaciji naj bi nagovarjali več znanih imen, med njimi Sriram Krishnana, nekdanjega svetovalca Bele hiše za AI. Organizacija naj bi zaživela konec leta ali v začetku 2027. Podjetja ustanovitve še niso potrdila.
 
 **Kaj to pomeni za vas:** v EU AI Act že določa pravila, zato neposrednega vpliva ni. Če pa bodo standardi res nastali, bodo verjetno postali merilo, po katerem bodo ponudniki opisovali varnost svojih modelov.
 
@@ -52,7 +52,7 @@ Vir: [Ljubljanske novice](https://ljnovice.si/2026/09/18/podpisana-skupna-deklar
 
 ## 6. Oglasi v ChatGPT se širijo
 
-OpenAI je 23. septembra oglase v ChatGPT razširil na sedem azijskih trgov, med njimi Singapur, Indonezijo in Tajvan. S tem so na voljo v več kot 60 državah. Po navedbah OpenAI je oglasni posel konec avgusta dosegel letno stopnjo prihodkov (run rate) v višini milijarde dolarjev, manj kot 200 dni po začetku. OpenAI zagotavlja, da so oglasi jasno označeni in ne vplivajo na odgovore.
+OpenAI je 23. septembra oglase v ChatGPT razširil na sedem azijskih trgov, med njimi Singapur, Indonezijo in Tajvan. S tem so na voljo v več kot 60 državah. Po navedbah OpenAI je oglasni posel konec avgusta dosegel letno stopnjo prihodkov (run rate, trenutni prihodki, preračunani na celo leto) v višini milijarde dolarjev, manj kot 200 dni po začetku. OpenAI zagotavlja, da so oglasi jasno označeni in ne vplivajo na odgovore.
 
 **Kaj to pomeni za vas:** ChatGPT postaja nov oglaševalski kanal. Za marketinške ekipe je vredno spremljati, kdaj in pod kakšnimi pogoji bo oglaševanje odprto na trgih, kjer poslujete.
 

@@ -36,6 +36,18 @@ Slovenian equivalents of typical LLM vocabulary. One in a long text is fine, clu
 - Summary paragraphs that repeat the section. Closing moral lessons ("Nauk: ...").
 - Synonym cycling (model, sistem, orodje, rešitev for the same thing). Repeat the noun.
 
+## Titles and clarity (Anže, 29. 9. 2026)
+
+- Titles describe exactly what the article is about: who did what, or what the guide teaches.
+  Never click bait: no teasers, no hidden subject, no promotional adjectives ("hitrejši in
+  cenejši", "vse, kar morate vedeti"). Good: "Anthropic izdal Claude Sonnet 5.5: kaj je novega
+  in kdaj ga izbrati namesto Opus 5.5".
+- Write for a business reader who is not technical: short sentences, one thought per sentence,
+  everyday words. If a simpler word works, use it.
+- Every technical term (token, API, agent, kontekstno okno, predogled, tenant ...) gets a short
+  explanation in plain Slovenian at its first use, even if it also links to the glossary.
+  Product and benchmark names get a few words on what they are.
+
 ## What the text should look like
 
 - Plain verbs: je, ima, stane, velja, ne dela.
@@ -51,3 +63,5 @@ Slovenian equivalents of typical LLM vocabulary. One in a long text is fine, clu
 3. Search for the words above.
 4. Count bold labels and triplets.
 5. Would a sceptical reader roll their eyes at any sentence? Rewrite it.
+6. Does the title say exactly what the article is about? Is every technical term explained at
+   first use?

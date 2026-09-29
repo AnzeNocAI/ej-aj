@@ -23,7 +23,7 @@ Claude Code pozna tri načine, kako nalogo pognati ob določenem času.
 
 Lokalna rutina teče na vašem računalniku, zato vidi vaše datoteke in programe. Teče samo, ko je namizna aplikacija odprta in računalnik buden. Če je bil računalnik ugasnjen ali v spanju, ob naslednjem zagonu aplikacije ali prebujanju enkrat nadoknadi zamujene zagone iz zadnjih sedmih dni.
 
-Rutina v oblaku teče tudi, ko je vaš računalnik ugasnjen, a do lokalnih datotek nima dostopa. Dela z repozitoriji in konektorji, ki ji jih dodelite. Je v fazi raziskovalnega predogleda, na voljo v paketih Pro, Max, Team in Enterprise, z dnevno omejitvijo števila zagonov. Sprožiti jo je mogoče tudi prek API-ja ali ob dogodku na GitHubu.
+Rutina v oblaku teče tudi, ko je vaš računalnik ugasnjen, a do lokalnih datotek nima dostopa. Dela z repozitoriji na GitHubu in konektorji (povezavami z drugimi aplikacijami), ki ji jih dodelite. Je v zgodnji preizkusni fazi (research preview), na voljo v paketih Pro, Max, Team in Enterprise, z dnevno omejitvijo števila zagonov. Sprožiti jo je mogoče tudi prek API-ja ali ob dogodku na GitHubu.
 
 `/loop` ponavlja nalogo samo znotraj odprte seje, ponavljajoče naloge pa po sedmih dneh potečejo. Primeren je za spremljanje nečesa, kar poteka zdaj.
 
@@ -40,7 +40,7 @@ Rutino v oblaku ustvarite na claude.ai/code/routines, v namizni aplikaciji ali z
 Rutina teče brez vas, zato mora imeti navodila, ki ne potrebujejo vprašanj:
 
 1. Kaj naj naredi, korak za korakom, in s katerimi datotekami ali viri.
-2. Kaj naj naredi, ko nekaj ne uspe: na primer vir ni dosegljiv ali podatka ni. Najbolje, da to jasno zapiše v poročilo in se ne loti obvoda.
+2. Kaj naj naredi, ko nekaj ne uspe: na primer vir ni dosegljiv ali podatka ni. Najbolje, da to jasno zapiše v poročilo in težave ne poskuša zaobiti po svoje.
 3. Česa ne sme narediti. Naša rutina za tedenski pregled na primer nikoli ne objavi, ampak samo odpre predlog, ki ga pregleda človek.
 4. Kakšen naj bo rezultat: datoteka, sporočilo, predlog sprememb.
 
@@ -48,7 +48,7 @@ Ko rutino nastavite, jo prvič poženite ročno z "Run now". Tako vidite, ali de
 
 ## Za razvijalce: rutina brez aplikacije
 
-Claude Code lahko teče tudi brez vmesnika, z ukazom `claude -p "navodilo"`. Tak ukaz lahko poženete iz lastnega urnika (na primer cron) ali v GitHub Actions, kjer se Claude odzove na omembo `@claude` v zahtevi za spremembo. Dokumentacija za skripte priporoča zastavico `--bare`, izhod pa lahko dobite tudi v obliki JSON.
+Claude Code lahko teče tudi brez vmesnika, z ukazom `claude -p "navodilo"`. Tak ukaz lahko poženete iz lastnega urnika (na primer cron, vgrajenega urnika na Macu in Linuxu) ali v GitHub Actions (samodejnih opravilih na GitHubu), kjer se Claude odzove na omembo `@claude` v zahtevi za spremembo. Dokumentacija za skripte priporoča možnost `--bare`, rezultat pa lahko dobite tudi v obliki JSON (strukturirani podatki, ki jih program lažje prebere).
 
 Viri: [Claude Code, delo brez vmesnika](https://code.claude.com/docs/en/headless), [Claude Code, GitHub Actions](https://code.claude.com/docs/en/github-actions)
 

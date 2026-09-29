@@ -13,15 +13,15 @@ Večina slovenskih podjetij AI ne razvija, ampak ga uporablja: ChatGPT za maile,
 
 - **AI pismenost velja od 2. februarja 2025.** Podjetje mora sprejeti ukrepe, da zaposleni, ki uporabljajo AI, razumejo, kaj delajo. Certifikat ni potreben. **Slovenski zakon za kršitev predvideva globe**, nadzira pa inšpekcija za informacijsko družbo.
 - **Nekatere rabe so prepovedane**, na primer prepoznavanje čustev zaposlenih na delovnem mestu.
-- **Od 2. avgusta 2026 veljajo pravila o preglednosti**: ljudje morajo vedeti, kdaj se pogovarjajo z AI, deepfake vsebine morajo biti označene.
+- **Od 2. avgusta 2026 veljajo pravila o preglednosti**: ljudje morajo vedeti, kdaj se pogovarjajo z AI, posnetki, ki jih je ustvaril ali predelal AI in so videti resnični (deepfake), pa morajo biti označeni.
 - **Stroga pravila za visoko tvegano rabo** (na primer AI pri izbiri kandidatov za zaposlitev) so bila julija 2026 prestavljena na **2. december 2027**.
-- **V Sloveniji nadzor deli več organov:** AI pismenost inšpekcija za informacijsko družbo, preglednost in rabo pri zaposlovanju AKOS, prepovedane prakse Informacijski pooblaščenec.
+- **V Sloveniji nadzor deli več organov:** AI pismenost inšpekcija za informacijsko družbo, preglednost in rabo pri zaposlovanju Agencija za komunikacijska omrežja in storitve (AKOS), prepovedane prakse Informacijski pooblaščenec.
 
 ## Ali AI Act velja za vaše podjetje?
 
 Uredba loči dve glavni vlogi. **Ponudnik** je tisti, ki sistem AI razvije in ga da na trg (OpenAI, Anthropic, Google, Microsoft). **Uvajalec** je tisti, ki sistem AI uporablja pri svojem delu. Podjetje, ki zaposlenim omogoči ChatGPT ali Claude, je uvajalec.
 
-Obveznosti za modele za splošne namene, ki veljajo od avgusta 2025 (tehnična dokumentacija, politika avtorskih pravic, povzetek učnih podatkov, pri najzmogljivejših modelih še ocena sistemskih tveganj), veljajo za ponudnike modelov, ne za podjetja, ki jih uporabljajo. Kdor pa na osnovi takega modela zgradi in pod svojim imenom ponuja lasten sistem AI, na primer klepetalnik za stranke, lahko sam postane ponudnik. V tem primeru je treba vlogo preveriti natančneje.
+Obveznosti za modele za splošne namene (veliki modeli, kot so GPT, Claude ali Gemini, ki jih je mogoče uporabiti za zelo različne naloge), ki veljajo od avgusta 2025 (tehnična dokumentacija, politika avtorskih pravic, povzetek učnih podatkov, pri najzmogljivejših modelih še ocena sistemskih tveganj), veljajo za ponudnike modelov, ne za podjetja, ki jih uporabljajo. Kdor pa na osnovi takega modela zgradi in pod svojim imenom ponuja lasten sistem AI, na primer klepetalnik za stranke, lahko sam postane ponudnik. V tem primeru je treba vlogo preveriti natančneje.
 
 ## Časovnica
 
@@ -31,10 +31,10 @@ Obveznosti za modele za splošne namene, ki veljajo od avgusta 2025 (tehnična d
 | 2. februar 2025 | Prepovedane prakse in obveznost AI pismenosti. |
 | 2. avgust 2025 | Obveznosti ponudnikov modelov za splošne namene, nadzorna pravila. |
 | 21. november 2025 | V Sloveniji začne veljati zakon o izvajanju (ZIUDHPUI). |
-| 27. julij 2026 | Začne veljati Digital Omnibus, ki premakne roke za visoko tvegane sisteme. |
-| 2. avgust 2026 | Pravila o preglednosti (člen 50): klepetalniki, označevanje deepfake vsebin in besedil o zadevah javnega interesa. Nadzorni organi začnejo nadzirati tudi AI pismenost. |
-| 2. december 2026 | Nove prepovedi (sistemi, ki ustvarjajo intimne podobe ljudi brez njihove izrecne privolitve, in gradivo spolne zlorabe otrok). Do tega dne morajo ponudniki generativnih sistemov AI, danih na trg pred 2. avgustom 2026, uvesti strojno berljivo označevanje vsebin (člen 50(2)). |
-| 2. december 2027 | Pravila za visoko tvegane rabe iz Priloge III (zaposlovanje, krediti ...). |
+| 27. julij 2026 | Začne veljati Digital Omnibus, paket sprememb, s katerim je EU spremenila AI Act. Premakne roke za visoko tvegane sisteme. |
+| 2. avgust 2026 | Pravila o preglednosti (člen 50): klepetalniki, označevanje ponarejenih posnetkov (deepfake) in besedil o zadevah javnega interesa. Nadzorni organi začnejo nadzirati tudi AI pismenost. |
+| 2. december 2026 | Nove prepovedi (sistemi, ki ustvarjajo intimne podobe ljudi brez njihove izrecne privolitve, in gradivo spolne zlorabe otrok). Do tega dne morajo ponudniki generativnih sistemov AI, danih na trg pred 2. avgustom 2026, uvesti strojno berljivo označevanje vsebin, torej oznako, ki jo prebere računalnik, na primer digitalni vodni žig ali metapodatke (člen 50(2)). |
+| 2. december 2027 | Pravila za visoko tvegane rabe s seznama v Prilogi III uredbe (zaposlovanje, krediti ...). |
 | 2. avgust 2028 | Pravila za AI, vgrajen v izdelke (medicinski pripomočki, dvigala, igrače). |
 
 Viri: [Evropska komisija, vprašanja in odgovori o AI Act](https://digital-strategy.ec.europa.eu/en/faqs/ai-act-questions-answers), [Uradni list RS 85/2025](https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina/2025-01-3035/zakon-o-izvajanju-uredbe-eu-o-dolocitvi-harmoniziranih-pravil-o-umetni-inteligenci-ziudhpui)
@@ -60,7 +60,7 @@ Viri: [besedilo člena 4](https://artificialintelligenceact.eu/article/4/), [Inf
 
 ## Prepovedane prakse
 
-Od 2. februarja 2025 so prepovedani sistemi AI, ki ljudi škodljivo zavajajo ali izkoriščajo njihovo ranljivost, točkovanje ljudi na podlagi vedenja (social scoring), neciljano zbiranje obrazov s spleta za prepoznavanje ter biometrično razvrščanje po rasi, veri, političnem prepričanju ali spolni usmerjenosti.
+Od 2. februarja 2025 so prepovedani sistemi AI, ki ljudi škodljivo zavajajo ali izkoriščajo njihovo ranljivost, točkovanje ljudi na podlagi vedenja (social scoring), neciljano zbiranje obrazov s spleta za prepoznavanje ter razvrščanje ljudi po rasi, veri, političnem prepričanju ali spolni usmerjenosti na podlagi biometričnih podatkov (na primer obraza).
 
 Za podjetja je najbolj otipljiva prepoved **prepoznavanja čustev na delovnem mestu in v šolah**, razen iz zdravstvenih ali varnostnih razlogov. Orodje, ki iz kamere ali glasu ocenjuje razpoloženje zaposlenih, je torej prepovedano.
 
@@ -86,7 +86,7 @@ Za večino podjetij je visoko tvegana raba izjema, ne pravilo. Pomembna je predv
 - pri **odločitvah o zaposlenih**: napredovanje, odpoved, dodeljevanje nalog na podlagi vedenja, spremljanje in ocenjevanje dela,
 - pri **ocenjevanju kreditne sposobnosti** posameznikov ter pri določanju cen življenjskih in zdravstvenih zavarovanj.
 
-Uvajalec takega sistema mora med drugim zagotoviti človeški nadzor usposobljene osebe, sistem uporabljati po navodilih ponudnika, hraniti dnevnike vsaj šest mesecev in **pred uvedbo na delovnem mestu obvestiti predstavnike delavcev in zaposlene**, na katere se sistem nanaša. Te obveznosti veljajo od 2. decembra 2027.
+Uvajalec takega sistema mora med drugim zagotoviti človeški nadzor usposobljene osebe, sistem uporabljati po navodilih ponudnika, hraniti samodejne zapise delovanja sistema (dnevnike) vsaj šest mesecev in **pred uvedbo na delovnem mestu obvestiti predstavnike delavcev in zaposlene**, na katere se sistem nanaša. Te obveznosti veljajo od 2. decembra 2027.
 
 Viri: [Priloga III](https://artificialintelligenceact.eu/annex/3/), [besedilo člena 26](https://artificialintelligenceact.eu/article/26/)
 
