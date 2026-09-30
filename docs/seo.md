@@ -2,7 +2,8 @@
 
 Analiza 30. septembra 2026. Stran je stara pet dni, zato Search Console še nima uporabnih
 podatkov; iskalni nizi spodaj so iz predlogov iskanja Google in Bing za Slovenijo (brez obsega
-iskanj). Po 14. oktobru preveri v Search Console, kateri nizi dejansko prinašajo prikaze.
+iskanj). Po 14. oktobru preveri v Search Console, kateri nizi dejansko prinašajo prikaze
+(Anže je 30. 9. dovolil, da to agent naredi v njegovem Chrome profilu anze999).
 
 ## Tehnično (urejeno v PR tehnicno/seo-osnove)
 
@@ -23,7 +24,8 @@ iskanj). Po 14. oktobru preveri v Search Console, kateri nizi dejansko prinašaj
 
 ## Nastavitve, ki jih mora narediti Anže (Cloudflare)
 
-- **Always Use HTTPS** (SSL/TLS, Edge Certificates): `http://ej-aj.si/` 30. 9. vrne 200 namesto
+- **Always Use HTTPS** (SSL/TLS, Edge Certificates; agentu varnostno pravilo aplikacije
+  preklopa ne dovoli, zato ga naredi Anže): `http://ej-aj.si/` 30. 9. vrne 200 namesto
   preusmeritve na https. Google zato vidi dve različici vsake strani.
 - Po želji HSTS na isti strani (šele ko HTTPS preusmeritev deluje nekaj dni).
 
