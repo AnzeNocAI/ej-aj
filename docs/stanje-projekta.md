@@ -152,6 +152,8 @@ Odprta vprašanja za Anžeta so v `~/Desktop/ej-aj-vprasanja.md` (zunaj repa).
 
 ## Predlogi za naslednje funkcije (po vrednosti)
 
+**SEO analiza 30. 9. 2026 in nov seznam tem: `docs/seo.md`.** Spodnji seznam je starejši.
+
 Iz raziskave ključnih besed 27. 9. 2026 (predlogi iskanja Google in Bing za Slovenijo, Google
 Trends; brez podatkov o obsegu iskanj):
 

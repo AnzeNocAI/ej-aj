@@ -5,7 +5,7 @@ import { getCollection, render } from 'astro:content';
 import Video from '../components/Video.astro';
 import Base from './Base.astro';
 import Newsletter from '../components/Newsletter.astro';
-import { getPosts, postPath } from '../lib';
+import { getPosts, postPath, relatedPosts } from '../lib';
 import { SITE, TYPE_LABEL, formatDate } from '../site';
 
 interface Props {
@@ -29,6 +29,15 @@ const next = at >= 0 && at < series.length - 1 ? series[at + 1] : undefined;
 // Recommended videos listed in the front matter, in the given order.
 const allVideos = post.data.videi.length ? await getCollection('videi') : [];
 const videos = post.data.videi.map((id) => allVideos.find((v) => v.id === id)).filter((v) => v !== undefined);
+// "Preberite še": articles that share the most glossary terms with this one.
+const related = relatedPosts(post, await getPosts());
+const url = new URL(postPath(post), Astro.site).toString();
+const section =
+  post.data.type === 'vodnik'
+    ? post.data.serija === 'prirocnik'
+      ? { name: 'Priročnik', path: '/prirocnik/' }
+      : { name: 'Vodniki', path: '/vodniki/' }
+    : { name: 'Novice', path: '/novice/' };
 const image = existsSync(`public/og/${post.id}.png`) ? `/og/${post.id}.png` : '/og.png';
 ---
 
@@ -38,6 +47,7 @@ const image = existsSync(`public/og/${post.id}.png`) ? `/og/${post.id}.png` : '/
   description={post.data.description}
   type="article"
   published={post.data.date}
+  modified={post.data.updated}
   image={image}
   jsonLd={[
     {
@@ -46,11 +56,21 @@ const image = existsSync(`public/og/${post.id}.png`) ? `/og/${post.id}.png` : '/
       headline: post.data.title,
       description: post.data.description,
       datePublished: post.data.date.toISOString(),
+      dateModified: (post.data.updated ?? post.data.date).toISOString(),
       inLanguage: 'sl-SI',
       author: { '@id': `${Astro.site}#avtor` },
       publisher: { '@id': `${Astro.site}#avtor` },
-      mainEntityOfPage: new URL(postPath(post), Astro.site).toString(),
+      mainEntityOfPage: url,
       image: new URL(image, Astro.site).toString(),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'ej-aj.si', item: Astro.site?.toString() },
+        { '@type': 'ListItem', position: 2, name: section.name, item: new URL(section.path, Astro.site).toString() },
+        { '@type': 'ListItem', position: 3, name: post.data.title, item: url },
+      ],
     },
   ]}
 >
@@ -59,6 +79,11 @@ const image = existsSync(`public/og/${post.id}.png`) ? `/og/${post.id}.png` : '/
       <div class="meta">
         <span class="tag">{TYPE_LABEL[post.data.type]}</span>
         <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        {post.data.updated && (
+          <span>
+            Posodobljeno <time datetime={post.data.updated.toISOString()}>{formatDate(post.data.updated)}</time>
+          </span>
+        )}
         {post.data.period && <span>Obdobje: {post.data.period}</span>}
       </div>
       <h1>{post.data.title}</h1>
@@ -116,6 +141,21 @@ const image = existsSync(`public/og/${post.id}.png`) ? `/og/${post.id}.png` : '/
         </nav>
       )
     }
+    {
+      related.length > 0 && (
+        <section class="related-posts" aria-labelledby="preberite-se">
+          <h2 id="preberite-se">Preberite še</h2>
+          <ul>
+            {related.map((r) => (
+              <li>
+                <a href={postPath(r)}>{r.data.title}</a>
+                <p>{r.data.description}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
     <p class="disclosure">
       Pri pripravi je pomagal AI (Claude). Vsako trditev smo preverili pri navedenem viru, besedilo
       je pred objavo pregledal in uredil {SITE.author}. Ste opazili napako?
@@ -126,6 +166,32 @@ const image = existsSync(`public/og/${post.id}.png`) ? `/og/${post.id}.png` : '/
 </Base>
 
 <style>
+  .related-posts {
+    margin: 40px 0 0;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+  .related-posts h2 {
+    font-size: 1.2rem;
+    margin: 0 0 12px;
+  }
+  .related-posts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .related-posts a {
+    font-weight: 650;
+    line-height: 1.35;
+  }
+  .related-posts p {
+    margin: 4px 0 0;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
   .post-videos {
     margin: 40px 0 0;
     display: flex;
