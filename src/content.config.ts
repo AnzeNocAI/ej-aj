@@ -8,6 +8,8 @@ const novice = defineCollection({
     title: z.string(),
     description: z.string().max(200),
     date: z.coerce.date(),
+    // Date of the last substantive update (facts, prices, sections), not typo fixes.
+    updated: z.coerce.date().optional(),
     type: z.enum(['tedenski-pregled', 'clanek', 'vodnik']),
     // Obdobje, ki ga pokriva tedenski pregled, npr. "17. do 26. september 2026".
     period: z.string().optional(),

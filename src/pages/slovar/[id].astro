@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import { getPosts, postPath, postsMentioning } from '../../lib';
 
 export async function getStaticPaths() {
   const entries = (await getCollection('slovar')).sort((a, b) =>
@@ -18,9 +19,16 @@ const byId = new Map(entries.map((e) => [e.id, e]));
 const related = glej.filter((id) => byId.has(id)).map((id) => byId.get(id)!);
 const url = new URL(`/slovar/${entry.id}/`, Astro.site).toString();
 const setUrl = new URL('/slovar/', Astro.site).toString();
-// Meta description: first sentence of the definition, trimmed to search-snippet length.
-const firstSentence = razlaga.split(/(?<=\.)\s/)[0];
-const description = firstSentence.length > 155 ? `${firstSentence.slice(0, 152)}...` : firstSentence;
+// Meta description: as many whole sentences of the definition as fit in a search snippet.
+const sentences = razlaga.split(/(?<=\.)\s/);
+let description = sentences[0];
+for (const s of sentences.slice(1)) {
+  if (`${description} ${s}`.length > 158) break;
+  description = `${description} ${s}`;
+}
+if (description.length > 158) description = `${description.slice(0, 155)}...`;
+// Articles that use the term, so a short definition leads on to the longer explanations.
+const articles = postsMentioning(entry.id, await getPosts()).slice(0, 6);
 ---
 
 <Base
@@ -83,6 +91,21 @@ const description = firstSentence.length > 155 ? `${firstSentence.slice(0, 152)}
       )
     }
 
+    {
+      articles.length > 0 && (
+        <section class="articles">
+          <h2>Kje o tem pišemo</h2>
+          <ul>
+            {articles.map((p) => (
+              <li>
+                <a href={postPath(p)}>{p.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
     <nav class="pager" aria-label="Sosednja gesla">
       {prev ? <a href={`/slovar/${prev.id}/`}>← {prev.data.izraz}</a> : <span />}
       <a href="/slovar/">Vsi izrazi</a>
@@ -124,6 +147,20 @@ const description = firstSentence.length > 155 ? `${firstSentence.slice(0, 152)}
     border-radius: 999px;
     text-decoration: none;
     font-size: 0.95rem;
+  }
+  .articles {
+    margin-top: 28px;
+  }
+  .articles h2 {
+    font-size: 1rem;
+    margin: 0 0 8px;
+  }
+  .articles ul {
+    margin: 0;
+    padding-left: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
   .pager {
     display: flex;
