@@ -10,7 +10,7 @@ Output: one new file `src/content/novice/YYYY-MM-DD-tedenski-pregled-N.md` on a 
 pull request. **Never merge, never push to `main`.** Merging
 is publishing, and only Anže does that.
 
-Repo: `/Users/anze/Desktop/ej-aj` (public, `ej-aj-pro/ej-aj`). Read `AGENTS.md` and
+Repo: `/Users/anze/Desktop/Claude/ej-aj` (public, `ej-aj-pro/ej-aj`). Read `AGENTS.md` and
 `docs/slog.md` there first: their writing, accuracy and confidentiality rules apply to
 everything below.
 
@@ -23,7 +23,7 @@ network command (`git fetch`, `git push`, `gh ...`) with
 Do not touch the main checkout (Anže may have uncommitted work there).
 
 ```bash
-cd /Users/anze/Desktop/ej-aj
+cd /Users/anze/Desktop/Claude/ej-aj
 GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git fetch origin
 TODAY=$(date +%F)
 WT=/Users/anze/.cache/ej-aj-worktrees/pregled-$TODAY
@@ -102,6 +102,13 @@ they can do or buy. A good mix: 2 to 3 model or product releases, 1 practical fe
 1 research or safety story if it is striking, 1 policy or EU item, 1 Slovenian item when there
 is a real one. Merge duplicates (one item, several sources). Drop items whose facts you cannot
 support with an opened page. Fewer good items beat more weak ones; 5 is fine.
+
+Then pick 0 to 2 **article candidates** among the selected items, using the three criteria in
+`AGENTS.md` ("Content types"). Most weeks have zero or one. Do not write the articles in this
+run: list them in the PR body so Anže can choose, and each chosen one becomes its own PR
+(`clanek/<slug>`). If an item already has an article on `origin/main`
+(`grep -l "type: clanek" src/content/novice/*.md`), keep it short in the digest and end it with
+`Podrobneje: [<article title>](/novice/<id>/)` after the `Vir:` line.
 
 ## 5. Write the draft
 
@@ -186,16 +193,19 @@ PR body (Slovenian, short):
 - **Nova gesla v slovarju:** one line per entry, `- [ ] <izraz>: <first sentence of razlaga>`
   with a link to `/slovar/<id>/` on the preview, or "brez". Anže deletes the ones he doesn't
   want before merging.
+- **Kandidati za članek:** 0 to 2 lines, `- [ ] <topic>: <one line on why it meets the three
+  criteria>`, or "brez". Anže ticks the ones he wants written as separate PRs.
 - **Za preveriti:** anything the fact-checker could not confirm, sources that failed, and
   anything you were unsure about
 - validator result (errors / warnings) and "Build: OK"
 - last line: "Merge = objava na ej-aj.si. Cloudflare bo spodaj dodal preview povezavo."
 
-Then remove the worktree: `cd /Users/anze/Desktop/ej-aj && git worktree remove "$WT"`.
+Then remove the worktree: `cd /Users/anze/Desktop/Claude/ej-aj && git worktree remove "$WT"`.
 
 ## 9. Final message
 
-Slovenian, short: the PR link, the item headlines, new glossary entries, failed sources,
+Slovenian, short: the PR link, the item headlines, new glossary entries, article candidates,
+failed sources,
 anything Anže must check.
 If a step failed, say which one and what state things were left in. Do not work around a
 failure silently.
