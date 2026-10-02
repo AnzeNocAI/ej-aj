@@ -306,6 +306,19 @@
     pa počasnejše in manj zanesljivo od neposredne povezave.
   glej: [agent, mcp]
 
+- id: digitalni-dvojcek
+  izraz: Digitalni dvojček
+  angl: Digital twin
+  razlaga: >-
+    Virtualni model fizičnega predmeta, naprave ali procesa, ki ga sproti posodabljajo podatki
+    iz resničnega sveta, na primer iz senzorjev. Na njem lahko preizkušate spremembe in
+    simulirate razmere, ne da bi posegali v pravi predmet. AI pomaga, da so simulacije in
+    napovedi hitrejše.
+  primer: >-
+    Proizvajalec avtomobilov v digitalnem dvojčku preizkusi, kako nova oblika vpliva na
+    zračni upor, preden izdela pravi prototip.
+  glej: [strojno-ucenje, umetna-inteligenca]
+
 - id: vibe-coding
   izraz: Vibe coding
   angl: Vibe coding
@@ -462,6 +475,19 @@
     Pravila in tehnične omejitve, ki preprečujejo, da bi AI naredil nekaj neželenega: razkril
     zaupne podatke, izvedel plačilo brez potrditve ali odgovarjal zunaj svojega področja.
   glej: [vrivanje-navodil, zasebnost-podatkov]
+
+- id: peskovnik
+  izraz: Peskovnik (sandbox)
+  angl: Sandbox
+  razlaga: >-
+    Izolirano okolje, v katerem program ali agent dela, ne da bi lahko posegel v preostali
+    sistem. Do datotek, omrežja in drugih orodij dostopa le tako, kot dovolijo vnaprej
+    določena pravila. Če agent naredi napako ali ga kdo zlorabi, je škoda praviloma omejena
+    na peskovnik.
+  primer: >-
+    Agent, ki ureja programsko kodo, dela na kopiji projekta v peskovniku in nima dostopa do
+    gesel ali produkcijske baze podatkov.
+  glej: [agent, varovala, vrivanje-navodil]
 
 - id: evalvacija
   izraz: Evalvacija (eval)
