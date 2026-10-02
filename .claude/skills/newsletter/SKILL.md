@@ -8,7 +8,7 @@ description: Turn the latest published ej-aj.si weekly digest into a newsletter 
 The newsletter is the weekly digest by email. Its job is to bring readers back to ej-aj.si, so
 the email is shorter than the article and every item links to the site.
 
-Repo: `/Users/anze/Desktop/ej-aj`. Read `AGENTS.md` first (Slovenian, no em or en dashes,
+Repo: `/Users/anze/Desktop/Claude/ej-aj`. Read `AGENTS.md` first (Slovenian, no em or en dashes,
 Slovenian number formats). **Never send an email and never schedule one.** Anže sends from
 Buttondown himself.
 
