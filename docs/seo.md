@@ -49,7 +49,7 @@ iskanj). Po 14. oktobru preveri v Search Console, kateri nizi dejansko prinašaj
 
 ## Predlogi vsebin (po pričakovani vrednosti)
 
-1. **Brezplačna AI orodja: kaj dobite zastonj pri ChatGPT, Claude, Gemini in Copilot** (omejitve
+1. **Brezplačna AI orodja: kaj dobite zastonj pri ChatGPT, Claude, Gemini in Copilot** (PR #52, 2. 10.; omejitve
    brezplačnih paketov, prijava, slovenščina, kaj se zgodi s podatki). Največ iskanj od vseh tem.
 2. **ChatGPT v slovenščini: kako začeti** (prijava, nastavitev jezika, glas, aplikacija, kdaj se
    splača Go ali Plus). Iskalci tega niza so začetniki, ki jih druge strani ne nagovarjajo.
