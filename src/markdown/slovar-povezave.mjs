@@ -9,6 +9,7 @@
 // nodes, so they are never touched.
 
 import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import yaml from 'js-yaml';
 
 const MAX_LINKS = 10;
@@ -51,6 +52,10 @@ const PHRASES = {
   'sencna-ai': ['senčna AI', 'shadow AI'],
   'vrivanje-navodil': ['vrivanje navodil', 'prompt injection'],
   api: ['API'],
+  peskovnik: ['peskovnik', 'sandbox'],
+  'digitalni-dvojcek': ['digitalni dvojček', 'digitalni dvojčki', 'digitalnega dvojčka', 'digitalnem dvojčku', 'digitalnih dvojčkov', 'digitalnih dvojčkih', 'digital twin'],
+  // Not linked (in SKIP), only used to find articles that mention the product.
+  copilot: ['Copilot'],
 };
 
 const L = '[\\p{L}\\p{N}]';
@@ -77,13 +82,16 @@ function headword(izraz) {
   return izraz.replace(/\s*\(.*?\)\s*/g, ' ').trim();
 }
 
-let cached;
-function loadTerms() {
-  if (cached) return cached;
-  const entries = yaml.load(readFileSync(new URL('../data/slovar.yaml', import.meta.url), 'utf8'));
+const cached = new Map();
+// includeSkipped: also the SKIP terms, for finding which articles mention a term (never linked).
+function loadTerms(includeSkipped = false) {
+  if (cached.has(includeSkipped)) return cached.get(includeSkipped);
+  // Relative to the project root: this module is also bundled into the build via src/lib.ts,
+  // where import.meta.url no longer points at src/markdown/.
+  const entries = yaml.load(readFileSync(resolve(process.cwd(), 'src/data/slovar.yaml'), 'utf8'));
   const terms = [];
   for (const e of entries) {
-    if (SKIP.has(e.id)) continue;
+    if (SKIP.has(e.id) && !includeSkipped) continue;
     const phrases = PHRASES[e.id] ?? [headword(e.izraz)];
     for (const p of phrases) {
       const acronymOnly = /^[A-Z0-9]{2,}$/.test(p) || /^[A-Z]{2,}\s/.test(p);
@@ -96,8 +104,9 @@ function loadTerms() {
     list.length ? new RegExp(list.map((t) => `(?<![\\p{L}\\p{N}-])(${t.source})(?!${L})`).join('|'), flags) : null;
   const sens = terms.filter((t) => t.caseSensitive);
   const insens = terms.filter((t) => !t.caseSensitive);
-  cached = { sens: { re: build(sens, 'gu'), terms: sens }, insens: { re: build(insens, 'giu'), terms: insens } };
-  return cached;
+  const compiled = { sens: { re: build(sens, 'gu'), terms: sens }, insens: { re: build(insens, 'giu'), terms: insens } };
+  cached.set(includeSkipped, compiled);
+  return compiled;
 }
 
 // All matches in a string from both regexes, left to right, without overlaps.
@@ -116,6 +125,14 @@ function findMatches(text, compiled) {
   let lastEnd = -1;
   for (const f of found) if (f.start >= lastEnd) { out.push(f); lastEnd = f.end; }
   return out;
+}
+
+// Glossary ids mentioned in a Markdown text (headings included, link URLs and "Vir:" lines not).
+// Used for related articles and for the article list on glossary pages.
+export function termIdsIn(text, { includeSkipped = false } = {}) {
+  const compiled = loadTerms(includeSkipped);
+  const plain = text.replace(/\]\([^)]*\)/g, ']').replace(/^Viri?:.*$/gm, '');
+  return new Set(findMatches(plain, compiled).map((m) => m.term.id));
 }
 
 const SKIP_ANCESTORS = new Set(['heading', 'link', 'linkReference', 'definition', 'tableCell']);
