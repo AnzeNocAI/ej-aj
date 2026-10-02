@@ -102,21 +102,23 @@
     - https://developers.openai.com/api/docs/models
   preverjeno: 2026-09-26
 
-- id: gpt-6-sol
+- id: gpt-6-1-sol
   ponudnik: OpenAI
-  ime: GPT-6 Sol
-  api_id: gpt-6-sol
-  izid: '2026-09-22'
+  ime: GPT-6.1 Sol
+  api_id: gpt-6.1-sol
+  izid: '2026-09-29'
   cena_vhod: 2
   cena_izhod: 10
   kontekst: 1050000
   odprte_utezi: false
-  dostop: ChatGPT (plačljivi paketi), Codex, OpenAI API
-  za_kaj: Vsakdanje delo in avtomatizacije za podjetja, ki uporabljajo ChatGPT.
+  dostop: ChatGPT Work in Codex (Plus, Pro, Business, Enterprise, Edu), OpenAI API
+  za_kaj: Zahtevnejše delo in avtomatizacije, kjer šteje cena, za podjetja, ki uporabljajo ChatGPT.
+  opomba: Nasledil je GPT-6 Sol. Pri pozivih nad 272.000 vhodnimi tokeni je cena višja.
   viri:
-    - https://developers.openai.com/api/docs/models
-    - https://community.openai.com/t/announcing-gpt-6-sol-and-gpt-6-luna-in-the-api-codex-and-chatgpt/1399925
-  preverjeno: 2026-09-26
+    - https://developers.openai.com/api/docs/models/gpt-6.1-sol
+    - https://learn.chatgpt.com/docs/models
+    - https://techcrunch.com/2026/09/29/openai-launches-gpt-6-1-sol-says-it-nearly-matches-gpt-6-astra-and-costs-less/
+  preverjeno: 2026-10-02
 
 - id: gpt-6-luna
   ponudnik: OpenAI

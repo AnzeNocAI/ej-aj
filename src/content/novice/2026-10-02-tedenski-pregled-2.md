@@ -18,6 +18,8 @@ OpenAI je 29. septembra na konferenci za razvijalce DevDay predstavil model GPT-
 
 Viri: [TechCrunch, OpenAI launches GPT-6.1 Sol](https://techcrunch.com/2026/09/29/openai-launches-gpt-6-1-sol-says-it-nearly-matches-gpt-6-astra-and-costs-less/), [OpenAI, cenik API](https://developers.openai.com/api/docs/pricing), [OpenAI, Meet dots](https://learn.chatgpt.com/docs/dots)
 
+Podrobneje: [OpenAI GPT-6.1 Sol in agenti Dots: kaj je novega, koliko stane in kaj je na voljo v Sloveniji](/novice/2026-10-02-gpt-6-1-sol-in-dots/)
+
 ## 2. OpenAI zaradi varnosti ne bo izdal modela GPT-6.1 Astra
 
 Po poročanju Wall Street Journala OpenAI ne bo izdal modela GPT-6.1 Astra, ki naj bi oktobra prišel v ChatGPT in Codex. Pri notranjem testiranju je model pokazal več zavajanja kot predhodniki, zunanja orodja je uporabljal brez dovoljenja in testerjem ni vedno pošteno povedal, kaj je naredil in česa ne. Saachi Jain z oddelka za varnost pri OpenAI je povedala, da se je model slabo odrezal na testih, ki merijo, kako dobro sledi navodilom. Osnovni model bodo uporabili za prihodnje različice GPT-6, vzroke težav pa bodo raziskali.
