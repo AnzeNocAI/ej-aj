@@ -3,7 +3,7 @@
 Za agenta, ki nadaljuje delo na ej-aj.si. Najprej preberi `AGENTS.md` (pravila pisanja, točnosti,
 zaupnosti), `docs/slog.md` (kako ne zveneti kot AI), nato ta dokument, `docs/postavitev.md`
 (domena, Cloudflare, računi) in `docs/kako-objavim.md` (kako Anže pregleduje in objavlja).
-Stanje: 30. september 2026.
+Stanje: 2. oktober 2026.
 
 ## Kaj je na strani (ej-aj.si)
 
@@ -100,6 +100,9 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 
 ## Odprto
 
+0. **HTTPS:** `http://ej-aj.si` 2. 10. še vedno vrne 200 namesto preusmeritve. Anže mora v
+   Cloudflaru vklopiti SSL/TLS, Edge Certificates, Always Use HTTPS (agentu varnostno pravilo
+   aplikacije preklopa ne dovoli). Search Console pregled po 14. 10. (glej `docs/seo.md`).
 1. **Newsletter** (PR #7 objavljen 29. 9.): Buttondown, uporabnik `ej-aj`, račun noc.anze@gmail.com,
    brezplačni paket. Ime ej-aj.si, barva #1f3bd6, odgovori na pozdrav@ej-aj.si, slovenska noga.
    Slovenščine Buttondown ne podpira, potrditveni mail je v angleščini (lastno besedilo zahteva
@@ -147,6 +150,19 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
   nastanejo konflikti. Rešitev: `git checkout --theirs scripts/og-slike.json` po merge-u `main` in
   ponovno `node scripts/og-slike.mjs`.
 - Ukaz za GitHub žeton v skillih in tem dokumentu popravljen na obliko z rezervo (glej Tehnika).
+
+## Narejeno 30. septembra in 2. oktobra 2026
+
+- SEO osnove (#50): `lastmod` v sitemapu, polje `updated`, drobtinice, "Preberite še" pod
+  članki, "Kje o tem pišemo" na slovarju, naslovi rubrik, IndexNow (workflow po vsakem pushu na
+  `main`; 2. 10. enkrat ročno poslanih vseh 94 strani, HTTP 200). Analiza in teme: `docs/seo.md`.
+- Vodnika iz SEO načrta: brezplačna AI orodja (#52) in ChatGPT v slovenščini (#53). Pri obeh je
+  preverjevalec našel napake (14 oziroma 13, predvsem pretiravanja in mnenja kot dejstva).
+- Preimenovanja, ki jih morajo upoštevati prihodnji članki: NotebookLM je zdaj Gemini Notebook,
+  Mistral Le Chat je zdaj Vibe, Microsoft 365 Copilot Chat je zdaj Microsoft Copilot Chat.
+- Validator obravnava `www.perplexity.ai` kot gostitelja, ki blokira skripte.
+- Repo je zdaj v `/Users/anze/Desktop/Claude/ej-aj`; worktreeje po selitvi popravi
+  `git worktree repair <pot>`.
 
 Odprta vprašanja za Anžeta so v `~/Desktop/ej-aj-vprasanja.md` (zunaj repa).
 
