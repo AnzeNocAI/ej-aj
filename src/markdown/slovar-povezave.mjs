@@ -52,6 +52,8 @@ const PHRASES = {
   'sencna-ai': ['senčna AI', 'shadow AI'],
   'vrivanje-navodil': ['vrivanje navodil', 'prompt injection'],
   api: ['API'],
+  peskovnik: ['peskovnik', 'sandbox'],
+  'digitalni-dvojcek': ['digitalni dvojček', 'digitalni dvojčki', 'digitalnega dvojčka', 'digitalnem dvojčku', 'digitalnih dvojčkov', 'digitalnih dvojčkih', 'digital twin'],
   // Not linked (in SKIP), only used to find articles that mention the product.
   copilot: ['Copilot'],
 };
