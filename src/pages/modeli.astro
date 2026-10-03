@@ -2,17 +2,12 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { formatDate } from '../site';
+import NarocnineTabela from '../components/NarocnineTabela.astro';
+import '../styles/tabele.css';
+import { PRODUCTS, host, sortPlans } from '../cene';
 
 // Subscriptions (src/data/narocnine.yaml): what a person or a company pays per seat.
-const PRODUCT_ORDER = ['ChatGPT', 'Claude', 'Gemini', 'Microsoft Copilot', 'Mistral Le Chat', 'Perplexity'];
-const plans = (await getCollection('narocnine')).sort((a, b) => {
-  const pa = PRODUCT_ORDER.indexOf(a.data.produkt);
-  const pb = PRODUCT_ORDER.indexOf(b.data.produkt);
-  if (pa !== pb) return (pa === -1 ? 99 : pa) - (pb === -1 ? 99 : pb);
-  const pa2 = a.data.cena_mesec ?? a.data.cena_letno ?? 1e9;
-  const pb2 = b.data.cena_mesec ?? b.data.cena_letno ?? 1e9;
-  return pa2 - pb2;
-});
+const plans = sortPlans(await getCollection('narocnine'));
 const groups = [
   { key: 'podjetje', title: 'Za podjetja in ekipe' },
   { key: 'posameznik', title: 'Za posameznike' },
@@ -31,32 +26,15 @@ const lastChecked = new Date(
   Math.max(...models.map((m) => m.data.preverjeno.valueOf()), ...plans.map((p) => p.data.preverjeno.valueOf())),
 );
 const usd = new Intl.NumberFormat('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const money = new Intl.NumberFormat('sl-SI', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 const num = new Intl.NumberFormat('sl-SI');
 
 function apiPrice(v: number | null) {
   return v === null ? 'ni podatka' : `${usd.format(v)} $`;
 }
-function planPrice(v: number | null, currency: string) {
-  if (v === null) return 'po dogovoru';
-  if (v === 0) return 'brezplačno';
-  return `${money.format(v)} ${currency === 'EUR' ? '€' : '$'}`;
-}
 function context(v: number | null) {
   if (v === null) return 'ni podatka';
   if (v >= 1_000_000) return `${num.format(v / 1_000_000)} mio.`;
   return `${num.format(Math.round(v / 1000))} tisoč`;
-}
-// Slovenian plural: 1 uporabnik, 2 uporabnika, 3-4 uporabniki, 5+ uporabnikov.
-function users(n: number) {
-  const m = n % 100;
-  if (m === 1) return `${n} uporabnik`;
-  if (m === 2) return `${n} uporabnika`;
-  if (m === 3 || m === 4) return `${n} uporabniki`;
-  return `${n} uporabnikov`;
-}
-function host(url: string) {
-  return new URL(url).hostname.replace(/^www\./, '');
 }
 // Link labels: hostname, numbered when one model cites the same host twice.
 function sourceLabels(urls: string[]) {
@@ -95,6 +73,15 @@ function sourceLabels(urls: string[]) {
         uporabnika na mesec, popust za letno plačilo je naveden posebej. Ponudniki cene prilagajajo
         državi; pri vsaki postavki je označeno, ali vključuje DDV.
       </p>
+      <p class="how narrow">
+        Cene po orodjih:{' '}
+        {PRODUCTS.map((p, i) => (
+          <>
+            {i > 0 && ' · '}
+            <a href={`/cene/${p.slug}/`}>{p.ime.replace(/ \(.*\)$/, '')}</a>
+          </>
+        ))}
+      </p>
 
       {
         groups.map((g) => {
@@ -102,45 +89,7 @@ function sourceLabels(urls: string[]) {
           return (
             <>
               <h3>{g.title}</h3>
-              <div class="table-wrap">
-                <table class="data">
-                  <thead>
-                    <tr>
-                      <th scope="col">Paket</th>
-                      <th scope="col" class="num">Mesečno</th>
-                      <th scope="col" class="num">Pri letnem plačilu</th>
-                      <th scope="col">Kaj dobite</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {rows.map((p) => (
-                      <tr id={p.id}>
-                        <th scope="row">
-                          <span class="name">
-                            {p.data.produkt} {p.data.paket}
-                          </span>
-                          {p.data.min_uporabnikov && <span class="sub">najmanj {users(p.data.min_uporabnikov)}</span>}
-                        </th>
-                        <td class="num" data-label="Mesečno">
-                          {p.data.cena_mesec === null && p.data.cena_letno !== null
-                            ? 'samo letno'
-                            : planPrice(p.data.cena_mesec, p.data.valuta)}
-                        </td>
-                        <td class="num" data-label="Pri letnem plačilu">
-                          {p.data.cena_letno === null ? 'ni' : planPrice(p.data.cena_letno, p.data.valuta)}
-                        </td>
-                        <td class="use" data-label="Kaj dobite">
-                          {p.data.kaj_dobite}
-                          {p.data.opomba && <span class="note">{p.data.opomba}</span>}
-                          <span class="sources">
-                            {p.data.ddv && <>{p.data.ddv}. </>}Vir: <a href={p.data.vir}>{host(p.data.vir)}</a>
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <NarocnineTabela plans={rows} />
             </>
           );
         })
@@ -270,46 +219,6 @@ function sourceLabels(urls: string[]) {
     font-size: 0.98rem;
     margin: 0 0 8px;
   }
-  .table-wrap {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--surface);
-    overflow: hidden;
-  }
-  .data {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.95rem;
-  }
-  .data th,
-  .data td {
-    text-align: left;
-    vertical-align: top;
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--line);
-  }
-  .data thead th {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--muted);
-    background: var(--bg);
-  }
-  .data tbody tr:last-child > * {
-    border-bottom: 0;
-  }
-  .data tbody tr {
-    scroll-margin-top: 80px;
-  }
-  .num {
-    text-align: right !important;
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-  }
-  .name {
-    display: block;
-    font-weight: 700;
-  }
   .provider {
     display: flex;
     gap: 6px;
@@ -319,18 +228,6 @@ function sourceLabels(urls: string[]) {
     font-size: 0.85rem;
     color: var(--muted);
   }
-  .sub,
-  .note,
-  .sources {
-    display: block;
-    margin-top: 6px;
-    font-size: 0.82rem;
-    color: var(--muted);
-    font-weight: 400;
-  }
-  .use {
-    min-width: 260px;
-  }
   .notes {
     margin-top: 16px;
   }
@@ -338,49 +235,8 @@ function sourceLabels(urls: string[]) {
   @media (max-width: 760px) {
     /* The sticky header wraps to two rows on phones. */
     .block,
-    #kako-izbrati,
-    .data tbody tr {
+    #kako-izbrati {
       scroll-margin-top: 150px;
-    }
-    .table-wrap {
-      border: 0;
-      background: transparent;
-    }
-    .data thead {
-      display: none;
-    }
-    .data,
-    .data tbody,
-    .data tr,
-    .data th,
-    .data td {
-      display: block;
-      width: 100%;
-    }
-    .data tr {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      margin-bottom: 12px;
-      padding: 6px 0;
-    }
-    .data th,
-    .data td {
-      border-bottom: 0;
-      padding: 6px 16px;
-    }
-    .data td.num {
-      display: flex;
-      justify-content: space-between;
-      text-align: right;
-    }
-    .data td.num::before {
-      content: attr(data-label);
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-    .use {
-      min-width: 0;
     }
   }
 </style>

@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { host, planPrice, users } from '../cene';
+import '../styles/tabele.css';
+
+// Subscription table used on /modeli/ and on the per-product price pages.
+interface Props {
+  plans: CollectionEntry<'narocnine'>[];
+}
+const { plans: rows } = Astro.props;
+---
+
+<div class="table-wrap">
+  <table class="data">
+    <thead>
+      <tr>
+        <th scope="col">Paket</th>
+        <th scope="col" class="num">Mesečno</th>
+        <th scope="col" class="num">Pri letnem plačilu</th>
+        <th scope="col">Kaj dobite</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((p) => (
+        <tr id={p.id}>
+          <th scope="row">
+            <span class="name">
+              {p.data.produkt} {p.data.paket}
+            </span>
+            {p.data.min_uporabnikov && <span class="sub">najmanj {users(p.data.min_uporabnikov)}</span>}
+          </th>
+          <td class="num" data-label="Mesečno">
+            {p.data.cena_mesec === null && p.data.cena_letno !== null
+              ? 'samo letno'
+              : planPrice(p.data.cena_mesec, p.data.valuta)}
+          </td>
+          <td class="num" data-label="Pri letnem plačilu">
+            {p.data.cena_letno === null ? 'ni' : planPrice(p.data.cena_letno, p.data.valuta)}
+          </td>
+          <td class="use" data-label="Kaj dobite">
+            {p.data.kaj_dobite}
+            {p.data.opomba && <span class="note">{p.data.opomba}</span>}
+            <span class="sources">
+              {p.data.ddv && <>{p.data.ddv}. </>}Vir: <a href={p.data.vir}>{host(p.data.vir)}</a>
+            </span>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
