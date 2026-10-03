@@ -90,17 +90,25 @@ Source lists:
   AI Office). Slovenian news counts only if it is about AI and has a concrete fact (a decision,
   a programme, a model, an event with results).
 
-Also read, as a list of leads only, Anže's private weekly report if one exists for today:
-`/Users/anze/Desktop/Claude/GitHub Repository (Anze)/knowledge/ai-research/tedenski-pregled/<today>.md`.
-Any lead you use must be re-verified at its primary source. Never copy text or client
-references from that report; it is private.
+Also read, as a list of leads only, Anže's private weekly reports: every
+`/Users/anze/Desktop/Claude/GitHub Repository (Anze)/knowledge/ai-research/tedenski-pregled/YYYY-MM-DD.md`
+dated inside the window (a separate routine writes one on Friday morning, before this one runs).
+They summarise about 20 newsletters and podcasts (Ben's Bites, The Neuron, How I AI, Nate B Jones,
+Simon Willison and others) and are the main source of leads for practical items: new tools and
+features, real company use cases, methods for bringing AI into work, skills, company memory.
+These newsletters are secondary sources: for every lead you use, find and open the primary source
+(the company's own announcement, documentation or case study) and link that. If there is no
+primary source, link the newsletter and say whose account it is. Never copy text, ideas for
+workshops or client references from those reports; they are private. If no report exists for
+the window, carry on without it and say so under **Za preveriti**.
 
 ## 4. Select 5 to 10 items
 
 Reader: a Slovenian business person curious about AI, not an engineer. Pick what changes what
 they can do or buy. A good mix: 2 to 3 model or product releases, 1 practical feature,
 1 research or safety story if it is striking, 1 policy or EU item, 1 Slovenian item when there
-is a real one. Merge duplicates (one item, several sources). Drop items whose facts you cannot
+is a real one, 1 concrete use case or adoption method (how a company actually uses AI) when
+there is one with a primary source. Merge duplicates (one item, several sources). Drop items whose facts you cannot
 support with an opened page. Fewer good items beat more weak ones; 5 is fine.
 
 ## 5. Write the draft
