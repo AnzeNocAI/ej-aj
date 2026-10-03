@@ -2,6 +2,7 @@
 title: 'ChatGPT, Claude ali Gemini: primerjava cen, funkcij in zasebnosti'
 description: 'ChatGPT, Claude in Gemini drug ob drugem: koliko stanejo osebni paketi, kaj dobite brezplačno, katere funkcije ima kateri, kaj naredijo z vašimi podatki in kako izbrati.'
 date: 2026-09-27
+updated: 2026-10-03
 type: vodnik
 ---
 
@@ -68,11 +69,11 @@ Viri: [ChatGPT, cene](https://chatgpt.com/pricing/), [Claude, cene](https://clau
 
 ## Modeli
 
-V plačljivih paketih dobite zmogljivejše modele kot brezplačno, najzmogljivejši pa so ponekod le v najdražjih paketih ali za doplačilo. ChatGPT Plus vključuje modele GPT-6 (Astra, Sol in Luna), Pro pa razširjen dostop do njih in način Pro reasoning z modelom GPT-6 Astra. Claude Pro vključuje modele Opus, Sonnet in Haiku (v brezplačnem paketu Opusa ni), model Fable pa je v paketu Pro na voljo le z dokupljenimi krediti za uporabo. Google AI Pro navaja razširjen dostop do modela Gemini 3.1 Pro, funkcijo Deep Think pa le paket Ultra.
+V plačljivih paketih dobite zmogljivejše modele kot brezplačno, najzmogljivejši pa so ponekod le v najdražjih paketih ali za doplačilo. ChatGPT Plus v klepetu uporablja GPT-5.6 Sol, modele GPT-6 (Astra v omejenem obsegu, Sol in Luna) pa v okoljih Work in Codex. Pro ima razširjen dostop in v klepetu način Pro z modelom GPT-6 Pro, ki temelji na GPT-6 Astra. Claude Pro vključuje modele Opus, Sonnet in Haiku (v brezplačnem paketu Opusa ni), model Fable pa je v paketu Pro na voljo le z dokupljenimi krediti za uporabo. Google AI Pro navaja razširjen dostop do modela Gemini 3.1 Pro, funkcijo Deep Think pa le paket Ultra.
 
 Primerjava modelov s cenami za rabo prek API (povezave, prek katere programi uporabljajo model) je na strani [Modeli in cene](/modeli/). Meritve splošnih zmožnosti se z vsako novo različico spremenijo, zato se ob izbiri osebnega paketa po naši oceni bolj splača gledati funkcije in povezave kot lestvice.
 
-Viri: [ChatGPT, cene](https://chatgpt.com/pricing/), [Claude, cene](https://claude.com/pricing), [Gemini, naročnine](https://gemini.google/subscriptions/)
+Viri: [ChatGPT, cene](https://chatgpt.com/pricing/), [Claude, cene](https://claude.com/pricing), [Gemini, naročnine](https://gemini.google/subscriptions/), [OpenAI, GPT-5.6 in GPT-6 Pro v ChatGPT](https://help.openai.com/en/articles/20001354-gpt-56-and-gpt-6-pro-in-chatgpt)
 
 ## Kaj se zgodi z vašimi pogovori
 

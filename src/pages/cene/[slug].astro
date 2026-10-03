@@ -1,0 +1,199 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import NarocnineTabela from '../../components/NarocnineTabela.astro';
+import { PRODUCTS, host, planPrice, sortPlans, users } from '../../cene';
+import { formatDate } from '../../site';
+
+// One page per product from src/data/narocnine.yaml, for searches like "chatgpt plus cena".
+// Every sentence is built from the data, so the monthly refresh (skill posodobi-modele) keeps
+// the page current without edits here.
+export async function getStaticPaths() {
+  return PRODUCTS.map((p) => ({ params: { slug: p.slug }, props: { product: p } }));
+}
+
+const { product } = Astro.props;
+const plans = sortPlans((await getCollection('narocnine')).filter((p) => p.data.produkt === product.produkt));
+const checked = new Date(Math.max(...plans.map((p) => p.data.preverjeno.valueOf())));
+const groups = [
+  { key: 'posameznik', title: 'Za posameznike' },
+  { key: 'podjetje', title: 'Za podjetja in ekipe' },
+] as const;
+const name = (p: (typeof plans)[number]) => `${p.data.produkt} ${p.data.paket}`;
+const free = plans.find((p) => p.data.cena_mesec === 0);
+// Individuals first, then companies; cheapest first within each group.
+const paid = groups.flatMap((g) => plans.filter((p) => p.data.za === g.key && p.data.cena_mesec !== 0));
+const allEur = plans.every((p) => p.data.valuta === 'EUR');
+
+function priceSentence(p: (typeof plans)[number]) {
+  const d = p.data;
+  const vat = d.ddv ? ` (${d.ddv})` : '';
+  let s: string;
+  if (d.cena_mesec !== null && d.cena_mesec > 0) {
+    s = `${name(p)} stane ${planPrice(d.cena_mesec, d.valuta)} na mesec${vat}`;
+    if (d.cena_letno !== null) s += `, pri letnem plačilu ${planPrice(d.cena_letno, d.valuta)} na mesec`;
+  } else if (d.cena_letno !== null) {
+    s = `${name(p)} se plača letno, ${planPrice(d.cena_letno, d.valuta)} na mesec${vat}`;
+  } else {
+    s = `Cena za ${name(p)} je po dogovoru s ponudnikom`;
+  }
+  s += d.za === 'podjetje' && (d.cena_mesec !== null || d.cena_letno !== null) ? ', na uporabnika.' : '.';
+  if (d.min_uporabnikov) s += ` Najmanj ${users(d.min_uporabnikov)}.`;
+  return s;
+}
+
+// Short price list for the meta description: "Go 8 €, Plus 23 €, ...", individuals only, plus
+// the cheapest company plan, so the snippet answers the search without being cut off.
+const priced = (za: string) => paid.filter((p) => p.data.za === za && (p.data.cena_mesec !== null || p.data.cena_letno !== null));
+const price = (p: (typeof plans)[number]) => planPrice(p.data.cena_mesec ?? p.data.cena_letno, p.data.valuta);
+const short = priced('posameznik').map((p) => `${p.data.paket} ${price(p)}`);
+const company = priced('podjetje').find((p) => p.data.cena_mesec !== null) ?? priced('podjetje')[0];
+if (company) short.push(`za podjetja od ${price(company)} na uporabnika`);
+const title = `Koliko stane ${product.ime}: cene paketov za posameznike in podjetja`;
+const description = `Cene ${product.ime} na mesec: ${short.join(', ')}. Kaj dobite v posameznem paketu, z viri in datumom preverjanja.`;
+
+const guides = (await Promise.all(product.vodniki.map((id) => getCollection('novice', (e) => e.id.endsWith(id))))).flat();
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const faq = [
+  ...(free ? [{ q: `Ali je ${product.ime} brezplačen?`, a: `Da. Brezplačni paket ${name(free)}: ${free.data.kaj_dobite}` }] : []),
+  ...paid.map((p) => ({ q: `Koliko stane ${name(p)}?`, a: `${priceSentence(p)} ${p.data.kaj_dobite}` })),
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'ej-aj.si', item: Astro.site?.toString() },
+        { '@type': 'ListItem', position: 2, name: 'Modeli in cene', item: new URL('/modeli/', Astro.site).toString() },
+        { '@type': 'ListItem', position: 3, name: `Cene ${product.ime}`, item: url },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    },
+  ]}
+>
+  <div class="wrap">
+    <header class="article-head narrow">
+      <span class="eyebrow"><a href="/modeli/#narocnine">Modeli in cene</a></span>
+      <h1>Koliko stane {product.ime}</h1>
+      <p class="lede">
+        Cene vseh paketov {product.ime} ({product.ponudnik}) za posameznike in podjetja, kot jih za Slovenijo navaja
+        ponudnik. Cene so na uporabnika na mesec. Preverjeno {formatDate(checked)}, stran se osveži vsak mesec.
+      </p>
+      {product.slug === 'mistral' && (
+        <p>Mistral je klepetalnik Le Chat preimenoval v Vibe. Imena paketov so taka, kot jih je ob preverjanju navajala stran s cenami.</p>
+      )}
+      {!allEur && (
+        <p>
+          Nekatere cene so v ameriških dolarjih, ker jih ponudnik za Slovenijo v evrih ne navaja ali jih še nismo preverili.
+          Pri vsaki postavki piše, za katero državo cena velja.
+        </p>
+      )}
+    </header>
+
+    {
+      groups.map((g) => {
+        const rows = plans.filter((p) => p.data.za === g.key);
+        return rows.length > 0 && (
+          <section class="block">
+            <h2>{g.title}</h2>
+            <NarocnineTabela plans={rows} />
+          </section>
+        );
+      })
+    }
+
+    <section class="block prose narrow">
+      <h2>Cene posameznih paketov</h2>
+      {
+        free && (
+          <>
+            <h3>Ali je {product.ime} brezplačen?</h3>
+            <p>
+              Da. Brezplačni paket {name(free)} ponuja: {free.data.kaj_dobite.replace(/^./, (c) => c.toLowerCase())} Kaj točno dobite brez plačila pri
+              različnih orodjih, primerja vodnik <a href="/vodniki/brezplacna-ai-orodja/">Brezplačna AI orodja</a>.
+            </p>
+          </>
+        )
+      }
+      {
+        paid.map((p) => (
+          <>
+            <h3>Koliko stane {name(p)}?</h3>
+            <p>
+              {priceSentence(p)} Kaj dobite: {p.data.kaj_dobite.replace(/^./, (c) => c.toLowerCase())}
+              {p.data.opomba && <> {p.data.opomba}</>}{' '}
+              <span class="vir">
+                Vir: <a href={p.data.vir}>{host(p.data.vir)}</a>, preverjeno {formatDate(p.data.preverjeno)}.
+              </span>
+            </p>
+          </>
+        ))
+      }
+      <h3>Ali je v ceni DDV?</h3>
+      <p>
+        Pri postavkah, kjer je v tabeli zapisano "brez DDV" ali "z DDV", to navaja ponudnik. Kjer oznake ni, ponudnik ob
+        ceni tega ne pove; končni znesek z DDV vidite pred plačilom. Če kupujete za podjetje in ob nakupu vpišete
+        identifikacijsko številko za DDV, ponudnik iz druge države EU praviloma izda račun brez DDV, DDV pa obračunate sami
+        (<a href="https://europa.eu/youreurope/business/taxation/vat/cross-border-vat/index_sl.htm">obrnjena davčna obveznost</a>).
+      </p>
+      <h3>Kako odpoveste naročnino?</h3>
+      <p>
+        Koraki za odpoved in pravila za vračilo denarja so v vodniku{' '}
+        <a href="/vodniki/odpoved-narocnine-ai/">Kako odpovedati naročnino na ChatGPT, Claude ali Gemini</a>.
+      </p>
+    </section>
+
+    <section class="block narrow">
+      <h2>Primerjava z drugimi orodji</h2>
+      <ul class="others">
+        {PRODUCTS.filter((p) => p.slug !== product.slug).map((p) => (
+          <li><a href={`/cene/${p.slug}/`}>Koliko stane {p.ime}</a></li>
+        ))}
+        <li><a href="/modeli/#narocnine">Vse naročnine v eni tabeli</a></li>
+      </ul>
+      {guides.length > 0 && (
+        <>
+          <h3>Vodniki</h3>
+          <ul class="others">
+            {guides.map((g) => (
+              <li><a href={`/vodniki/${g.id.replace(/^\d{4}-\d{2}-\d{2}-/, '')}/`}>{g.data.title}</a></li>
+            ))}
+          </ul>
+        </>
+      )}
+    </section>
+  </div>
+</Base>
+
+<style>
+  .eyebrow a {
+    color: inherit;
+  }
+  .block {
+    margin: 36px 0;
+  }
+  .block h2 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    margin: 0 0 12px;
+  }
+  .vir {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .others {
+    padding-left: 1.2em;
+  }
+  .others li {
+    margin: 4px 0;
+  }
+</style>
