@@ -15,6 +15,35 @@ const EU = ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'F
 const IME = { AT: 'Avstrija', BE: 'Belgija', BG: 'Bolgarija', CY: 'Ciper', CZ: 'Češka', DE: 'Nemčija', DK: 'Danska', EE: 'Estonija', EL: 'Grčija', ES: 'Španija', FI: 'Finska', FR: 'Francija', HR: 'Hrvaška', HU: 'Madžarska', IE: 'Irska', IT: 'Italija', LT: 'Litva', LU: 'Luksemburg', LV: 'Latvija', MT: 'Malta', NL: 'Nizozemska', PL: 'Poljska', PT: 'Portugalska', RO: 'Romunija', SE: 'Švedska', SI: 'Slovenija', SK: 'Slovaška' };
 const MS_NAMES = { Austria: 'AT', Belgium: 'BE', Bulgaria: 'BG', Cyprus: 'CY', Czechia: 'CZ', 'Czech Republic': 'CZ', Germany: 'DE', Denmark: 'DK', Estonia: 'EE', Greece: 'EL', Spain: 'ES', Finland: 'FI', France: 'FR', Croatia: 'HR', Hungary: 'HU', Ireland: 'IE', Italy: 'IT', Lithuania: 'LT', Luxembourg: 'LU', Latvia: 'LV', Malta: 'MT', Netherlands: 'NL', Poland: 'PL', Portugal: 'PT', Romania: 'RO', Sweden: 'SE', Slovenia: 'SI', Slovakia: 'SK' };
 const BOTS = ['ChatGPT', 'Google Gemini', 'Microsoft Copilot', 'Perplexity', 'Claude'];
+// Chatbot shares by country (/statistika/klepetalniki-po-drzavah/): StatCounter region name,
+// region code, Slovenian name, group. China and Russia are left out on purpose: StatCounter does
+// not track their domestic chatbots, so its shares there say little about real use.
+const BOTS_DRZAVE = [...BOTS, 'Deepseek'];
+const DRZAVE = [
+  ...EU.map((c) => [{ CZ: 'Czech Republic', EL: 'Greece' }[c] ?? Object.keys(MS_NAMES).find((n) => MS_NAMES[n] === c), c === 'EL' ? 'GR' : c, IME[c], 'EU']),
+  ['United Kingdom', 'GB', 'Združeno kraljestvo', 'Evropa'],
+  ['Norway', 'NO', 'Norveška', 'Evropa'],
+  ['Switzerland', 'CH', 'Švica', 'Evropa'],
+  ['Serbia', 'RS', 'Srbija', 'Evropa'],
+  ['Bosnia and Herzegovina', 'BA', 'Bosna in Hercegovina', 'Evropa'],
+  ['Montenegro', 'ME', 'Črna gora', 'Evropa'],
+  ['North Macedonia', 'MK', 'Severna Makedonija', 'Evropa'],
+  ['Ukraine', 'UA', 'Ukrajina', 'Evropa'],
+  ['Turkey', 'TR', 'Turčija', 'Evropa'],
+  ['United States', 'US', 'ZDA', 'Svet'],
+  ['Canada', 'CA', 'Kanada', 'Svet'],
+  ['Mexico', 'MX', 'Mehika', 'Svet'],
+  ['Brazil', 'BR', 'Brazilija', 'Svet'],
+  ['India', 'IN', 'Indija', 'Svet'],
+  ['Japan', 'JP', 'Japonska', 'Svet'],
+  ['South Korea', 'KR', 'Južna Koreja', 'Svet'],
+  ['Indonesia', 'ID', 'Indonezija', 'Svet'],
+  ['Australia', 'AU', 'Avstralija', 'Svet'],
+  ['South Africa', 'ZA', 'Južna Afrika', 'Svet'],
+  ['Nigeria', 'NG', 'Nigerija', 'Svet'],
+  ['Egypt', 'EG', 'Egipt', 'Svet'],
+];
+const r2 = (v) => Math.round(v * 100 + 1e-7) / 100;
 
 // Half-up rounding to one decimal (Eurostat publishes two; 19,95 must become 20,0).
 const r1 = (v) => Math.round(v * 10 + 1e-7) / 10;
@@ -73,7 +102,7 @@ function statcounterUrl(region, regionHidden, from, to) {
     toMonthYear: ymDash(to),
     csv: '1',
   });
-  return `https://gs.statcounter.com/ai-chatbot-market-share/all/${region.toLowerCase()}/chart.php?${q}`;
+  return `https://gs.statcounter.com/ai-chatbot-market-share/all/${region.toLowerCase().replaceAll(' ', '-')}/chart.php?${q}`;
 }
 
 // Microsoft CSV columns look like "H1 2025 AI Diffusion" and "Q2 2026 AI Diffusion".
@@ -154,6 +183,20 @@ async function main() {
   out.klepetalniki_si = { meseci: siRows.map((r) => r.Date), ...Object.fromEntries(BOTS.map((b) => [b, siRows.map((r) => Number(r[b] ?? 0))])) };
   const euLast = euRows.at(-1);
   out.klepetalniki_evropa = { mesec: euLast.Date, ...Object.fromEntries(BOTS.map((b) => [b, Number(euLast[b] ?? 0)])) };
+
+  // StatCounter by country: average of the monthly shares over the last three complete months,
+  // because single months of smaller countries swing by several points.
+  const from3 = ym(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 3, 1)));
+  const drzave = [];
+  for (const [region, code, ime, skupina] of [['Worldwide', 'ww', 'Svet', 'Svet'], ['Europe', 'eu', 'Evropa', 'Evropa'], ...DRZAVE]) {
+    const rows = parseCsv(await get(statcounterUrl(region, code, from3, to), 'text')).filter((r) => /^\d{4}-\d{2}$/.test(r.Date));
+    if (rows.length !== 3) throw new Error(`StatCounter ${region}: ${rows.length} mesecev namesto 3`);
+    const avg = (b) => r2(rows.reduce((sum, r) => sum + Number(r[b] ?? 0), 0) / rows.length);
+    drzave.push({ koda: code.toUpperCase(), ime, skupina, ...Object.fromEntries(BOTS_DRZAVE.map((b) => [b, avg(b)])) });
+    await new Promise((res) => setTimeout(res, 300));
+  }
+  out.klepetalniki_drzave = { od: ymDash(from3), do: ymDash(to), drzave };
+  sources.statcounter_drzave = { od: ymDash(from3), do: ymDash(to), drzav: drzave.length };
 
   out._meta = { preverjeno: new Date().toLocaleDateString('sv-SE'), viri: sources };
 
