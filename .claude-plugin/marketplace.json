@@ -1,0 +1,17 @@
+{
+  "name": "ej-aj",
+  "owner": {
+    "name": "ej-aj.si",
+    "url": "https://ej-aj.si/skilli/"
+  },
+  "metadata": {
+    "description": "Brezplačni skilli v slovenščini z ej-aj.si"
+  },
+  "plugins": [
+    {
+      "name": "ej-aj",
+      "source": "./skilli/ej-aj",
+      "description": "Pet skillov v slovenščini: pregled skilla, AI v delovni postopek, baza znanja na GitHubu, slovenski slog, pravila rabe AI."
+    }
+  ]
+}

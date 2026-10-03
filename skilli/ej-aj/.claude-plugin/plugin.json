@@ -1,0 +1,12 @@
+{
+  "name": "ej-aj",
+  "description": "Skilli v slovenščini z ej-aj.si: pregled skilla, AI v delovni postopek, baza znanja na GitHubu, slovenski slog, pravila rabe AI.",
+  "version": "1.0.0",
+  "author": {
+    "name": "ej-aj.si",
+    "url": "https://ej-aj.si/skilli/"
+  },
+  "homepage": "https://ej-aj.si/skilli/",
+  "repository": "https://github.com/ej-aj-pro/ej-aj",
+  "license": "MIT"
+}

@@ -1,0 +1,179 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+// Free skills from skilli/ej-aj/skills/<id>/ (plugin "ej-aj" in the marketplace at the repo root).
+// Reader-facing text is in src/data/skilli.yaml; ZIPs come from scripts/skilli-zip.mjs.
+// Same order as in src/data/skilli.yaml.
+const ORDER = ['pregled-skilla', 'ai-v-delovni-postopek', 'baza-znanja-github', 'slovenski-slog', 'pravila-rabe-ai'];
+const skills = (await getCollection('skilli')).sort((a, b) => ORDER.indexOf(a.id) - ORDER.indexOf(b.id));
+const GITHUB = 'https://github.com/ej-aj-pro/ej-aj/tree/main/skilli/ej-aj/skills';
+const title = 'Brezplačni skilli v slovenščini za Claude in druga AI orodja';
+const description =
+  'Pet brezplačnih skillov v slovenščini: pregled skilla, AI v delovni postopek, baza znanja na GitHubu, slovenski slog in pravila rabe AI. Za Claude, Claude Code in druga orodja.';
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+---
+
+<Base
+  title={title}
+  description={description}
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: title,
+      itemListElement: skills.map((s, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `${url}#${s.id}`,
+        name: s.data.naslov,
+      })),
+    },
+  ]}
+>
+  <div class="wrap narrow">
+    <header class="article-head">
+      <span class="eyebrow">Skilli</span>
+      <h1>Brezplačni skilli v slovenščini</h1>
+      <p class="lede">
+        Skill je mapa z navodili (in po potrebi skriptami), ki jih AI uporabi, ko naleti na nalogo, za katero so
+        namenjena. Teh pet smo napisali v slovenščini in jih lahko prosto uporabljate, prilagajate in delite (licenca
+        MIT). Delujejo v Claudu in Claude Code, po odprtem standardu Agent Skills pa tudi v drugih orodjih.
+      </p>
+      <p>
+        Kako skill deluje in kako napišete svojega, razloži vodnik{' '}
+        <a href="/vodniki/claude-skills/">Claude skills: kaj je skill in kako ga napisati</a>.
+      </p>
+    </header>
+
+    <section class="skills">
+      {
+        skills.map((s) => (
+          <article class="skill" id={s.id}>
+            <h2>{s.data.naslov}</h2>
+            <p>{s.data.kaj}</p>
+            <p class="meta">{s.data.za_koga}</p>
+            <p class="example">
+              <span>Recite na primer:</span> "{s.data.primer}"
+            </p>
+            <p class="actions">
+              <a class="btn" href={`/skilli/${s.id}.zip`} download>Prenesi ZIP</a>
+              <a href={`${GITHUB}/${s.id}`}>Datoteke na GitHubu</a>
+              <code>/ej-aj:{s.id}</code>
+            </p>
+            <p class="sources">
+              Nastal iz:{' '}
+              {s.data.viri.map((v, i) => (
+                <>
+                  {i > 0 && ', '}
+                  <a href={v.url}>{v.ime}</a>
+                </>
+              ))}
+            </p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="prose install">
+      <h2>Kako namestite skille</h2>
+
+      <h3>Claude Code</h3>
+      <p>Vseh pet skillov je v enem vtičniku. V terminalu vpišite:</p>
+      <pre><code>claude plugin marketplace add ej-aj-pro/ej-aj
+claude plugin install ej-aj@ej-aj</code></pre>
+      <p>
+        Claude skill uporabi sam, ko vaša zahteva ustreza njegovemu opisu. Lahko ga pokličete tudi neposredno, na
+        primer <code>/ej-aj:pregled-skilla</code>. Posamezen skill lahko namestite tudi tako, da njegovo mapo iz ZIP
+        datoteke skopirate v <code>~/.claude/skills/</code> (za vse vaše projekte) ali v <code>.claude/skills/</code>{' '}
+        v projektu (za vso ekipo).
+      </p>
+
+      <h3>Aplikacija Claude (claude.ai)</h3>
+      <p>
+        Prenesite ZIP skilla, v aplikaciji odprite Customize, nato Skills, kliknite Create skill in izberite Upload a
+        skill. Skilli so na voljo v paketih Free, Pro, Max, Team in Enterprise. Lastniki organizacij v paketih Team in
+        Enterprise lahko skill dodelijo vsem v organizaciji.
+      </p>
+
+      <h3>Druga orodja</h3>
+      <p>
+        Skilli so napisani po odprtem standardu <a href="https://agentskills.io">Agent Skills</a>, ki ga podpirajo
+        tudi ChatGPT in Codex, Gemini CLI, GitHub Copilot, VS Code, Cursor in druga orodja. Mapo skilla skopirajte v
+        mapo za skille svojega orodja; kje je, piše v navodilih posameznega orodja, povezana na strani standarda.
+        Skripte v skillih so v Pythonu in ne potrebujejo dodatnih paketov.
+      </p>
+
+      <h2>Varnost</h2>
+      <p>
+        Skill lahko vsebuje skripte, ki se izvedejo na vašem računalniku. Anthropic svetuje, naj skille nameščate le
+        iz virov, ki jim zaupate, in pred namestitvijo preberete vse datoteke. Naši skilli ne pošiljajo podatkov
+        nikamor, ničesar ne objavijo in pred pošiljanjem, objavo ali potiskom na GitHub počakajo na vašo potrditev.
+        Vse datoteke si lahko ogledate na{' '}
+        <a href="https://github.com/ej-aj-pro/ej-aj/tree/main/skilli">GitHubu</a>. Za pregled tujega skilla lahko
+        uporabite naš <a href="#pregled-skilla">Pregled skilla</a>.
+      </p>
+      <p>
+        Napako ali predlog za izboljšavo sporočite na{' '}
+        <a href="https://github.com/ej-aj-pro/ej-aj/issues">GitHubu</a> ali na pozdrav@ej-aj.si.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .skills {
+    display: grid;
+    gap: 18px;
+    margin: 28px 0 40px;
+  }
+  .skill {
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    scroll-margin-top: 90px;
+  }
+  .skill h2 {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    margin: 0 0 8px;
+  }
+  .skill p {
+    margin: 0 0 10px;
+  }
+  .meta,
+  .sources {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .example span {
+    color: var(--muted);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .actions code {
+    font-size: 0.85rem;
+  }
+  .install pre {
+    overflow-x: auto;
+  }
+  @media (max-width: 760px) {
+    .skill {
+      scroll-margin-top: 150px;
+    }
+  }
+</style>

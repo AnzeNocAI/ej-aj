@@ -79,3 +79,5 @@ V tem primeru je pisanje prepuščeno Claudu, izračun cene pa skripti, ker mora
 ## Varnost
 
 Skill lahko vsebuje skripte, ki se izvedejo na vašem računalniku. Anthropic opozarja, naj skille uporabljate samo iz zaupanja vrednih virov in pred uporabo preglejte vse datoteke, ker lahko zlonameren skill pošlje podatke drugam.
+
+Pet brezplačnih skillov v slovenščini, ki jih lahko prenesete in prilagodite, med njimi tudi skill za pregled skilla po teh pravilih, je na strani [Skilli](/skilli/).

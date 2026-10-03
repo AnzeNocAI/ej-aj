@@ -114,7 +114,7 @@ const children = [
   ),
   spacer(),
   rule('2.2', 'Osebnih in brezplačnih računov za službene podatke ne uporabljamo.'),
-  rule('2.3', 'Novo orodje pred uporabo odobri [odgovorna oseba]. Pred odobritvijo preveri, ali ponudnik podatke uporablja za učenje modelov, kje (v EU ali zunaj nje) in koliko časa jih hrani in ali je z njim sklenjena pogodba o obdelavi osebnih podatkov. Pogoje odobrenih orodij pregleda vsaj enkrat na leto.'),
+  rule('2.3', 'Novo orodje pred uporabo odobri [odgovorna oseba]. Pred odobritvijo preveri, ali ponudnik podatke uporablja za učenje modelov, kje (v EU ali zunaj nje) in koliko časa jih hrani ter ali je z njim sklenjena pogodba o obdelavi osebnih podatkov. Pogoje odobrenih orodij pregleda vsaj enkrat na leto.'),
   rule('2.4', 'Kdor se z orodji AI uči na osebnem računu, pri tem ne uporablja službenih podatkov in v nastavitvah izklopi uporabo pogovorov za izboljšanje modelov.'),
 
   rule('2.5', 'Ko zaposleni odide, [odgovorna oseba] ukine njegov dostop do službenih računov AI in poskrbi, da službeni pogovori in datoteke ostanejo v podjetju.'),
@@ -182,7 +182,7 @@ const children = [
   ),
 
   new Paragraph({ pageBreakBefore: true, heading: HeadingLevel.HEADING_1, children: [new TextRun('Priloga 2: Izjava o seznanitvi')] }),
-  p('Spodaj podpisani potrjujem, da sem prebral Pravila rabe orodij umetne inteligence [ime podjetja], ki veljajo od [datum], in jih bom pri delu upošteval.'),
+  p('Spodaj podpisani potrjujem, da sem prebral(-a) Pravila rabe orodij umetne inteligence [ime podjetja], ki veljajo od [datum], in jih bom pri delu upošteval(-a).'),
   spacer(),
   table(
     ['Ime in priimek', 'Delovno mesto', 'Datum', 'Podpis'],

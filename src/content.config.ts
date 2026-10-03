@@ -91,4 +91,17 @@ const narocnine = defineCollection({
   }),
 });
 
-export const collections = { novice, slovar, modeli, narocnine, videi };
+const skilli = defineCollection({
+  loader: file('src/data/skilli.yaml'),
+  schema: z.object({
+    naslov: z.string(),
+    kaj: z.string(),
+    za_koga: z.string(),
+    // Example request in the user's words.
+    primer: z.string(),
+    // Public sources the skill was built from (our guides or external pages).
+    viri: z.array(z.object({ ime: z.string(), url: z.string() })).min(1),
+  }),
+});
+
+export const collections = { novice, slovar, modeli, narocnine, videi, skilli };
