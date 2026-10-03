@@ -570,7 +570,6 @@
  },
  "klepetalniki_si": {
   "meseci": [
-   "2025-09",
    "2025-10",
    "2025-11",
    "2025-12",
@@ -581,10 +580,10 @@
    "2026-05",
    "2026-06",
    "2026-07",
-   "2026-08"
+   "2026-08",
+   "2026-09"
   ],
   "ChatGPT": [
-   90.48,
    89.67,
    91.78,
    89.54,
@@ -595,10 +594,10 @@
    89.05,
    90.77,
    90.27,
-   90.28
+   90.28,
+   90.1
   ],
   "Google Gemini": [
-   1.11,
    1.13,
    1.29,
    1.78,
@@ -609,10 +608,10 @@
    2.98,
    3.04,
    5.01,
-   5.71
+   5.71,
+   6.91
   ],
   "Microsoft Copilot": [
-   5.08,
    4.96,
    3.58,
    4.58,
@@ -623,10 +622,10 @@
    3.81,
    3.45,
    2.15,
-   1.95
+   1.95,
+   1.02
   ],
   "Perplexity": [
-   2.7,
    3.68,
    3.13,
    3.81,
@@ -637,10 +636,10 @@
    2.41,
    1.37,
    1.49,
-   1.13
+   1.13,
+   1.57
   ],
   "Claude": [
-   0.63,
    0.56,
    0.22,
    0.28,
@@ -651,19 +650,576 @@
    1.71,
    1.37,
    1.07,
-   0.93
+   0.93,
+   0.41
   ]
  },
  "klepetalniki_evropa": {
-  "mesec": "2026-08",
-  "ChatGPT": 79.24,
-  "Google Gemini": 10.87,
-  "Microsoft Copilot": 3.55,
-  "Perplexity": 3.5,
-  "Claude": 2.81
+  "mesec": "2026-09",
+  "ChatGPT": 78.82,
+  "Google Gemini": 12.82,
+  "Microsoft Copilot": 3.2,
+  "Perplexity": 3.72,
+  "Claude": 1.41
+ },
+ "klepetalniki_drzave": {
+  "od": "2026-07",
+  "do": "2026-09",
+  "drzave": [
+   {
+    "koda": "WW",
+    "ime": "Svet",
+    "skupina": "Svet",
+    "ChatGPT": 79.25,
+    "Google Gemini": 10.6,
+    "Microsoft Copilot": 2.54,
+    "Perplexity": 5.35,
+    "Claude": 2.23,
+    "Deepseek": 0.02
+   },
+   {
+    "koda": "EU",
+    "ime": "Evropa",
+    "skupina": "Evropa",
+    "ChatGPT": 77.79,
+    "Google Gemini": 11.62,
+    "Microsoft Copilot": 3.81,
+    "Perplexity": 3.99,
+    "Claude": 2.74,
+    "Deepseek": 0.04
+   },
+   {
+    "koda": "AT",
+    "ime": "Avstrija",
+    "skupina": "EU",
+    "ChatGPT": 80.22,
+    "Google Gemini": 9.63,
+    "Microsoft Copilot": 3.13,
+    "Perplexity": 4.07,
+    "Claude": 2.91,
+    "Deepseek": 0.01
+   },
+   {
+    "koda": "BE",
+    "ime": "Belgija",
+    "skupina": "EU",
+    "ChatGPT": 77.16,
+    "Google Gemini": 10.9,
+    "Microsoft Copilot": 5.83,
+    "Perplexity": 3.11,
+    "Claude": 2.96,
+    "Deepseek": 0
+   },
+   {
+    "koda": "BG",
+    "ime": "Bolgarija",
+    "skupina": "EU",
+    "ChatGPT": 80.41,
+    "Google Gemini": 13.71,
+    "Microsoft Copilot": 1.64,
+    "Perplexity": 2.69,
+    "Claude": 1.55,
+    "Deepseek": 0
+   },
+   {
+    "koda": "CY",
+    "ime": "Ciper",
+    "skupina": "EU",
+    "ChatGPT": 87.11,
+    "Google Gemini": 7.1,
+    "Microsoft Copilot": 1.28,
+    "Perplexity": 2.91,
+    "Claude": 1.62,
+    "Deepseek": 0
+   },
+   {
+    "koda": "CZ",
+    "ime": "Češka",
+    "skupina": "EU",
+    "ChatGPT": 74.93,
+    "Google Gemini": 13.87,
+    "Microsoft Copilot": 5.57,
+    "Perplexity": 3.92,
+    "Claude": 1.53,
+    "Deepseek": 0.19
+   },
+   {
+    "koda": "DE",
+    "ime": "Nemčija",
+    "skupina": "EU",
+    "ChatGPT": 76.64,
+    "Google Gemini": 10.85,
+    "Microsoft Copilot": 3.7,
+    "Perplexity": 5.73,
+    "Claude": 3.05,
+    "Deepseek": 0.02
+   },
+   {
+    "koda": "DK",
+    "ime": "Danska",
+    "skupina": "EU",
+    "ChatGPT": 83.72,
+    "Google Gemini": 7.67,
+    "Microsoft Copilot": 3.4,
+    "Perplexity": 2.58,
+    "Claude": 2.51,
+    "Deepseek": 0.08
+   },
+   {
+    "koda": "EE",
+    "ime": "Estonija",
+    "skupina": "EU",
+    "ChatGPT": 83.28,
+    "Google Gemini": 8.6,
+    "Microsoft Copilot": 2.14,
+    "Perplexity": 2.96,
+    "Claude": 3.03,
+    "Deepseek": 0
+   },
+   {
+    "koda": "GR",
+    "ime": "Grčija",
+    "skupina": "EU",
+    "ChatGPT": 80.76,
+    "Google Gemini": 12.82,
+    "Microsoft Copilot": 2.1,
+    "Perplexity": 2.16,
+    "Claude": 2.15,
+    "Deepseek": 0
+   },
+   {
+    "koda": "ES",
+    "ime": "Španija",
+    "skupina": "EU",
+    "ChatGPT": 77.06,
+    "Google Gemini": 13.18,
+    "Microsoft Copilot": 3.39,
+    "Perplexity": 4.23,
+    "Claude": 2.13,
+    "Deepseek": 0
+   },
+   {
+    "koda": "FI",
+    "ime": "Finska",
+    "skupina": "EU",
+    "ChatGPT": 76.62,
+    "Google Gemini": 10,
+    "Microsoft Copilot": 3.76,
+    "Perplexity": 5.43,
+    "Claude": 4.06,
+    "Deepseek": 0.09
+   },
+   {
+    "koda": "FR",
+    "ime": "Francija",
+    "skupina": "EU",
+    "ChatGPT": 78.48,
+    "Google Gemini": 10.64,
+    "Microsoft Copilot": 3.27,
+    "Perplexity": 4.33,
+    "Claude": 3.21,
+    "Deepseek": 0.04
+   },
+   {
+    "koda": "HR",
+    "ime": "Hrvaška",
+    "skupina": "EU",
+    "ChatGPT": 87.25,
+    "Google Gemini": 6.72,
+    "Microsoft Copilot": 1.66,
+    "Perplexity": 2.85,
+    "Claude": 1.52,
+    "Deepseek": 0
+   },
+   {
+    "koda": "HU",
+    "ime": "Madžarska",
+    "skupina": "EU",
+    "ChatGPT": 78.27,
+    "Google Gemini": 14.37,
+    "Microsoft Copilot": 2.76,
+    "Perplexity": 3.34,
+    "Claude": 1.27,
+    "Deepseek": 0
+   },
+   {
+    "koda": "IE",
+    "ime": "Irska",
+    "skupina": "EU",
+    "ChatGPT": 75.2,
+    "Google Gemini": 12.39,
+    "Microsoft Copilot": 4.23,
+    "Perplexity": 4.26,
+    "Claude": 3.87,
+    "Deepseek": 0.04
+   },
+   {
+    "koda": "IT",
+    "ime": "Italija",
+    "skupina": "EU",
+    "ChatGPT": 68.21,
+    "Google Gemini": 18.37,
+    "Microsoft Copilot": 4.96,
+    "Perplexity": 5.88,
+    "Claude": 2.58,
+    "Deepseek": 0
+   },
+   {
+    "koda": "LT",
+    "ime": "Litva",
+    "skupina": "EU",
+    "ChatGPT": 81.82,
+    "Google Gemini": 9.95,
+    "Microsoft Copilot": 2.05,
+    "Perplexity": 2.88,
+    "Claude": 3.3,
+    "Deepseek": 0
+   },
+   {
+    "koda": "LU",
+    "ime": "Luksemburg",
+    "skupina": "EU",
+    "ChatGPT": 82.02,
+    "Google Gemini": 7.27,
+    "Microsoft Copilot": 2.68,
+    "Perplexity": 5.19,
+    "Claude": 2.84,
+    "Deepseek": 0
+   },
+   {
+    "koda": "LV",
+    "ime": "Latvija",
+    "skupina": "EU",
+    "ChatGPT": 84.32,
+    "Google Gemini": 8.91,
+    "Microsoft Copilot": 1.85,
+    "Perplexity": 3.26,
+    "Claude": 1.62,
+    "Deepseek": 0.04
+   },
+   {
+    "koda": "MT",
+    "ime": "Malta",
+    "skupina": "EU",
+    "ChatGPT": 86.66,
+    "Google Gemini": 6.04,
+    "Microsoft Copilot": 3.22,
+    "Perplexity": 2.59,
+    "Claude": 1.5,
+    "Deepseek": 0
+   },
+   {
+    "koda": "NL",
+    "ime": "Nizozemska",
+    "skupina": "EU",
+    "ChatGPT": 80.61,
+    "Google Gemini": 8.8,
+    "Microsoft Copilot": 3.88,
+    "Perplexity": 3.57,
+    "Claude": 3.1,
+    "Deepseek": 0.03
+   },
+   {
+    "koda": "PL",
+    "ime": "Poljska",
+    "skupina": "EU",
+    "ChatGPT": 81.89,
+    "Google Gemini": 11.49,
+    "Microsoft Copilot": 2.02,
+    "Perplexity": 3.23,
+    "Claude": 1.35,
+    "Deepseek": 0
+   },
+   {
+    "koda": "PT",
+    "ime": "Portugalska",
+    "skupina": "EU",
+    "ChatGPT": 79.4,
+    "Google Gemini": 11.23,
+    "Microsoft Copilot": 3.67,
+    "Perplexity": 3.34,
+    "Claude": 2.33,
+    "Deepseek": 0.03
+   },
+   {
+    "koda": "RO",
+    "ime": "Romunija",
+    "skupina": "EU",
+    "ChatGPT": 83.82,
+    "Google Gemini": 9.22,
+    "Microsoft Copilot": 2.16,
+    "Perplexity": 2.34,
+    "Claude": 2.45,
+    "Deepseek": 0.01
+   },
+   {
+    "koda": "SE",
+    "ime": "Švedska",
+    "skupina": "EU",
+    "ChatGPT": 80.79,
+    "Google Gemini": 9.84,
+    "Microsoft Copilot": 3.89,
+    "Perplexity": 2.76,
+    "Claude": 2.68,
+    "Deepseek": 0.02
+   },
+   {
+    "koda": "SI",
+    "ime": "Slovenija",
+    "skupina": "EU",
+    "ChatGPT": 90.22,
+    "Google Gemini": 5.88,
+    "Microsoft Copilot": 1.71,
+    "Perplexity": 1.4,
+    "Claude": 0.8,
+    "Deepseek": 0
+   },
+   {
+    "koda": "SK",
+    "ime": "Slovaška",
+    "skupina": "EU",
+    "ChatGPT": 76.86,
+    "Google Gemini": 14.5,
+    "Microsoft Copilot": 3.45,
+    "Perplexity": 3.19,
+    "Claude": 2,
+    "Deepseek": 0
+   },
+   {
+    "koda": "GB",
+    "ime": "Združeno kraljestvo",
+    "skupina": "Evropa",
+    "ChatGPT": 76.08,
+    "Google Gemini": 10.2,
+    "Microsoft Copilot": 6.76,
+    "Perplexity": 3.16,
+    "Claude": 3.77,
+    "Deepseek": 0.02
+   },
+   {
+    "koda": "NO",
+    "ime": "Norveška",
+    "skupina": "Evropa",
+    "ChatGPT": 80.68,
+    "Google Gemini": 8.31,
+    "Microsoft Copilot": 5.19,
+    "Perplexity": 2.92,
+    "Claude": 2.78,
+    "Deepseek": 0.05
+   },
+   {
+    "koda": "CH",
+    "ime": "Švica",
+    "skupina": "Evropa",
+    "ChatGPT": 76.47,
+    "Google Gemini": 11.03,
+    "Microsoft Copilot": 3.7,
+    "Perplexity": 4.78,
+    "Claude": 3.95,
+    "Deepseek": 0.03
+   },
+   {
+    "koda": "RS",
+    "ime": "Srbija",
+    "skupina": "Evropa",
+    "ChatGPT": 83.99,
+    "Google Gemini": 10.59,
+    "Microsoft Copilot": 1.78,
+    "Perplexity": 1.88,
+    "Claude": 1.77,
+    "Deepseek": 0
+   },
+   {
+    "koda": "BA",
+    "ime": "Bosna in Hercegovina",
+    "skupina": "Evropa",
+    "ChatGPT": 83.68,
+    "Google Gemini": 10.23,
+    "Microsoft Copilot": 1.42,
+    "Perplexity": 1.86,
+    "Claude": 2.81,
+    "Deepseek": 0
+   },
+   {
+    "koda": "ME",
+    "ime": "Črna gora",
+    "skupina": "Evropa",
+    "ChatGPT": 81.63,
+    "Google Gemini": 14.5,
+    "Microsoft Copilot": 1.11,
+    "Perplexity": 2.37,
+    "Claude": 0.39,
+    "Deepseek": 0
+   },
+   {
+    "koda": "MK",
+    "ime": "Severna Makedonija",
+    "skupina": "Evropa",
+    "ChatGPT": 87.74,
+    "Google Gemini": 7.85,
+    "Microsoft Copilot": 2.49,
+    "Perplexity": 1.18,
+    "Claude": 0.73,
+    "Deepseek": 0
+   },
+   {
+    "koda": "UA",
+    "ime": "Ukrajina",
+    "skupina": "Evropa",
+    "ChatGPT": 73.19,
+    "Google Gemini": 20.5,
+    "Microsoft Copilot": 1.48,
+    "Perplexity": 2.36,
+    "Claude": 2.46,
+    "Deepseek": 0.01
+   },
+   {
+    "koda": "TR",
+    "ime": "Turčija",
+    "skupina": "Evropa",
+    "ChatGPT": 76.33,
+    "Google Gemini": 19.68,
+    "Microsoft Copilot": 1.36,
+    "Perplexity": 0.87,
+    "Claude": 1.74,
+    "Deepseek": 0
+   },
+   {
+    "koda": "US",
+    "ime": "ZDA",
+    "skupina": "Svet",
+    "ChatGPT": 70.75,
+    "Google Gemini": 12.6,
+    "Microsoft Copilot": 7.85,
+    "Perplexity": 4.24,
+    "Claude": 4.47,
+    "Deepseek": 0.08
+   },
+   {
+    "koda": "CA",
+    "ime": "Kanada",
+    "skupina": "Svet",
+    "ChatGPT": 70.93,
+    "Google Gemini": 14.12,
+    "Microsoft Copilot": 7.23,
+    "Perplexity": 4.43,
+    "Claude": 3.25,
+    "Deepseek": 0.02
+   },
+   {
+    "koda": "MX",
+    "ime": "Mehika",
+    "skupina": "Svet",
+    "ChatGPT": 73.94,
+    "Google Gemini": 17.89,
+    "Microsoft Copilot": 4.55,
+    "Perplexity": 2.49,
+    "Claude": 1.14,
+    "Deepseek": 0
+   },
+   {
+    "koda": "BR",
+    "ime": "Brazilija",
+    "skupina": "Svet",
+    "ChatGPT": 79.45,
+    "Google Gemini": 13.7,
+    "Microsoft Copilot": 2.41,
+    "Perplexity": 2.25,
+    "Claude": 2.18,
+    "Deepseek": 0.01
+   },
+   {
+    "koda": "IN",
+    "ime": "Indija",
+    "skupina": "Svet",
+    "ChatGPT": 77.8,
+    "Google Gemini": 13.25,
+    "Microsoft Copilot": 2.05,
+    "Perplexity": 4.09,
+    "Claude": 2.82,
+    "Deepseek": 0
+   },
+   {
+    "koda": "JP",
+    "ime": "Japonska",
+    "skupina": "Svet",
+    "ChatGPT": 70.99,
+    "Google Gemini": 17.13,
+    "Microsoft Copilot": 7.51,
+    "Perplexity": 2.16,
+    "Claude": 2.14,
+    "Deepseek": 0.06
+   },
+   {
+    "koda": "KR",
+    "ime": "Južna Koreja",
+    "skupina": "Svet",
+    "ChatGPT": 65.14,
+    "Google Gemini": 25.87,
+    "Microsoft Copilot": 2.49,
+    "Perplexity": 3.65,
+    "Claude": 2.84,
+    "Deepseek": 0
+   },
+   {
+    "koda": "ID",
+    "ime": "Indonezija",
+    "skupina": "Svet",
+    "ChatGPT": 85.5,
+    "Google Gemini": 5.33,
+    "Microsoft Copilot": 0.34,
+    "Perplexity": 7.33,
+    "Claude": 1.49,
+    "Deepseek": 0
+   },
+   {
+    "koda": "AU",
+    "ime": "Avstralija",
+    "skupina": "Svet",
+    "ChatGPT": 73.47,
+    "Google Gemini": 9.83,
+    "Microsoft Copilot": 8.67,
+    "Perplexity": 4.18,
+    "Claude": 3.84,
+    "Deepseek": 0
+   },
+   {
+    "koda": "ZA",
+    "ime": "Južna Afrika",
+    "skupina": "Svet",
+    "ChatGPT": 77.78,
+    "Google Gemini": 8.76,
+    "Microsoft Copilot": 8,
+    "Perplexity": 3.33,
+    "Claude": 2.14,
+    "Deepseek": 0
+   },
+   {
+    "koda": "NG",
+    "ime": "Nigerija",
+    "skupina": "Svet",
+    "ChatGPT": 74.4,
+    "Google Gemini": 13.43,
+    "Microsoft Copilot": 5.23,
+    "Perplexity": 3.58,
+    "Claude": 3.37,
+    "Deepseek": 0
+   },
+   {
+    "koda": "EG",
+    "ime": "Egipt",
+    "skupina": "Svet",
+    "ChatGPT": 71.82,
+    "Google Gemini": 19.88,
+    "Microsoft Copilot": 2.42,
+    "Perplexity": 4.06,
+    "Claude": 1.81,
+    "Deepseek": 0.01
+   }
+  ]
  },
  "_meta": {
-  "preverjeno": "2026-09-27",
+  "preverjeno": "2026-10-03",
   "viri": {
    "podjetja": {
     "dataset": "isoc_eb_ai",
@@ -678,8 +1234,13 @@
     "zadnje_obdobje": "2. čet. 2026"
    },
    "statcounter": {
-    "od": "2025-09",
-    "do": "2026-08"
+    "od": "2025-10",
+    "do": "2026-09"
+   },
+   "statcounter_drzave": {
+    "od": "2026-07",
+    "do": "2026-09",
+    "drzav": 50
    }
   }
  }
