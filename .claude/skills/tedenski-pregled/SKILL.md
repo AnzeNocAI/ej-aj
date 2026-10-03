@@ -10,7 +10,7 @@ Output: one new file `src/content/novice/YYYY-MM-DD-tedenski-pregled-N.md` on a 
 pull request. **Never merge, never push to `main`.** Merging
 is publishing, and only Anže does that.
 
-Repo: `/Users/anze/Desktop/ej-aj` (public, `ej-aj-pro/ej-aj`). Read `AGENTS.md` and
+Repo: `/Users/anze/Desktop/Claude/ej-aj` (public, `ej-aj-pro/ej-aj`). Read `AGENTS.md` and
 `docs/slog.md` there first: their writing, accuracy and confidentiality rules apply to
 everything below.
 
@@ -23,7 +23,7 @@ network command (`git fetch`, `git push`, `gh ...`) with
 Do not touch the main checkout (Anže may have uncommitted work there).
 
 ```bash
-cd /Users/anze/Desktop/ej-aj
+cd /Users/anze/Desktop/Claude/ej-aj
 GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git fetch origin
 TODAY=$(date +%F)
 WT=/Users/anze/.cache/ej-aj-worktrees/pregled-$TODAY
@@ -191,7 +191,7 @@ PR body (Slovenian, short):
 - validator result (errors / warnings) and "Build: OK"
 - last line: "Merge = objava na ej-aj.si. Cloudflare bo spodaj dodal preview povezavo."
 
-Then remove the worktree: `cd /Users/anze/Desktop/ej-aj && git worktree remove "$WT"`.
+Then remove the worktree: `cd /Users/anze/Desktop/Claude/ej-aj && git worktree remove "$WT"`.
 
 ## 9. Final message
 

@@ -55,7 +55,7 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 
 ## Tehnika, ki jo moraš poznati
 
-- Repo: `/Users/anze/Desktop/ej-aj`, GitHub `ej-aj-pro/ej-aj` (javen). Aktivni `gh` račun na Macu je
+- Repo: `/Users/anze/Desktop/Claude/ej-aj`, GitHub `ej-aj-pro/ej-aj` (javen). Aktivni `gh` račun na Macu je
   **AnzeNoc** in ga ne preklapljaj (`gh auth switch` pokvari drugo sejo). Vsak omrežni ukaz:
   `GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git push ...`, enako za `gh pr ...`.
   Račun ej-aj-pro (id 326904133) je v gh keyringu še shranjen pod starim imenom **AnzeNocAI**, zato
@@ -84,7 +84,7 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
   `git checkout .claude/launch.json`.
 - Worktreeji rutin in skillov: `~/.cache/ej-aj-worktrees/` (Namizje se sinhronizira v iCloud).
 - Skilli v repu: `tedenski-pregled` (predlaga tudi do 3 nova gesla za slovar), `posodobi-modele`
-  (modeli, naročnine in statistika), `nov-vodnik` (iz zapiska v `~/Desktop/ej-aj-inbox/`),
+  (modeli, naročnine in statistika), `nov-vodnik` (iz zapiska v `/Users/anze/Desktop/Claude/ej-aj/ej-aj-inbox/`),
   `newsletter`.
 - **Brskalnik:** Cloudflare, Domenca, Search Console in Bing so na računu anze999@gmail.com v
   Anžetovem Chrome profilu **anze999** (Claude in Chrome). V tem profilu klikanje po koordinatah
@@ -107,7 +107,7 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
    brezplačni paket. Ime ej-aj.si, barva #1f3bd6, odgovori na pozdrav@ej-aj.si, slovenska noga.
    Slovenščine Buttondown ne podpira, potrditveni mail je v angleščini (lastno besedilo zahteva
    paket Standard). API ključ je v `~/.zshrc` kot `BUTTONDOWN_API_KEY`. Prvi mail je osnutek v
-   Buttondownu (`~/Desktop/ej-aj-newsletter/2026-09-29.md`), pošlje ga Anže. Brez stalnega urnika,
+   Buttondownu (`/Users/anze/Desktop/Claude/ej-aj/ej-aj-newsletter/2026-09-29.md`), pošlje ga Anže. Brez stalnega urnika,
    zato besedilo ne obljublja "vsak petek". Odprto: pošiljanje z `newsletter@ej-aj.si` (sending
    domain v Buttondownu, DNS v Cloudflare, Email Routing za ta naslov; Anže je odobril).
 2. **Rutini** sta od 26. 9. 2026 ustvarjeni v tej instanci (glej spodaj). Anže naj stari v instanci
@@ -164,7 +164,7 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
 - Repo je zdaj v `/Users/anze/Desktop/Claude/ej-aj`; worktreeje po selitvi popravi
   `git worktree repair <pot>`.
 
-Odprta vprašanja za Anžeta so v `~/Desktop/ej-aj-vprasanja.md` (zunaj repa).
+Odprta vprašanja za Anžeta so v `/Users/anze/Desktop/Claude/ej-aj/ZA-ANZETA.md` (v mapi repa, git jo prezre).
 
 ## Narejeno 3. oktobra 2026
 
@@ -201,7 +201,7 @@ Trends; brez podatkov o obsegu iskanj):
 4. ~~AI pismenost zaposlenih~~ (objavljeno 27. 9., #37).
 5. **Search Console**: čez nekaj tednov pogledati, kateri iskalni nizi prinašajo obiske (Anže
    mora dovoliti delo v svojem Chrome profilu).
-6. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v `~/Desktop/ej-aj-inbox/` kaj.
+6. **Vodniki iz Anžetovih zapiskov** (skill `nov-vodnik`), ko bo v `/Users/anze/Desktop/Claude/ej-aj/ej-aj-inbox/` kaj.
 7. Iskanje (Pagefind): s 25 članki se približujemo meji približno 30.
 
 ## Rutine (za ponovno ustvarjanje)
@@ -214,17 +214,17 @@ Trends; brez podatkov o obsegu iskanj):
 ```
 You are running as a scheduled local routine for Anže. Task: prepare the next weekly AI news digest ("Tedenski pregled") for his public site ej-aj.si and open a pull request. You never merge and never push to main; merging is publishing and only Anže does that.
 
-Repo: /Users/anze/Desktop/ej-aj (GitHub: ej-aj-pro/ej-aj). Always use absolute paths.
+Repo: /Users/anze/Desktop/Claude/ej-aj (GitHub: ej-aj-pro/ej-aj). Always use absolute paths.
 
 GitHub auth: the active gh account on this Mac is a different one (AnzeNoc) and must NOT be switched with `gh auth switch`, because another Claude session relies on it. Prefix every network command (git fetch, git push, gh ...) with GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)".
 
 Steps:
-1. cd /Users/anze/Desktop/ej-aj && GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git fetch origin
+1. cd /Users/anze/Desktop/Claude/ej-aj && GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git fetch origin
 2. Load the current instructions from main, not from whatever branch is checked out locally:
    git show origin/main:.claude/skills/tedenski-pregled/SKILL.md
    git show origin/main:AGENTS.md
    If the skill file does not exist on origin/main, stop and report in Slovenian: "Skill tedenski-pregled še ni na main. Mergaj PR #3 (https://github.com/ej-aj-pro/ej-aj/pull/3), potem rutino zaženi ročno." Do nothing else.
-3. Follow the skill exactly, step by step. It creates its own worktree under /Users/anze/.cache/ej-aj-worktrees/ (outside iCloud), uses parallel subagents to collect news, a fact-checker subagent, runs scripts/preveri.mjs and the build, and opens the PR. Do not touch the main checkout at /Users/anze/Desktop/ej-aj beyond git fetch and git worktree commands.
+3. Follow the skill exactly, step by step. It creates its own worktree under /Users/anze/.cache/ej-aj-worktrees/ (outside iCloud), uses parallel subagents to collect news, a fact-checker subagent, runs scripts/preveri.mjs and the build, and opens the PR. Do not touch the main checkout at /Users/anze/Desktop/Claude/ej-aj beyond git fetch and git worktree commands.
 4. Rules that always apply: Slovenian copy, no em dashes or en dashes; every news item has a source link and every number, date and name must come from an opened source; never invent anything; no client names or client data (his private knowledge-base report may be read only as a list of leads, never copied).
 5. Final message in Slovenian, short: the PR link, the headlines, failed sources, and anything Anže must check by hand. If any step failed, say exactly which one and what state things were left in; do not work around failures silently.
 ```
@@ -237,12 +237,12 @@ Steps:
 ```
 You are running as a scheduled local routine for Anže. Task: re-check the model comparison (src/data/modeli.yaml), the subscription prices (src/data/narocnine.yaml) and the AI statistics page (src/data/statistika.json, page /statistika/) on his public site ej-aj.si, and open a pull request if anything changed. You never merge and never push to main; merging is publishing and only Anže does that.
 
-Repo: /Users/anze/Desktop/ej-aj (GitHub: ej-aj-pro/ej-aj). Always use absolute paths.
+Repo: /Users/anze/Desktop/Claude/ej-aj (GitHub: ej-aj-pro/ej-aj). Always use absolute paths.
 
 GitHub auth: the active gh account on this Mac is a different one (AnzeNoc) and must NOT be switched with `gh auth switch`. Prefix every network command (git fetch, git push, gh ...) with GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)".
 
 Steps:
-1. cd /Users/anze/Desktop/ej-aj && GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git fetch origin
+1. cd /Users/anze/Desktop/Claude/ej-aj && GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git fetch origin
 2. Load the current instructions from main:
    git show origin/main:.claude/skills/posodobi-modele/SKILL.md
    git show origin/main:AGENTS.md

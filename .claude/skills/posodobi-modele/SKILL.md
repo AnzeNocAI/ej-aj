@@ -7,7 +7,7 @@ description: Monthly refresh of the ej-aj.si model comparison (src/data/modeli.y
 
 Output: a branch `modeli/YYYY-MM` with changes to `src/data/modeli.yaml`, `src/data/narocnine.yaml`
 and `src/data/statistika.json`, and an open PR.
-**Never merge, never push to `main`.** Read `/Users/anze/Desktop/ej-aj/AGENTS.md` first.
+**Never merge, never push to `main`.** Read `/Users/anze/Desktop/Claude/ej-aj/AGENTS.md` first.
 
 Every `gh` and network `git` command needs the prefix
 `GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)"` (the active gh account is a different one and
@@ -16,7 +16,7 @@ must not be switched).
 ## 1. Worktree
 
 ```bash
-cd /Users/anze/Desktop/ej-aj
+cd /Users/anze/Desktop/Claude/ej-aj
 GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)" git fetch origin
 MONTH=$(date +%Y-%m)
 WT=/Users/anze/.cache/ej-aj-worktrees/modeli-$MONTH
@@ -115,7 +115,7 @@ models, a section "Statistika" with the script's list of changed values and the 
 rewrote (or "brez sprememb"), sources that failed, and "Merge = objava na ej-aj.si". If nothing changed, do not open
 a PR; report "brez sprememb" instead and delete the branch.
 
-Remove the worktree at the end: `git -C /Users/anze/Desktop/ej-aj worktree remove "$WT"`.
+Remove the worktree at the end: `git -C /Users/anze/Desktop/Claude/ej-aj worktree remove "$WT"`.
 
 ## 5. Final message
 

@@ -24,11 +24,11 @@ Read it at the start of every session.
 - `.claude/skills/tedenski-pregled/`: prepares the weekly digest as a PR (parallel collector
   subagents, fact-checker subagent, validator). Run by a local Friday routine
   (`ej-aj-tedenski-pregled`), or on request.
-- `.claude/skills/nov-vodnik/`: turns a note from `~/Desktop/ej-aj-inbox/` (outside the repo,
+- `.claude/skills/nov-vodnik/`: turns a note from `/Users/anze/Desktop/Claude/ej-aj/ej-aj-inbox/` (in the repo folder but ignored by git,
   synced via iCloud) into a draft guide PR, with a confidentiality pass and `[DOPOLNI: ...]`
   placeholders that the validator blocks. Manual for now.
 - `.claude/skills/newsletter/`: turns the latest published digest into a newsletter email
-  (file in `~/Desktop/ej-aj-newsletter/`, optional Buttondown draft via API). Never sends.
+  (file in `/Users/anze/Desktop/Claude/ej-aj/ej-aj-newsletter/`, optional Buttondown draft via API). Never sends.
 - Routines and skills do their work in git worktrees under `~/.cache/ej-aj-worktrees/`, never
   in the main checkout and never inside iCloud-synced folders.
 
