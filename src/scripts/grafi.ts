@@ -8,7 +8,7 @@ type BarsCfg = { type: 'bars'; rows: string[]; series: Series[] };
 type RankRow = { koda: string; ime: string; v: number };
 type RankCfg = {
   type: 'rank';
-  views: { key: string; label: string; rows: RankRow[]; eu?: number; note: string }[];
+  views: { key: string; label: string; rows: RankRow[]; eu?: number; ref?: { label: string; v: number }; note: string }[];
 };
 type Cfg = LineCfg | BarsCfg | RankCfg;
 
@@ -274,7 +274,7 @@ function rankChart(root: HTMLElement, plot: HTMLElement, cfg: RankCfg) {
     const bar = 14, pad = 6;
     const m = { t: 22, r: 52, l: labelW + 8 };
     const H = m.t + view.rows.length * (bar + pad) + 4;
-    const xMax = niceMax(Math.max(...view.rows.map((r) => r.v)));
+    const xMax = niceMax(Math.max(...view.rows.map((r) => r.v), view.ref?.v ?? 0));
     const Xw = (v: number) => (v / xMax) * (W - m.l - m.r);
     const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, width: W, height: H, role: 'img', 'aria-label': `${root.dataset.label ?? ''}: ${view.label}` }, plot);
 
@@ -291,10 +291,12 @@ function rankChart(root: HTMLElement, plot: HTMLElement, cfg: RankCfg) {
       p.addEventListener('blur', () => tip.hide());
     });
     el('line', { x1: m.l, x2: m.l, y1: m.t - 4, y2: H, class: 'viz-axis' }, svg);
-    if (view.eu !== undefined) {
-      const x = m.l + Xw(view.eu);
+    // Reference line: an explicit one, else the EU average.
+    const ref = view.ref ?? (view.eu !== undefined ? { label: 'EU', v: view.eu } : undefined);
+    if (ref) {
+      const x = m.l + Xw(ref.v);
       el('line', { x1: x, x2: x, y1: m.t - 6, y2: H, class: 'viz-ref-line' }, svg);
-      text(svg, x, m.t - 10, `EU ${pct(view.eu)}`, 'viz-tick', 'middle');
+      text(svg, x, m.t - 10, `${ref.label} ${pct(ref.v)}`, 'viz-tick', 'middle');
     }
   }
   draw();

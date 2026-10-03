@@ -1,0 +1,266 @@
+---
+import Base from '../../layouts/Base.astro';
+import stat from '../../data/statistika.json';
+import { formatDate } from '../../site';
+import '../../styles/grafi.css';
+
+// Everything below is computed from src/data/statistika.json (scripts/osvezi-statistiko.mjs), so
+// the monthly refresh updates the numbers and the sentences that name countries.
+const PREVERJENO = formatDate(new Date(stat._meta.preverjeno));
+const kd = stat.klepetalniki_drzave;
+type Row = (typeof kd.drzave)[number];
+const BOTS = [
+  { key: 'ChatGPT', name: 'ChatGPT', color: '--s1' },
+  { key: 'Google Gemini', name: 'Gemini', color: '--s2' },
+  { key: 'Microsoft Copilot', name: 'Copilot', color: '--s3' },
+  { key: 'Perplexity', name: 'Perplexity', color: '--s4' },
+  { key: 'Claude', name: 'Claude', color: '--s5' },
+] as const;
+type BotKey = (typeof BOTS)[number]['key'];
+
+const svet = kd.drzave.find((r) => r.koda === 'WW')!;
+const evropa = kd.drzave.find((r) => r.koda === 'EU')!;
+const drzave = kd.drzave.filter((r) => r.koda !== 'WW' && r.koda !== 'EU');
+const si = drzave.find((r) => r.koda === 'SI')!;
+const n = drzave.length;
+
+const fmt = new Intl.NumberFormat('sl-SI', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const pct = (v: number) => `${fmt.format(v)}\u00a0%`;
+const v1 = (v: number) => Math.round(v * 10) / 10;
+const sorted = (b: BotKey) => drzave.slice().sort((a, c) => c[b] - a[b]);
+const rankOf = (b: BotKey) => sorted(b).findIndex((r) => r.koda === 'SI') + 1;
+const top = (b: BotKey, k = 3) => sorted(b).slice(0, k).map((r) => `${r.ime} (${pct(r[b])})`).join(', ');
+const second = (r: Row) => BOTS.slice(1).reduce((best, b) => (r[b.key] > r[best.key] ? b : best), BOTS[1]);
+const firstNotChatgpt = drzave.filter((r) => BOTS.slice(1).some((b) => r[b.key] > r.ChatGPT));
+const secondNotGemini = drzave.filter((r) => second(r).key !== 'Google Gemini');
+const lowestChatgpt = sorted('ChatGPT').at(-1)!;
+const siAboveWorld = BOTS.slice(1).filter((b) => si[b.key] >= svet[b.key]).map((b) => b.name);
+
+const MESECI = ['januar', 'februar', 'marec', 'april', 'maj', 'junij', 'julij', 'avgust', 'september', 'oktober', 'november', 'december'];
+const [y0, m0] = kd.od.split('-').map(Number);
+const [y1, m1] = kd.do.split('-').map(Number);
+const OBDOBJE = y0 === y1 ? `${MESECI[m0 - 1]} do ${MESECI[m1 - 1]} ${y1}` : `${MESECI[m0 - 1]} ${y0} do ${MESECI[m1 - 1]} ${y1}`;
+
+const rows = (b: BotKey) => sorted(b).map((r) => ({ koda: r.koda, ime: r.ime, v: v1(r[b]) }));
+const cfg = {
+  type: 'rank',
+  views: BOTS.map((b) => ({
+    key: b.key,
+    label: b.name,
+    rows: rows(b.key),
+    ref: { label: 'Svet', v: v1(svet[b.key]) },
+    note: `Delež obiskov spletnih strani, ki pridejo iz klepetalnika ${b.name}, med vsemi obiski iz klepetalnikov. Povprečje mesecev ${OBDOBJE}. Navpična črta je svetovni delež.`,
+  })),
+};
+
+const SKUPINE = [
+  { key: 'EU', name: 'Države EU' },
+  { key: 'Evropa', name: 'Druge evropske države' },
+  { key: 'Svet', name: 'Drugod po svetu' },
+];
+const VIRI = {
+  statcounter: 'https://gs.statcounter.com/ai-chatbot-market-share',
+  openaiDrzave: 'https://help.openai.com/en/articles/7947663-chatgpt-supported-countries',
+  metoda: 'https://gs.statcounter.com/press/new-statcounter-ai-data-finds-chatgpt-sends-79-perc-of-all-chatbot-referrals-to-websites',
+};
+const json = (o: unknown) => JSON.stringify(o);
+const title = 'Najbolj uporabljeni AI klepetalniki po državah: ChatGPT, Gemini, Copilot, Claude';
+const description = `Kateri AI klepetalnik prevladuje v ${n} državah Evrope in sveta: deleži ChatGPT, Gemini, Copilot, Perplexity in Claude po podatkih StatCounterja, s Slovenijo v primerjavi.`;
+---
+
+<Base
+  title={title}
+  description={description}
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'ej-aj.si', item: Astro.site?.toString() },
+        { '@type': 'ListItem', position: 2, name: 'Statistika', item: new URL('/statistika/', Astro.site).toString() },
+        { '@type': 'ListItem', position: 3, name: 'Klepetalniki po državah', item: new URL(Astro.url.pathname, Astro.site).toString() },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Dataset',
+      name: 'Deleži AI klepetalnikov po državah',
+      description,
+      inLanguage: 'sl-SI',
+      temporalCoverage: `${kd.od}/${kd.do}`,
+      dateModified: stat._meta.preverjeno,
+      isBasedOn: VIRI.statcounter,
+      creator: { '@id': `${Astro.site}#avtor` },
+      url: new URL(Astro.url.pathname, Astro.site).toString(),
+    },
+  ]}
+>
+  <div class="wrap narrow">
+    <header class="article-head">
+      <span class="eyebrow"><a href="/statistika/">Statistika</a></span>
+      <h1>Najbolj uporabljeni AI klepetalniki po državah</h1>
+      <p class="lede">
+        Kateri klepetalnik ljudje uporabljajo v Sloveniji, v drugih državah EU in drugod po svetu, merjeno z obiski
+        spletnih strani, ki pridejo iz ChatGPT, Gemini, Copilota, Perplexityja in Clauda. Podatki StatCounterja za {OBDOBJE},
+        preverjeni {PREVERJENO}.
+      </p>
+    </header>
+
+    <div class="tiles">
+      <div class="tile">
+        <span class="tile-label">ChatGPT v Sloveniji</span>
+        <span class="tile-value">{pct(si.ChatGPT)}</span>
+        <span class="tile-note">{rankOf('ChatGPT')}. mesto od {n} držav. Svet: {pct(svet.ChatGPT)}</span>
+      </div>
+      <div class="tile">
+        <span class="tile-label">Gemini v Sloveniji</span>
+        <span class="tile-value">{pct(si['Google Gemini'])}</span>
+        <span class="tile-note">{rankOf('Google Gemini')}. mesto od {n} držav. Svet: {pct(svet['Google Gemini'])}</span>
+      </div>
+      <div class="tile">
+        <span class="tile-label">Claude v Sloveniji</span>
+        <span class="tile-value">{pct(si.Claude)}</span>
+        <span class="tile-note">{rankOf('Claude')}. mesto od {n} držav. Svet: {pct(svet.Claude)}</span>
+      </div>
+    </div>
+
+    <section class="stat-section">
+      <h2>Na kratko</h2>
+      <ul>
+        <li>
+          {firstNotChatgpt.length === 0
+            ? `ChatGPT je prvi v vseh ${n} državah v pregledu.`
+            : `ChatGPT je prvi v ${n - firstNotChatgpt.length} od ${n} držav. Izjeme: ${firstNotChatgpt.map((r) => r.ime).join(', ')}.`}{' '}
+          Svetovno ima {pct(svet.ChatGPT)} vseh obiskov iz klepetalnikov, v Evropi {pct(evropa.ChatGPT)}. Najnižji delež ima
+          {' '}{lowestChatgpt.ime} ({pct(lowestChatgpt.ChatGPT)}).
+        </li>
+        <li>
+          Slovenija ima {rankOf('ChatGPT') === 1 ? 'najvišji delež ChatGPT od vseh' : `${rankOf('ChatGPT')}. najvišji delež ChatGPT med`} {n} držav{rankOf('ChatGPT') === 1 ? '' : 'ami'} v pregledu ({pct(si.ChatGPT)}).{' '}
+          {siAboveWorld.length === 0
+            ? 'Vsi drugi klepetalniki imajo pri nas nižji delež kot v svetu.'
+            : `Nad svetovnim deležem je pri nas še ${siAboveWorld.join(', ')}.`}
+        </li>
+        <li>
+          {secondNotGemini.length === 0
+            ? `Na drugem mestu je povsod Gemini.`
+            : `Na drugem mestu je Gemini v ${n - secondNotGemini.length} od ${n} držav. Izjeme, z drugim klepetalnikom v oklepaju: ${secondNotGemini.map((r) => `${r.ime} (${second(r).name})`).join(', ')}.`}{' '}
+          Najvišji delež ima Gemini v teh državah: {top('Google Gemini')}.
+        </li>
+        <li>
+          Največji delež ima Copilot v teh državah: {top('Microsoft Copilot')}. Pri Claudu so na vrhu {top('Claude')}, pri Perplexityju {top('Perplexity')}.
+        </li>
+      </ul>
+    </section>
+
+    <section class="stat-section">
+      <h2>Države po deležu klepetalnika</h2>
+      <p>Izberite klepetalnik. Slovenija je označena z modro.</p>
+      <figure class="viz" data-label="Države po deležu obiskov iz klepetalnika">
+        <figcaption>Delež obiskov iz klepetalnika po državah, {OBDOBJE}</figcaption>
+        <p class="viz-view-note"></p>
+        <div class="viz-plot"></div>
+        <script type="application/json" set:html={json(cfg)} />
+        <p class="viz-source">Vir: <a href={VIRI.statcounter}>StatCounter, AI Chatbot Market Share</a>.</p>
+      </figure>
+    </section>
+
+    <section class="stat-section">
+      <h2>Vse države v tabeli</h2>
+      <p>Deleži so povprečje mesečnih deležev za {OBDOBJE}. Odebeljen je drugi najpogostejši klepetalnik v državi.</p>
+      <div class="table-scroll">
+        <table class="drzave">
+          <thead>
+            <tr><th>Država</th>{BOTS.map((b) => <th class="num">{b.name}</th>)}</tr>
+          </thead>
+          <tbody>
+            <tr class="skupaj"><td>Svet</td>{BOTS.map((b) => <td class="num">{pct(svet[b.key])}</td>)}</tr>
+            <tr class="skupaj"><td>Evropa</td>{BOTS.map((b) => <td class="num">{pct(evropa[b.key])}</td>)}</tr>
+            {SKUPINE.map((g) => (
+              <>
+                <tr class="skupina"><th colspan={BOTS.length + 1}>{g.name}</th></tr>
+                {drzave
+                  .filter((r) => r.skupina === g.key)
+                  .sort((a, b) => a.ime.localeCompare(b.ime, 'sl'))
+                  .map((r) => (
+                    <tr class={r.koda === 'SI' ? 'si' : undefined}>
+                      <td>{r.ime}</td>
+                      {BOTS.map((b) => (
+                        <td class="num">{second(r).key === b.key ? <strong>{pct(r[b.key])}</strong> : pct(r[b.key])}</td>
+                      ))}
+                    </tr>
+                  ))}
+              </>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="viz-source">
+        Vir: <a href={VIRI.statcounter}>StatCounter</a>. DeepSeek je povsod pod 0,5 %, zato ga tabela ne prikazuje.
+      </p>
+    </section>
+
+    <section class="stat-section">
+      <h2>Kaj ti podatki merijo in česa ne</h2>
+      <p>
+        StatCounter šteje obiske spletnih strani, ki uporabljajo njegovo kodo (po njegovih navedbah več kot 1,5 milijona
+        strani), in pri vsakem obisku, ki pride iz klepetalnika, zabeleži, iz katerega. Delež pove, kolikšen del teh obiskov
+        je prišel iz posameznega klepetalnika. Ne pove, koliko ljudi orodje uporablja, in ne zajame pogovorov, ki se končajo
+        brez klika na povezavo. Klepetalnik, ki pogosteje navaja povezave do virov, ima zato lahko višji delež, kot bi ga
+        imel po številu uporabnikov.
+      </p>
+      <p>
+        StatCounter loči ChatGPT, Gemini, Copilot, Perplexity, Claude in DeepSeek. Groka ne meri, ker ta ob kliku ne pošlje
+        podatka, od kod prihaja obisk. Kitajske in Rusije v pregledu ni: StatCounter tamkajšnjih domačih klepetalnikov ne loči,
+        ChatGPT pa v teh dveh državah <a href={VIRI.openaiDrzave}>uradno ni na voljo</a>, zato deleži za ti državi ne bi
+        povedali veliko.
+      </p>
+      <p>
+        Deleži manjših držav se iz meseca v mesec spreminjajo za nekaj odstotnih točk, zato stran prikazuje povprečje
+        zadnjih treh mesecev. Razlike pod eno odstotno točko so po naši oceni v mejah nihanja. Kako so se deleži v Sloveniji
+        spreminjali skozi leto, kaže graf na strani <a href="/statistika/">AI v Sloveniji v številkah</a>.{' '}
+        <a href={VIRI.metoda}>Opis metode StatCounterja</a>.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import '../../scripts/grafi.ts';
+</script>
+
+<style>
+  .eyebrow a {
+    color: inherit;
+  }
+  .table-scroll {
+    overflow-x: auto;
+  }
+  .drzave {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  .drzave th,
+  .drzave td {
+    text-align: left;
+    padding: 5px 8px 5px 0;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  .drzave .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .drzave .skupina th {
+    padding-top: 18px;
+    font-family: var(--serif);
+    font-size: 1.05rem;
+  }
+  .drzave .skupaj td {
+    color: var(--muted);
+  }
+  .drzave .si td {
+    background: var(--accent-soft);
+    font-weight: 600;
+  }
+</style>
