@@ -3,7 +3,7 @@
 Za agenta, ki nadaljuje delo na ej-aj.si. Najprej preberi `AGENTS.md` (pravila pisanja, točnosti,
 zaupnosti), `docs/slog.md` (kako ne zveneti kot AI), nato ta dokument, `docs/postavitev.md`
 (domena, Cloudflare, računi) in `docs/kako-objavim.md` (kako Anže pregleduje in objavlja).
-Stanje: 2. oktober 2026.
+Stanje: 3. oktober 2026.
 
 ## Kaj je na strani (ej-aj.si)
 
@@ -165,6 +165,28 @@ slovar. Analitika: Cloudflare Web Analytics (brez piškotkov).
   `git worktree repair <pot>`.
 
 Odprta vprašanja za Anžeta so v `~/Desktop/ej-aj-vprasanja.md` (zunaj repa).
+
+## Narejeno 3. oktobra 2026
+
+Anže je bil odsoten in prosil za samostojno delo na SEO in vsebinah. Vse je v PR-jih:
+
+- #57 statistika: AI klepetalniki po 48 državah (`scripts/osvezi-statistiko.mjs` zdaj prenese
+  tudi države, povprečje zadnjih treh mesecev; sloga grafov v `src/styles/grafi.css`).
+- #58 strani s cenami `/cene/<orodje>/` iz `narocnine.yaml` (komponenta `NarocnineTabela.astro`,
+  pomožne funkcije v `src/cene.ts`, sloga v `src/styles/tabele.css`; `/cene/` še vedno preusmerja).
+- #59 vodnik Kaj je umetna inteligenca, #60 zaznavalniki AI besedila (mergaj po #59),
+  #62 plonk listek modelov (popravi tudi stavek o GPT-6 v vodniku ChatGPT, Claude ali Gemini),
+  #63 AI za video, glasbo in glas, #64 AI za ustvarjanje slik (mergaj skupaj z #63).
+- #61 (mergano): validator pozna več gostiteljev, ki blokirajo skripte.
+- Ugotovitve raziskave, ki zadevajo stare strani (modeli.yaml, Sonnet 5.5, Microsoft v EUR), so
+  zapisane v opisu PR #62; popravi jih mesečna rutina.
+- Rutina `ej-aj-posodobi-modele` 1. 10. ni tekla (0 zagonov), Anže jo mora pognati ročno.
+- Vprašanje o skillih: priporočilo je stran `/skilli/` z brezplačnimi skilli in javni repo
+  `ej-aj-pro/skilli`; prodaje zaenkrat ne (ZEPT zahteva podatke prodajalca, kar je v nasprotju z
+  anonimnostjo strani). Čaka Anžetovo odločitev.
+- Preverjevalci dejstev so pri vsaki vsebini našli od 17 do 31 pripomb. Pri orodjih za slike in
+  video so cene in imena modelov najbolj nestabilni; vodnika še nista v mesečni rutini.
+- Vgrajeni brskalnik je v Sloveniji in pokaže evrske cene (Synthesia, Suno, Adobe), WebFetch pa USD.
 
 ## Predlogi za naslednje funkcije (po vrednosti)
 

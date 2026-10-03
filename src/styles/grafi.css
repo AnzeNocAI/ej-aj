@@ -1,0 +1,252 @@
+/* Charts on /statistika/ pages (src/scripts/grafi.ts) and the stat tiles. */
+.viz {
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --s4: #eda100;
+  --s5: #e87ba4;
+  --ref: #c9c7c0;
+  --grid: #eeece6;
+  --axis: #cfccc4;
+  position: relative;
+  margin: 28px 0 36px;
+  padding: 18px 18px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+@media (prefers-color-scheme: dark) {
+  .viz {
+    --s1: #3987e5;
+    --s2: #d95926;
+    --s3: #199e70;
+    --s4: #c98500;
+    --s5: #d55181;
+    --ref: #4a4d55;
+    --grid: #262a32;
+    --axis: #3a3f49;
+  }
+}
+.viz figcaption {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.viz-plot {
+  width: 100%;
+  min-height: 40px;
+}
+.viz-plot svg {
+  display: block;
+  overflow: visible;
+}
+.viz-grid {
+  stroke: var(--grid);
+  stroke-width: 1;
+}
+.viz-axis {
+  stroke: var(--axis);
+  stroke-width: 1;
+}
+.viz-cross {
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+.viz-ref-line {
+  stroke: var(--ink);
+  stroke-width: 1;
+  opacity: 0.55;
+}
+.viz-dot {
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+.viz-bar {
+  cursor: default;
+  outline: none;
+}
+.viz-bar:hover,
+.viz-bar:focus {
+  opacity: 0.8;
+}
+.viz-tick {
+  fill: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.viz-label {
+  fill: var(--ink);
+  font-size: 13px;
+}
+.viz-value {
+  fill: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.viz-strong {
+  fill: var(--ink);
+  font-weight: 600;
+}
+.viz-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin: 0 0 10px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.viz-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+button.viz-legend-item {
+  cursor: pointer;
+}
+button.viz-legend-item[aria-pressed='false'] {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+.viz-key-line {
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+  border-radius: 1px;
+}
+.viz-key-rect {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+.viz-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.viz-tabs button {
+  font: inherit;
+  font-size: 0.88rem;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+}
+.viz-tabs button[aria-pressed='true'] {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.viz-view-note,
+.viz-hint {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 0 0 10px;
+}
+.viz-tip {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.08);
+  white-space: nowrap;
+}
+.viz-tip-title {
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.viz-tip-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.viz-tip-row strong {
+  font-variant-numeric: tabular-nums;
+}
+.viz-tip-row span:last-child {
+  color: var(--muted);
+}
+.viz-table {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+.viz-table summary {
+  cursor: pointer;
+  color: var(--muted);
+}
+.viz-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+.viz-table th,
+.viz-table td {
+  text-align: left;
+  padding: 4px 8px 4px 0;
+  border-bottom: 1px solid var(--line);
+}
+.viz-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.viz-source {
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin: 8px 0 20px;
+}
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.tile-label {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.tile-value {
+  font-size: 2.2rem;
+  font-weight: 650;
+  line-height: 1.1;
+}
+.tile-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.stat-section {
+  margin: 36px 0;
+}
+.stat-section h2 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  margin: 0 0 12px;
+}
+@media (max-width: 520px) {
+  .viz {
+    padding: 14px 12px 12px;
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+}

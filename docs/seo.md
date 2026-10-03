@@ -55,16 +55,16 @@ iskanj). Po 14. oktobru preveri v Search Console, kateri nizi dejansko prinašaj
    splača Go ali Plus). Iskalci tega niza so začetniki, ki jih druge strani ne nagovarjajo.
 3. **Microsoft Copilot v slovenščini: brezplačni Copilot, Copilot Chat in Microsoft 365 Copilot**
    (razlike, kaj imate že v službenem računu). "copilot slovenščina" je drugi predlog za "copilot".
-4. **AI za ustvarjanje slik: orodja, cene, avtorske pravice in označevanje po AI Act**. Veliko
+4. **AI za ustvarjanje slik: orodja, cene, avtorske pravice in označevanje po AI Act** (PR #64, 3. 10.). Veliko
    iskanj; povezava na vodnik AI Act (člen 50).
-5. **Koliko stane ChatGPT (Free, Go, Plus, Pro, Business) v evrih**, enako za Claude in Gemini.
+5. **Koliko stane ChatGPT (Free, Go, Plus, Pro, Business) v evrih** (PR #58, 3. 10.: strani `/cene/<orodje>/` iz `narocnine.yaml`), enako za Claude in Gemini.
    Lahko samodejno iz `narocnine.yaml` kot strani `/cene/chatgpt/` ... (zdaj `/cene/` preusmerja
    na `/modeli/`), mesečna rutina jih osvežuje. Funkcija, ne samo članek.
 6. **AI v šoli: kaj lahko učitelji in dijaki uporabljajo** (Arnes, pravila, preverjanje). Preveri
    pri Arnesu in MVI, kaj dejansko ponujajo; brez tega ne pisati.
-7. **Ali zaznavalniki AI besedila delujejo (tudi za slovenščino)**. Iščejo učitelji, študenti in
+7. **Ali zaznavalniki AI besedila delujejo (tudi za slovenščino)** (PR #60, 3. 10.). Iščejo učitelji, študenti in
    delodajalci; odgovor je podprt z raziskavami.
-8. **Kaj je umetna inteligenca in kako deluje: razlaga za začetnike**. Temeljna stran, na katero
+8. **Kaj je umetna inteligenca in kako deluje: razlaga za začetnike** (PR #59, 3. 10.). Temeljna stran, na katero
    kažejo vsi vodniki; slovar ima le kratko geslo.
 9. **NotebookLM: kaj je in kako ga uporabiti za dokumente podjetja**.
 10. **AI prevajalniki za slovenščino: DeepL, Google Translate, ChatGPT, Claude** (povezava na
@@ -75,6 +75,17 @@ iskanj). Po 14. oktobru preveri v Search Console, kateri nizi dejansko prinašaj
 
 Pri 1 do 3 in 5 so naslovi lahko skoraj enaki iskalnemu nizu; to ni click bait, ker natančno
 povedo, kaj članek je.
+
+Dodano 3. 10. 2026 (seja, ko je Anže prosil za SEO in nove vsebine):
+
+- **Kateri AI model za katero nalogo** (plonk listek, PR #62) in **AI za video, glasbo in glas**
+  (PR #63, poudarek na podpori za slovenščino).
+- **Najbolj uporabljeni AI klepetalniki po državah** (`/statistika/klepetalniki-po-drzavah/`, PR #57):
+  StatCounter za 48 držav, osveži se z mesečno rutino. Slovenija ima najvišji delež ChatGPT od vseh
+  48 držav (90,2 %, julij do september 2026): dobra zgodba za medije in povratne povezave.
+- Meta keywords namenoma ne uporabljamo (Google jih ne upošteva, Bing jih šteje kot možen spam).
+- Naslednje teme iz seznama: 3 (Copilot v slovenščini), 6 (AI v šoli), 10 (prevajalniki),
+  11 (tečaji). Nova ideja: stran `/skilli/` z brezplačnimi slovenskimi skilli (glej spodaj).
 
 ## Zunaj strani (največji vzvod za novo domeno)
 
