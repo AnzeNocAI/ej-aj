@@ -1,0 +1,100 @@
+/* Data tables on /modeli/ and /cene/<slug>/ (src/components/NarocnineTabela.astro). */
+.table-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+.table-wrap .data {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.table-wrap .data th,
+.table-wrap .data td {
+  text-align: left;
+  vertical-align: top;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.table-wrap .data thead th {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  background: var(--bg);
+}
+.table-wrap .data tbody tr:last-child > * {
+  border-bottom: 0;
+}
+.table-wrap .data tbody tr {
+  scroll-margin-top: 80px;
+}
+.table-wrap .num {
+  text-align: right !important;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.table-wrap .name {
+  display: block;
+  font-weight: 700;
+}
+.table-wrap .sub,
+.table-wrap .note,
+.table-wrap .sources {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+.table-wrap .use {
+  min-width: 260px;
+}
+
+@media (max-width: 760px) {
+  /* The sticky header wraps to two rows on phones. */
+  .table-wrap .data tbody tr {
+    scroll-margin-top: 150px;
+  }
+  .table-wrap {
+    border: 0;
+    background: transparent;
+  }
+  .table-wrap .data thead {
+    display: none;
+  }
+  .table-wrap .data,
+  .table-wrap .data tbody,
+  .table-wrap .data tr,
+  .table-wrap .data th,
+  .table-wrap .data td {
+    display: block;
+    width: 100%;
+  }
+  .table-wrap .data tr {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    padding: 6px 0;
+  }
+  .table-wrap .data th,
+  .table-wrap .data td {
+    border-bottom: 0;
+    padding: 6px 16px;
+  }
+  .table-wrap .data td.num {
+    display: flex;
+    justify-content: space-between;
+    text-align: right;
+  }
+  .table-wrap .data td.num::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .table-wrap .use {
+    min-width: 0;
+  }
+}

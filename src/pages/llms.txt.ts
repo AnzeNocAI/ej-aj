@@ -4,6 +4,7 @@ import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { getPosts, postPath } from '../lib';
 import { SITE } from '../site';
+import { PRODUCTS } from '../cene';
 
 export const GET: APIRoute = async ({ site }) => {
   const abs = (path: string) => new URL(path, site).toString();
@@ -20,6 +21,7 @@ export const GET: APIRoute = async ({ site }) => {
     '## Glavne strani',
     '',
     `- [Cene AI orodij in primerjava modelov](${abs('/modeli/')}): naročnine za ChatGPT, Claude, Gemini, Microsoft Copilot in druga orodja (posamezniki in podjetja) ter cene API, kontekstno okno in priporočila za Claude, GPT, Gemini, Mistral, Llama, DeepSeek in slovenski GaMS, z viri in datumom preverjanja.`,
+    ...PRODUCTS.map((p) => `- [Koliko stane ${p.ime}](${abs(`/cene/${p.slug}/`)}): cene vseh paketov za posameznike in podjetja z viri, osveženo vsak mesec.`),
     `- [AI v Sloveniji v številkah](${abs('/statistika/')}): delež podjetij in prebivalcev, ki uporabljajo AI, primerjava z državami EU in delež klepetalnikov (Eurostat, SURS, Microsoft, StatCounter).`,
     `- [AI slovar](${abs('/slovar/')}): ${terms.length} izrazov umetne inteligence, razloženih po domače.`,
     `- [Priročnik: kako dobro uporabljati Claude](${abs('/prirocnik/')}): 10 vodnikov po vrsti o promptih, kontekstu podjetja, Claude Code, skillih, subagentih, hookih, rutinah in lastnih agentih.`,
