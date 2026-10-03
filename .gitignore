@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local folders next to the code, never committed (inbox notes, newsletter drafts, notes for Anže)
+ej-aj-inbox/
+ej-aj-newsletter/
+ZA-ANZETA.md

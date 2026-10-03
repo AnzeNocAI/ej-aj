@@ -1,6 +1,6 @@
 ---
 name: nov-vodnik
-description: Turn Anže's rough note (dictated or typed, dropped into ~/Desktop/ej-aj-inbox) into a draft practical guide ("vodnik") for ej-aj.si and open a PR. Keeps his voice and his experience, never invents results, strips anything that could identify a client. Use when he says "nov vodnik", "naredi vodnik iz zapiska", "obdelaj inbox", or points at a note.
+description: Turn Anže's rough note (dictated or typed, dropped into /Users/anze/Desktop/Claude/ej-aj/ej-aj-inbox) into a draft practical guide ("vodnik") for ej-aj.si and open a PR. Keeps his voice and his experience, never invents results, strips anything that could identify a client. Use when he says "nov vodnik", "naredi vodnik iz zapiska", "obdelaj inbox", or points at a note.
 ---
 
 # Nov vodnik iz zapiska
@@ -9,13 +9,13 @@ Anže works with Slovenian companies on AI adoption. A guide on ej-aj.si is one 
 case written for a business reader: the problem, what you need, the steps, an example prompt,
 the pitfalls. His notes are the raw material; you do the writing, he stays the author.
 
-Repo: `/Users/anze/Desktop/ej-aj`. Read `AGENTS.md` there first. Every network `git`/`gh`
+Repo: `/Users/anze/Desktop/Claude/ej-aj`. Read `AGENTS.md` there first. Every network `git`/`gh`
 command needs the prefix `GH_TOKEN="$(gh auth token --user ej-aj-pro 2>/dev/null || gh auth token --user AnzeNocAI)"` (never `gh auth switch`).
 **Never merge and never push to `main`.**
 
 ## 1. Pick up the note
 
-Inbox: `/Users/anze/Desktop/ej-aj-inbox/` (synced through iCloud, so he can drop notes from
+Inbox: `/Users/anze/Desktop/Claude/ej-aj/ej-aj-inbox/` (synced through iCloud, so he can drop notes from
 his phone). Take the oldest `.txt` or `.md` file that is not in `obdelano/`, or the file he
 named. Audio files: there is no transcription tool on this Mac yet; tell him and skip them.
 
@@ -82,7 +82,7 @@ Open the PR (`gh pr create --repo ej-aj-pro/ej-aj --base main`), title
 what you removed or generalised for confidentiality, and "Merge = objava na ej-aj.si". Open it
 as a draft (`--draft`) while any `[DOPOLNI]` remains.
 
-Move the processed note to `/Users/anze/Desktop/ej-aj-inbox/obdelano/` (never delete notes)
+Move the processed note to `/Users/anze/Desktop/Claude/ej-aj/ej-aj-inbox/obdelano/` (never delete notes)
 and remove the worktree.
 
 ## 5. Final message
