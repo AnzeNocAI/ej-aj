@@ -1,0 +1,60 @@
+# Brezplačni skilli z ej-aj.si (stran /skilli/). Mapa skilla: skilli/ej-aj/skills/<id>/.
+# viri: objavljeni vodniki ej-aj.si in javni viri, iz katerih je skill nastal. Skilli ne smejo
+# vsebovati ničesar od strank ali iz zaupnih projektov; vse mora izhajati iz javnih virov.
+
+- id: pregled-skilla
+  naslov: 'Pregled skilla'
+  kaj: 'Pregleda skill po Anthropicovih priporočilih in predlaga konkretne popravke. Skripta preveri ime, opis, dolžino, pokvarjene povezave in morebitna gesla, Claude pa vsebino in varnost skript.'
+  za_koga: 'Za vse, ki pišejo svoje skille ali nameravajo namestiti tujega.'
+  primer: 'Preglej skill v mapi priprava-ponudb.'
+  viri:
+    - ime: 'Claude skills, kaj je skill in kako ga napisati'
+      url: '/vodniki/claude-skills/'
+    - ime: 'Anthropic, dobre prakse za pisanje skillov'
+      url: 'https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices'
+
+- id: ai-v-delovni-postopek
+  naslov: 'AI v delovni postopek'
+  kaj: 'Vodi vas po korakih od izbire naloge do skilla. Preveri, ali je naloga primerna za AI (podatki, posledice napake), z vprašanji zapiše postopek, merilo uspeha in preizkusne primere ter na koncu napiše skill.'
+  za_koga: 'Za podjetja, ki bi rada ponavljajoče se delo (ponudbe, odgovore na povpraševanja, povzetke) prepustila AI.'
+  primer: 'Rad bi, da AI pripravlja odgovore na povpraševanja. Naredi skill iz tega postopka.'
+  viri:
+    - ime: 'Kako preizkusiti AI rešitev na svojih nalogah'
+      url: '/vodniki/kako-preveriti-ali-ai-deluje/'
+    - ime: 'Kateri podatki ne sodijo v ChatGPT'
+      url: '/vodniki/varna-raba-ai-v-podjetju/'
+    - ime: 'Claude skills'
+      url: '/vodniki/claude-skills/'
+
+- id: baza-znanja-github
+  naslov: 'Baza znanja podjetja na GitHubu'
+  kaj: 'Pripravi mapo z dokumenti, ki jih AI potrebuje vedno znova (CLAUDE.md, dokument o podjetju, pravila pisanja, predloge, skilli), pregleda, da v njej ni gesel in osebnih podatkov, in jo pripravi za zasebni repozitorij.'
+  za_koga: 'Za ekipe, ki uporabljajo Claude Code in želijo skupna navodila za AI na enem mestu.'
+  primer: 'Postavi bazo znanja za naše podjetje v mapi podjetje-ai.'
+  viri:
+    - ime: 'Ali hraniti kontekst podjetja za AI na GitHubu'
+      url: '/vodniki/kontekst-podjetja-na-githubu/'
+    - ime: 'Kako AI-ju dati kontekst podjetja'
+      url: '/vodniki/kontekst-podjetja-za-ai/'
+
+- id: slovenski-slog
+  naslov: 'Slovenski slog'
+  kaj: 'Piše in popravlja slovenska besedila tako, da ne zvenijo kot AI, in s pravilnim slovenskim zapisom številk, odstotkov, valut in datumov. Skripta najde pomišljaje, angleški zapis številk in besede, ki jih AI rad pretirano uporablja.'
+  za_koga: 'Za vse, ki z AI pišejo slovenske članke, objave, ponudbe in e-pošto.'
+  primer: 'Popravi slog tega besedila, da ne bo zvenelo kot AI.'
+  viri:
+    - ime: 'Pravila sloga ej-aj.si'
+      url: 'https://github.com/ej-aj-pro/ej-aj/blob/main/docs/slog.md'
+    - ime: 'Wikipedia, znaki pisanja z AI'
+      url: 'https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing'
+
+- id: pravila-rabe-ai
+  naslov: 'Pravila rabe AI za podjetje'
+  kaj: 'Iz naše predloge z vprašanji pripravi interna pravila rabe AI za vaše podjetje: dovoljena orodja, podatki, preverjanje rezultatov, označevanje, usposabljanje in evidenca.'
+  za_koga: 'Za direktorje in odgovorne osebe, ki pripravljajo pravila in ukrepe za AI pismenost.'
+  primer: 'Pripravi pravila rabe AI za naše podjetje.'
+  viri:
+    - ime: 'Predloga pravil rabe AI v podjetju'
+      url: '/vodniki/predloga-pravil-rabe-ai/'
+    - ime: 'AI pismenost zaposlenih'
+      url: '/vodniki/ai-pismenost-zaposlenih/'
